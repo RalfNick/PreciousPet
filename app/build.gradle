@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-//        applicationId "com.ralf.www.preciouspet"
+        applicationId "com.ralf.www.preciouspet"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]

@@ -1,7 +1,5 @@
 package com.ralf.www.pet_provider.base;
 
-import android.support.multidex.MultiDex;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseApplication;
 import com.ralf.www.pet_provider.BuildConfig;

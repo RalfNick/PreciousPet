@@ -76,10 +76,10 @@ public class SplashActivity extends BaseActivity {
                 .doOnComplete(() -> {
                     if (UserUtil.isUserLogin()) {
                         ARouter.getInstance().build(RouterConfig.AppModule.MAIN_PATH).navigation();
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     } else {
                         ARouter.getInstance().build(RouterConfig.AppModule.ENTRANCE_PATH).navigation();
                     }
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     finish();
                 })
                 .subscribe();
@@ -87,13 +87,13 @@ public class SplashActivity extends BaseActivity {
 
     private void initBackgroundFullScreen() {
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            View decorView = getWindow().getDecorView();
+//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(option);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
     }
 
     @OnClick(R.id.splash_jump_over_btn)

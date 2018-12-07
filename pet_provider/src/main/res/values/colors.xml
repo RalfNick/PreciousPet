@@ -2,9 +2,9 @@
 <resources>
     <color name="appMain">#ed6c00</color>
 
-    <color name="colorPrimary">#ed6c00</color>
-    <color name="colorPrimaryDark">#ed6c00</color>
-    <color name="colorAccent">#ed6c00</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
 
     <color name="white_bkg">#f5f5f5</color>
     <color name="white">#ffffffff</color>
@@ -168,5 +168,11 @@
     <color name="blue_text">#2b84ce</color>
 
     <color name="layer_bg_transparent">#0d000000</color><!-- 5% -->
+
+    <!--需要换肤的颜色==========================================================-->
+
+    <color name="change_skin_state_bar">#f2473d</color>
+    <color name="color_main_radio_text_true">#f2473d</color>
+    <color name="color_main_radio_text_false">#FF888888</color>
 
 </resources>

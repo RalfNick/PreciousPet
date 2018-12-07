@@ -1,0 +1,6 @@
+include ':app', ':module_config_res',
+        ':lib_common',
+        ':pet_provider',
+        ':lib_imageloader_glide',
+        ':module_db',
+        ':module_easeui'

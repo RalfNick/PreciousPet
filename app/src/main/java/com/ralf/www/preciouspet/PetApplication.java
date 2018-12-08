@@ -1,5 +1,7 @@
 package com.ralf.www.preciouspet;
 
+import android.support.multidex.MultiDex;
+
 import com.ralf.www.pet_provider.base.PreciousApplication;
 import com.ralf.www.preciouspet.crash.CrashHandler;
 
@@ -15,6 +17,8 @@ public class PetApplication extends PreciousApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        MultiDex.install(this);
         /**全局异常捕获**/
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());

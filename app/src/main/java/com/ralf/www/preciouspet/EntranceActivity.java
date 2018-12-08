@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.jaeger.library.StatusBarUtil;
 import com.ralf.www.pet_provider.router.RouterConfig;
 
 @Route(path = RouterConfig.AppModule.ENTRANCE_PATH)
@@ -15,5 +16,7 @@ public class EntranceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ARouter.getInstance().inject(this);
         setContentView(R.layout.activity_entrance);
+
+        StatusBarUtil.setTranslucent(this, 128);
     }
 }

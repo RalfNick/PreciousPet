@@ -75,5 +75,8 @@ dependencies {
     releaseImplementation rootProject.ext.dependencies["canary-release"]
     testImplementation rootProject.ext.dependencies["canary-release"]
 
-//    implementation 'com.jaeger.statusbarutil:library:1.4.0'
+    implementation('com.jaeger.statusbarutil:library:1.4.0'){
+        exclude group: 'com.android.support', module:'design'
+    }
+    implementation 'com.android.support:multidex:1.0.3'
 }

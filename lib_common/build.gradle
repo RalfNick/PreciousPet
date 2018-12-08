@@ -49,15 +49,12 @@ dependencies {
         exclude module: 'support-annotations'
     }
     api rootProject.ext.dependencies["annotations"]
-
     //view
-//    compileOnly rootProject.ext.dependencies["autolayout"]
     api rootProject.ext.dependencies["autosize"]
     api(rootProject.ext.dependencies["butterknife"]) {
         exclude module: 'support-annotations'
         exclude module: 'support-compat'
     }
-
     //rx
     api rootProject.ext.dependencies["rxjava2"]
     api(rootProject.ext.dependencies["rxandroid2"]) {
@@ -86,7 +83,6 @@ dependencies {
         exclude module: 'support-annotations'
     }
     api rootProject.ext.dependencies['rxerrorhandler2']
-
     //network
     api(rootProject.ext.dependencies["retrofit"]) {
         exclude module: 'okhttp'
@@ -109,7 +105,6 @@ dependencies {
     annotationProcessor(rootProject.ext.dependencies["glide-compiler"]) {
         exclude module: 'jsr305'
     }
-
     //tools
     compileOnly rootProject.ext.dependencies["javax.annotation"]
     api rootProject.ext.dependencies["dagger2"]
@@ -118,7 +113,6 @@ dependencies {
     compileOnly rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["gson"]
     api rootProject.ext.dependencies["arouter"]
-
     //test
     api rootProject.ext.dependencies["timber"]
 }

@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/module_config_res/module_config_res.iml" filepath="$PROJECT_DIR$/module_config_res/module_config_res.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_db/module_db.iml" filepath="$PROJECT_DIR$/module_db/module_db.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_easeui/module_easeui.iml" filepath="$PROJECT_DIR$/module_easeui/module_easeui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_user/module_user.iml" filepath="$PROJECT_DIR$/module_user/module_user.iml" />
       <module fileurl="file://$PROJECT_DIR$/pet_provider/pet_provider.iml" filepath="$PROJECT_DIR$/pet_provider/pet_provider.iml" />
     </modules>
   </component>

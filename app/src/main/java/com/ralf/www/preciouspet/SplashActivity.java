@@ -1,11 +1,8 @@
 package com.ralf.www.preciouspet;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -54,7 +51,6 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        initBackgroundFullScreen();
         startCount();
     }
 
@@ -78,22 +74,11 @@ public class SplashActivity extends BaseActivity {
                         ARouter.getInstance().build(RouterConfig.AppModule.MAIN_PATH).navigation();
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     } else {
-                        ARouter.getInstance().build(RouterConfig.AppModule.ENTRANCE_PATH).navigation();
+                        ARouter.getInstance().build(RouterConfig.UserModule.ENTRANCE_PATH).navigation();
                     }
                     finish();
                 })
                 .subscribe();
-    }
-
-    private void initBackgroundFullScreen() {
-
-//        if (Build.VERSION.SDK_INT >= 21) {
-//            View decorView = getWindow().getDecorView();
-//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-//            decorView.setSystemUiVisibility(option);
-//            getWindow().setStatusBarColor(Color.TRANSPARENT);
-//        }
     }
 
     @OnClick(R.id.splash_jump_over_btn)

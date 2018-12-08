@@ -29,7 +29,6 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity" />
 
         <!-- 启动页 -->
@@ -53,22 +52,17 @@
                 <data android:scheme="preciouspet" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".EntranceActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
 
         <meta-data
             android:name="com.ralf.www.pet_provider.configuration.GlobalConfiguration"
             android:value="ConfigModule" />
-
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />
         <meta-data
             android:name="design_height_in_dp"
             android:value="640" />
+
     </application>
 
 </manifest>

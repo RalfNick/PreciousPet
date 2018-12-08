@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/new_bg"
     android:orientation="vertical"
-    tools:context=".EntranceActivity">
+    tools:context=".mvp.ui.EntranceActivity">
 
     <Button
         android:id="@+id/activity_entrance_register"

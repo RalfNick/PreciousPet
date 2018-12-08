@@ -1,9 +1,19 @@
-apply plugin: 'com.android.application'
-
+Properties localProperties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream();
+localProperties.load(inputStream)
+def isModuleDevelop = localProperties.getProperty("isModuleDevelop", "false")
+if (isModuleDevelop.toBoolean()) {
+    //组件化编译时为application
+    apply plugin: 'com.android.application'
+    apply plugin: 'com.jakewharton.butterknife'
+} else {
+    //非组件化编译时为library
+    apply plugin: 'com.android.library'
+    apply plugin: 'com.jakewharton.butterknife'
+}
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
-    useLibrary 'org.apache.http.legacy'
 
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
@@ -11,13 +21,17 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.ralf.www.preciouspet"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+
+        if (isModuleDevelop.toBoolean()) {
+            //组件化编译时为app，设置 Application Id
+            applicationId "com.icourt.lawschool"
+        }
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -25,6 +39,7 @@ android {
             }
         }
     }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -37,27 +52,20 @@ android {
         }
     }
 
-    afterEvaluate {
-        tasks.matching {
-            it.name.startsWith('dex')
-        }.each { dx ->
-            if (dx.additionalParameters == null) {
-                dx.additionalParameters = []
+    sourceSets {
+        main {
+            if (isModuleDevelop.toBoolean()) {
+                //组件化编译时为app，在对应的AndroidManifest文件中需要写ndroid.intent.action.MAIN入口Activity
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                // 集成开发模式下排除debug文件夹中的所有Java文件
+                java {
+                    //debug文件夹中放的是Application类，非组件化时不用有此类
+                    exclude 'debug/**'
+                }
             }
-            dx.additionalParameters += '--multi-dex' // enable multidex
-
-            // optional
-            dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
         }
-    }
-    dexOptions {
-        preDexLibraries = false//如果应用中包含引用的lirary工程,需要将预编译设置为false:
-    }
-    dexOptions {
-        javaMaxHeapSize "2g"//增加java堆内存大小
-    }
-    lintOptions {
-        abortOnError false
     }
 
 }
@@ -66,15 +74,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':pet_provider')
-    implementation project(':module_user')
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
-    //test
-
-    debugImplementation rootProject.ext.dependencies["canary-debug"]
-    releaseImplementation rootProject.ext.dependencies["canary-release"]
-    testImplementation rootProject.ext.dependencies["canary-release"]
-
-    implementation 'com.android.support:multidex:1.0.3'
 }

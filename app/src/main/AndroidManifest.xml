@@ -53,6 +53,7 @@
             </intent-filter>
         </activity>
 
+        <!--用户登录部分 start-->
         <activity
             android:name="com.ralf.www.module_user.mvp.ui.LoginActivity"
             android:screenOrientation="portrait" />
@@ -62,6 +63,12 @@
         <activity
             android:name="com.ralf.www.module_user.mvp.ui.EntranceActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ralf.www.module_user.mvp.ui.UserProtocolActivity"
+            android:screenOrientation="portrait" />
+
+        <!--用户登录部分 end-->
 
         <meta-data
             android:name="com.ralf.www.pet_provider.configuration.GlobalConfiguration"

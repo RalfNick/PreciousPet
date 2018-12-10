@@ -53,6 +53,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.ralf.www.module_user.mvp.ui.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ralf.www.module_user.mvp.ui.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ralf.www.module_user.mvp.ui.EntranceActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.ralf.www.pet_provider.configuration.GlobalConfiguration"
             android:value="ConfigModule" />

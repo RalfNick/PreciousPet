@@ -15,7 +15,7 @@ import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.cache.IntelligentCache;
 import com.jess.arms.integration.cache.LruCache;
 import com.ralf.www.pet_provider.BuildConfig;
-import com.ralf.www.pet_provider.http.Api;
+import com.ralf.www.pet_provider.http.HttpUrl;
 import com.ralf.www.pet_provider.http.GlobalHttpHandlerImpl;
 import com.ralf.www.pet_provider.http.ResponseErrorListenerImpl;
 import com.ralf.www.pet_provider.http.serializer.DateDeserializer;
@@ -38,7 +38,7 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
  **/
 public class GlobalConfiguration implements ConfigModule {
 
-    public static String sDomain = Api.APP_URL_DOMAIN;
+    public static String sDomain = HttpUrl.APP_URL_DOMAIN;
 
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
@@ -46,7 +46,7 @@ public class GlobalConfiguration implements ConfigModule {
             builder.printHttpLogLevel(RequestInterceptor.Level.NONE);
         }
 
-        builder.baseurl(Api.APP_URL_DOMAIN)
+        builder.baseurl(HttpUrl.APP_URL_DOMAIN)
                 //强烈建议自己自定义图片加载逻辑, 因为 arms-imageloader-glide 提供的 GlideImageLoaderStrategy 并不能满足复杂的需求
                 //请参考 https://github.com/JessYanCoding/MVPArms/wiki#3.4
                 .imageLoaderStrategy(new GlideImageLoaderStrategy())
@@ -104,7 +104,7 @@ public class GlobalConfiguration implements ConfigModule {
                     ProgressManager.getInstance().with(okhttpBuilder);
                     //让 Retrofit 同时支持多个 BaseUrl 以及动态改变 BaseUrl. 详细使用请方法查看 https://github.com/JessYanCoding/RetrofitUrlManager
                     RetrofitUrlManager.getInstance().with(okhttpBuilder);
-//                    RetrofitUrlManager.getInstance().putDomain(Api.APP_URL_LOGIN_KEY, Api.APP_URL_LOGIN);
+//                    RetrofitUrlManager.getInstance().putDomain(HttpUrl.APP_URL_LOGIN_KEY, HttpUrl.APP_URL_LOGIN);
                 })
                 .rxCacheConfiguration((context1, rxCacheBuilder) -> {//这里可以自己自定义配置 RxCache 的参数
                     rxCacheBuilder.useExpiredDataIfLoaderNotAvailable(true);

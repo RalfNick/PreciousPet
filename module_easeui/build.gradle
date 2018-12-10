@@ -61,6 +61,6 @@ dependencies {
     testImplementation rootProject.ext.dependencies["junit"]
     compile 'com.google.android.gms:play-services-gcm:16.0.0'
     compile files('libs/hyphenatechat_3.3.4.jar')
-    compile 'com.amap.api:map2d:latest.integration'
-    compile 'com.amap.api:location:latest.integration'
+    compile 'com.amap.api:map2d:5.2.0'
+    compile 'com.amap.api:location:4.4.0'
 }

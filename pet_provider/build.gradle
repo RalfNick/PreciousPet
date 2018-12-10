@@ -48,7 +48,7 @@ dependencies {
     api project(':module_easeui')
 //    implementation rootProject.ext.dependencies["glide"]
 
-    implementation rootProject.ext.dependencies["logger"]
+    api rootProject.ext.dependencies["logger"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     implementation rootProject.ext.dependencies["lifecyclemodel"]
 

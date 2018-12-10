@@ -1,16 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ralf.www.module_user">
-
-    <application>
-        <activity
-            android:name=".mvp.ui.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.RegisterActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.EntranceActivity"
-            android:screenOrientation="portrait" />
-
-    </application>
-</manifest>
+    package="com.ralf.www.module_user" />

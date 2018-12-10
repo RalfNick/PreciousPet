@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jaeger.library.StatusBarUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.orhanobut.logger.Logger;
 import com.ralf.www.module_user.R;
 import com.ralf.www.module_user.R2;
 import com.ralf.www.pet_provider.router.RouterConfig;
@@ -23,6 +24,8 @@ import butterknife.OnClick;
  */
 @Route(path = RouterConfig.UserModule.ENTRANCE_PATH)
 public class EntranceActivity extends BaseActivity {
+
+    private static final String TAG = EntranceActivity.class.getSimpleName();
 
     @BindView(R2.id.activity_entrance_register)
     Button mRegisterBtn;
@@ -41,22 +44,16 @@ public class EntranceActivity extends BaseActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        StatusBarUtil.setTranslucent(this, 28);
+        StatusBarUtil.setTranslucent(this, 1);
     }
 
     @OnClick({R2.id.activity_entrance_register, R2.id.activity_entrance_login})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R2.id.activity_entrance_register:
-                ARouter.getInstance().build(RouterConfig.UserModule.REGISTER_PATH).navigation();
-                break;
-
-            case R2.id.activity_entrance_login:
-                ARouter.getInstance().build(RouterConfig.UserModule.LOGIN_PATH).navigation();
-                break;
-
-            default:
-                break;
+        int i = view.getId();
+        if (i == R.id.activity_entrance_register) {
+            ARouter.getInstance().build(RouterConfig.UserModule.REGISTER_PATH).navigation();
+        } else if (i == R.id.activity_entrance_login) {
+            ARouter.getInstance().build(RouterConfig.UserModule.LOGIN_PATH).navigation();
         }
     }
 }

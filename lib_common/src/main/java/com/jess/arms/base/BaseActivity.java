@@ -80,11 +80,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         return mLifecycleSubject;
     }
 
-//    @Override
-//    public View onCreateView(String name, Context context, AttributeSet attrs) {
-//        return super.onCreateView(name, context, attrs);
-//    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

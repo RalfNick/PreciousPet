@@ -19,6 +19,11 @@ public interface HttpUrl {
      */
     String LOGIN_USER_PROTOCOL = APP_URL_DOMAIN + "web/service/sa.htm";
 
+    /**
+     * 宠物隐私协议
+     */
+    String PET_PROTOCOL = APP_URL_DOMAIN + "web/service/pa.htm";
+
 //    /**
 //     * 刷新用户新接口
 //     *

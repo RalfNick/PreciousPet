@@ -5,8 +5,8 @@
             <shape>
                 <corners android:radius="2dp" />
                 <gradient
-                    android:endColor="@color/orange_normal"
-                    android:startColor="@color/colorPrimaryLight" />
+                    android:endColor="@color/file_type_doc"
+                    android:startColor="@color/blue_line" />
 
             </shape>
         </clip>

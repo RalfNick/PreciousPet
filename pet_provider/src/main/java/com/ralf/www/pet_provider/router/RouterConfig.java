@@ -9,13 +9,13 @@ package com.ralf.www.pet_provider.router;
  **/
 public final class RouterConfig {
 
-    public static class AppModule{
+    public static class AppModule {
 
         // 主界面
         public static final String MAIN_PATH = "/app/main";
     }
 
-    public static class UserModule{
+    public static class UserModule {
 
         // 测试界面
         public static final String MAIN_PATH = "/user_module/main";
@@ -25,11 +25,25 @@ public final class RouterConfig {
         public static final String LOGIN_PATH = "/user_module/login";
         // 注册
         public static final String REGISTER_PATH = "/user_module/register";
+        // 设置用户信息（注册）
+        public static final String REGISTER_USER_PATH = "/user_module/register_user";
+
+        /**
+         * 跳转到用户信息设置界面携带的参数 KEY
+         */
+        public static final String KEY_USER_PHONE = "key_user_phone";
+        public static final String KEY_USER_PASSWORD = "key_user_password";
 
         // 用户协议
         public static final String USER_PROTOCOL_PATH = "/user_module/protocol";
         // 用户协议 URL
         public static final String KEY_USER_PROTOCOL_URL = "key_protocol_url";
+        public static final String KEY_USER_PROTOCOL_TITLE = "key_protocol_title";
+
+        /**
+         * 修改用户密码
+         */
+        public static final String MODIFY_PASSWORD_PATH = "/user_module/modify_password";
 
     }
 }

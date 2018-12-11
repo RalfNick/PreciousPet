@@ -1,11 +1,9 @@
 package com.ralf.www.pet_provider.base;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.View;
 
@@ -27,8 +25,6 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
-
-import static com.jess.arms.utils.ThirdViewUtil.convertAutoView;
 
 /**
  * @author Ralf(wanglixin)

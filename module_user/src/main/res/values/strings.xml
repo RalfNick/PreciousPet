@@ -5,4 +5,9 @@
     <string name="login_app">登录</string>
     <string name="phone">手机号码</string>
     <string name="recommend_login_method">推荐登录方式</string>
+    <string name="senod_code">发送验证码</string>
+    <string name="vertify_code">发送验证码</string>
+
+    <string name="login_save">保存</string>
+    <string name="login_register">注册</string>
 </resources>

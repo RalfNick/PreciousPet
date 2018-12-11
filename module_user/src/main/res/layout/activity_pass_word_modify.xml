@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mvp.ui.RegisterActivity">
+    tools:context=".mvp.ui.PassWordModifyActivity">
 
     <include layout="@layout/layout_title" />
 
     <EditText
-        android:id="@+id/phone_register_et"
+        android:id="@+id/phone_modify_et"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
         android:background="@color/colorWhite"
         android:hint="@string/phone"
-        android:paddingEnd="3dp"
-        android:paddingStart="3dp"
         android:textColorHighlight="@color/login_text_color"
         android:textSize="14sp" />
 
@@ -30,16 +30,16 @@
         android:background="@color/app_background" />
 
     <EditText
-        android:id="@+id/password_register_et"
+        android:id="@+id/password_modify_et"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
         android:background="@color/colorWhite"
         android:hint="@string/login_password"
         android:inputType="textPassword"
-        android:paddingEnd="3dp"
-        android:paddingStart="3dp"
         android:textColorHighlight="@color/login_text_color"
         android:textSize="14sp" />
 
@@ -63,10 +63,10 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="12dp"
             android:layout_marginStart="12dp"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
             android:background="@color/colorWhite"
             android:hint="@string/vertify_code"
-            android:paddingEnd="3dp"
-            android:paddingStart="3dp"
             android:textColorHighlight="@color/login_text_color"
             android:textSize="14sp" />
 
@@ -78,7 +78,6 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="12dp"
             android:background="@drawable/selector_login_btn_bg"
-            android:gravity="center"
             android:text="@string/senod_code"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -87,41 +86,15 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/register_new_user_btn"
+        android:id="@+id/modify_password_save_btn"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
+        android:enabled="false"
+        android:textColor="@color/colorWhite"
         android:layout_marginTop="18dp"
         android:background="@drawable/selector_login_btn_bg"
-        android:enabled="false"
-        android:text="@string/login_register"
-        android:textColor="@color/colorWhite" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/user_protocol_read_state_cb"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:background="@drawable/selector_checkbox_state_bg"
-            android:button="@null"
-            android:checked="false" />
-
-        <TextView
-            android:id="@+id/register_user_protocol_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:textColor="#FF888888"
-            android:textSize="13sp"
-            tools:text="用户注册协议" />
-
-    </LinearLayout>
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/login_save"/>
 
 </LinearLayout>

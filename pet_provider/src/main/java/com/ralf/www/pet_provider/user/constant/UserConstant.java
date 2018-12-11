@@ -12,16 +12,21 @@ public final class UserConstant {
     /**
      * 用户基本信息
      */
-    public static String USER_INFO = "user_id";
-    public static String USER_TOKEN = "user_token";
-    public static String USER_ID = "user_id";
-    public final static String USER_NAME = "user_name";
-    public final static String USER_IMAGE = "user_image";
+    public static String USER_TOKEN = "token";
+    public static String USER_ID = "userId";
+    public final static String PASSWORD = "password";
+    public final static String USER_NAME = "userName";
+    public final static String USER_IMAGE = "userImage";
+    public final static String PHONE = "phone";
+    public final static String VCODE_TYPE = "validCodeType";
+    public final static String VALIDCODE = "validCode";
+
+    public final static String POSITION = "position";
 
     /**
      * 宠物信息
      */
-    public final static String USER_PET_ID = "user_pet_id";
+    public final static String USER_PET_ID = "userPetId";
 
     /**
      * 环信用户信息

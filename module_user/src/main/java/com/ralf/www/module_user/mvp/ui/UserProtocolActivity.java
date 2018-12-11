@@ -45,7 +45,6 @@ import butterknife.OnClick;
 @Route(path = RouterConfig.UserModule.USER_PROTOCOL_PATH)
 public class UserProtocolActivity extends BaseSwipeBackActivity {
 
-    private static final String TITLE = "用户协议";
     private static final int PROGRESS_LENGTH = 100;
 
     @BindView(R2.id.back_iv)
@@ -72,13 +71,11 @@ public class UserProtocolActivity extends BaseSwipeBackActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
 
-        mTitleNameTv.setText(TITLE);
-        // 背景色
-        Drawable bgDrawable = getResources().getDrawable(R.mipmap.bg_title_bar, null);
-        mLayoutTitle.setBackground(bgDrawable);
-        // 获取url
+        // 获取url和title
         Intent intent = getIntent();
         String url = intent.getStringExtra(RouterConfig.UserModule.KEY_USER_PROTOCOL_URL);
+        String title = intent.getStringExtra(RouterConfig.UserModule.KEY_USER_PROTOCOL_TITLE);
+        mTitleNameTv.setText(title);
         initWebView(url);
     }
 

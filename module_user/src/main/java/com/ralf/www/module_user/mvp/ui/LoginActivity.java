@@ -1,7 +1,6 @@
 package com.ralf.www.module_user.mvp.ui;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -71,9 +70,6 @@ public class LoginActivity extends BaseSwipeBackActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mTitleNameTv.setText("登录");
-        // 背景色
-        Drawable bgDrawable = getResources().getDrawable(R.mipmap.bg_title_bar, null);
-        mLayoutTitle.setBackground(bgDrawable);
         setClickableSpan();
     }
 
@@ -102,7 +98,10 @@ public class LoginActivity extends BaseSwipeBackActivity {
         } else if (i == R.id.login_password_edit) {
 
         } else if (i == R.id.login_forgot_password_btn) {
-
+            ARouter.getInstance()
+                    .build(RouterConfig.UserModule.MODIFY_PASSWORD_PATH)
+                    .withString(RouterConfig.UserModule.KEY_USER_PROTOCOL_URL, HttpUrl.LOGIN_USER_PROTOCOL)
+                    .navigation();
         }
     }
 
@@ -122,6 +121,7 @@ public class LoginActivity extends BaseSwipeBackActivity {
             ARouter.getInstance()
                     .build(RouterConfig.UserModule.USER_PROTOCOL_PATH)
                     .withString(RouterConfig.UserModule.KEY_USER_PROTOCOL_URL, HttpUrl.LOGIN_USER_PROTOCOL)
+                    .withString(RouterConfig.UserModule.KEY_USER_PROTOCOL_TITLE, "用户协议")
                     .navigation();
         }
     }

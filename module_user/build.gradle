@@ -80,4 +80,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
 
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
 }

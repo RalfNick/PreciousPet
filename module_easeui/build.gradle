@@ -47,9 +47,9 @@ dependencies {
     //release时需要把hyphenatechatsdk的依赖注释掉，sdk已经被打成jar包放在libs底下
     //compile project(':hyphenatechatsdk')
     //    compile 'com.hyphenate:hyphenate-sdk:3.3.1'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.dependencies["glide"]
-    androidTestCompile(rootProject.ext.dependencies["espresso-core"]) {
+    androidTestImplementation(rootProject.ext.dependencies["espresso-core"]) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 //    api(rootProject.ext.dependencies["support-v4"]) {
@@ -59,8 +59,8 @@ dependencies {
         exclude module: 'support-annotations'
     }
     testImplementation rootProject.ext.dependencies["junit"]
-    compile 'com.google.android.gms:play-services-gcm:16.0.0'
-    compile files('libs/hyphenatechat_3.3.4.jar')
-    compile 'com.amap.api:map2d:5.2.0'
-    compile 'com.amap.api:location:4.4.0'
+    api 'com.google.android.gms:play-services-gcm:16.0.0'
+    api files('libs/hyphenatechat_3.3.4.jar')
+    api 'com.amap.api:map2d:5.2.0'
+    api 'com.amap.api:location:4.4.0'
 }

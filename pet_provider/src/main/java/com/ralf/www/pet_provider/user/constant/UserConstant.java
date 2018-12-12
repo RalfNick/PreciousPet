@@ -16,7 +16,9 @@ public final class UserConstant {
     public static String USER_ID = "userId";
     public final static String PASSWORD = "password";
     public final static String USER_NAME = "userName";
-    public final static String USER_IMAGE = "userImage";
+    public static final String NICK_NAME = "nickName";
+    public static final String USER_SEX = "sex";
+    public final static String USER_IMAGE = "headPortrait";
     public final static String PHONE = "phone";
     public final static String VCODE_TYPE = "validCodeType";
     public final static String VALIDCODE = "validCode";

@@ -57,7 +57,7 @@ dependencies {
     implementation rootProject.ext.dependencies["retrofit-url-manager"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
 
-    compile files('libs/umeng-analytics-7.4.0.jar')
+    api files('libs/umeng-analytics-7.4.0.jar')
 
     // status bar
     api('com.jaeger.statusbarutil:library:1.4.0') {

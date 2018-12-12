@@ -10,4 +10,10 @@
 
     <string name="login_save">保存</string>
     <string name="login_register">注册</string>
+    <string name="register_finish">完成</string>
+    <string name="register_user_name_title">主人名字</string>
+    <string name="register_user_name_setting">设置名称</string>
+    <string name="register_user_sex_title">主人性别</string>
+    <string name="register_user_woman">女</string>
+    <string name="register_user_man">男</string>
 </resources>

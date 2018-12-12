@@ -14,6 +14,10 @@ import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.cache.IntelligentCache;
 import com.jess.arms.integration.cache.LruCache;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 import com.ralf.www.pet_provider.BuildConfig;
 import com.ralf.www.pet_provider.http.HttpUrl;
 import com.ralf.www.pet_provider.http.GlobalHttpHandlerImpl;
@@ -38,13 +42,14 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
  **/
 public class GlobalConfiguration implements ConfigModule {
 
-    public static String sDomain = HttpUrl.APP_URL_DOMAIN;
-
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
         if (!BuildConfig.DEBUG) { //Release 时,让框架不再打印 Http 请求和响应的信息
             builder.printHttpLogLevel(RequestInterceptor.Level.NONE);
         }
+
+        // 设置 logger
+        setGlobalLogger();
 
         builder.baseurl(HttpUrl.APP_URL_DOMAIN)
                 //强烈建议自己自定义图片加载逻辑, 因为 arms-imageloader-glide 提供的 GlideImageLoaderStrategy 并不能满足复杂的需求
@@ -112,6 +117,22 @@ public class GlobalConfiguration implements ConfigModule {
                     // 否则请 return null;
                     return null;
                 });
+    }
+
+    /**
+     * 设置 logger
+     */
+    private void setGlobalLogger() {
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)
+                .methodCount(0)
+                .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
+            @Override
+            public boolean isLoggable(int priority, String tag) {
+                return BuildConfig.DEBUG;
+            }
+        });
     }
 
     @Override

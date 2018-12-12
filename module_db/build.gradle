@@ -43,7 +43,7 @@ dependencies {
 
     testImplementation rootProject.ext.dependencies["junit"]
 
-    compile 'net.zetetic:android-database-sqlcipher:3.5.7'
+    api 'net.zetetic:android-database-sqlcipher:3.5.7'
     api rootProject.ext.dependencies["greendao"]
 }
 

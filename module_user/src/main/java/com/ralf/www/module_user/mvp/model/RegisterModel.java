@@ -65,9 +65,12 @@ public class RegisterModel extends BaseModel implements RegisterContact.Model {
     public Observable<VertifyCodeEntity> registerNewUser(String image, String nickName,
                                                          String phone, String password, int sex) {
         JsonObject object = new JsonObject();
+        object.addProperty(UserConstant.USER_IMAGE,image);
+        object.addProperty(UserConstant.NICK_NAME,nickName);
+        object.addProperty(UserConstant.USER_SEX,sex);
         object.addProperty(UserConstant.PHONE, phone);
         object.addProperty(UserConstant.PASSWORD, password);
 
-        return mRepositoryManager.obtainRetrofitService(UserService.class).vertifyPhone(object);
+        return mRepositoryManager.obtainRetrofitService(UserService.class).registerNewUser(object);
     }
 }

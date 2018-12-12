@@ -156,6 +156,7 @@ public class RegisterActivity extends BaseSwipeBackActivity<RegisterPresenter> i
                 .withString(RouterConfig.UserModule.KEY_USER_PASSWORD, passWord)
                 .navigation();
         ToastUtils.showShort("注册成功，请设置个人信息！");
+        finish();
     }
 
     @Override

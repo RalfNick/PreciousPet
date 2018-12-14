@@ -1,6 +1,7 @@
 package com.ralf.www.module_user.http;
 
 import com.google.gson.JsonObject;
+import com.ralf.www.module_user.entity.LoginEntity;
 import com.ralf.www.module_user.entity.VertifyCodeEntity;
 import com.ralf.www.pet_provider.http.BaseEntity;
 
@@ -35,7 +36,12 @@ public interface UserService {
     @POST("api/user/changePassword")
     Observable<VertifyCodeEntity> requestModifyPsw(@Body JsonObject body);
 
-
+    /**
+     * 注册的三个步骤
+     *
+     * @param body json
+     * @return
+     */
     @POST("api/user/register/step1")
     Observable<VertifyCodeEntity> vertifyPhone(@Body JsonObject body);
 
@@ -45,7 +51,30 @@ public interface UserService {
     @POST("api/user/register/step3")
     Observable<VertifyCodeEntity> registerNewUser(@Body JsonObject body);
 
-//    @POST("api/user/login")
-//    Observable<LoginEntity> loginRequest(@Body JsonObject body);
+    /**
+     * 登录
+     *
+     * @param body json
+     * @return
+     */
+    @POST("api/user/login")
+    Observable<BaseEntity<LoginEntity>> loginRequest(@Body JsonObject body);
 
+    /**
+     * 三方登录
+     *
+     * @param object json
+     * @return
+     */
+    @POST("api/user/thirdpartyLogin")
+    Observable<BaseEntity<LoginEntity>> thirdPartLogin(@Body JsonObject object);
+
+    /**
+     * 退出登录
+     *
+     * @param object json
+     * @return
+     */
+    @POST("api/user/Logout")
+    Observable<BaseEntity<LoginEntity>> logoutRequest(@Body JsonObject object);
 }

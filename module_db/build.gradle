@@ -44,6 +44,7 @@ dependencies {
     testImplementation rootProject.ext.dependencies["junit"]
 
     api 'net.zetetic:android-database-sqlcipher:3.5.7'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
     api rootProject.ext.dependencies["greendao"]
 }
 

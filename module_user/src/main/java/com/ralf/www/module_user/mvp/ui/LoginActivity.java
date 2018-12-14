@@ -1,5 +1,7 @@
 package com.ralf.www.module_user.mvp.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,12 +20,25 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jess.arms.di.component.AppComponent;
 import com.ralf.www.module_user.R;
 import com.ralf.www.module_user.R2;
+import com.ralf.www.module_user.constant.LoginEnum;
+import com.ralf.www.module_user.dg.component.DaggerLoginComponent;
+import com.ralf.www.module_user.dg.module.LoginModule;
+import com.ralf.www.module_user.mvp.contact.LoginContact;
+import com.ralf.www.module_user.mvp.presenter.LoginPresenter;
 import com.ralf.www.pet_provider.base.BaseSwipeBackActivity;
 import com.ralf.www.pet_provider.http.HttpUrl;
 import com.ralf.www.pet_provider.router.RouterConfig;
+import com.ralf.www.pet_provider.util.ToastUtils;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,7 +47,7 @@ import butterknife.OnClick;
  * @author wanglixin
  */
 @Route(path = RouterConfig.UserModule.LOGIN_PATH)
-public class LoginActivity extends BaseSwipeBackActivity {
+public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> implements LoginContact.View {
 
     private static final String LOGIN_INFO = "已阅读并同意,牵宠用户协议";
 
@@ -59,7 +74,11 @@ public class LoginActivity extends BaseSwipeBackActivity {
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
-
+        DaggerLoginComponent.builder()
+                .appComponent(appComponent)
+                .loginModule(new LoginModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -71,6 +90,8 @@ public class LoginActivity extends BaseSwipeBackActivity {
     public void initData(@Nullable Bundle savedInstanceState) {
         mTitleNameTv.setText("登录");
         setClickableSpan();
+        mPresenter.setEditTextEvent(RxTextView.textChanges(mLoginPhoneEdit),
+                RxTextView.textChanges(mLoginPasswordEdit));
     }
 
     /**
@@ -86,25 +107,59 @@ public class LoginActivity extends BaseSwipeBackActivity {
         mLoginInfoTv.setHighlightColor(Color.parseColor("#00ffffff"));
     }
 
-    @OnClick({R2.id.back_iv, R2.id.login_phone_edit, R2.id.login_password_edit, R2.id.login_forgot_password_btn})
+    @OnClick({R2.id.back_iv, R2.id.login_btn, R2.id.login_forgot_password_btn})
     public void onViewClicked(View view) {
 
-        int i = view.getId();
+        int id = view.getId();
 
-        if (i == R.id.back_iv) {
+        if (id == R.id.back_iv) {
             finish();
-        } else if (i == R.id.login_phone_edit) {
-
-        } else if (i == R.id.login_password_edit) {
-
-        } else if (i == R.id.login_forgot_password_btn) {
+        } else if (id == R.id.login_forgot_password_btn) {
             ARouter.getInstance()
                     .build(RouterConfig.UserModule.MODIFY_PASSWORD_PATH)
                     .withString(RouterConfig.UserModule.KEY_USER_PROTOCOL_URL, HttpUrl.LOGIN_USER_PROTOCOL)
                     .navigation();
+        } else if (id == R.id.login_btn) {
+            mPresenter.loginRequest(LoginEnum.TYPE_PHONE);
+        } else if (id == R.id.login_weixin_btn) {
+            mPresenter.loginRequest(LoginEnum.TYPE_WX);
+        } else if (id == R.id.login_qq_btn) {
+            mPresenter.loginRequest(LoginEnum.TYPE_QQ);
         }
     }
 
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
+
+    @Override
+    public void updateLoginBtnState(boolean isEnable) {
+        mLoginBtn.setEnabled(isEnable);
+    }
+
+    @Override
+    public void jumpToMainPage() {
+//        ARouter.getInstance().build()
+//                .navigation();
+//        finish();
+    }
+
+    @Override
+    public void showMessage(@NonNull String message) {
+
+        ToastUtils.showShort(message);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 设置 SpannerString
+     */
     private class MyClickableSpan extends ClickableSpan {
 
         @Override

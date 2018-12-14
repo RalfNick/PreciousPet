@@ -9,7 +9,7 @@ import com.jess.arms.utils.PermissionUtil;
 import com.ralf.www.module_user.entity.VertifyCodeEntity;
 import com.ralf.www.module_user.mvp.contact.RegisterContact;
 import com.ralf.www.module_user.mvp.contact.RegisterUserContact;
-import com.ralf.www.pet_provider.http.BaseObservser;
+import com.ralf.www.pet_provider.base.SimpleObserver;
 
 import java.util.List;
 
@@ -81,7 +81,7 @@ public class RegisterUserPresenter extends BasePresenter<RegisterContact.Model, 
         mModel.registerNewUser(imagePath, nickName, phone, passWord, sex)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObservser<VertifyCodeEntity>() {
+                .subscribe(new SimpleObserver<VertifyCodeEntity>() {
                     @Override
                     protected void onSuccess(VertifyCodeEntity vertifyCodeEntity) {
                         if (vertifyCodeEntity.getCode() == 0) {
@@ -93,7 +93,7 @@ public class RegisterUserPresenter extends BasePresenter<RegisterContact.Model, 
                     }
 
                     @Override
-                    protected void onFailed(VertifyCodeEntity vertifyCodeEntity) {
+                    protected void onFailed() {
                         mRootView.showMessage("注册失败！");
                     }
                 });

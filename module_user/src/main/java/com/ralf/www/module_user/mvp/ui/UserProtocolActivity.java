@@ -2,7 +2,6 @@ package com.ralf.www.module_user.mvp.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -25,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.di.component.AppComponent;
 import com.ralf.www.module_user.R;
@@ -58,6 +58,12 @@ public class UserProtocolActivity extends BaseSwipeBackActivity {
     @BindView(R2.id.progress_bar_webView)
     ProgressBar mProgressBar;
 
+    @Autowired(name = RouterConfig.UserModule.KEY_USER_PROTOCOL_URL)
+    String mUrl;
+
+    @Autowired(name = RouterConfig.UserModule.KEY_USER_PROTOCOL_TITLE)
+    String mTitle;
+
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
 
@@ -71,12 +77,8 @@ public class UserProtocolActivity extends BaseSwipeBackActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
 
-        // 获取url和title
-        Intent intent = getIntent();
-        String url = intent.getStringExtra(RouterConfig.UserModule.KEY_USER_PROTOCOL_URL);
-        String title = intent.getStringExtra(RouterConfig.UserModule.KEY_USER_PROTOCOL_TITLE);
-        mTitleNameTv.setText(title);
-        initWebView(url);
+        mTitleNameTv.setText(mTitle);
+        initWebView(mUrl);
     }
 
     @Override

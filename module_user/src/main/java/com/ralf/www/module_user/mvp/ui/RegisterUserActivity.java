@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -73,8 +74,12 @@ public class RegisterUserActivity extends BaseActivity<RegisterUserPresenter>
     @Inject
     RxPermissions mRxPermissions;
 
-    private String mPhone;
-    private String mPassWord;
+    @Autowired(name = RouterConfig.UserModule.KEY_USER_PHONE)
+    String mPhone;
+
+    @Autowired(name = RouterConfig.UserModule.KEY_USER_PASSWORD)
+    String mPassWord;
+
     private int mSex = 1;
     private String mNickName;
     private String mImagePath;
@@ -101,10 +106,6 @@ public class RegisterUserActivity extends BaseActivity<RegisterUserPresenter>
 
         mBackIv.setVisibility(View.GONE);
         mTitleNameTv.setText(TITLE);
-
-        Intent intent = getIntent();
-        mPhone = intent.getStringExtra(RouterConfig.UserModule.KEY_USER_PHONE);
-        mPassWord = intent.getStringExtra(RouterConfig.UserModule.KEY_USER_PASSWORD);
 
         mPresenter.requestPermission();
         setViewChangeEvent();
@@ -182,8 +183,6 @@ public class RegisterUserActivity extends BaseActivity<RegisterUserPresenter>
 
     @OnClick(R2.id.register_new_user_finish_btn)
     public void onViewClicked() {
-        mPhone = "15624964887";
-        mPassWord = "123456";
         mPresenter.finishRegister(mImagePath, mNickName, mSex, mPhone, mPassWord);
     }
 

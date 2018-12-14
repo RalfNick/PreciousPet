@@ -22,8 +22,19 @@ public final class UserConstant {
     public final static String PHONE = "phone";
     public final static String VCODE_TYPE = "validCodeType";
     public final static String VALIDCODE = "validCode";
+    public final static String USER_EXTEND = "userExtend";
+
+    public final static String PLAY_VIDEO_STATUS = "playVideoStatus";
 
     public final static String POSITION = "position";
+
+    /**
+     * 三方属性 key
+     */
+    public final static String OPEN_ID = "openId";
+    public final static String TOKEN_INFO = "tokenInfo";
+    public final static String IMAGE = "img";
+
 
     /**
      * 宠物信息

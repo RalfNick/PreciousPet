@@ -27,8 +27,7 @@ import java.util.List;
  **/
 public class GreenDaoUtils {
 
-
-    private static final String DEFAULT_DATABASE_NAME = "iCourtDatabase";
+    private static final String DEFAULT_DATABASE_NAME = "PreciousPetDB";
     private DaoSession mDaoSession;
     private DaoMaster mDaoMaster;
     private AbstractDao mAbstractDao;
@@ -166,10 +165,20 @@ public class GreenDaoUtils {
     }
 
     /**
+     * 查询所有的同一类型的实体类，并全部删除
+     *
+     * @param entityClaz 实体类
+     * @param <T>
+     */
+    public <T> void deleteList(Class<T> entityClaz) {
+        List<T> queryAll = queryAll(entityClaz);
+        deleteList(queryAll);
+    }
+
+    /**
      * 全部删除
      */
-    public <T> void deleteAll(Class<T> claz) {
-        setCurrentDao(claz);
+    public void deleteAll() {
         mAbstractDao.deleteAll();
     }
 
@@ -501,7 +510,7 @@ public class GreenDaoUtils {
     }
 
     private <T> void setCurrentDaoOfList(Collection<T> entities) {
-        if (entities != null && entities.size() > 1) {
+        if (entities != null && entities.size() > 0) {
             Iterator<T> iterator = entities.iterator();
             T next = iterator.next();
             setCurrentDao(next.getClass());

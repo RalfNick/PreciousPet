@@ -1,6 +1,11 @@
-include ':app', ':module_config_res', ':module_user',
+include ':app',
+        ':module_config_res',
+        ':module_user',
+        ':module_chat',
         ':lib_common',
         ':pet_provider',
         ':lib_imageloader_glide',
         ':module_db',
-        ':module_easeui'
+        ':module_easeui',
+        ':module_hmspush',
+        ':module_emoji'

@@ -10,11 +10,12 @@ import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
 import com.hyphenate.easeui.model.EaseNotifier;
-import com.hyphenate.easeui.domain.EaseAvatarOptions;
+import com.hyphenate.easeui.model.EaseDingMessageHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -67,7 +68,10 @@ public final class EaseUI {
     public void popActivity(Activity activity){
         activityList.remove(activity);
     }
-    
+
+    public Activity getTopActivity(){
+        return activityList.get(0);
+    }
     
     private EaseUI(){}
     
@@ -97,15 +101,11 @@ public final class EaseUI {
         }
         appContext = context;
         
-        int pid = android.os.Process.myPid();
-        String processAppName = getAppName(pid);
-        
-        Log.d(TAG, "process app name : " + processAppName);
 
         // if there is application has remote service, application:onCreate() maybe called twice
         // this check is to make sure SDK will initialized only once
         // return if process name is not application's name since the package name is the default process name
-        if (processAppName == null || !processAppName.equalsIgnoreCase(appContext.getPackageName())) {
+        if (!isMainProcess(appContext)) {
             Log.e(TAG, "enter the service process!");
             return false;
         }
@@ -142,8 +142,7 @@ public final class EaseUI {
     }
     
     void initNotifier(){
-        notifier = createNotifier();
-        notifier.init(appContext);
+        notifier = new EaseNotifier(appContext);
     }
     
     private void registerMessageListener() {
@@ -162,7 +161,7 @@ public final class EaseUI {
             }
 
             @Override
-            public void onMessageRecalled(List<EMMessage> list) {
+            public void onMessageRecalled(List<EMMessage> messages) {
 
             }
 
@@ -172,13 +171,12 @@ public final class EaseUI {
             }
             @Override
             public void onCmdMessageReceived(List<EMMessage> messages) {
-                
+                for (EMMessage message : messages) {
+                    // To handle group-ack msg.
+                    EaseDingMessageHelper.get().handleAckMessage(message);
+                }
             }
         });
-    }
-    
-    protected EaseNotifier createNotifier(){
-        return new EaseNotifier();
     }
     
     public EaseNotifier getNotifier(){
@@ -200,7 +198,7 @@ public final class EaseUI {
     
     /**
      * set user profile provider
-     * @param userProvider
+     * @param provider
      */
     public void setUserProfileProvider(EaseUserProfileProvider userProvider){
         this.userProvider = userProvider;
@@ -221,35 +219,16 @@ public final class EaseUI {
     public EaseSettingsProvider getSettingsProvider(){
         return settingsProvider;
     }
-    
-    
-    /**
-     * check the application process name if process name is not qualified, then we think it is a service process and we will not init SDK
-     * @param pID
-     * @return
-     */
-    private String getAppName(int pID) {
-        String processName = null;
-        ActivityManager am = (ActivityManager) appContext.getSystemService(Context.ACTIVITY_SERVICE);
-        List l = am.getRunningAppProcesses();
-        Iterator i = l.iterator();
-        PackageManager pm = appContext.getPackageManager();
-        while (i.hasNext()) {
-            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
-            try {
-                if (info.pid == pID) {
-                    CharSequence c = pm.getApplicationLabel(pm.getApplicationInfo(info.processName, PackageManager.GET_META_DATA));
-                    // Log.d("Process", "Id: "+ info.pid +" ProcessName: "+
-                    // info.processName +"  Label: "+c.toString());
-                    // processName = c.toString();
-                    processName = info.processName;
-                    return processName;
-                }
-            } catch (Exception e) {
-                // Log.d("Process", "Error>> :"+ e.toString());
+
+    public boolean isMainProcess(Context context) {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                return context.getApplicationInfo().packageName.equals(appProcess.processName);
             }
         }
-        return processName;
+        return false;
     }
     
     /**

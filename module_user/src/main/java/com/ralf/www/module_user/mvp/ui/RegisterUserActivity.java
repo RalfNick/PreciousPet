@@ -24,6 +24,8 @@ import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.StringUtils;
+import com.jess.arms.utils.ToastUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -34,8 +36,6 @@ import com.ralf.www.module_user.dg.component.DaggerRegisterUserComponent;
 import com.ralf.www.module_user.mvp.contact.RegisterUserContact;
 import com.ralf.www.module_user.mvp.presenter.RegisterUserPresenter;
 import com.ralf.www.pet_provider.router.RouterConfig;
-import com.ralf.www.pet_provider.util.StringUtils;
-import com.ralf.www.pet_provider.util.ToastUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.List;

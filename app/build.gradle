@@ -24,6 +24,8 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+
+        ndk { abiFilters "armeabi-v7a", "x86" }
     }
     buildTypes {
         release {
@@ -67,6 +69,7 @@ dependencies {
 
     implementation project(':pet_provider')
     implementation project(':module_user')
+    implementation project(':module_chat')
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]

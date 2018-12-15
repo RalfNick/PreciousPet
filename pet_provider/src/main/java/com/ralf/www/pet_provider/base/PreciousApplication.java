@@ -1,6 +1,9 @@
 package com.ralf.www.pet_provider.base;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.jess.arms.base.BaseApplication;
 import com.ralf.www.pet_provider.BuildConfig;
 import com.ralf.www.pet_provider.constant.PetConstant;

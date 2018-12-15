@@ -5,12 +5,12 @@ import android.arch.lifecycle.OnLifecycleEvent;
 
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RegexUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.jess.arms.utils.StringUtils;
 import com.ralf.www.module_user.entity.VertifyCodeEntity;
 import com.ralf.www.module_user.mvp.contact.RegisterContact;
 import com.ralf.www.module_user.util.CountDownUtil;
-import com.ralf.www.pet_provider.util.RegexUtils;
-import com.ralf.www.pet_provider.util.StringUtils;
 
 import javax.inject.Inject;
 

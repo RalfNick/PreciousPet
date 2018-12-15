@@ -2,6 +2,7 @@ package com.ralf.www.preciouspet;
 
 import android.support.multidex.MultiDex;
 
+import com.ralf.www.module_chat.ChatHelper;
 import com.ralf.www.pet_provider.base.PreciousApplication;
 import com.ralf.www.preciouspet.crash.CrashHandler;
 
@@ -23,7 +24,7 @@ public class PetApplication extends PreciousApplication {
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
         /**环信初始化*/
-//        DemoHelper.getInstance().init(this);
+        ChatHelper.getInstance().init(this);
     }
 
     /**

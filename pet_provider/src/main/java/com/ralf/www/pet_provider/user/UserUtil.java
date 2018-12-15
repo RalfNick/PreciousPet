@@ -1,8 +1,8 @@
 package com.ralf.www.pet_provider.user;
 
+import com.jess.arms.utils.SpUtil;
+import com.jess.arms.utils.StringUtils;
 import com.ralf.www.pet_provider.user.constant.UserConstant;
-import com.ralf.www.pet_provider.util.SpUtil;
-import com.ralf.www.pet_provider.util.StringUtils;
 
 /**
  * @author Ralf(wanglixin)

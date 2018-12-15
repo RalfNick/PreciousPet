@@ -115,4 +115,6 @@ dependencies {
     api rootProject.ext.dependencies["arouter"]
     //test
     api rootProject.ext.dependencies["timber"]
+    // log
+    api rootProject.ext.dependencies["logger"]
 }

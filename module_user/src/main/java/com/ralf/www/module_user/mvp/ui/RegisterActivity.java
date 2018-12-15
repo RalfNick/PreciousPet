@@ -21,6 +21,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.widget.RxCompoundButton;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.utils.ToastUtils;
 import com.ralf.www.module_user.R;
 import com.ralf.www.module_user.R2;
 import com.ralf.www.module_user.dg.component.DaggerRegisterComponent;
@@ -30,7 +31,6 @@ import com.ralf.www.module_user.mvp.presenter.RegisterPresenter;
 import com.ralf.www.pet_provider.base.BaseSwipeBackActivity;
 import com.ralf.www.pet_provider.http.HttpUrl;
 import com.ralf.www.pet_provider.router.RouterConfig;
-import com.ralf.www.pet_provider.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;

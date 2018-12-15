@@ -22,6 +22,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.utils.ToastUtils;
 import com.ralf.www.module_user.R;
 import com.ralf.www.module_user.R2;
 import com.ralf.www.module_user.constant.LoginEnum;
@@ -32,13 +33,7 @@ import com.ralf.www.module_user.mvp.presenter.LoginPresenter;
 import com.ralf.www.pet_provider.base.BaseSwipeBackActivity;
 import com.ralf.www.pet_provider.http.HttpUrl;
 import com.ralf.www.pet_provider.router.RouterConfig;
-import com.ralf.www.pet_provider.util.ToastUtils;
-import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -112,7 +112,7 @@ public class EaseChatMessageList extends RelativeLayout{
             messageAdapter.refreshSeekTo(position);
         }
     }
-    
+
 	public ListView getListView() {
 		return listView;
 	} 
@@ -135,7 +135,6 @@ public class EaseChatMessageList extends RelativeLayout{
 
 
     public interface MessageListItemClickListener{
-	    void onResendClick(EMMessage message);
 	    /**
 	     * there is default handling when bubble is clicked, if you want handle it, return true
 	     * another way is you implement in onBubbleClick() of chat row
@@ -143,9 +142,11 @@ public class EaseChatMessageList extends RelativeLayout{
 	     * @return
 	     */
 	    boolean onBubbleClick(EMMessage message);
+	    boolean onResendClick(EMMessage message);
 	    void onBubbleLongClick(EMMessage message);
 	    void onUserAvatarClick(String username);
 	    void onUserAvatarLongClick(String username);
+	    void onMessageInProgress(EMMessage message);
 	}
 	
 	/**

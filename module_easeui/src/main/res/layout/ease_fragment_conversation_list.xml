@@ -6,17 +6,22 @@
     android:background="@color/common_bg"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-        <include layout="@layout/ease_search_bar" />
-    </RelativeLayout>
-
+	<com.hyphenate.easeui.widget.EaseTitleBar 
+	    android:id="@+id/title_bar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    hyphenate:titleBarTitle="@string/session"
+	    />
+    
+    <include layout="@layout/ease_search_bar" />
+    
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fl_error_item"/>
+        android:id="@+id/fl_error_item"
+        >
+    </FrameLayout>
+
 
     <com.hyphenate.easeui.widget.EaseConversationList
         android:id="@+id/list"

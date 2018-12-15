@@ -14,6 +14,8 @@
 package com.hyphenate.easeui;
 
 public class EaseConstant {
+
+
     public static final String MESSAGE_ATTR_IS_VOICE_CALL = "is_voice_call";
     public static final String MESSAGE_ATTR_IS_VIDEO_CALL = "is_video_call";
 
@@ -21,12 +23,12 @@ public class EaseConstant {
 
     public static final String MESSAGE_ATTR_IS_BIG_EXPRESSION = "em_is_big_expression";
     public static final String MESSAGE_ATTR_EXPRESSION_ID = "em_expression_id";
-    
+
     public static final String MESSAGE_ATTR_AT_MSG = "em_at_list";
     public static final String MESSAGE_ATTR_VALUE_AT_MSG_ALL = "ALL";
 
     public static String TO_HX_USERID = "";
-	public static final int CHATTYPE_SINGLE = 1;
+    public static final int CHATTYPE_SINGLE = 1;
     public static final int CHATTYPE_GROUP = 2;
     public static final int CHATTYPE_CHATROOM = 3;
     public static final String CONVERSATION_TIME_SHOW = "ConversationTimeShow";
@@ -83,4 +85,5 @@ public class EaseConstant {
     public static final String EXTRA_CONTENT_MESSAGE = "contentMessage";// 点赞/评论/通知 内容
     public static final String EXTRA_CONTENT_TYPE = "contentType";// 点赞/评论/通知 类型
     public static final String EXTRA_CONTENT_BE_MESSAGE = "contentBeMessage";// 点赞/评论/通知 被评论内容
+
 }

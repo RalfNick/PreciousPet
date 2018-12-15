@@ -1,0 +1,120 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ralf.www.module_chat">
+
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 用于读取数据从扩展存储卡 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application>
+
+        <!-- 设置环信应用的AppKey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1157170417178540#pet-online" />
+
+        <!-- 高德AppKey -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="95b850a1997d93a341ed272cc034640d">
+
+        </meta-data>
+
+        <!-- 高德地图Service -->
+        <service android:name="com.amap.api.location.APSService" />
+
+        <!-- 声明SDK所需的service SDK核心功能 -->
+        <service
+            android:name="com.hyphenate.chat.EMChatService"
+            android:exported="true" />
+        <service
+            android:name="com.hyphenate.chat.EMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <!--&lt;!&ndash; choose video &ndash;&gt;-->
+        <!--<activity-->
+        <!--android:name=".view.diy_view.my_chat_activity.view.ImageGridActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/horizontal_slide"-->
+        <!--android:windowSoftInputMode="stateAlwaysHidden" />-->
+        <!--<activity-->
+        <!--android:name=".view.diy_view.my_chat_activity.view.RecorderVideoActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/horizontal_slide"-->
+        <!--android:windowSoftInputMode="stateAlwaysHidden" />-->
+        <!--&lt;!&ndash; 视频通话 &ndash;&gt;-->
+        <!--<activity-->
+        <!--android:name=".view.diy_view.my_chat_activity.view.VideoCallActivity"-->
+        <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/horizontal_slide" />-->
+        <!--&lt;!&ndash; 语音通话 &ndash;&gt;-->
+        <!--<activity-->
+        <!--android:name=".view.diy_view.my_chat_activity.view.VoiceCallActivity"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/nornal_style" />-->
+        <!-- 下载文件 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowNormalFileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <!-- 显示下载大图页面 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <!-- 地图 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseGaoDeMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <!--<activity-->
+        <!--android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/horizontal_slide" />-->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <!--<activity-->
+        <!--android:name=".view.diy_view.my_chat_activity.view.ContextMenuActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/MyDialogStyle" />-->
+        <!--<activity android:name=".view.activity.heimingdan_activity.HeimingdanActivity" />-->
+        <!--<activity-->
+        <!--android:name=".view.activity.chat_message_activity.ChatMessageActivity"-->
+        <!--android:launchMode="singleTop" />-->
+    </application>
+</manifest>

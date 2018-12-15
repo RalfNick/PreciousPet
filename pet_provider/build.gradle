@@ -45,8 +45,8 @@ dependencies {
     api project(':module_db')
     api project(':module_config_res')
     api project(':module_easeui')
+    implementation project(':module_hmspush')
     //    implementation rootProject.ext.dependencies["glide"]
-    api rootProject.ext.dependencies["logger"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     implementation rootProject.ext.dependencies["lifecyclemodel"]
     // tools

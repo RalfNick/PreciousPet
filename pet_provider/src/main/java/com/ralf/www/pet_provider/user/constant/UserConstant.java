@@ -1,5 +1,7 @@
 package com.ralf.www.pet_provider.user.constant;
 
+import com.ralf.www.pet_provider.http.HttpUrl;
+
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
@@ -10,7 +12,27 @@ package com.ralf.www.pet_provider.user.constant;
 public final class UserConstant {
 
     /**
-     * 用户基本信息
+     * 暂时常量
+     */
+    public static String APP_IS_FIRST = "appIsFirst";
+    public static String APP_NICKNAME = "";
+    public static String APP_IMAGE = "";
+    public static int APP_USERID = -1;
+    public static String APP_SYSTEM = "android";
+    public static String APP_TOKEN = "";
+    public static int APP_SEX = -1;
+    public static String APP_HX_USERID = "";
+    public static String APP_PETTOKEN = "";
+    public static String APP_LEVEL = "LV";
+    public static String ERWEIMA_PREFIX = HttpUrl.ADD_FRIEND;
+    public static String LOCATION_LAT = "";
+    public static String LOCATION_LNG = "";
+    public static String CITY_NAME = "";
+    public static String PROVINCE_NAME = "";
+
+
+    /**
+     * 用户基本信息 key
      */
     public static String USER_TOKEN = "token";
     public static String USER_ID = "userId";
@@ -25,7 +47,6 @@ public final class UserConstant {
     public final static String USER_EXTEND = "userExtend";
 
     public final static String PLAY_VIDEO_STATUS = "playVideoStatus";
-
     public final static String POSITION = "position";
 
     /**

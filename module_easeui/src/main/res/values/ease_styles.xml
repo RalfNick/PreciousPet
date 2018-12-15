@@ -71,11 +71,11 @@
         <item name="android:windowAnimationStyle">@style/AnimFade</item>
     </style>
 
-    <style name="horizontal_slide" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="horizontal_slide" parent="android:Theme.NoTitleBar">
         <item name="android:windowAnimationStyle">@style/AnimFade2</item>
     </style>
     
-    <style name="nornal_style" parent="Theme.AppCompat.Light.NoActionBar"></style>
+    <style name="nornal_style" parent="android:Theme.NoTitleBar"></style>
 
     <!--
     <style name="horizontal_slide2" parent="android:style/Theme.Holo.Light.NoActionBar">
@@ -85,7 +85,7 @@
 
 
 
-    <style name="MyDialogStyle" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MyDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>

@@ -1,0 +1,103 @@
+Properties localProperties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream();
+localProperties.load(inputStream)
+def isModuleDevelop = localProperties.getProperty("isModuleDevelop", "false")
+if (isModuleDevelop.toBoolean()) {
+    //组件化编译时为application
+    apply plugin: 'com.android.application'
+    apply plugin: 'com.jakewharton.butterknife'
+} else {
+    //非组件化编译时为library
+    apply plugin: 'com.android.library'
+    apply plugin: 'com.jakewharton.butterknife'
+}
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        if (isModuleDevelop.toBoolean()) {
+            //组件化编译时为app，设置 Application Id
+            applicationId "com.icourt.lawschool"
+        }
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+        ndk { abiFilters "armeabi-v7a", "x86" }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (isModuleDevelop.toBoolean()) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                // 集成开发模式下排除debug文件夹中的所有Java文件
+                java {
+                    //debug文件夹中放的是Application类，非组件化时不用有此类
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+//    implementation project(':lib_common')
+//    api project(':lib_imageloader_glide')
+//    api project(':module_db')
+//    implementation project(':module_config_res')
+    //    implementation rootProject.ext.dependencies["glide"]
+//    implementation rootProject.ext.dependencies["logger"]
+//    implementation rootProject.ext.dependencies["lifecyclemodel"]
+    implementation project(':module_emoji')
+//    api project(':module_easeui')
+    implementation project(':pet_provider')
+
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+
+    //test
+//    implementation rootProject.ext.dependencies["junit"]
+//    implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
+    // status bar
+//    implementation('com.jaeger.statusbarutil:library:1.4.0') {
+//        exclude group: 'com.android.support', module: 'design'
+//    }
+
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+
+    implementation 'com.parse:parse-android:1.13.1'
+}

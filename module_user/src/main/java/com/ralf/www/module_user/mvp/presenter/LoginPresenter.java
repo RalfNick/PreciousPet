@@ -11,7 +11,9 @@ import com.google.gson.JsonObject;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RegexUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.jess.arms.utils.SpUtil;
 import com.orhanobut.logger.Logger;
 import com.ralf.module_db.data.entity.MessageRemindEntity;
 import com.ralf.module_db.data.entity.PetEntity;
@@ -21,13 +23,12 @@ import com.ralf.www.module_user.entity.LoginEntity;
 import com.ralf.www.module_user.entity.ThirdPartLoginEntity;
 import com.ralf.www.module_user.mvp.contact.LoginContact;
 import com.ralf.www.pet_provider.base.SimpleObserver;
+import com.ralf.www.pet_provider.chat.ChatUtil;
 import com.ralf.www.pet_provider.constant.PetConstant;
 import com.ralf.www.pet_provider.http.BaseEntity;
 import com.ralf.www.pet_provider.http.WebObserver;
 import com.ralf.www.pet_provider.user.constant.UserConstant;
 import com.ralf.www.pet_provider.util.BitmapUtil;
-import com.ralf.www.pet_provider.util.RegexUtils;
-import com.ralf.www.pet_provider.util.SpUtil;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -287,6 +288,13 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
         SpUtil.getInstance().put(UserConstant.USER_SEX, data.getUserSex());
         SpUtil.getInstance().put(UserConstant.PLAY_VIDEO_STATUS, 0);
 
+        // 内存缓存
+        UserConstant.APP_IMAGE = data.getUserHeadPortrait();
+        UserConstant.APP_NICKNAME = data.getNickName();
+        UserConstant.APP_TOKEN = data.getToken();
+        UserConstant.APP_USERID = data.getUserId();
+        UserConstant.APP_SEX = data.getUserSex();
+
         // 保存宠物信息到数据库
         List<LoginEntity.PetListBean> petList = data.getPetList();
         List<PetEntity> petEntities = new ArrayList<>();
@@ -302,15 +310,7 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
                 petEntities.add(entity);
             }
         }
-        PetEntity entity = new PetEntity();
-        entity.setSex(1);
-        entity.setPetSelect(true);
-        entity.setPetName("Lolo");
-        entity.setHeadPortrait("123");
-        entity.setPetId(1283838);
-        petEntities.add(entity);
-        GreenDaoUtils.getInstance(mApplication)
-                .insertTx(petEntities);
+        GreenDaoUtils.getInstance(mApplication).insertTx(petEntities);
     }
 
     /**
@@ -365,6 +365,6 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
      * @param hxUserName 用户名
      */
     private void loginHx(String hxUserName) {
-
+        ChatUtil.login(hxUserName, hxUserName);
     }
 }

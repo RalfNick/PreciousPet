@@ -28,7 +28,7 @@ android {
 
         if (isModuleDevelop.toBoolean()) {
             //组件化编译时为app，设置 Application Id
-            applicationId "com.icourt.lawschool"
+            applicationId "com.ralf.preciouspet"
         }
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

@@ -42,7 +42,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/community_image_selector"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                android:paddingTop="6dp"
                 android:text="@string/radio_btn_community"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />
@@ -55,7 +55,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/information_image_selector"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                android:paddingTop="6dp"
                 android:text="@string/radio_btn_info"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />
@@ -81,7 +81,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/service_image_selector"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                android:paddingTop="6dp"
                 android:text="@string/radio_btn_service"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />
@@ -94,7 +94,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/my_image_selector"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                android:paddingTop="6dp"
                 android:text="@string/radio_btn_me"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />

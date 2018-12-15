@@ -1,6 +1,6 @@
 package debug;
 
-import com.ralf.www.pet_provider.base.PreciousApplication;
+import com.ralf.pet_provider.base.PreciousApplication;
 
 /**
  * @author Ralf(wanglixin)

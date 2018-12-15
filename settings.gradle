@@ -1,6 +1,6 @@
 include ':app',
         ':module_config_res',
-        ':module_user',
+        ':module_login_register',
         ':module_chat',
         ':lib_common',
         ':pet_provider',

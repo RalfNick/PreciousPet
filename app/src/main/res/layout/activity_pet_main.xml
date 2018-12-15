@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".PetMainActivity">
+
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:scaleType="fitXY"
+            android:src="@mipmap/bg_bottom_bar" />
+
+        <RadioGroup
+            android:id="@+id/main_view_switch_rg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp">
+
+            <RadioButton
+                android:id="@+id/main_community_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/community_image_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="@string/radio_btn_community"
+                android:textColor="@color/color_selector_main_radio"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_information_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/information_image_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="@string/radio_btn_info"
+                android:textColor="@color/color_selector_main_radio"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_shopping_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/shopping_image_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="@string/radio_btn_shop"
+                android:textColor="@color/color_selector_main_radio"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_service_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/service_image_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="@string/radio_btn_service"
+                android:textColor="@color/color_selector_main_radio"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/main_me_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/my_image_selector"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="@string/radio_btn_me"
+                android:textColor="@color/color_selector_main_radio"
+                android:textSize="12sp" />
+
+        </RadioGroup>
+
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ralf.www.module_login_register">
+
+    <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 用于读取数据从扩展存储卡 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application>
+
+        <!--用户登录部分 start-->
+        <activity
+            android:name="com.ralf.www.module_login_register.mvp.ui.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ralf.www.module_login_register.mvp.ui.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ralf.www.module_login_register.mvp.ui.EntranceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ralf.www.module_login_register.mvp.ui.UserProtocolActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.PassWordModifyActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".mvp.ui.RegisterUserActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <!--用户登录部分 end-->
+
+    </application>
+
+</manifest>

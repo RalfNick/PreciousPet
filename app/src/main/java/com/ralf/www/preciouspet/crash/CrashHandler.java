@@ -1,7 +1,6 @@
 package com.ralf.www.preciouspet.crash;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -9,8 +8,6 @@ import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.ralf.www.preciouspet.MainActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -99,7 +96,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
 //            System.exit(1);
             // 重新启动程序，注释上面的退出程序
 //            Intent intent = new Intent();
-//            intent.setClass(mContext, MainActivity.class);
+//            intent.setClass(mContext, UserMainActivity.class);
 //            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            mContext.startActivity(intent);
 //            android.os.Process.killProcess(android.os.Process.myPid());

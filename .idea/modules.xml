@@ -12,7 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/module_easeui/module_easeui.iml" filepath="$PROJECT_DIR$/module_easeui/module_easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_emoji/module_emoji.iml" filepath="$PROJECT_DIR$/module_emoji/module_emoji.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_hmspush/module_hmspush.iml" filepath="$PROJECT_DIR$/module_hmspush/module_hmspush.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module_user/module_user.iml" filepath="$PROJECT_DIR$/module_user/module_user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_login_register/module_login_register.iml" filepath="$PROJECT_DIR$/module_login_register/module_login_register.iml" />
       <module fileurl="file://$PROJECT_DIR$/pet_provider/pet_provider.iml" filepath="$PROJECT_DIR$/pet_provider/pet_provider.iml" />
     </modules>
   </component>

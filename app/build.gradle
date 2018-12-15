@@ -68,7 +68,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':pet_provider')
-    implementation project(':module_user')
+    implementation project(':module_login_register')
     implementation project(':module_chat')
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
@@ -80,4 +80,5 @@ dependencies {
     testImplementation rootProject.ext.dependencies["canary-release"]
 
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 }

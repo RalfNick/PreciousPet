@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
@@ -23,6 +25,7 @@ import com.ralf.www.module_user.entity.LoginEntity;
 import com.ralf.www.module_user.entity.ThirdPartLoginEntity;
 import com.ralf.www.module_user.mvp.contact.LoginContact;
 import com.ralf.www.pet_provider.base.SimpleObserver;
+import com.ralf.www.pet_provider.chat.ChatCallBack;
 import com.ralf.www.pet_provider.chat.ChatUtil;
 import com.ralf.www.pet_provider.constant.PetConstant;
 import com.ralf.www.pet_provider.http.BaseEntity;
@@ -36,6 +39,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -349,7 +353,8 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
                         GreenDaoUtils.getInstance(mApplication).deleteAll();
                         // 清除 SP
                         SpUtil.getInstance().clear(true);
-
+                        // 退出环信
+                        ChatUtil.logout();
                     }
 
                     @Override
@@ -365,6 +370,18 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
      * @param hxUserName 用户名
      */
     private void loginHx(String hxUserName) {
-        ChatUtil.login(hxUserName, hxUserName);
+
+        ChatUtil.login(hxUserName, hxUserName, new ChatCallBack() {
+            @Override
+            public void onSuccess() {
+                Logger.e("登录环信成功");
+                mRootView.jumpToMainPage();
+            }
+
+            @Override
+            public void onFailed(String failMsg) {
+                Logger.e("登录环信失败");
+            }
+        });
     }
 }

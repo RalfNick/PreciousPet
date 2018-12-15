@@ -196,7 +196,6 @@ public class RegisterUserActivity extends BaseActivity<RegisterUserPresenter>
         ARouter.getInstance()
                 .build(RouterConfig.UserModule.LOGIN_PATH)
                 .navigation();
-        AppManager.getAppManager().killActivity(EntranceActivity.class);
         finish();
     }
 

@@ -22,6 +22,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.integration.AppManager;
 import com.jess.arms.utils.ToastUtils;
 import com.ralf.www.module_user.R;
 import com.ralf.www.module_user.R2;
@@ -135,9 +136,10 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
 
     @Override
     public void jumpToMainPage() {
-//        ARouter.getInstance().build()
-//                .navigation();
-//        finish();
+        ARouter.getInstance().build(RouterConfig.AppModule.MAIN_PATH)
+                .navigation();
+        AppManager.getAppManager().killActivity(EntranceActivity.class);
+        finish();
     }
 
     @Override

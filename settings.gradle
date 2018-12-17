@@ -1,6 +1,7 @@
 include ':app',
         ':module_config_res',
         ':module_login_register',
+        ':module_community',
         ':module_chat',
         ':lib_common',
         ':pet_provider',

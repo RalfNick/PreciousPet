@@ -29,7 +29,7 @@
         <RadioGroup
             android:id="@+id/main_view_switch_rg"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:orientation="horizontal"
             android:paddingBottom="5dp">
@@ -40,9 +40,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
+                android:checked="true"
                 android:drawableTop="@drawable/community_image_selector"
                 android:gravity="center"
-                android:paddingTop="6dp"
+                android:paddingTop="10dp"
                 android:text="@string/radio_btn_community"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />
@@ -55,7 +56,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/information_image_selector"
                 android:gravity="center"
-                android:paddingTop="6dp"
+                android:paddingTop="10dp"
                 android:text="@string/radio_btn_info"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />
@@ -81,7 +82,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/service_image_selector"
                 android:gravity="center"
-                android:paddingTop="6dp"
+                android:paddingTop="10dp"
                 android:text="@string/radio_btn_service"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />
@@ -94,7 +95,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/my_image_selector"
                 android:gravity="center"
-                android:paddingTop="6dp"
+                android:paddingTop="10dp"
                 android:text="@string/radio_btn_me"
                 android:textColor="@color/color_selector_main_radio"
                 android:textSize="12sp" />

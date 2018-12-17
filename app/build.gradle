@@ -70,6 +70,7 @@ dependencies {
     implementation project(':pet_provider')
     implementation project(':module_login_register')
     implementation project(':module_chat')
+    implementation project(':module_community')
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]

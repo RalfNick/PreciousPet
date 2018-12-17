@@ -73,6 +73,7 @@ public final class RouterConfig {
      */
     public static class CommunityModule {
 
+        public static final String FRAGMENT_NAME = "CommunityFragment";
         /**
          * 测试界面
          */
@@ -85,6 +86,8 @@ public final class RouterConfig {
      * 资讯模块
      */
     public static class NewsModule {
+
+        public static final String FRAGMENT_NAME = "CommunityFragment";
 
         /**
          * 测试界面
@@ -99,6 +102,8 @@ public final class RouterConfig {
      */
     public static class ServiceModule {
 
+        public static final String FRAGMENT_NAME = "CommunityFragment";
+
         /**
          * 测试界面
          */
@@ -112,6 +117,8 @@ public final class RouterConfig {
      */
     public static class MallModule {
 
+        public static final String FRAGMENT_NAME = "CommunityFragment";
+
         /**
          * 测试界面
          */
@@ -124,6 +131,8 @@ public final class RouterConfig {
      * 用户模块
      */
     public static class UserModule {
+
+        public static final String FRAGMENT_NAME = "CommunityFragment";
 
         /**
          * 测试界面

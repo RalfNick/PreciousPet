@@ -131,4 +131,10 @@ public interface IFragment {
      * @param data 当不需要参数时 {@code data} 可以为 {@code null}
      */
     void setData(@Nullable Object data);
+
+    /**
+     * 是否使用 ARouter
+     * @return
+     */
+    boolean useARouter();
 }

@@ -13,6 +13,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/main_network_unavailable_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="当前网络不可用"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/main_reload_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/main_color"
+                android:textColor="@color/white"
+                android:text="请重试" />
+        </LinearLayout>
+
     </FrameLayout>
 
     <FrameLayout
@@ -101,6 +126,19 @@
                 android:textSize="12sp" />
 
         </RadioGroup>
+
+        <TextView
+            android:id="@+id/main_my_msg_unread"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/background_shopping_count"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            tools:ignore="RtlHardcoded" />
 
     </FrameLayout>
 

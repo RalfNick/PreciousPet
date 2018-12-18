@@ -6,25 +6,29 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.di.scope.FragmentScope;
 import com.orhanobut.logger.Logger;
 import com.ralf.pet_provider.base.SimpleObserver;
 import com.ralf.pet_provider.router.RouterConfig;
+import com.ralf.pet_provider.util.NetUtil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author wanglixin
@@ -36,6 +40,12 @@ public class PetMainActivity extends BaseActivity {
     FrameLayout mFragmentContainer;
     @BindView(R.id.main_view_switch_rg)
     RadioGroup mViewSwitchRg;
+    @BindView(R.id.main_my_msg_unread)
+    TextView mMsgCount;
+    @BindView(R.id.main_network_unavailable_ll)
+    LinearLayout mNetworkLl;
+    @BindView(R.id.main_reload_btn)
+    Button mReloadBtn;
 
     /**
      * 当前选择的 Fragment 的路径
@@ -69,7 +79,11 @@ public class PetMainActivity extends BaseActivity {
      * 检查网络
      */
     private void checkNetWork() {
-
+        if (!NetUtil.isNetworkConnected(this)) {
+            mNetworkLl.setVisibility(View.VISIBLE);
+        } else {
+            mNetworkLl.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -131,6 +145,7 @@ public class PetMainActivity extends BaseActivity {
 
     /**
      * 隐藏所有的 Fragment
+     *
      * @param transaction
      */
     private void hideAllFragments(FragmentTransaction transaction) {
@@ -140,9 +155,14 @@ public class PetMainActivity extends BaseActivity {
         }
         for (String tag : mFragmentTagSet) {
             Fragment fragment = mFragmentManager.findFragmentByTag(tag);
-            if (fragment != null){
+            if (fragment != null) {
                 transaction.hide(fragment);
             }
         }
+    }
+
+    @OnClick(R.id.main_reload_btn)
+    public void onViewClicked() {
+        switchFragment();
     }
 }

@@ -16,6 +16,7 @@ import com.jess.arms.utils.RxLifecycleUtils;
 import com.jess.arms.utils.SpUtil;
 import com.orhanobut.logger.Logger;
 import com.ralf.module_db.data.entity.MessageRemindEntity;
+import com.ralf.module_db.data.entity.PetAssistantEntity;
 import com.ralf.module_db.data.entity.PetEntity;
 import com.ralf.module_db.util.GreenDaoUtils;
 import com.ralf.module_login_register.constant.LoginEnum;
@@ -310,6 +311,19 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
             }
         }
         GreenDaoUtils.getInstance(mApplication).insertTx(petEntities);
+
+        // 保存助手信息
+        List<LoginEntity.QCListBean> qcList = data.getQCList();
+        if (qcList != null && qcList.size() > 0) {
+            LoginEntity.QCListBean bean = qcList.get(0);
+            PetAssistantEntity entity = new PetAssistantEntity();
+            entity.setQCuserId(bean.getQCuserId());
+            entity.setQCType(bean.getQCType());
+            entity.setQCheadPortrait(bean.getQCheadPortrait());
+            entity.setQChxId(bean.getQChxId());
+            entity.setQCnickName(bean.getQCnickName());
+            GreenDaoUtils.getInstance(mApplication).insert(entity);
+        }
     }
 
     /**

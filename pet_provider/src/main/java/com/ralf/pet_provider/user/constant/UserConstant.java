@@ -66,4 +66,12 @@ public final class UserConstant {
      * 环信用户信息
      */
     public final static String HX_USER_NAME = "hxUserName";
+
+    /**
+     * 助手信息
+     */
+    public static int ASSISTANT_ID = 16567;
+    public static String ASSISTANT_HXID = "TL_16567";
+    public static String ASSISTANT_NAME = "牵宠小助手";
+    public static String ASSISTANT_IMAGE = "";
 }

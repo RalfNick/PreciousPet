@@ -15,15 +15,25 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.EaseConstant;
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.utils.SpUtil;
+import com.jess.arms.utils.ToastUtils;
 import com.orhanobut.logger.Logger;
+import com.ralf.module_chat.ChatHelper;
+import com.ralf.module_chat.Constant;
+import com.ralf.module_db.data.entity.PetAssistantEntity;
+import com.ralf.module_db.util.GreenDaoUtils;
 import com.ralf.pet_provider.base.SimpleObserver;
 import com.ralf.pet_provider.router.RouterConfig;
+import com.ralf.pet_provider.user.constant.UserConstant;
 import com.ralf.pet_provider.util.NetUtil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
@@ -34,7 +44,7 @@ import butterknife.OnClick;
  * @author wanglixin
  */
 @Route(path = RouterConfig.AppModule.MAIN_PATH)
-public class PetMainActivity extends BaseActivity {
+public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgInterface {
 
     @BindView(R.id.main_fragment_container)
     FrameLayout mFragmentContainer;
@@ -73,6 +83,33 @@ public class PetMainActivity extends BaseActivity {
         mFragmentManager = getSupportFragmentManager();
         checkNetWork();
         initRaidoCheckedEvent();
+        loadUserInfo();
+        ChatHelper.getInstance().setPushMsg(this);
+    }
+
+    /**
+     * 加载用户信息
+     */
+    private void loadUserInfo() {
+
+        UserConstant.USER_TOKEN = SpUtil.getInstance().getString(UserConstant.USER_TOKEN);
+        UserConstant.USER_ID = SpUtil.getInstance().getString(UserConstant.USER_ID);
+        UserConstant.APP_NICKNAME = SpUtil.getInstance().getString(UserConstant.USER_NAME);
+        UserConstant.APP_IMAGE = SpUtil.getInstance().getString(UserConstant.USER_IMAGE);
+        UserConstant.APP_HX_USERID = SpUtil.getInstance().getString(UserConstant.HX_USER_NAME);
+        UserConstant.APP_SEX = SpUtil.getInstance().getInt(UserConstant.USER_SEX);
+
+        EaseConstant.TO_HX_USERID = UserConstant.APP_HX_USERID;
+
+        // 加载助手信息
+        List<PetAssistantEntity> entities = GreenDaoUtils.getInstance(getApplication())
+                .queryAll(PetAssistantEntity.class);
+        if (entities != null && entities.size() > 0) {
+            UserConstant.ASSISTANT_ID = entities.get(0).getQCuserId();
+            UserConstant.ASSISTANT_HXID = entities.get(0).getQChxId();
+            UserConstant.ASSISTANT_NAME = entities.get(0).getQCnickName();
+            UserConstant.ASSISTANT_IMAGE = entities.get(0).getQCheadPortrait();
+        }
     }
 
     /**
@@ -164,5 +201,22 @@ public class PetMainActivity extends BaseActivity {
     @OnClick(R.id.main_reload_btn)
     public void onViewClicked() {
         switchFragment();
+    }
+
+    @Override
+    public void getPushMsg() {
+        ToastUtils.showShort("推送消息");
+        int count = EMClient.getInstance().chatManager().getUnreadMessageCount();
+        if (count > 0) {
+            mMsgCount.setText(String.valueOf(count));
+            mMsgCount.setVisibility(View.VISIBLE);
+        } else {
+            mMsgCount.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void getMyPushMsg() {
+
     }
 }

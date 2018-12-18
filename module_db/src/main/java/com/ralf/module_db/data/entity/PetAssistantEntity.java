@@ -43,7 +43,17 @@ public class PetAssistantEntity {
     @Property(nameInDb = "qc_userId")
     private int qCuserId;
 
-    @Generated
+    @Generated(hash = 454463711)
+    public PetAssistantEntity(long id, int qCType, String qCheadPortrait, String qChxId, String qCnickName, int qCuserId) {
+        this.id = id;
+        this.qCType = qCType;
+        this.qCheadPortrait = qCheadPortrait;
+        this.qChxId = qChxId;
+        this.qCnickName = qCnickName;
+        this.qCuserId = qCuserId;
+    }
+
+    @Generated(hash = 1566405587)
     public PetAssistantEntity() {
     }
 
@@ -96,5 +106,13 @@ public class PetAssistantEntity {
                 ", qCnickName='" + qCnickName + '\'' +
                 ", qCuserId=" + qCuserId +
                 '}';
+    }
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

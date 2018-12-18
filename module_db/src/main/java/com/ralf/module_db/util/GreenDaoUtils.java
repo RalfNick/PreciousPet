@@ -45,7 +45,6 @@ public class GreenDaoUtils {
             mDaoMaster = new DaoMaster(mHelper.getEncryptedReadableDb(passWord));
         }
         mDaoSession = mDaoMaster.newSession();
-
     }
 
     public static GreenDaoUtils getInstance(Application application) {

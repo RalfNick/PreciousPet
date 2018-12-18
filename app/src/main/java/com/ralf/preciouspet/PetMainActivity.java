@@ -65,6 +65,11 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
 
     private FragmentManager mFragmentManager;
 
+    /**
+     * 记录退出时间
+     */
+    private long mExitTime;
+
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
 
@@ -92,8 +97,8 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
      */
     private void loadUserInfo() {
 
-        UserConstant.USER_TOKEN = SpUtil.getInstance().getString(UserConstant.USER_TOKEN);
-        UserConstant.USER_ID = SpUtil.getInstance().getString(UserConstant.USER_ID);
+        UserConstant.APP_TOKEN = SpUtil.getInstance().getString(UserConstant.USER_TOKEN);
+        UserConstant.APP_USERID = SpUtil.getInstance().getInt(UserConstant.USER_ID);
         UserConstant.APP_NICKNAME = SpUtil.getInstance().getString(UserConstant.USER_NAME);
         UserConstant.APP_IMAGE = SpUtil.getInstance().getString(UserConstant.USER_IMAGE);
         UserConstant.APP_HX_USERID = SpUtil.getInstance().getString(UserConstant.HX_USER_NAME);
@@ -195,6 +200,16 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
             if (fragment != null) {
                 transaction.hide(fragment);
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - mExitTime > 2000) {
+            mExitTime = System.currentTimeMillis();
+            ToastUtils.showShort("再按一次退出程序");
+        } else {
+            finish();
         }
     }
 

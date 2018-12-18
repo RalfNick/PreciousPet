@@ -34,17 +34,17 @@ public final class UserConstant {
     /**
      * 用户基本信息 key
      */
-    public static String USER_TOKEN = "token";
-    public static String USER_ID = "userId";
-    public final static String PASSWORD = "password";
-    public final static String USER_NAME = "userName";
+    public static final String USER_TOKEN = "token";
+    public static final String USER_ID = "userId";
+    public static final String PASSWORD = "password";
+    public static final String USER_NAME = "userName";
     public static final String NICK_NAME = "nickName";
     public static final String USER_SEX = "sex";
-    public final static String USER_IMAGE = "headPortrait";
-    public final static String PHONE = "phone";
-    public final static String VCODE_TYPE = "validCodeType";
-    public final static String VALIDCODE = "validCode";
-    public final static String USER_EXTEND = "userExtend";
+    public static final String USER_IMAGE = "headPortrait";
+    public static final String PHONE = "phone";
+    public static final String VCODE_TYPE = "validCodeType";
+    public static final String VALIDCODE = "validCode";
+    public static final String USER_EXTEND = "userExtend";
 
     public final static String PLAY_VIDEO_STATUS = "playVideoStatus";
     public final static String POSITION = "position";

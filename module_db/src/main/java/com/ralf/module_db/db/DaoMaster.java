@@ -24,6 +24,7 @@ public class DaoMaster extends AbstractDaoMaster {
         MessageRemindEntityDao.createTable(db, ifNotExists);
         SampleDBEntityDao.createTable(db, ifNotExists);
         PetEntityDao.createTable(db, ifNotExists);
+        PetAssistantEntityDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -31,6 +32,7 @@ public class DaoMaster extends AbstractDaoMaster {
         MessageRemindEntityDao.dropTable(db, ifExists);
         SampleDBEntityDao.dropTable(db, ifExists);
         PetEntityDao.dropTable(db, ifExists);
+        PetAssistantEntityDao.dropTable(db, ifExists);
     }
 
     /**
@@ -52,6 +54,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(MessageRemindEntityDao.class);
         registerDaoClass(SampleDBEntityDao.class);
         registerDaoClass(PetEntityDao.class);
+        registerDaoClass(PetAssistantEntityDao.class);
     }
 
     public DaoSession newSession() {

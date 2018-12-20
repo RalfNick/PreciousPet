@@ -69,4 +69,10 @@ dependencies {
     api files('libs/umeng_social_api.jar')
     api files('libs/umeng_social_tool.jar')
 
+    // smartrefresh
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-18'
+    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-18'//没有使用特殊Header，可以不加这行
+
+    // BRVAH
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
 }

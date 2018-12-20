@@ -137,4 +137,10 @@ public interface IFragment {
      * @return
      */
     boolean useARouter();
+
+    /**
+     * 是否使用 ButterKnife
+     * @return
+     */
+    boolean userButterKnife();
 }

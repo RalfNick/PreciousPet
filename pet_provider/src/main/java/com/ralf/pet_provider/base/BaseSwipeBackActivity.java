@@ -150,7 +150,7 @@ public abstract class BaseSwipeBackActivity<P extends IPresenter> extends AppCom
     }
 
     @Override
-    public boolean userArouter() {
+    public boolean userARouter() {
         return true;
     }
 }

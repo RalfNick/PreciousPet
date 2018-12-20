@@ -6,11 +6,11 @@ import com.jess.arms.mvp.IView;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name CommunityContact
+ * @name FeaturedContact
  * @email -
  * @date 2018/12/17 上午10:07
  **/
-public interface CommunityContact {
+public interface FeaturedContact {
 
     interface View extends IView {
 

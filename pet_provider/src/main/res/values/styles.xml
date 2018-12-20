@@ -15,4 +15,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">17sp</item>
+    </style>
+
 </resources>

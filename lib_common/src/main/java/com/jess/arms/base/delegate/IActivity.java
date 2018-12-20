@@ -97,5 +97,5 @@ public interface IActivity {
      * 是否使用 ARouter
      * @return
      */
-    boolean userArouter();
+    boolean userARouter();
 }

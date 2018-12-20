@@ -51,7 +51,7 @@ public class ActivityDelegateImpl implements ActivityDelegate {
             EventBusManager.getInstance().register(mActivity);
         }
         //如果要使用 ARouter 请将此方法返回 true
-        if (iActivity.userArouter()){
+        if (iActivity.userARouter()){
             // 注册 ARouter
             ARouter.getInstance().inject(mActivity);
         }

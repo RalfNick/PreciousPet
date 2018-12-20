@@ -135,7 +135,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     }
 
     @Override
-    public boolean userArouter() {
+    public boolean userARouter() {
         return true;
     }
 }

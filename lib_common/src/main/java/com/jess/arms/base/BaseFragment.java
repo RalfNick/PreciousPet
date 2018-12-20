@@ -35,6 +35,8 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
@@ -57,9 +59,14 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;
     protected Context mContext;
+    protected Unbinder mUnbinder;
+
+    /**
+     * 如果当前页面逻辑简单, Presenter 可以为 null
+     */
     @Inject
     @Nullable
-    protected P mPresenter;//如果当前页面逻辑简单, Presenter 可以为 null
+    protected P mPresenter;
 
     @NonNull
     @Override
@@ -86,16 +93,22 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        View view = initView(inflater, container, savedInstanceState);
         if (useARouter()) {
             ARouter.getInstance().inject(this);
         }
-        return initView(inflater, container, savedInstanceState);
+        if (userButterKnife()) {
+            mUnbinder = ButterKnife.bind(this, view);
+        }
+        return view;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null) mPresenter.onDestroy();//释放资源
+        if (mPresenter != null) {
+            mPresenter.onDestroy();//释放资源
+        }
         this.mPresenter = null;
     }
 
@@ -103,6 +116,14 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     public void onDetach() {
         super.onDetach();
         mContext = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
     }
 
     /**
@@ -121,6 +142,11 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
 
     @Override
     public boolean useARouter() {
+        return true;
+    }
+
+    @Override
+    public boolean userButterKnife() {
         return true;
     }
 }

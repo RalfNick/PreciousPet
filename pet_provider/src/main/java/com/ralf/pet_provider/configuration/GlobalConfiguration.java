@@ -44,13 +44,12 @@ public class GlobalConfiguration implements ConfigModule {
 
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
-        if (!BuildConfig.DEBUG) { //Release 时,让框架不再打印 Http 请求和响应的信息
+        // Release 时,让框架不再打印 Http 请求和响应的信息
+        if (!BuildConfig.DEBUG) {
             builder.printHttpLogLevel(RequestInterceptor.Level.NONE);
         }
-
         // 设置 logger
         setGlobalLogger();
-
         builder.baseurl(HttpUrl.APP_URL_DOMAIN)
                 //强烈建议自己自定义图片加载逻辑, 因为 arms-imageloader-glide 提供的 GlideImageLoaderStrategy 并不能满足复杂的需求
                 //请参考 https://github.com/JessYanCoding/MVPArms/wiki#3.4
@@ -68,19 +67,15 @@ public class GlobalConfiguration implements ConfigModule {
 //                    }
 //                })
 
-                //可根据当前项目的情况以及环境为框架某些部件提供自定义的缓存策略, 具有强大的扩展性
-                .cacheFactory(new Cache.Factory() {
-                    @NonNull
-                    @Override
-                    public Cache build(CacheType type) {
-                        switch (type.getCacheTypeId()) {
-                            case CacheType.EXTRAS_TYPE_ID:
-                                return new IntelligentCache(500);
+                // 可根据当前项目的情况以及环境为框架某些部件提供自定义的缓存策略, 具有强大的扩展性
+                .cacheFactory(type -> {
+                    switch (type.getCacheTypeId()) {
+                        case CacheType.EXTRAS_TYPE_ID:
+                            return new IntelligentCache(500);
 //                            case CacheType.CACHE_SERVICE_CACHE_TYPE_ID:
 //                                return new Cache(type.calculateCacheSize(context));//自定义 Cache
-                            default:
-                                return new LruCache(200);
-                        }
+                        default:
+                            return new LruCache(200);
                     }
                 })
                 // 这里提供一个全局处理 Http 请求和响应结果的处理类,可以比客户端提前一步拿到服务器返回的结果,可以做一些操作,比如token超时,重新获取
@@ -95,12 +90,11 @@ public class GlobalConfiguration implements ConfigModule {
                             .serializeNulls()//支持序列化null的参数
                             .enableComplexMapKeySerialization();//支持将序列化key为object的map,默认只能序列化key为string的map
                 })
-                .retrofitConfiguration((context1, retrofitBuilder) -> {//这里可以自己自定义配置Retrofit的参数, 甚至您可以替换框架配置好的 OkHttpClient 对象 (但是不建议这样做, 这样做您将损失框架提供的很多功能)
-//                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用fastjson替代gson
-                })
-                .okhttpConfiguration((context1, okhttpBuilder) -> {//这里可以自己自定义配置Okhttp的参数
-//                    okhttpBuilder.sslSocketFactory(); //支持 Https,详情请百度
-
+                //这里可以自己自定义配置Retrofit的参数, 甚至您可以替换框架配置好的 OkHttpClient 对象 (但是不建议这样做, 这样做您将损失框架提供的很多功能)
+                .retrofitConfiguration((context1, retrofitBuilder) -> retrofitBuilder.addConverterFactory(JsonConverterFactory.create()))
+                .okhttpConfiguration((context1, okhttpBuilder) -> {
+                    // 这里可以自己自定义配置Okhttp的参数
+                    // okhttpBuilder.sslSocketFactory(); //支持 Https,详情请百度
                     okhttpBuilder.connectTimeout(60, TimeUnit.SECONDS)
                             .readTimeout(60 * 30, TimeUnit.SECONDS)
                             .writeTimeout(60 * 30, TimeUnit.SECONDS);
@@ -111,7 +105,8 @@ public class GlobalConfiguration implements ConfigModule {
                     RetrofitUrlManager.getInstance().with(okhttpBuilder);
 //                    RetrofitUrlManager.getInstance().putDomain(HttpUrl.APP_URL_LOGIN_KEY, HttpUrl.APP_URL_LOGIN);
                 })
-                .rxCacheConfiguration((context1, rxCacheBuilder) -> {//这里可以自己自定义配置 RxCache 的参数
+                //这里可以自己自定义配置 RxCache 的参数
+                .rxCacheConfiguration((context1, rxCacheBuilder) -> {
                     rxCacheBuilder.useExpiredDataIfLoaderNotAvailable(true);
                     // 想自定义 RxCache 的缓存文件夹或者解析方式, 如改成 fastjson, 请 return rxCacheBuilder.persistence(cacheDirectory, new FastJsonSpeaker());
                     // 否则请 return null;

@@ -28,7 +28,6 @@ import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
@@ -76,6 +75,32 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         return inflater.inflate(R.layout.fragment_featured, container, false);
     }
 
+    @Override
+    protected void loadLargeData() {
+        mList.add(new FeaturedEntity());
+        mList.add(new FeaturedEntity());
+        mList.add(new FeaturedEntity());
+        mAdapter.setNewData(mList);
+        requestData(true, Constant.TYPE_REFRESH);
+    }
+
+    @Override
+    protected void initEvent(@Nullable Bundle savedInstanceState) {
+
+        View headView = LayoutInflater.from(getContext()).inflate(R.layout.featured_banner_layout,
+                mRefreshLayout, false);
+        mBanner = (Banner) headView;
+        mBanner.setImageLoader(new GlideImageLoader());
+        mBanner.setImages(BANNER_ITEMS);
+        mAdapter = new FeaturedAdapter(R.layout.item_featured_layout);
+        mAdapter.addHeaderView(mBanner);
+        mAdapter.openLoadAnimation();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(mAdapter);
+        setClickEvent();
+        mBanner.start();
+    }
+
     /**
      * 设置点击事件
      */
@@ -90,12 +115,12 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+                requestData(false, Constant.TYPE_REFRESH);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+                requestData(true, Constant.TYPE_REFRESH);
             }
         });
 
@@ -117,33 +142,18 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     }
 
     @Override
-    protected void loadLargeData() {
-        mList.add(new FeaturedEntity("dog - 1"));
-        mList.add(new FeaturedEntity("dog - 2"));
-        mList.add(new FeaturedEntity("dog - 3"));
-        mAdapter.setNewData(mList);
-        requestData(true, Constant.TYPE_REFRESH);
-    }
-
-    @Override
-    protected void initEvent(@Nullable Bundle savedInstanceState) {
-        View headView = LayoutInflater.from(getContext()).inflate(R.layout.featured_banner_layout, mRefreshLayout, false);
-
-        mBanner = (Banner) headView;
-        mBanner.setImageLoader(new GlideImageLoader());
-        mBanner.setImages(BANNER_ITEMS);
-        mAdapter = new FeaturedAdapter(R.layout.item_featured_layout);
-        mAdapter.addHeaderView(mBanner);
-        mAdapter.openLoadAnimation();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(mAdapter);
-        setClickEvent();
-        mBanner.start();
-    }
-
-    @Override
     public void setData(@Nullable Object data) {
 
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+        mRefreshLayout.finishRefresh();
     }
 
     @Override
@@ -159,6 +169,11 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
      */
     private void requestData(boolean isRefresh, int type) {
         mPresenter.requestData(isRefresh, type);
+    }
+
+    @Override
+    public void updateView(FeaturedEntity data) {
+
     }
 
     public class GlideImageLoader extends ImageLoader {

@@ -24,6 +24,6 @@ public class FeaturedAdapter extends BaseQuickAdapter<FeaturedEntity, BaseViewHo
     protected void convert(BaseViewHolder helper, FeaturedEntity item) {
 
         TextView view = helper.getView(R.id.feather_item_title);
-        view.setText(item.getTitle());
+        view.setText(item.toString());
     }
 }

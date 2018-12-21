@@ -18,8 +18,13 @@ package com.ralf.pet_provider.http;
 import android.content.Context;
 
 import com.jess.arms.http.GlobalHttpHandler;
+import com.ralf.pet_provider.user.UserUtil;
+import com.ralf.pet_provider.user.constant.UserConstant;
+
+import java.nio.charset.Charset;
 
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -33,7 +38,12 @@ import okhttp3.Response;
  * ================================================
  */
 public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
+
     private Context context;
+
+    private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
+    private static final Charset UTF_8 = Charset.forName("UTF-8");
+    private static final String TAG = "Json请求体加密";
 
     public GlobalHttpHandlerImpl(Context context) {
         this.context = context;
@@ -74,21 +84,10 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
      */
     @Override
     public Request onHttpRequestBefore(Interceptor.Chain chain, Request request) {
-        /* 如果需要再请求服务器之前做一些操作, 则重新返回一个做过操作的的 Request 如增加 Header, 不做操作则直接返回参数 request
-        return chain.request().newBuilder().header("token", tokenId)
-                              .build(); */
-//
-//        UserInfo userInfo = SpUtil.getGsonObject(LawSchoolConstants.USER_INFO, UserInfo.class);
-//        String officeId = "";
-//        String token = "";
-//        if (userInfo != null) {
-//            officeId = userInfo.getOfficeId();
-//            token = userInfo.getToken();
-//        }
+        // 如果需要再请求服务器之前做一些操作, 则重新返回一个做过操作的的 Request 如增加 Header, 不做操作则直接返回参数 request
         return chain.request()
                 .newBuilder()
-                .addHeader("token", "")
-                .addHeader("Cookie", "of_id=" + "" + ";officeId=" + "")
+                .addHeader("token", UserConstant.APP_TOKEN)
                 .build();
     }
 }

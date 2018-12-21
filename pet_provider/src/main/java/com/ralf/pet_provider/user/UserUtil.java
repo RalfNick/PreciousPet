@@ -17,8 +17,8 @@ public class UserUtil {
         return SpUtil.getInstance().getString(UserConstant.USER_TOKEN);
     }
 
-    public static String getUserId() {
-        return SpUtil.getInstance().getString(UserConstant.USER_ID);
+    public static int getUserId() {
+        return SpUtil.getInstance().getInt(UserConstant.USER_ID,-1);
     }
 
     public static String getUserName() {

@@ -24,6 +24,8 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
     @Inject
     RxErrorHandler mErrorHandler;
 
+    private int mPage = 1;
+
     @Inject
     public FeaturedPresenter(FeaturedContact.Model model, FeaturedContact.View rootView) {
         super(model, rootView);
@@ -37,5 +39,15 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
     public void onDestroy() {
         super.onDestroy();
         mErrorHandler = null;
+    }
+
+    /**
+     * 请求数据
+     *
+     * @param isRefresh 是否刷新
+     * @param type      类型
+     */
+    public void requestData(boolean isRefresh, int type) {
+
     }
 }

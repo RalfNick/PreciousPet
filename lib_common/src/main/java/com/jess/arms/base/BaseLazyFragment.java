@@ -30,17 +30,17 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
     /**
      * 少量数据，初始化时就加载，如 View 的初始化，点击事件设置等，接口中 iniView 仅仅用来返回布局
      */
-    protected abstract void loadSmallData();
+    protected abstract void initEvent(@Nullable Bundle savedInstanceState);
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initEvent(savedInstanceState);
         mIsPrepared = true;
     }
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        loadSmallData();
         loadLargeData();
     }
 

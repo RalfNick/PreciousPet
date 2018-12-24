@@ -6,9 +6,13 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.ralf.module_community.entity.BannerEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.pet_provider.http.WebObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -57,11 +61,11 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
 
         if (isRefresh) {
             mPage = 1;
-            getFeaturedData(type);
+            getFeaturedData(isRefresh, type);
         } else {
             if (mPage < mTotalPage) {
                 mPage++;
-                getFeaturedData(type);
+                getFeaturedData(isRefresh, type);
             }
         }
     }
@@ -69,7 +73,7 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
     /**
      * 请求数据
      */
-    private void getFeaturedData(int type) {
+    private void getFeaturedData(boolean isRefresh, int type) {
         mModel.getFeaturedData(mPage, type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -77,6 +81,9 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                 .subscribe(new WebObserver<FeaturedEntity>(mErrorHandler) {
                     @Override
                     protected void onSuccess(FeaturedEntity data) {
+                        mTotalPage = data.getPages();
+                        // 更新 banner
+                        mRootView.loadBannerView(data.getBannerList());
                         mRootView.updateView(data);
                         mRootView.hideLoading();
                     }

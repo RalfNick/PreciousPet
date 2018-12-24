@@ -22,17 +22,17 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         MessageRemindEntityDao.createTable(db, ifNotExists);
+        PetAssistantEntityDao.createTable(db, ifNotExists);
         SampleDBEntityDao.createTable(db, ifNotExists);
         PetEntityDao.createTable(db, ifNotExists);
-        PetAssistantEntityDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         MessageRemindEntityDao.dropTable(db, ifExists);
+        PetAssistantEntityDao.dropTable(db, ifExists);
         SampleDBEntityDao.dropTable(db, ifExists);
         PetEntityDao.dropTable(db, ifExists);
-        PetAssistantEntityDao.dropTable(db, ifExists);
     }
 
     /**
@@ -52,9 +52,9 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(MessageRemindEntityDao.class);
+        registerDaoClass(PetAssistantEntityDao.class);
         registerDaoClass(SampleDBEntityDao.class);
         registerDaoClass(PetEntityDao.class);
-        registerDaoClass(PetAssistantEntityDao.class);
     }
 
     public DaoSession newSession() {

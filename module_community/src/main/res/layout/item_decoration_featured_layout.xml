@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/header_master_avatar_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="13dp"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/header_master_level_iv"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/header_master_avatar_iv"
+        android:layout_alignEnd="@+id/header_master_avatar_iv"
+        android:scaleType="centerCrop" />
+
+    <Button
+        android:id="@+id/header_attention_btn"
+        android:layout_width="74dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="13dp"
+        android:textSize="14sp"
+        tools:text="已关注" />
+
+    <LinearLayout
+        android:id="@+id/header_no_pet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/header_master_avatar_iv"
+        android:layout_toStartOf="@+id/header_attention_btn"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/header_no_pet_master_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textColor="#507daf"
+            android:textSize="13sp"
+            tools:text="喵喵喵" />
+
+        <TextView
+            android:id="@+id/header_no_pet_location_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:textColor="#FF888888"
+            android:textSize="12sp"
+            tools:text="辽宁 沈阳" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/header_master_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/header_master_avatar_iv"
+        android:layout_toStartOf="@+id/header_attention_btn"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/header_pet_master_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textColor="#507daf"
+            android:textSize="13sp"
+            tools:text="喵喵喵" />
+
+        <TextView
+            android:id="@+id/header_pet_location_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:textColor="#FF888888"
+            android:textSize="12sp"
+            tools:text="辽宁 沈阳" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/header_pet_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_master_layout"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/header_master_avatar_iv"
+        android:layout_toStartOf="@+id/header_attention_btn"
+        android:background="@drawable/shape_header_pet_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/header_pet_avatar_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:scaleType="centerCrop"
+            tools:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/header_pet_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginStart="6dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="5"
+            android:singleLine="true"
+            android:textColor="#464646"
+            android:textSize="11sp"
+            tools:text="狗狗" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="6dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/discuss_text_color" />
+
+        <TextView
+            android:id="@+id/header_pet_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="4"
+            android:singleLine="true"
+            android:textColor="#FF6BB6EC"
+            android:textSize="11sp"
+            tools:text="英短蓝猫" />
+
+        <ImageView
+            android:id="@+id/header_pet_sex_iv"
+            android:layout_width="13dp"
+            android:layout_height="11dp"
+            android:layout_margin="5dp"
+            tools:src="@mipmap/ic_launcher_round" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -13,7 +13,7 @@ public class FeaturedEntity {
 
     private Integer pages;
     private List<DynamicListBean> dynamicList;
-    private List<DynamicListBean.BannerListBean> bannerList;
+    private List<BannerEntity> bannerList;
 
     public Integer getPages() {
         return pages;
@@ -31,11 +31,11 @@ public class FeaturedEntity {
         this.dynamicList = dynamicList;
     }
 
-    public List<DynamicListBean.BannerListBean> getBannerList() {
+    public List<BannerEntity> getBannerList() {
         return bannerList;
     }
 
-    public void setBannerList(List<DynamicListBean.BannerListBean> bannerList) {
+    public void setBannerList(List<BannerEntity> bannerList) {
         this.bannerList = bannerList;
     }
 
@@ -376,52 +376,5 @@ public class FeaturedEntity {
                     '}';
         }
 
-        public static class BannerListBean {
-            /**
-             * imgUrl : http://192.168.1.139:8090/upload/image/carouselPic/14907798156721.jpg
-             * id : 1
-             */
-
-
-            private String imgUrl;
-
-            private Integer id;
-
-            private String linkUrl;
-
-            private Integer type;
-
-            public String getLinkUrl() {
-                return linkUrl;
-            }
-
-            public void setLinkUrl(String linkUrl) {
-                this.linkUrl = linkUrl;
-            }
-
-            public Integer getType() {
-                return type;
-            }
-
-            public void setType(Integer type) {
-                this.type = type;
-            }
-
-            public String getImgUrl() {
-                return imgUrl;
-            }
-
-            public void setImgUrl(String imgUrl) {
-                this.imgUrl = imgUrl;
-            }
-
-            public Integer getId() {
-                return id;
-            }
-
-            public void setId(Integer id) {
-                this.id = id;
-            }
-        }
     }
 }

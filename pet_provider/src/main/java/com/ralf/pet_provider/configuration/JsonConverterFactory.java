@@ -5,8 +5,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.TypeAdapter;
-import com.google.gson.reflect.TypeToken;
 import com.ralf.pet_provider.user.UserUtil;
 import com.ralf.pet_provider.user.constant.UserConstant;
 
@@ -29,6 +27,8 @@ import retrofit2.Retrofit;
  **/
 public class JsonConverterFactory extends Converter.Factory {
 
+    private final Gson gson;
+
     public static JsonConverterFactory create() {
         return create(new Gson());
     }
@@ -37,8 +37,6 @@ public class JsonConverterFactory extends Converter.Factory {
         return new JsonConverterFactory(gson);
 
     }
-
-    private final Gson gson;
 
     private JsonConverterFactory(Gson gson) {
         if (gson == null) {
@@ -49,10 +47,10 @@ public class JsonConverterFactory extends Converter.Factory {
 
     @Override
     public Converter<?, RequestBody> requestBodyConverter(Type type,
-                                                          Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
-
-        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new JsonRequestBodyConverter<>(gson, adapter); //请求
+                                                          Annotation[] parameterAnnotations,
+                                                          Annotation[] methodAnnotations,
+                                                          Retrofit retrofit) {
+        return new JsonRequestBodyConverter<>(gson);
     }
 
     public static class JsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
@@ -60,11 +58,9 @@ public class JsonConverterFactory extends Converter.Factory {
         private static final Charset UTF_8 = Charset.forName("UTF-8");
         private static final String TAG = "Json请求体加密";
         private final Gson gson;
-        private final TypeAdapter<T> adapter;
 
-        JsonRequestBodyConverter(Gson gson, TypeAdapter<T> adapter) {
+        JsonRequestBodyConverter(Gson gson) {
             this.gson = gson;
-            this.adapter = adapter;
         }
 
         @Override

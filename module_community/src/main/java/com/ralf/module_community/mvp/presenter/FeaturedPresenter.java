@@ -6,13 +6,9 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
-import com.ralf.module_community.entity.BannerEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.pet_provider.http.WebObserver;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -84,7 +80,7 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                         mTotalPage = data.getPages();
                         // 更新 banner
                         mRootView.loadBannerView(data.getBannerList());
-                        mRootView.updateView(data);
+                        mRootView.updateView(isRefresh, data);
                         mRootView.hideLoading();
                     }
 

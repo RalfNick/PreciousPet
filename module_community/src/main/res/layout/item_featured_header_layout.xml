@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ralf.module_community.mvp.ui.view.FeaturedHeaderView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_header_view"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:orientation="vertical">
+    android:background="@color/colorWhite">
 
-    <com.ralf.module_community.mvp.ui.view.FeaturedHeaderView
-        android:id="@+id/item_header_view"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite" />
-</LinearLayout>
+</com.ralf.module_community.mvp.ui.view.FeaturedHeaderView>

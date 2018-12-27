@@ -26,7 +26,7 @@ public interface FeaturedContact {
          *
          * @param data 精选数据
          */
-        void updateView(FeaturedEntity data);
+        void updateView(boolean isRefresh,FeaturedEntity data);
 
         /**
          * 加载轮播图

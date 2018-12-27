@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.jess.arms.base.BaseLazyFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.imageloader.ImageConfig;
@@ -127,31 +128,27 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         OnHeaderClickListener clickListener = new OnHeaderClickListener() {
             @Override
             public void onHeaderClick(View view, int id, int position) {
-                switch (id) {
-                    // 关注
-                    case R2.id.header_attention_btn:
-                        ToastUtils.showShort("关注");
-                        // 刷新ItemDecorations，导致重绘刷新头部
-                        mRecyclerView.invalidateItemDecorations();
-                        //TODO 需要更新关注按钮状态
-                        break;
+                int viewId = view.getId();
+                if (viewId == R.id.header_attention_btn) {
+                    ToastUtils.showShort("Decoration 关注");
+                    // 刷新ItemDecorations，导致重绘刷新头部
+                    mRecyclerView.invalidateItemDecorations();
+                    // TODO 需要更新关注按钮状态
+
                     // 跳转到主人详情
-                    case R2.id.header_master_avatar_iv:
-                    case R2.id.header_no_pet_master_name_tv:
-                    case R2.id.header_pet_master_name_tv:
-                        ToastUtils.showShort("主人详情");
-                        break;
+                } else if (viewId == R.id.header_master_avatar_iv
+                        || viewId == R.id.header_no_pet_master_name_tv
+                        || viewId == R.id.header_pet_master_name_tv) {
+                    ToastUtils.showShort("Decoration 主人详情");
+
                     // 跳转宠物从详情
-                    case R2.id.header_pet_avatar_iv:
-                    case R2.id.header_pet_name_tv:
-                        ToastUtils.showShort("宠物详情");
-                        break;
+                } else if (viewId == R.id.header_pet_avatar_iv
+                        || viewId == R.id.header_pet_name_tv) {
+                    ToastUtils.showShort("Decoration 宠物详情");
+
                     // 宠物类型详情
-                    case R2.id.header_pet_type_tv:
-                        ToastUtils.showShort("宠物类型");
-                        break;
-                    default:
-                        break;
+                } else if (viewId == R.id.header_pet_type_tv) {
+                    ToastUtils.showShort("Decoration 宠物类型");
                 }
             }
 
@@ -160,12 +157,12 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                 Logger.e("decoration 长按事件--");
             }
         };
-        mItemDecoration = new PinnedHeaderItemDecoration.Builder(MultiItemType.TYPE_HEAD)
+        mItemDecoration = new PinnedHeaderItemDecoration.Builder(MultiItemType.TYPE_HEADER)
                 .setClickIds(R.id.header_attention_btn, R.id.header_master_avatar_iv,
                         R.id.header_no_pet_master_name_tv, R.id.header_pet_master_name_tv,
                         R.id.header_pet_avatar_iv, R.id.header_pet_name_tv, R.id.header_pet_type_tv)
                 .setHeaderClickListener(clickListener)
-                .enableDivider(true)
+                .enableDivider(false)
                 .disableHeaderClick(false)
                 .create();
         mRecyclerView.addItemDecoration(mItemDecoration);
@@ -196,7 +193,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                ToastUtils.showShort("ItemClick - " + position);
             }
         });
 
@@ -204,9 +201,34 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+                int id = view.getId();
+                handleClick(id);
             }
         });
+    }
+
+    /**
+     * 处理点击事件
+     * @param viewId 控件 id
+     */
+    private void handleClick(int viewId) {
+        if (viewId == R.id.header_attention_btn) {
+            ToastUtils.showShort("关注");
+
+            // 跳转到主人详情
+        } else if (viewId == R.id.header_master_avatar_iv
+                || viewId == R.id.header_no_pet_master_name_tv
+                || viewId == R.id.header_pet_master_name_tv) {
+            ToastUtils.showShort("主人详情");
+
+            // 跳转宠物从详情
+        } else if (viewId == R.id.header_pet_avatar_iv || viewId == R.id.header_pet_name_tv) {
+            ToastUtils.showShort("宠物详情");
+
+            // 宠物类型详情
+        } else if (viewId == R.id.header_pet_type_tv) {
+            ToastUtils.showShort("宠物类型");
+        }
     }
 
     @Override
@@ -240,12 +262,30 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     }
 
     @Override
-    public void updateView(FeaturedEntity data) {
+    public void updateView(boolean isRefresh, FeaturedEntity data) {
         List<FeaturedEntity.DynamicListBean> dynamicList = data.getDynamicList();
-        AdapterMultiItemEntity itemEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_HEAD);
-        itemEntity.setDynamicBean(dynamicList.get(0));
-        mList.add(itemEntity);
-        mList.add(new AdapterMultiItemEntity(MultiItemType.TYPE_CONTENT));
+        for (FeaturedEntity.DynamicListBean bean : dynamicList) {
+
+            // 头部动态布局
+            AdapterMultiItemEntity headEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_HEADER);
+            headEntity.setDynamicBean(bean);
+            mList.add(headEntity);
+
+            // 内容部分
+            AdapterMultiItemEntity contentEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_CONTENT);
+            contentEntity.setDynamicBean(bean);
+            mList.add(contentEntity);
+
+            // 底部部分
+            AdapterMultiItemEntity footerEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_FOOTER);
+            contentEntity.setDynamicBean(bean);
+            mList.add(footerEntity);
+        }
+        if (isRefresh) {
+            mRefreshLayout.finishRefresh();
+        } else {
+            mRefreshLayout.finishLoadMore();
+        }
         mAdapter.setNewData(mList);
     }
 

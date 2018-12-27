@@ -99,9 +99,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header_master_layout"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/header_master_avatar_iv"
-        android:layout_toStartOf="@+id/header_attention_btn"
         android:background="@drawable/shape_header_pet_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal">

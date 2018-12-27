@@ -10,11 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
-import com.jess.arms.utils.ToastUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.R2;
 import com.ralf.module_community.entity.FeaturedEntity;
@@ -23,7 +23,6 @@ import com.ralf.pet_provider.user.constant.UserConstant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author Ralf(wanglixin)
@@ -89,7 +88,7 @@ public class FeaturedHeaderView extends RelativeLayout {
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(getContext()).imageLoader();
     }
 
-    public void setData(FeaturedEntity.DynamicListBean bean) {
+    public void setData(FeaturedEntity.DynamicListBean bean, BaseViewHolder helper) {
 
         // 主人头像
         ImageConfig imageConfig = ImageConfigImpl.builder()
@@ -143,35 +142,22 @@ public class FeaturedHeaderView extends RelativeLayout {
             mAttentionBtn.setBackground(AttentionStatusUtil.setAttentionStatus(getContext(), bean.getAttentionStatus()));
             mAttentionBtn.setVisibility(View.VISIBLE);
         }
+        setClickEvent(helper);
     }
 
-    @OnClick({R2.id.header_master_avatar_iv, R2.id.header_attention_btn,
-            R2.id.header_no_pet_master_name_tv, R2.id.header_pet_master_name_tv,
-            R2.id.header_pet_avatar_iv, R2.id.header_pet_name_tv,
-            R2.id.header_pet_type_tv})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            // 关注
-            case R2.id.header_attention_btn:
-                ToastUtils.showShort("关注");
-                break;
-            // 跳转到主人详情
-            case R2.id.header_master_avatar_iv:
-            case R2.id.header_no_pet_master_name_tv:
-            case R2.id.header_pet_master_name_tv:
-                ToastUtils.showShort("主人详情");
-                break;
-            // 跳转宠物从详情
-            case R2.id.header_pet_avatar_iv:
-            case R2.id.header_pet_name_tv:
-                ToastUtils.showShort("宠物详情");
-                break;
-            // 宠物类型详情
-            case R2.id.header_pet_type_tv:
-                ToastUtils.showShort("宠物类型");
-                break;
-            default:
-                break;
-        }
+    /**
+     * 设置点击事件
+     *
+     * @param helper
+     */
+    private void setClickEvent(BaseViewHolder helper) {
+
+        helper.addOnClickListener(R.id.header_attention_btn)
+                .addOnClickListener(R.id.header_master_avatar_iv)
+                .addOnClickListener(R.id.header_no_pet_master_name_tv)
+                .addOnClickListener(R.id.header_pet_master_name_tv)
+                .addOnClickListener(R.id.header_pet_avatar_iv)
+                .addOnClickListener(R.id.header_pet_name_tv)
+                .addOnClickListener(R.id.header_pet_type_tv);
     }
 }

@@ -82,6 +82,4 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'  //最新版本
     // tab
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    // pinner decoration
-    implementation 'com.oushangfeng:PinnedSectionItemDecoration:1.3.2'
 }

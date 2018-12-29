@@ -35,8 +35,6 @@ public class FeaturedHeaderView extends RelativeLayout {
 
     @BindView(R2.id.header_master_avatar_iv)
     ImageView mAvatarIv;
-    @BindView(R2.id.header_master_level_iv)
-    ImageView mLevelIv;
     @BindView(R2.id.header_attention_btn)
     Button mAttentionBtn;
     @BindView(R2.id.header_no_pet_master_name_tv)
@@ -63,7 +61,6 @@ public class FeaturedHeaderView extends RelativeLayout {
     LinearLayout mPetLayout;
 
     private ImageLoader mImageLoader;
-    private String mLocationText = "%s%s";
 
     public FeaturedHeaderView(Context context) {
         this(context, null);
@@ -88,6 +85,10 @@ public class FeaturedHeaderView extends RelativeLayout {
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(getContext()).imageLoader();
     }
 
+    public void setData(FeaturedEntity.DynamicListBean bean) {
+        setData(bean, null);
+    }
+
     public void setData(FeaturedEntity.DynamicListBean bean, BaseViewHolder helper) {
 
         // 主人头像
@@ -103,14 +104,6 @@ public class FeaturedHeaderView extends RelativeLayout {
         String province = bean.getProvince();
         String city = bean.getCity();
         Integer userId = bean.getUserId();
-
-        // 没有宠物情况下
-        mNoPetNameTv.setText(nickName);
-        mNoPetLocationTv.setText(String.format(mLocationText, province, city));
-
-        // 有宠物情况下
-        mMasterNameTv.setText(nickName);
-        mLocationTv.setText(String.format(mLocationText, province, city));
 
         Integer owner = bean.getOwner();
         boolean hasPet = false;
@@ -130,10 +123,19 @@ public class FeaturedHeaderView extends RelativeLayout {
                 petSexResId = R.mipmap.pet_girl;
             }
         }
-        mPetSexIv.setImageResource(petSexResId);
         mMasterLayout.setVisibility(hasPet ? View.VISIBLE : View.GONE);
         mNoPetLayout.setVisibility(hasPet ? View.GONE : View.VISIBLE);
         mPetLayout.setVisibility(hasPet ? View.VISIBLE : View.GONE);
+        mPetSexIv.setImageResource(petSexResId);
+
+        // 没有宠物情况下
+        mNoPetNameTv.setText(nickName);
+        String locationText = "%s%s";
+        mNoPetLocationTv.setText(String.format(locationText, province, city));
+
+        // 有宠物情况下
+        mMasterNameTv.setText(nickName);
+        mLocationTv.setText(String.format(locationText, province, city));
 
         // 关注按钮
         if (userId.equals(UserConstant.APP_USERID)) {
@@ -142,7 +144,9 @@ public class FeaturedHeaderView extends RelativeLayout {
             mAttentionBtn.setBackground(AttentionStatusUtil.setAttentionStatus(getContext(), bean.getAttentionStatus()));
             mAttentionBtn.setVisibility(View.VISIBLE);
         }
-        setClickEvent(helper);
+        if (helper != null) {
+            setClickEvent(helper);
+        }
     }
 
     /**

@@ -12,16 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.jess.arms.base.BaseLazyFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.ToastUtils;
-import com.orhanobut.logger.Logger;
-import com.oushangfeng.pinnedsectionitemdecoration.PinnedHeaderItemDecoration;
-import com.oushangfeng.pinnedsectionitemdecoration.callback.OnHeaderClickListener;
 import com.ralf.module_community.R;
 import com.ralf.module_community.R2;
 import com.ralf.module_community.constant.Constant;
@@ -34,6 +30,10 @@ import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
+import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
+import com.ralf.pet_provider.widget.stickyitemdecoration.OnStickyChangeListener;
+import com.ralf.pet_provider.widget.stickyitemdecoration.StickyHeadContainer;
+import com.ralf.pet_provider.widget.stickyitemdecoration.StickyItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -75,7 +75,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
     private List<AdapterMultiItemEntity> mList = new ArrayList<>();
     private FeaturedAdapter mAdapter;
-    private PinnedHeaderItemDecoration mItemDecoration;
+    private StickyHeadContainer mStickyHeadContainer;
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
@@ -92,6 +92,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         View rootView = inflater.inflate(R.layout.fragment_featured, container, false);
         mHeadView = inflater.inflate(R.layout.featured_header_layout, mRefreshLayout, false);
         mBanner = mHeadView.findViewById(R.id.featured_header_banner);
+        mStickyHeadContainer = rootView.findViewById(R.id.feather_sticky_decoration);
         return rootView;
     }
 
@@ -125,47 +126,54 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
      */
     private void initDecoration() {
 
-        OnHeaderClickListener clickListener = new OnHeaderClickListener() {
-            @Override
-            public void onHeaderClick(View view, int id, int position) {
-                int viewId = view.getId();
-                if (viewId == R.id.header_attention_btn) {
-                    ToastUtils.showShort("Decoration 关注");
-                    // 刷新ItemDecorations，导致重绘刷新头部
-                    mRecyclerView.invalidateItemDecorations();
-                    // TODO 需要更新关注按钮状态
+        final FeaturedHeaderView featuredHeaderView = mStickyHeadContainer.findViewById(R.id.item_header_view);
+        View.OnClickListener listener = v -> {
+            int viewId = v.getId();
+            if (viewId == R.id.header_attention_btn) {
+                ToastUtils.showShort("Decoration 关注");
+                // TODO 需要更新关注按钮状态
 
-                    // 跳转到主人详情
-                } else if (viewId == R.id.header_master_avatar_iv
-                        || viewId == R.id.header_no_pet_master_name_tv
-                        || viewId == R.id.header_pet_master_name_tv) {
-                    ToastUtils.showShort("Decoration 主人详情");
+                // 跳转到主人详情
+            } else if (viewId == R.id.header_master_avatar_iv
+                    || viewId == R.id.header_no_pet_master_name_tv
+                    || viewId == R.id.header_pet_master_name_tv) {
+                ToastUtils.showShort("Decoration 主人详情");
 
-                    // 跳转宠物从详情
-                } else if (viewId == R.id.header_pet_avatar_iv
-                        || viewId == R.id.header_pet_name_tv) {
-                    ToastUtils.showShort("Decoration 宠物详情");
+                // 跳转宠物从详情
+            } else if (viewId == R.id.header_pet_avatar_iv
+                    || viewId == R.id.header_pet_name_tv) {
+                ToastUtils.showShort("Decoration 宠物详情");
 
-                    // 宠物类型详情
-                } else if (viewId == R.id.header_pet_type_tv) {
-                    ToastUtils.showShort("Decoration 宠物类型");
-                }
-            }
-
-            @Override
-            public void onHeaderLongClick(View view, int id, int position) {
-                Logger.e("decoration 长按事件--");
+                // 宠物类型详情
+            } else if (viewId == R.id.header_pet_type_tv) {
+                ToastUtils.showShort("Decoration 宠物类型");
             }
         };
-        mItemDecoration = new PinnedHeaderItemDecoration.Builder(MultiItemType.TYPE_HEADER)
-                .setClickIds(R.id.header_attention_btn, R.id.header_master_avatar_iv,
-                        R.id.header_no_pet_master_name_tv, R.id.header_pet_master_name_tv,
-                        R.id.header_pet_avatar_iv, R.id.header_pet_name_tv, R.id.header_pet_type_tv)
-                .setHeaderClickListener(clickListener)
-                .enableDivider(false)
-                .disableHeaderClick(false)
-                .create();
-        mRecyclerView.addItemDecoration(mItemDecoration);
+        mStickyHeadContainer.findViewById(R.id.header_attention_btn).setOnClickListener(listener);
+        mStickyHeadContainer.findViewById(R.id.header_master_avatar_iv).setOnClickListener(listener);
+        mStickyHeadContainer.findViewById(R.id.header_no_pet_master_name_tv).setOnClickListener(listener);
+        mStickyHeadContainer.findViewById(R.id.header_pet_master_name_tv).setOnClickListener(listener);
+        mStickyHeadContainer.findViewById(R.id.header_pet_avatar_iv).setOnClickListener(listener);
+        mStickyHeadContainer.findViewById(R.id.header_pet_name_tv).setOnClickListener(listener);
+        mStickyHeadContainer.findViewById(R.id.header_pet_type_tv).setOnClickListener(listener);
+
+        mStickyHeadContainer.setDataCallback(pos -> featuredHeaderView.setData(mAdapter.getData().get(pos).getDynamicBean()));
+
+        StickyItemDecoration itemDecoration = new StickyItemDecoration(mStickyHeadContainer, MultiItemType.TYPE_HEADER);
+        itemDecoration.setOnStickyChangeListener(new OnStickyChangeListener() {
+            @Override
+            public void onScrollable(int offset) {
+                mStickyHeadContainer.scrollChild(offset);
+                mStickyHeadContainer.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onInVisible() {
+                mStickyHeadContainer.reset();
+                mStickyHeadContainer.setVisibility(View.INVISIBLE);
+            }
+        });
+        mRecyclerView.addItemDecoration(itemDecoration);
     }
 
     /**
@@ -209,6 +217,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
     /**
      * 处理点击事件
+     *
      * @param viewId 控件 id
      */
     private void handleClick(int viewId) {

@@ -15,7 +15,7 @@ public class AdapterMultiItemEntity implements MultiItemEntity {
 
     private int mItemType;
     private List<BannerEntity> mBannerEntityList;
-    private FeaturedEntity.DynamicListBean mDynamicBean;
+    private DynamicEntity mDynamicBean;
 
     public AdapterMultiItemEntity(int itemType) {
         mItemType = itemType;
@@ -34,11 +34,11 @@ public class AdapterMultiItemEntity implements MultiItemEntity {
         mBannerEntityList = bannerEntityList;
     }
 
-    public FeaturedEntity.DynamicListBean getDynamicBean() {
+    public DynamicEntity getDynamicBean() {
         return mDynamicBean;
     }
 
-    public void setDynamicBean(FeaturedEntity.DynamicListBean dynamicBean) {
+    public void setDynamicBean(DynamicEntity dynamicBean) {
         mDynamicBean = dynamicBean;
     }
 }

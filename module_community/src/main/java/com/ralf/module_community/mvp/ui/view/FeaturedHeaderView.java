@@ -17,6 +17,7 @@ import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.R2;
+import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.util.AttentionStatusUtil;
 import com.ralf.pet_provider.user.constant.UserConstant;
@@ -79,17 +80,17 @@ public class FeaturedHeaderView extends RelativeLayout {
     private void initView() {
 
         View view = LayoutInflater.from(getContext())
-                .inflate(R.layout.item_decoration_featured_layout, this);
+                .inflate(R.layout.custom_header_view_layout, this);
 
         ButterKnife.bind(this, view);
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(getContext()).imageLoader();
     }
 
-    public void setData(FeaturedEntity.DynamicListBean bean) {
+    public void setData(DynamicEntity bean) {
         setData(bean, null);
     }
 
-    public void setData(FeaturedEntity.DynamicListBean bean, BaseViewHolder helper) {
+    public void setData(DynamicEntity bean, BaseViewHolder helper) {
 
         // 主人头像
         ImageConfig imageConfig = ImageConfigImpl.builder()

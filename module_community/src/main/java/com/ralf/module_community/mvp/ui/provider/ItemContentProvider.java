@@ -24,7 +24,7 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
 
     @Override
     public int layout() {
-        return R.layout.item_featured_layout;
+        return R.layout.item_featured_content_layout;
     }
 
     @Override

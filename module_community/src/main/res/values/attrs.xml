@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FeaturedPersonView">
+        <attr name="multiLine" format="boolean" />
+        <attr name="lineNum" format="integer" />
+        <attr name="maxNum" format="integer" />
+        <attr name="picSize" format="dimension" />
+        <attr name="circle" format="boolean" />
+        <attr name="horizontalSpace" format="dimension" />
+        <attr name="verticalSpace" format="dimension" />
+    </declare-styleable>
+</resources>

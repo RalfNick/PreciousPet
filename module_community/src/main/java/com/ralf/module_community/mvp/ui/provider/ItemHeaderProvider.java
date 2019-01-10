@@ -1,10 +1,7 @@
 package com.ralf.module_community.mvp.ui.provider;
 
-import android.view.View;
-
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
-import com.jess.arms.utils.ToastUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.constant.MultiItemType;
 import com.ralf.module_community.entity.AdapterMultiItemEntity;

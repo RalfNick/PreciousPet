@@ -26,6 +26,7 @@ import com.ralf.module_community.dg.component.DaggerFeaturedComponent;
 import com.ralf.module_community.dg.module.FeaturedModule;
 import com.ralf.module_community.entity.AdapterMultiItemEntity;
 import com.ralf.module_community.entity.BannerEntity;
+import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
@@ -272,8 +273,8 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
     @Override
     public void updateView(boolean isRefresh, FeaturedEntity data) {
-        List<FeaturedEntity.DynamicListBean> dynamicList = data.getDynamicList();
-        for (FeaturedEntity.DynamicListBean bean : dynamicList) {
+        List<DynamicEntity> dynamicList = data.getDynamicList();
+        for (DynamicEntity bean : dynamicList) {
 
             // 头部动态布局
             AdapterMultiItemEntity headEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_HEADER);
@@ -287,7 +288,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
             // 底部部分
             AdapterMultiItemEntity footerEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_FOOTER);
-            contentEntity.setDynamicBean(bean);
+            footerEntity.setDynamicBean(bean);
             mList.add(footerEntity);
         }
         if (isRefresh) {

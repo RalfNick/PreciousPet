@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.ralf.module_community.mvp.ui.view.FeaturedPersonView
+        android:id="@+id/item_footer_person_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/white"
+        android:layout_marginStart="10dp"
+        android:gravity="start"
+        app:circle="true"
+        app:horizontalSpace="6dp"
+        app:lineNum="10"
+        app:maxNum="10"
+        app:multiLine="false"
+        app:picSize="28dp">
+
+    </com.ralf.module_community.mvp.ui.view.FeaturedPersonView>
+
+    <TextView
+        android:id="@+id/item_footer_person_num"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/shape_person_number"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textColor="#FFFF7624"
+        android:textSize="12sp"
+        tools:text="14" />
+
+    <LinearLayout
+        android:id="@+id/item_footer_options_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/item_footer_person_view"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/item_footer_support_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/selector_send_like"
+            android:button="@null"
+            android:drawablePadding="12dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/item_footer_gift_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@mipmap/footer_gift_send"
+            android:button="@null"
+            android:drawablePadding="6dp"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/item_footer_comment_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@mipmap/footer_comment"
+            android:button="@null"
+            android:drawablePadding="6dp"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/item_footer_share_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@mipmap/footer_share"
+            android:button="@null"
+            android:drawablePadding="6dp"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            tools:ignore="RtlSymmetry" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_footer_comment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_footer_options_ll"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/item_footer_comment_first"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="1"
+            android:textColor="@color/comment_content"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/item_footer_comment_second"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="1"
+            android:textColor="@color/comment_content"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/item_footer_comment_third"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="1"
+            android:textColor="@color/comment_content"
+            android:textSize="15sp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_footer_comment_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/item_footer_comment_ll"
+        android:gravity="end"
+        android:textSize="12sp"
+        tools:text="更多10条消息" />
+</RelativeLayout>

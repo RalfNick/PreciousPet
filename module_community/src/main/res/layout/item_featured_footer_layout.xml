@@ -160,5 +160,14 @@
         android:layout_below="@+id/item_footer_comment_ll"
         android:gravity="end"
         android:textSize="12sp"
+        android:padding="3dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/comment_nickname"
         tools:text="更多10条消息" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@+id/item_footer_comment_more"
+        android:background="@color/app_background" />
 </RelativeLayout>

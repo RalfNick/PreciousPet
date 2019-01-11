@@ -18,6 +18,7 @@ import com.ralf.module_community.R;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Ralf(wanglixin)
@@ -221,8 +222,13 @@ public class FeaturedPersonView extends LinearLayout {
         } else {
             mTotalNum = userInfoMap.size() > mSingleLineNum ? mSingleLineNum : userInfoMap.size();
         }
+        int count = 0;
         for (Integer userId : userInfoMap.keySet()) {
+            if (count == mTotalNum) {
+                break;
+            }
             addImageViewToParent(userInfoMap.get(userId), userId);
+            count++;
         }
         requestLayout();
     }

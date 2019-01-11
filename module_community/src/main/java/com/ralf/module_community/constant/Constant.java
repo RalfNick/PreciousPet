@@ -1,7 +1,5 @@
 package com.ralf.module_community.constant;
 
-import android.util.SparseIntArray;
-
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
@@ -20,4 +18,9 @@ public final class Constant {
     public static final int TYPE_CUTE_CAT = 4;
     public static final int TYPE_VIDEO = 7;
     public static final int TYPE_OTHER = 8;
+
+    /**
+     * 文字颜色
+     */
+    public static final String COLOR_TEXT_COMMENT = "#FF449DDE";
 }

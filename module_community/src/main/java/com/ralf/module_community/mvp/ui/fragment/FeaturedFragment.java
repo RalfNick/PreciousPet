@@ -238,6 +238,16 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             // 宠物类型详情
         } else if (viewId == R.id.header_pet_type_tv) {
             ToastUtils.showShort("宠物类型");
+        } else if (viewId == R.id.item_footer_comment_more) {
+            ToastUtils.showShort("查看更多评论");
+        } else if (viewId == R.id.item_footer_support_rb) {
+            ToastUtils.showShort("点赞");
+        } else if (viewId == R.id.item_footer_gift_rb) {
+            ToastUtils.showShort("送礼物");
+        } else if (viewId == R.id.item_footer_comment_rb) {
+            ToastUtils.showShort("开始评论");
+        } else if (viewId == R.id.item_footer_share_rb) {
+            ToastUtils.showShort("分享");
         }
     }
 

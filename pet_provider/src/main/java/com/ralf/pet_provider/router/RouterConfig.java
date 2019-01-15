@@ -95,6 +95,11 @@ public final class RouterConfig {
          * 社区评论详情界面
          */
         public static final String COMMUNITY_COMMENT_PATH = "/community_module/comment";
+
+        /**
+         * 点赞列表页面
+         */
+        public static final String COMMUNITY_PRAISE_LIST_PATH = "/community_module/praise_list";
     }
 
     /**

@@ -256,6 +256,11 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             jumpToNewPage(userId, "", 0);
         } else if (viewId == R.id.item_footer_share_rb) {
             ToastUtils.showShort("分享");
+        } else if (viewId == R.id.item_footer_person_num) {
+            ARouter.getInstance()
+                    .build(RouterConfig.CommunityModule.COMMUNITY_PRAISE_LIST_PATH)
+                    .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
+                    .navigation();
         }
     }
 

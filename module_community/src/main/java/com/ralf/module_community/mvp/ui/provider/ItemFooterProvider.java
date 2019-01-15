@@ -68,6 +68,7 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
         mPersonView = helper.getView(R.id.item_footer_person_view);
         // 点赞总人数
         TextView personNumTv = helper.getView(R.id.item_footer_person_num);
+        helper.addOnClickListener(R.id.item_footer_person_num);
         if (bePraiseTimes < 1) {
             personNumTv.setVisibility(View.GONE);
         } else {

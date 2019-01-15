@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseLazyFragment;
 import com.jess.arms.di.component.AppComponent;
@@ -32,6 +33,7 @@ import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
+import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.widget.stickyitemdecoration.OnStickyChangeListener;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyHeadContainer;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyItemDecoration;
@@ -211,7 +213,9 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 int id = view.getId();
-                handleClick(id);
+                AdapterMultiItemEntity itemEntity = mList.get(position);
+                int userId = itemEntity.getDynamicBean().getDynamicId();
+                handleClick(id, userId);
             }
         });
     }
@@ -221,7 +225,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
      *
      * @param viewId 控件 id
      */
-    private void handleClick(int viewId) {
+    private void handleClick(int viewId, int userId) {
         if (viewId == R.id.header_attention_btn) {
             ToastUtils.showShort("关注");
 
@@ -239,16 +243,36 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.header_pet_type_tv) {
             ToastUtils.showShort("宠物类型");
         } else if (viewId == R.id.item_footer_comment_more) {
-            ToastUtils.showShort("查看更多评论");
+            jumpToNewPage(userId, "", 0);
         } else if (viewId == R.id.item_footer_support_rb) {
             ToastUtils.showShort("点赞");
         } else if (viewId == R.id.item_footer_gift_rb) {
             ToastUtils.showShort("送礼物");
-        } else if (viewId == R.id.item_footer_comment_rb) {
-            ToastUtils.showShort("开始评论");
+        } else if (viewId == R.id.item_footer_comment_rb
+                || viewId == R.id.item_footer_comment_first
+                || viewId == R.id.item_footer_comment_second
+                || viewId == R.id.item_footer_comment_third
+                || viewId == R.id.item_footer_comment_more) {
+            jumpToNewPage(userId, "", 0);
         } else if (viewId == R.id.item_footer_share_rb) {
             ToastUtils.showShort("分享");
         }
+    }
+
+    /**
+     * 跳转到新界面，评论详情
+     *
+     * @param userId   用户 id
+     * @param nickName 昵称
+     * @param fromId   来自的 id
+     */
+    private void jumpToNewPage(int userId, String nickName, int fromId) {
+        ARouter.getInstance()
+                .build(RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
+                .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
+                .withString(RouterConfig.CommunityModule.KEY_NICK_NAME, nickName)
+                .withInt(RouterConfig.CommunityModule.KEY_FROM_USER_ID, fromId)
+                .navigation();
     }
 
     @Override

@@ -73,13 +73,28 @@ public final class RouterConfig {
      */
     public static class CommunityModule {
 
+        /**
+         * ARouter 跳转携带的参数的 Key,用户 id，昵称，来自的 id
+         */
+        public static final String KEY_USER_ID = "userId";
+        public static final String KEY_NICK_NAME = "nickName";
+        public static final String KEY_FROM_USER_ID = "fromId";
+
         public static final String FRAGMENT_NAME = "CommunityFragment";
         /**
          * 测试界面
          */
         public static final String MAIN_PATH = "/community_module/main";
 
+        /**
+         * 社区 Fragment 主界面
+         */
         public static final String COMMUNITY_PATH = "/community_module/community";
+
+        /**
+         * 社区评论详情界面
+         */
+        public static final String COMMUNITY_COMMENT_PATH = "/community_module/comment";
     }
 
     /**

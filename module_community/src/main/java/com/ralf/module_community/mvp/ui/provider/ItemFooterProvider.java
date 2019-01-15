@@ -100,8 +100,8 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
         EmojiconTextView firstMsgTv = helper.getView(R.id.item_footer_comment_first);
         EmojiconTextView secondMsgTv = helper.getView(R.id.item_footer_comment_second);
         EmojiconTextView thirdMsgTv = helper.getView(R.id.item_footer_comment_third);
-        helper.addOnClickListener(R.id.item_footer_comment_ll).
-                addOnClickListener(R.id.item_footer_comment_first)
+        helper.addOnClickListener(R.id.item_footer_comment_ll)
+                .addOnClickListener(R.id.item_footer_comment_first)
                 .addOnClickListener(R.id.item_footer_comment_second)
                 .addOnClickListener(R.id.item_footer_comment_third);
 
@@ -150,16 +150,17 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
         int fromId = commentEntity.getUserId();
         int toUserId = commentEntity.getToUserId();
         SpannableStringBuilder builder;
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor(Constant.COLOR_TEXT_COMMENT));
+        int color = mContext.getResources().getColor(R.color.comment_nickname);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
         if (commentEntity.getToUserId() == 0) {
             builder = new SpannableStringBuilder(fromNickName);
-            builder.setSpan(colorSpan, 0, fromNickName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(colorSpan, 0, fromNickName.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
             builder.append(" : ");
         } else {
             // 回复的人的文本设置
             builder = new SpannableStringBuilder(fromNickName).append(" 回复 ");
             SpannableStringBuilder toBuilder = new SpannableStringBuilder(toNickname);
-            toBuilder.setSpan(colorSpan, 0, toBuilder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            toBuilder.setSpan(colorSpan, 0, toBuilder.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
             toBuilder.setSpan(SpanTextClick.getClicker(toUserId, TextClickType.TYPE_PERSON_NAME),
                     0, toBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.append(toBuilder);

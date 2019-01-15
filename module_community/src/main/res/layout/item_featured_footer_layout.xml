@@ -9,10 +9,10 @@
         android:id="@+id/item_footer_person_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:background="@color/white"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
+        android:background="@color/white"
         android:gravity="start"
         app:circle="true"
         app:horizontalSpace="6dp"
@@ -119,6 +119,7 @@
             android:gravity="center_vertical"
             android:lineSpacingMultiplier="1.15"
             android:maxLines="1"
+            android:textAllCaps="false"
             android:textColor="@color/comment_content"
             android:textSize="15sp"
             android:visibility="visible" />
@@ -133,6 +134,7 @@
             android:gravity="center_vertical"
             android:lineSpacingMultiplier="1.15"
             android:maxLines="1"
+            android:textAllCaps="false"
             android:textColor="@color/comment_content"
             android:textSize="15sp"
             android:visibility="visible" />
@@ -147,6 +149,7 @@
             android:gravity="center_vertical"
             android:lineSpacingMultiplier="1.15"
             android:maxLines="1"
+            android:textAllCaps="false"
             android:textColor="@color/comment_content"
             android:textSize="15sp"
             android:visibility="visible" />
@@ -158,11 +161,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/item_footer_comment_ll"
-        android:gravity="end"
-        android:textSize="12sp"
-        android:padding="3dp"
         android:layout_marginEnd="15dp"
+        android:gravity="end"
+        android:padding="3dp"
         android:textColor="@color/comment_nickname"
+        android:textSize="12sp"
         tools:text="更多10条消息" />
 
     <View

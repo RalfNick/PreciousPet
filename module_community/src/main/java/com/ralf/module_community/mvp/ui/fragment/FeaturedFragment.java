@@ -80,6 +80,11 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     private FeaturedAdapter mAdapter;
     private StickyHeadContainer mStickyHeadContainer;
 
+    /**
+     * 当前吸顶的位置
+     */
+    private int mCurrentStickyPos;
+
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
         DaggerFeaturedComponent.builder()
@@ -132,16 +137,18 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         final FeaturedHeaderView featuredHeaderView = mStickyHeadContainer.findViewById(R.id.item_header_view);
         View.OnClickListener listener = v -> {
             int viewId = v.getId();
+            int userId = mAdapter.getData().get(mCurrentStickyPos).getDynamicBean().getUserId();
             if (viewId == R.id.header_attention_btn) {
                 ToastUtils.showShort("Decoration 关注");
                 // TODO 需要更新关注按钮状态
-
                 // 跳转到主人详情
             } else if (viewId == R.id.header_master_avatar_iv
                     || viewId == R.id.header_no_pet_master_name_tv
                     || viewId == R.id.header_pet_master_name_tv) {
-                ToastUtils.showShort("Decoration 主人详情");
-
+                ARouter.getInstance()
+                        .build(RouterConfig.UserModule.MASTER_INFO_PATH)
+                        .withInt(RouterConfig.UserModule.KEY_USER_ID, userId)
+                        .navigation();
                 // 跳转宠物从详情
             } else if (viewId == R.id.header_pet_avatar_iv
                     || viewId == R.id.header_pet_name_tv) {
@@ -160,7 +167,10 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mStickyHeadContainer.findViewById(R.id.header_pet_name_tv).setOnClickListener(listener);
         mStickyHeadContainer.findViewById(R.id.header_pet_type_tv).setOnClickListener(listener);
 
-        mStickyHeadContainer.setDataCallback(pos -> featuredHeaderView.setData(mAdapter.getData().get(pos).getDynamicBean()));
+        mStickyHeadContainer.setDataCallback(pos -> {
+            mCurrentStickyPos = pos;
+            featuredHeaderView.setData(mAdapter.getData().get(pos).getDynamicBean());
+        });
 
         StickyItemDecoration itemDecoration = new StickyItemDecoration(mStickyHeadContainer, MultiItemType.TYPE_HEADER);
         itemDecoration.setOnStickyChangeListener(new OnStickyChangeListener() {
@@ -209,15 +219,14 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         });
 
         // 子控件内部点击事件
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                int id = view.getId();
-                AdapterMultiItemEntity itemEntity = mList.get(position);
-                int userId = itemEntity.getDynamicBean().getDynamicId();
-                handleClick(id, userId);
-            }
-        });
+        mAdapter.setOnItemChildClickListener(
+                (adapter, view, position) -> {
+                    int id = view.getId();
+                    AdapterMultiItemEntity itemEntity = mList.get(position);
+                    int userId = itemEntity.getDynamicBean().getDynamicId();
+                    handleClick(id, userId);
+                }
+        );
     }
 
     /**
@@ -228,7 +237,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     private void handleClick(int viewId, int userId) {
         if (viewId == R.id.header_attention_btn) {
             ToastUtils.showShort("关注");
-
             // 跳转到主人详情
         } else if (viewId == R.id.header_master_avatar_iv
                 || viewId == R.id.header_no_pet_master_name_tv
@@ -249,11 +257,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             ToastUtils.showShort("点赞");
         } else if (viewId == R.id.item_footer_gift_rb) {
             ToastUtils.showShort("送礼物");
-        } else if (viewId == R.id.item_footer_comment_rb
-                || viewId == R.id.item_footer_comment_first
-                || viewId == R.id.item_footer_comment_second
-                || viewId == R.id.item_footer_comment_third
-                || viewId == R.id.item_footer_comment_more) {
+        } else if (viewId == R.id.item_footer_comment_rb) {
             jumpToNewPage(userId, "", 0);
         } else if (viewId == R.id.item_footer_share_rb) {
             ToastUtils.showShort("分享");

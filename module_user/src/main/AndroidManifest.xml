@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ralf.module_user" />
+    package="com.ralf.module_user" >
+
+    <application>
+        <activity android:name=".mvp.ui.MasterInfoActivity" />
+    </application>
+</manifest>

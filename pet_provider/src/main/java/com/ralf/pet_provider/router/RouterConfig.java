@@ -22,27 +22,27 @@ public final class RouterConfig {
         /**
          * 测试界面
          */
-        public static final String MAIN_PATH = "/user_module/main";
+        public static final String MAIN_PATH = "/login_module/main";
 
         /**
          * 入口，跳转到登录和注册
          */
-        public static final String ENTRANCE_PATH = "/user_module/entrance";
+        public static final String ENTRANCE_PATH = "/login_module/entrance";
 
         /**
          * 登录
          */
-        public static final String LOGIN_PATH = "/user_module/login";
+        public static final String LOGIN_PATH = "/login_module/login";
 
         /**
          * 注册
          */
-        public static final String REGISTER_PATH = "/user_module/register";
+        public static final String REGISTER_PATH = "/login_module/register";
 
         /**
          * 设置用户信息（注册）
          */
-        public static final String REGISTER_USER_PATH = "/user_module/register_user";
+        public static final String REGISTER_USER_PATH = "/login_module/register_user";
 
         /**
          * 跳转到用户信息设置界面携带的参数 KEY
@@ -53,7 +53,7 @@ public final class RouterConfig {
         /**
          * 用户协议
          */
-        public static final String USER_PROTOCOL_PATH = "/user_module/protocol";
+        public static final String USER_PROTOCOL_PATH = "/login_module/protocol";
 
         /**
          * 用户协议 URL
@@ -64,7 +64,7 @@ public final class RouterConfig {
         /**
          * 修改用户密码
          */
-        public static final String MODIFY_PASSWORD_PATH = "/user_module/modify_password";
+        public static final String MODIFY_PASSWORD_PATH = "/login_module/modify_password";
 
     }
 

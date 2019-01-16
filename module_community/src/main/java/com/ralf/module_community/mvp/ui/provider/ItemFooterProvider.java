@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.jess.arms.utils.ToastUtils;
@@ -26,6 +27,7 @@ import com.ralf.module_community.entity.CommentEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.PraiseEntity;
 import com.ralf.module_community.mvp.ui.view.FeaturedPersonView;
+import com.ralf.pet_provider.router.RouterConfig;
 import com.rockerhieu.emojicon.EmojiconTextView;
 
 import java.util.HashMap;
@@ -101,10 +103,6 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
         EmojiconTextView firstMsgTv = helper.getView(R.id.item_footer_comment_first);
         EmojiconTextView secondMsgTv = helper.getView(R.id.item_footer_comment_second);
         EmojiconTextView thirdMsgTv = helper.getView(R.id.item_footer_comment_third);
-        helper.addOnClickListener(R.id.item_footer_comment_ll)
-                .addOnClickListener(R.id.item_footer_comment_first)
-                .addOnClickListener(R.id.item_footer_comment_second)
-                .addOnClickListener(R.id.item_footer_comment_third);
 
         List<CommentEntity> commentList = entity.getCommentList();
         if (commentList != null && commentList.size() > 0) {
@@ -162,17 +160,17 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
             builder = new SpannableStringBuilder(fromNickName).append(" 回复 ");
             SpannableStringBuilder toBuilder = new SpannableStringBuilder(toNickname);
             toBuilder.setSpan(colorSpan, 0, toBuilder.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-            toBuilder.setSpan(SpanTextClick.getClicker(toUserId, TextClickType.TYPE_PERSON_NAME),
+            toBuilder.setSpan(SpanTextClick.getClicker(toUserId, "", 0, TextClickType.TYPE_PERSON_NAME),
                     0, toBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.append(toBuilder);
         }
         // click event
-        builder.setSpan(SpanTextClick.getClicker(fromId, TextClickType.TYPE_PERSON_NAME),
+        builder.setSpan(SpanTextClick.getClicker(fromId, "", 0, TextClickType.TYPE_PERSON_NAME),
                 0, fromNickName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         // content click
         int beforeLen = builder.length();
         builder.append(content);
-        builder.setSpan(SpanTextClick.getClicker(fromId, TextClickType.TYPE_COMMENT_TEXT),
+        builder.setSpan(SpanTextClick.getClicker(fromId, "", 0, TextClickType.TYPE_COMMENT_TEXT),
                 beforeLen, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return builder;
     }
@@ -228,12 +226,12 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
                 headDataMap.put(bean.getUserId(), bean.getHeadPortrait());
             }
         }
-        mPersonView.setClickListener(new FeaturedPersonView.OnHeadPortraitClickListener() {
-            @Override
-            public void onClick(int userId) {
-                ToastUtils.showShort("跳转到用户界面 " + userId);
-            }
-        });
+        mPersonView.setClickListener(
+                userId -> ARouter.getInstance()
+                        .build(RouterConfig.UserModule.MASTER_INFO_PATH)
+                        .withInt(RouterConfig.UserModule.KEY_USER_ID, userId)
+                        .navigation()
+        );
         mPersonView.setHeadPortaitData(headDataMap);
     }
 }

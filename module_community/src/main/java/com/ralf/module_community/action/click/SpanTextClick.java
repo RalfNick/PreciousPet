@@ -4,7 +4,8 @@ import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.View;
 
-import com.jess.arms.utils.ToastUtils;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.ralf.pet_provider.router.RouterConfig;
 
 /**
  * @author Ralf(wanglixin)
@@ -17,14 +18,19 @@ public class SpanTextClick extends ClickableSpan {
 
     private int mUserId;
     private TextClickType mType;
+    private int mFromId;
+    private String mNickName;
 
-    private SpanTextClick(int userId, TextClickType type) {
+
+    private SpanTextClick(int userId, String nickName, int fromId, TextClickType type) {
         this.mUserId = userId;
         this.mType = type;
+        this.mNickName = nickName;
+        this.mFromId = fromId;
     }
 
-    public static SpanTextClick getClicker(int userId, TextClickType type) {
-        return new SpanTextClick(userId, type);
+    public static SpanTextClick getClicker(int userId, String nickName, int fromId, TextClickType type) {
+        return new SpanTextClick(userId, nickName, fromId, type);
     }
 
     @Override
@@ -32,10 +38,18 @@ public class SpanTextClick extends ClickableSpan {
         switch (mType) {
 
             case TYPE_PERSON_NAME:
-                ToastUtils.showShort("跳转到个人主页");
+                ARouter.getInstance()
+                        .build(RouterConfig.UserModule.MASTER_INFO_PATH)
+                        .withInt(RouterConfig.UserModule.KEY_USER_ID, mUserId)
+                        .navigation();
                 break;
             case TYPE_COMMENT_TEXT:
-                ToastUtils.showShort("跳转到状态详情页");
+                ARouter.getInstance()
+                        .build(RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
+                        .withInt(RouterConfig.CommunityModule.KEY_USER_ID, mUserId)
+                        .withString(RouterConfig.CommunityModule.KEY_NICK_NAME, mNickName)
+                        .withInt(RouterConfig.CommunityModule.KEY_FROM_USER_ID, mFromId)
+                        .navigation();
                 break;
             default:
                 break;

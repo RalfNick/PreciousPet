@@ -152,13 +152,21 @@ public final class RouterConfig {
      */
     public static class UserModule {
 
-        public static final String FRAGMENT_NAME = "CommunityFragment";
+        public static final String FRAGMENT_NAME = "UserFragment";
 
         /**
          * 测试界面
          */
         public static final String MAIN_PATH = "/user_module/main";
 
+        /**
+         * 用户中心
+         */
         public static final String USER_PATH = "/user_module/user_center";
+
+        /**
+         * 用户状态信息
+         */
+        public static final String USER_STATE_PATH = "/user_module/user_state";
     }
 }

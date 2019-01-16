@@ -1,4 +1,4 @@
-include ':app',
+include ':app', ':module_user',
         ':module_config_res',
         ':module_login_register',
         ':module_community',

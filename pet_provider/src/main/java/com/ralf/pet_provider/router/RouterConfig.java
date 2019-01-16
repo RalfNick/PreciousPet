@@ -154,6 +154,8 @@ public final class RouterConfig {
 
         public static final String FRAGMENT_NAME = "UserFragment";
 
+        public static final String KEY_USER_ID = "user_id";
+
         /**
          * 测试界面
          */
@@ -167,6 +169,6 @@ public final class RouterConfig {
         /**
          * 用户状态信息
          */
-        public static final String USER_STATE_PATH = "/user_module/user_state";
+        public static final String MASTER_INFO_PATH = "/user_module/master_info";
     }
 }

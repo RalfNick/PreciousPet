@@ -4,7 +4,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 
 import com.jess.arms.mvp.BasePresenter;
-import com.ralf.module_user.mvp.contact.UserStateContact;
+import com.ralf.module_user.mvp.contact.MasterInfoContact;
 
 import javax.inject.Inject;
 
@@ -13,17 +13,17 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name UserStatePresenter
+ * @name MasterInfoPresenter
  * @email -
  * @date 2019/01/16 下午1:54
  **/
-public class UserStatePresenter extends BasePresenter<UserStateContact.Model,UserStateContact.View> {
+public class MasterInfoPresenter extends BasePresenter<MasterInfoContact.Model,MasterInfoContact.View> {
 
     @Inject
     RxErrorHandler mErrorHandler;
 
     @Inject
-    public UserStatePresenter(UserStateContact.Model model, UserStateContact.View rootView) {
+    public MasterInfoPresenter(MasterInfoContact.Model model, MasterInfoContact.View rootView) {
         super(model, rootView);
     }
 

@@ -233,12 +233,13 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.header_master_avatar_iv
                 || viewId == R.id.header_no_pet_master_name_tv
                 || viewId == R.id.header_pet_master_name_tv) {
-            ToastUtils.showShort("主人详情");
-
+            ARouter.getInstance()
+                    .build(RouterConfig.UserModule.MASTER_INFO_PATH)
+                    .withInt(RouterConfig.UserModule.KEY_USER_ID, userId)
+                    .navigation();
             // 跳转宠物从详情
         } else if (viewId == R.id.header_pet_avatar_iv || viewId == R.id.header_pet_name_tv) {
             ToastUtils.showShort("宠物详情");
-
             // 宠物类型详情
         } else if (viewId == R.id.header_pet_type_tv) {
             ToastUtils.showShort("宠物类型");

@@ -6,11 +6,11 @@ import com.jess.arms.mvp.IView;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name UserStateContact
+ * @name MasterInfoContact
  * @email -
  * @date 2019/01/16 下午1:51
  **/
-public interface UserStateContact {
+public interface MasterInfoContact {
 
     interface Model extends IModel {
 

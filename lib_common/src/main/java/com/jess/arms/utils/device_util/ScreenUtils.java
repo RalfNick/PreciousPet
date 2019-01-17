@@ -96,6 +96,20 @@ public class ScreenUtils {
     }
 
     /**
+     * 根据宽度和高度，将宽度转成屏幕高低
+     *
+     * @param width  已设置的宽度
+     * @param height 已设置的高度
+     * @return
+     */
+    public static int transToHeight(int width, int height) {
+        WindowManager systemService = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
+        int screenWidth = systemService.getDefaultDisplay().getWidth();
+        return (screenWidth * height / width);
+
+    }
+
+    /**
      * 设置屏幕为全屏
      *
      * @param activity activity
@@ -214,7 +228,9 @@ public class ScreenUtils {
         return ret;
     }
 
-    /**创建屏幕截图*/
+    /**
+     * 创建屏幕截图
+     */
     @SuppressLint("ResourceType")
     private Bitmap createSnapshot(View view) {
         Bitmap screenShot = null;
@@ -289,9 +305,9 @@ public class ScreenUtils {
 
 
     /**
-     *
      * 计算指定的 View 在屏幕中的坐标
-     * @param view  需要计算的 view
+     *
+     * @param view 需要计算的 view
      * @return 矩形区域
      */
     public static RectF calViewScreenLocation(View view) {
@@ -303,8 +319,8 @@ public class ScreenUtils {
         return new RectF(location[0], location[1], location[0] + view.getWidth(),
                 location[1] + view.getHeight());
     }
-    
-    private static Application getApplication(){
+
+    private static Application getApplication() {
         return AppManager.getAppManager().getApplication();
     }
 }

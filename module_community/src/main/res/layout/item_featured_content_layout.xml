@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/feather_item_title"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/item_content_container_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<cn.jzvd.JZVideoPlayerStandard-->
+        <!--android:id="@+id/item_content_player"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/video_watermark_image"-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_alignEnd="@+id/item_content_player"-->
+        <!--android:layout_alignTop="@+id/item_content_player"-->
+        <!--android:layout_marginEnd="5dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:src="@mipmap/video_image"-->
+        <!--android:visibility="visible" />-->
+
+        <ImageView
+            android:id="@+id/item_content_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            tools:src="@mipmap/ic_launcher" />
+    </RelativeLayout>
+
+    <com.rockerhieu.emojicon.EmojiconTextView
+        android:id="@+id/item_content_comment_tv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="dog - 1" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/colorWhite"
+        android:textColor="@color/shoushou"
+        android:textSize="15sp" />
 
 </LinearLayout>

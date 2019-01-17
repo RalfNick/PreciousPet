@@ -12,13 +12,11 @@ import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
-import com.jess.arms.utils.SizeUtils;
 import com.ralf.module_community.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Ralf(wanglixin)

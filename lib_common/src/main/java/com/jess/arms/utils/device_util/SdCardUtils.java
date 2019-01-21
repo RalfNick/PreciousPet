@@ -24,6 +24,7 @@ public final class SdCardUtils {
 
     /**
      * 判断SD卡是否被挂载
+     *
      * @return true 挂载； false 未挂载
      */
     public static boolean isSDCardMounted() {
@@ -33,6 +34,7 @@ public final class SdCardUtils {
 
     /**
      * 获取SD卡的根目录
+     *
      * @return 返回根目录路径
      */
     public static String getSDCardBaseDir() {
@@ -41,8 +43,10 @@ public final class SdCardUtils {
         }
         return null;
     }
+
     /**
      * 获取SD卡的完整空间大小，返回MB
+     *
      * @return 大小
      */
     public static long getSDCardSize() {
@@ -57,6 +61,7 @@ public final class SdCardUtils {
 
     /**
      * 获取SD卡的剩余空间大小
+     *
      * @return 大小
      */
     public static long getSDCardFreeSize() {
@@ -71,6 +76,7 @@ public final class SdCardUtils {
 
     /**
      * 获取SD卡的可用空间大小
+     *
      * @return 大小
      */
     public static long getSDCardAvailableSize() {
@@ -85,8 +91,9 @@ public final class SdCardUtils {
 
     /**
      * 往SD卡的公有目录下保存文件
-     * @param data 数据
-     * @param type 文件类型
+     *
+     * @param data     数据
+     * @param type     文件类型
      * @param fileName 文件名字
      * @return 是否保存成功
      */
@@ -117,8 +124,9 @@ public final class SdCardUtils {
 
     /**
      * 往SD卡的自定义目录下保存文件
-     * @param data 数据
-     * @param dir 文件夹
+     *
+     * @param data     数据
+     * @param dir      文件夹
      * @param fileName 文件名字
      * @return 是否保存成功
      */
@@ -152,10 +160,11 @@ public final class SdCardUtils {
 
     /**
      * 往SD卡的私有Files目录下保存文件
-     * @param data 数据
-     * @param type 文件类型
+     *
+     * @param data     数据
+     * @param type     文件类型
      * @param fileName 文件名字
-     * @param context 上下文
+     * @param context  上下文
      * @return 是否保存成功
      */
     public static boolean saveFileToSDCardPrivateFilesDir(byte[] data,
@@ -185,9 +194,10 @@ public final class SdCardUtils {
 
     /**
      * 往SD卡的私有Cache目录下保存文件
-     * @param data 数据
+     *
+     * @param data     数据
      * @param fileName 文件名字
-     * @param context 上下文
+     * @param context  上下文
      * @return 是否保存成功
      */
     public static boolean saveFileToSDCardPrivateCacheDir(byte[] data,
@@ -217,9 +227,10 @@ public final class SdCardUtils {
 
     /**
      * 保存bitmap图片到SDCard的私有Cache目录
-     * @param bitmap 位图
+     *
+     * @param bitmap   位图
      * @param fileName 文件名字
-     * @param context 上下文
+     * @param context  上下文
      * @return 是否保存成功
      */
     public static boolean saveBitmapToSDCardPrivateCacheDir(Bitmap bitmap,
@@ -259,6 +270,7 @@ public final class SdCardUtils {
 
     /**
      * 从SD卡获取文件
+     *
      * @param fileDir 指定路径下获取文件数据
      * @return 数据字节
      */
@@ -291,6 +303,7 @@ public final class SdCardUtils {
 
     /**
      * 从SDCard中寻找指定目录下的文件，返回Bitmap
+     *
      * @param filePath 文件路径
      * @return 位图
      */
@@ -307,6 +320,7 @@ public final class SdCardUtils {
 
     /**
      * 获取SD卡公有目录的路径
+     *
      * @param type
      * @return
      */
@@ -316,6 +330,7 @@ public final class SdCardUtils {
 
     /**
      * 获取SD卡私有Cache目录的路径
+     *
      * @param context 上下文
      * @return 路径
      */
@@ -325,8 +340,9 @@ public final class SdCardUtils {
 
     /**
      * 获取SD卡私有Files目录的路径
+     *
      * @param context 上下文
-     * @param type 文件类型
+     * @param type    文件类型
      * @return 路径
      */
     public static String getSDCardPrivateFilesDir(Context context, String type) {
@@ -335,6 +351,7 @@ public final class SdCardUtils {
 
     /**
      * 文件是否存在
+     *
      * @param filePath 文件路径
      * @return true--存在；false -- 不存在
      */
@@ -345,6 +362,7 @@ public final class SdCardUtils {
 
     /**
      * 从sdcard中删除文件
+     *
      * @param filePath 文件路径
      * @return 是否删除成功
      */

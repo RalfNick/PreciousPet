@@ -30,9 +30,7 @@ android {
             //组件化编译时为app，设置 Application Id
             applicationId "com.ralf.preciouspet"
         }
-        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName: project.getName()]
@@ -80,7 +78,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
 
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    implementation 'com.youth.banner:banner:1.4.10'  //最新版本
+    implementation 'com.youth.banner:banner:1.4.10'
     // tab
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 }

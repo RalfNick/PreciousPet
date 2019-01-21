@@ -42,5 +42,5 @@ android {
 }
 
 dependencies {
-    implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
 }

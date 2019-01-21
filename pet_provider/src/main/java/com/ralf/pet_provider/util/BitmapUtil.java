@@ -1,17 +1,17 @@
 package com.ralf.pet_provider.util;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.Cursor;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import android.net.Uri;
-import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import com.orhanobut.logger.Logger;
@@ -466,6 +466,7 @@ public class BitmapUtil {
 
     /**
      * 根据图片的url路径获得Bitmap对象
+     *
      * @param url
      * @return
      */
@@ -528,10 +529,11 @@ public class BitmapUtil {
 
     /**
      * 获取本地媒体的Base64字符串
+     *
      * @param path
      * @return
      */
-    public static String transFilePathToBase64(String path){
+    public static String transFilePathToBase64(String path) {
         String result = "";
         ByteArrayOutputStream baos = null;
         FileInputStream fis = null;
@@ -541,8 +543,8 @@ public class BitmapUtil {
                 bytes = new byte[1024];
                 fis = new FileInputStream(path);
                 baos = new ByteArrayOutputStream();
-                while (fis.read(bytes) != -1){
-                    baos.write(bytes,0,bytes.length);
+                while (fis.read(bytes) != -1) {
+                    baos.write(bytes, 0, bytes.length);
                 }
                 baos.flush();
                 baos.close();
@@ -562,6 +564,46 @@ public class BitmapUtil {
             }
         }
         return result;
+    }
+
+    /**
+     * 下载失败与获取失败时都统一显示默认下载失败图片
+     *
+     * @return
+     */
+    public static Bitmap getBitmapFromDrawableRes(Context context, int res) {
+        try {
+            return getBitmapImmutableCopy(context.getResources(), res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static final Bitmap getBitmapImmutableCopy(Resources res, int id) {
+        return getBitmap(res.getDrawable(id)).copy(Bitmap.Config.RGB_565, false);
+    }
+
+    public static final Bitmap getBitmap(Drawable dr) {
+        if (dr == null) {
+            return null;
+        }
+
+        if (dr instanceof BitmapDrawable) {
+            return ((BitmapDrawable) dr).getBitmap();
+        }
+        return null;
+    }
+
+    public static boolean isInvalidPictureFile(String mimeType) {
+        String lowerCaseFilepath = mimeType.toLowerCase();
+        return (lowerCaseFilepath.contains("jpg") || lowerCaseFilepath.contains("jpeg")
+                || lowerCaseFilepath.toLowerCase().contains("png") || lowerCaseFilepath.toLowerCase().contains("bmp") || lowerCaseFilepath
+                .toLowerCase().contains("gif"));
+    }
+
+    public static boolean isGif(String extension) {
+        return !TextUtils.isEmpty(extension) && extension.toLowerCase().equals("gif");
     }
 
 }

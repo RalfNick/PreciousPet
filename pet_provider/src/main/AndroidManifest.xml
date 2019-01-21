@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 用于读取数据从扩展存储卡 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application>
 
@@ -14,12 +18,26 @@
             android:name="UMENG_APPKEY"
             android:value="597e9d91b27b0a3c04001052" />
 
-        <meta-data android:value="umeng_chanal_1052"
-            android:name="UMENG_CHANNEL"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="umeng_chanal_1052" />
         <meta-data
             android:name="UPDATE_APP_KEY"
             android:value="ab55ce55Ac4bcP408cPb8c1Aaeac179c5f6f" />
 
+        <activity
+            android:name=".common.PicturePreviewActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.ralf.pet_provider.configuration.GlobalConfiguration"
+            android:value="ConfigModule" />
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="414" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="736" />
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
@@ -12,14 +11,17 @@ import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
-import com.jess.arms.utils.SizeUtils;
 import com.jess.arms.utils.StringUtils;
 import com.jess.arms.utils.device_util.ScreenUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.constant.MultiItemType;
 import com.ralf.module_community.entity.AdapterMultiItemEntity;
 import com.ralf.module_community.entity.DynamicEntity;
+import com.ralf.pet_provider.common.PicturePreviewActivity;
 import com.rockerhieu.emojicon.EmojiconTextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ralf(wanglixin)
@@ -29,6 +31,11 @@ import com.rockerhieu.emojicon.EmojiconTextView;
  * @date 2018/12/27 下午1:18
  **/
 public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity, BaseViewHolder> {
+
+    /**
+     * 图片的路径
+     */
+    private List<String> mUrlList = new ArrayList<>();
 
     @Override
     public int viewType() {
@@ -83,6 +90,14 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
                 .isCircle(false)
                 .build();
         imageLoader.loadImage(mContext, imageConfig);
+        // 设置点击事件
+        mUrlList.clear();
+        mUrlList.add(imagePath);
+        mUrlList.add(imagePath);
+        String[] urlArr = new String[mUrlList.size()];
+        mUrlList.toArray(urlArr);
+        imageView.setOnClickListener(v ->
+                PicturePreviewActivity.startPreViewPicActivity(mContext, urlArr, 0));
     }
 
     /**
@@ -99,11 +114,4 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
             textView.setVisibility(View.VISIBLE);
         }
     }
-
-    @Override
-    public void onClick(BaseViewHolder helper, AdapterMultiItemEntity data, int position) {
-        super.onClick(helper, data, position);
-    }
-
-
 }

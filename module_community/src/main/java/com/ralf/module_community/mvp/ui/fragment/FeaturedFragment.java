@@ -210,13 +210,13 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             }
         });
 
-        // 子控件点击事件
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showShort("ItemClick - " + position);
-            }
-        });
+//        // 子控件点击事件
+//        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                ToastUtils.showShort("ItemClick - " + position);
+//            }
+//        });
 
         // 子控件内部点击事件
         mAdapter.setOnItemChildClickListener(

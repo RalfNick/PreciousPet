@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-    //support
+    // support
     api(rootProject.ext.dependencies["support-v4"]) {
         exclude module: 'support-annotations'
     }
@@ -49,13 +49,13 @@ dependencies {
         exclude module: 'support-annotations'
     }
     api rootProject.ext.dependencies["annotations"]
-    //view
+    // view
     api rootProject.ext.dependencies["autosize"]
     api(rootProject.ext.dependencies["butterknife"]) {
         exclude module: 'support-annotations'
         exclude module: 'support-compat'
     }
-    //rx
+    // rx
     api rootProject.ext.dependencies["rxjava2"]
     api(rootProject.ext.dependencies["rxandroid2"]) {
         exclude module: 'rxjava'
@@ -83,7 +83,7 @@ dependencies {
         exclude module: 'support-annotations'
     }
     api rootProject.ext.dependencies['rxerrorhandler2']
-    //network
+    // network
     api(rootProject.ext.dependencies["retrofit"]) {
         exclude module: 'okhttp'
         exclude module: 'okio'
@@ -105,7 +105,7 @@ dependencies {
     annotationProcessor(rootProject.ext.dependencies["glide-compiler"]) {
         exclude module: 'jsr305'
     }
-    //tools
+    // tools
     compileOnly rootProject.ext.dependencies["javax.annotation"]
     api rootProject.ext.dependencies["dagger2"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
@@ -113,7 +113,7 @@ dependencies {
     compileOnly rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["gson"]
     api rootProject.ext.dependencies["arouter"]
-    //test
+    // test
     api rootProject.ext.dependencies["timber"]
     // log
     api rootProject.ext.dependencies["logger"]

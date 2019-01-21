@@ -46,7 +46,7 @@ dependencies {
     api project(':module_config_res')
     api project(':module_easeui')
     implementation project(':module_hmspush')
-    //    implementation rootProject.ext.dependencies["glide"]
+    // implementation rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     implementation rootProject.ext.dependencies["lifecyclemodel"]
     // tools
@@ -68,11 +68,20 @@ dependencies {
     api files('libs/umeng_shareboard_widget.jar')
     api files('libs/umeng_social_api.jar')
     api files('libs/umeng_social_tool.jar')
-
     // smartrefresh
-    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-18'
-    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-18'//没有使用特殊Header，可以不加这行
-
+    api('com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-18'){
+        exclude group: 'com.android.support', module: 'design'
+    }
+    api('com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-18'){
+        //没有使用特殊Header，可以不加这行
+        exclude group: 'com.android.support', module: 'design'
+    }
     // BRVAH
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+    api('com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'){
+        exclude group: 'com.android.support', module: 'design'
+    }
+
+    // 图片预览
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
+
 }

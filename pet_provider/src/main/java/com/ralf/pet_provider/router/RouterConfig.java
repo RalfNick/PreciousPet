@@ -1,5 +1,7 @@
 package com.ralf.pet_provider.router;
 
+import com.jess.arms.utils.StringUtils;
+
 /**
  * @author Ralf(wanglixin)
  * ARouter的参数名字常量和路径管理类
@@ -8,6 +10,22 @@ package com.ralf.pet_provider.router;
  * @date 2018/12/03 下午3:47
  **/
 public final class RouterConfig {
+
+    /**
+     * provider 模块，公共
+     */
+    public static class Provider {
+
+        /**
+         * 传递图片的地址-Key
+         */
+        public static final String KEY_PIC_URLS = "pic_urls";
+
+        /**
+         * 传递图片的地址的第一张的索引-Key
+         */
+        public static final String KEY_PIC_INDEX = "pic_current_index";
+    }
 
     public static class AppModule {
 

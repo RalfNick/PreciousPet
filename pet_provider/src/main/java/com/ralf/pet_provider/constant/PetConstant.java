@@ -10,6 +10,8 @@ import com.ralf.module_config_res.BuildConfig;
  * @date 2018/12/13 下午1:41
  **/
 public final class PetConstant {
+
+    public static final String IAMGE_PATH_PREFIX = "precious_pet";
     /**
      * 第三方appKey等
      */

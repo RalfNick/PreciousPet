@@ -28,7 +28,6 @@ public class ItemHeaderProvider extends BaseItemProvider<AdapterMultiItemEntity,
 
     @Override
     public void convert(BaseViewHolder helper, AdapterMultiItemEntity data, int position) {
-
         FeaturedHeaderView headerView = helper.getView(R.id.item_header_view);
         headerView.setData(data.getDynamicBean(), helper);
     }

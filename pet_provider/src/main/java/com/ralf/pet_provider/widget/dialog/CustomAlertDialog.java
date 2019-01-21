@@ -10,12 +10,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jess.arms.utils.SizeUtils;
 import com.jess.arms.utils.StringUtils;
 import com.ralf.pet_provider.R;
 import com.ralf.pet_provider.entity.DialogEntity;
@@ -64,6 +67,11 @@ public class CustomAlertDialog extends AlertDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = LayoutInflater.from(context).inflate(R.layout.dialog_layout_options, null);
+        initView(rootView);
+        setContentView(rootView);
+    }
+
+    private void initView(View rootView) {
         ImageButton imageButton = rootView.findViewById(R.id.dialog_title_button);
         TextView textView = rootView.findViewById(R.id.dialog_title_text_view);
         mAdapter = new DialogAdapter(R.layout.item_layout_dialog_option, mEntityList);
@@ -88,7 +96,6 @@ public class CustomAlertDialog extends AlertDialog {
                 mClickListener.onItemClick(position);
             }
         });
-        setContentView(rootView);
     }
 
     /**
@@ -96,7 +103,7 @@ public class CustomAlertDialog extends AlertDialog {
      */
     class DialogAdapter extends BaseQuickAdapter<DialogEntity, BaseViewHolder> {
 
-        public DialogAdapter(int layoutResId, @Nullable List<DialogEntity> data) {
+        DialogAdapter(int layoutResId, @Nullable List<DialogEntity> data) {
             super(layoutResId, data);
         }
 

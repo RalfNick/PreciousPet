@@ -11,11 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--<cn.jzvd.JZVideoPlayerStandard-->
-        <!--android:id="@+id/item_content_player"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:visibility="gone" />-->
+        <com.ralf.module_community.widget.player.SimpleCoverVideo
+            android:id="@+id/video_item_player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <!--<ImageView-->
         <!--android:id="@+id/video_watermark_image"-->

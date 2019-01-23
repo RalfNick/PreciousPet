@@ -1,7 +1,6 @@
 package com.ralf.preciouspet;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,7 +24,6 @@ import com.jess.arms.utils.SpUtil;
 import com.jess.arms.utils.ToastUtils;
 import com.orhanobut.logger.Logger;
 import com.ralf.module_chat.ChatHelper;
-import com.ralf.module_chat.Constant;
 import com.ralf.module_db.data.entity.PetAssistantEntity;
 import com.ralf.module_db.util.GreenDaoUtils;
 import com.ralf.pet_provider.base.SimpleObserver;
@@ -38,7 +36,6 @@ import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

@@ -18,7 +18,9 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.SizeUtils;
 import com.jess.arms.utils.ToastUtils;
+import com.jess.arms.utils.device_util.ScreenUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.R2;
 import com.ralf.module_community.constant.Constant;
@@ -33,6 +35,7 @@ import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
+import com.ralf.module_community.widget.player.ScrollCalculatorHelper;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.widget.stickyitemdecoration.OnStickyChangeListener;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyHeadContainer;
@@ -40,6 +43,7 @@ import com.ralf.pet_provider.widget.stickyitemdecoration.StickyItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
@@ -67,7 +71,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     RecyclerView mRecyclerView;
     @BindView(R2.id.featured_refresh_layout)
     SmartRefreshLayout mRefreshLayout;
-
     /**
      * 顶部视图，轮播图，list，adapter,页号
      */
@@ -84,6 +87,18 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
      * 当前吸顶的位置
      */
     private int mCurrentStickyPos;
+
+    /**
+     * 滑动时自动播放视频辅助类
+     */
+    private ScrollCalculatorHelper mScrollCalculatorHelper;
+
+    /**
+     * 计算滑动位置
+     */
+    private LinearLayoutManager mLayoutManager;
+    private int mFirstVisibleItem;
+    private int mLastVisibleItem;
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
@@ -117,16 +132,56 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                 .setIndicatorGravity(BannerConfig.CENTER)
                 .setDelayTime(BANNER_DELAY_TIME)
                 .setImageLoader(new GlideImageLoader());
-
         mAdapter = new FeaturedAdapter(mList);
         mAdapter.addHeaderView(mHeadView);
         mAdapter.openLoadAnimation();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        // 限定范围为屏幕一半的上下偏移180
+        int playTop = ScreenUtils.getScreenHeight() / 2 - SizeUtils.dp2px(160);
+        int playBottom = ScreenUtils.getScreenHeight() / 2 + SizeUtils.dp2px(180);
+        // 自定播放帮助类
+        mScrollCalculatorHelper = new ScrollCalculatorHelper(R.id.video_item_player, playTop, playBottom);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                mScrollCalculatorHelper.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mFirstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
+                mLastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+                // 滑动自动播放的代码
+                mScrollCalculatorHelper.onScroll(recyclerView, mFirstVisibleItem, mLastVisibleItem,
+                        mLastVisibleItem - mFirstVisibleItem);
+            }
+        });
         // decoration
         initDecoration();
         // click
         setClickEvent();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        GSYVideoManager.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        GSYVideoManager.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        GSYVideoManager.releaseAllVideos();
     }
 
     /**
@@ -210,13 +265,13 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             }
         });
 
-//        // 子控件点击事件
-//        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                ToastUtils.showShort("ItemClick - " + position);
-//            }
-//        });
+        // 子控件点击事件
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ToastUtils.showShort("ItemClick - " + position);
+            }
+        });
 
         // 子控件内部点击事件
         mAdapter.setOnItemChildClickListener(

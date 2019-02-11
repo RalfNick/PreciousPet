@@ -116,7 +116,6 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
                 .build();
         mImageLoader.loadImage(mContext, imageConfig);
         videoPath = "http://wdquan-space.b0.upaiyun.com/VIDEO/2018/11/22/ae0645396048_hls_time10.m3u8";
-        setWaterPrint();
         mVideoOptionBuilder.setIsTouchWiget(false)
                 .setThumbImageView(imageView)
                 .setUrl(videoPath)
@@ -125,6 +124,7 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
                 .setPlayTag(TAG)
                 .setPlayPosition(position)
                 .build(mVideoPlayer);
+        setWaterPrint();
         // 隐藏 title
         mVideoPlayer.getTitleTextView().setVisibility(View.GONE);
         // 设置返回键
@@ -137,7 +137,7 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
      * 水印图效果
      */
     private void setWaterPrint() {
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.video_image);
         mGSYVideoGLViewCustomRender = new GSYVideoGLViewCustomRender();
         mCustomBitmapIconEffect = new BitmapIconEffect(bitmap, SizeUtils.dp2px(50), SizeUtils.dp2px(50), 0.6f);
         mGSYVideoGLViewCustomRender.setBitmapEffect(mCustomBitmapIconEffect);

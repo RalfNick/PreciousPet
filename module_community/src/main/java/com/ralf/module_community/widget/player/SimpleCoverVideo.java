@@ -128,6 +128,8 @@ public class SimpleCoverVideo extends StandardGSYVideoPlayer {
     protected void changeUiToNormal() {
         super.changeUiToNormal();
         byStartedClick = false;
+        setViewShowState(mBottomContainer, GONE);
+        setViewShowState(mBottomProgressBar, GONE);
     }
 
     @Override
@@ -183,4 +185,26 @@ public class SimpleCoverVideo extends StandardGSYVideoPlayer {
         byStartedClick = true;
         super.onStartTrackingTouch(seekBar);
     }
+
+    @Override
+    protected void changeUiToPauseClear() {
+        super.changeUiToPauseClear();
+        setViewShowState(mBottomContainer, GONE);
+        setViewShowState(mBottomProgressBar, GONE);
+    }
+
+    @Override
+    protected void changeUiToCompleteShow() {
+        super.changeUiToCompleteShow();
+        setViewShowState(mBottomContainer, GONE);
+        setViewShowState(mBottomProgressBar, GONE);
+    }
+
+    @Override
+    protected void changeUiToPauseShow() {
+        super.changeUiToPauseShow();
+        setViewShowState(mBottomContainer, GONE);
+        setViewShowState(mBottomProgressBar, GONE);
+    }
+
 }

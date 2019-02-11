@@ -44,6 +44,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
@@ -66,6 +67,12 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
      * BANNER 轮播延迟时间
      */
     private static final int BANNER_DELAY_TIME = 2500;
+
+    /**
+     * 视频自动播放设置位置，上下偏离距离
+     */
+    private static final int OFFSET_PLAYER_TOP = 100;
+    private static final int OFFSET_PLAYER_BOTTOM = 100;
 
     @BindView(R2.id.featured_recycler_view)
     RecyclerView mRecyclerView;
@@ -116,6 +123,9 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mHeadView = inflater.inflate(R.layout.featured_header_layout, mRefreshLayout, false);
         mBanner = mHeadView.findViewById(R.id.featured_header_banner);
         mStickyHeadContainer = rootView.findViewById(R.id.feather_sticky_decoration);
+
+        // 设置为GL播放模式，才能支持滤镜，注意此设置是全局的
+//        GSYVideoType.setRenderType(GSYVideoType.GLSURFACE);
         return rootView;
     }
 
@@ -139,8 +149,8 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         // 限定范围为屏幕一半的上下偏移180
-        int playTop = ScreenUtils.getScreenHeight() / 2 - SizeUtils.dp2px(160);
-        int playBottom = ScreenUtils.getScreenHeight() / 2 + SizeUtils.dp2px(180);
+        int playTop = ScreenUtils.getScreenHeight() / 2 - SizeUtils.dp2px(OFFSET_PLAYER_TOP);
+        int playBottom = ScreenUtils.getScreenHeight() / 2 + SizeUtils.dp2px(OFFSET_PLAYER_BOTTOM);
         // 自定播放帮助类
         mScrollCalculatorHelper = new ScrollCalculatorHelper(R.id.video_item_player, playTop, playBottom);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

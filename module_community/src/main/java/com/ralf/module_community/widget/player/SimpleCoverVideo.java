@@ -83,13 +83,12 @@ public class SimpleCoverVideo extends StandardGSYVideoPlayer {
 
     @Override
     public GSYBaseVideoPlayer showSmallVideo(Point size, boolean actionBar, boolean statusBar) {
-        //下面这里替换成你自己的强制转化
+        // 下面这里替换成你自己的强制转化
         SimpleCoverVideo simpleCoverVideo = (SimpleCoverVideo) super.showSmallVideo(size, actionBar, statusBar);
         simpleCoverVideo.mStartButton.setVisibility(GONE);
         simpleCoverVideo.mStartButton = null;
         return simpleCoverVideo;
     }
-
 
     /******************* 下方两个重载方法，在播放开始前不屏蔽封面，不需要可屏蔽 ********************/
     @Override
@@ -107,7 +106,6 @@ public class SimpleCoverVideo extends StandardGSYVideoPlayer {
         }
         super.setViewShowState(view, visibility);
     }
-
 
     /******************* 下方重载方法，在播放开始不显示底部进度和按键，不需要可屏蔽 ********************/
 

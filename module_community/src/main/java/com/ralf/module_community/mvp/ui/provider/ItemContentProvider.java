@@ -72,10 +72,8 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
         int height = dynamicBean.getHigh();
         String resPath = dynamicBean.getDynamicsPath();
         String videoPath = dynamicBean.getVideoPrintscreen();
-
         // 类型：1-视频  0-图片
         int type = dynamicBean.getType();
-        type = 1;
         if (type == 1) {
             imageView.setVisibility(View.GONE);
             mVideoPlayer.setVisibility(View.VISIBLE);
@@ -115,7 +113,6 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
                 .isCircle(false)
                 .build();
         mImageLoader.loadImage(mContext, imageConfig);
-        videoPath = "http://wdquan-space.b0.upaiyun.com/VIDEO/2018/11/22/ae0645396048_hls_time10.m3u8";
         mVideoOptionBuilder.setIsTouchWiget(false)
                 .setThumbImageView(imageView)
                 .setUrl(videoPath)

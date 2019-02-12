@@ -31,6 +31,11 @@ public interface HttpUrl {
      */
     String PET_PROTOCOL = APP_URL_DOMAIN + "web/service/pa.htm";
 
+    /**
+     *  社区分享 url
+     */
+    String COMMUNITY_SHARE_URL = APP_URL_DOMAIN + "web/service/dynamicDetails?dynamicId=%s";
+
     public static final String MEILIBANG_API = "api/bbs/get/charmList";
     public static final String TUHAOBANG_API = "api/bbs/get/wealthRankList";
     public static final String ZIXUN_XIANGQING_API = "api/news/articleContent";

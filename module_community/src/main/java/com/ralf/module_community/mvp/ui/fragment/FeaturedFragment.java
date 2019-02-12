@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,9 @@ import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
 import com.ralf.module_community.widget.player.ScrollCalculatorHelper;
+import com.ralf.pet_provider.http.HttpUrl;
 import com.ralf.pet_provider.router.RouterConfig;
+import com.ralf.pet_provider.share.PetShare;
 import com.ralf.pet_provider.widget.stickyitemdecoration.OnStickyChangeListener;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyHeadContainer;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyItemDecoration;
@@ -44,10 +47,11 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
-import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -282,14 +286,13 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                 ToastUtils.showShort("ItemClick - " + position);
             }
         });
-
         // 子控件内部点击事件
         mAdapter.setOnItemChildClickListener(
                 (adapter, view, position) -> {
                     int id = view.getId();
                     AdapterMultiItemEntity itemEntity = mList.get(position);
-                    int userId = itemEntity.getDynamicBean().getDynamicId();
-                    handleClick(id, userId);
+                    DynamicEntity dynamicBean = itemEntity.getDynamicBean();
+                    handleClick(id, dynamicBean);
                 }
         );
     }
@@ -297,9 +300,11 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     /**
      * 处理点击事件
      *
-     * @param viewId 控件 id
+     * @param viewId        控件 id
+     * @param dynamicEntity 实体类
      */
-    private void handleClick(int viewId, int userId) {
+    private void handleClick(int viewId, @NotNull DynamicEntity dynamicEntity) {
+        Integer userId = dynamicEntity.getUserId();
         if (viewId == R.id.header_attention_btn) {
             ToastUtils.showShort("关注");
             // 跳转到主人详情
@@ -325,13 +330,36 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.item_footer_comment_rb) {
             jumpToNewPage(userId, "", 0);
         } else if (viewId == R.id.item_footer_share_rb) {
-            ToastUtils.showShort("分享");
+            shareCommunity(dynamicEntity);
         } else if (viewId == R.id.item_footer_person_num) {
             ARouter.getInstance()
                     .build(RouterConfig.CommunityModule.COMMUNITY_PRAISE_LIST_PATH)
                     .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
                     .navigation();
         }
+    }
+
+    /**
+     * 分享社区状态
+     *
+     * @param dynamicEntity 实体类
+     */
+    private void shareCommunity(DynamicEntity dynamicEntity) {
+        String url = String.format(HttpUrl.COMMUNITY_SHARE_URL, dynamicEntity.getDynamicId());
+        String nickName = dynamicEntity.getNickName();
+        String title = TextUtils.isEmpty(nickName) ? "\r" : String.format(PetShare.shareTitleOfCommunity, nickName);
+        String desc = !TextUtils.isEmpty(dynamicEntity.getTalk()) ? dynamicEntity.getTalk() : PetShare.SHARE_SELECTED_DESC;
+        // 1 视频类型   0 图片类型
+        String imgUrl = dynamicEntity.getType() == 1 ? dynamicEntity.getVideoPrintscreen() : dynamicEntity.getDynamicsPath();
+        PetShare.ShareBuilder
+                .with(mContext)
+                .url(url)
+                .imgUrl(imgUrl)
+                .title(title)
+                .desc(desc)
+                .withText(desc)
+                .build()
+                .shareToOthers(PetShare.ShareTypeEnum.SHARE_COMMUNITY_FEATURED);
     }
 
     /**

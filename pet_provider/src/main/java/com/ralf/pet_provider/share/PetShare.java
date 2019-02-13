@@ -2,6 +2,7 @@ package com.ralf.pet_provider.share;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
@@ -9,6 +10,7 @@ import com.jess.arms.utils.ToastUtils;
 import com.orhanobut.logger.Logger;
 import com.ralf.pet_provider.R;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -94,6 +96,20 @@ public class PetShare {
         mShareAction.withMedia(mUmWeb);
         mShareAction.withText(this.desc);
         mShareAction.open();
+    }
+
+    /**
+     * release需要在activity#onDestroy()回调中释放资源,必须调用
+     */
+    public static void release(Context context) {
+        UMShareAPI.get(context).release();
+    }
+
+    /**
+     * onActivityResult需要在activity#onActivityResult()回调中同步调用,以监听分享结果
+     */
+    public static void onActivityResult(Context context, int requestCode, int resultCode, Intent data) {
+        UMShareAPI.get(context).onActivityResult(requestCode, resultCode, data);
     }
 
     /**

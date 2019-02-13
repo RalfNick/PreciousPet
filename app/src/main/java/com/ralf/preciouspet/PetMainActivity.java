@@ -1,8 +1,12 @@
 package com.ralf.preciouspet;
 
+import android.Manifest;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,6 +32,7 @@ import com.ralf.module_db.data.entity.PetAssistantEntity;
 import com.ralf.module_db.util.GreenDaoUtils;
 import com.ralf.pet_provider.base.SimpleObserver;
 import com.ralf.pet_provider.router.RouterConfig;
+import com.ralf.pet_provider.share.PetShare;
 import com.ralf.pet_provider.user.constant.UserConstant;
 import com.ralf.pet_provider.util.NetUtil;
 
@@ -43,6 +48,8 @@ import butterknife.OnClick;
  */
 @Route(path = RouterConfig.AppModule.MAIN_PATH)
 public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgInterface {
+
+    private static final int PERMISSION_CODE = 120;
 
     @BindView(R.id.main_fragment_container)
     FrameLayout mFragmentContainer;
@@ -88,6 +95,31 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
         initRaidoCheckedEvent();
         loadUserInfo();
         ChatHelper.getInstance().setPushMsg(this);
+        getPermission();
+    }
+
+    /**
+     * 动态请求权限
+     */
+    private void getPermission() {
+        if (Build.VERSION.SDK_INT >= PERMISSION_CODE) {
+            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.CALL_PHONE,
+                    Manifest.permission.READ_LOGS,
+                    Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.SET_DEBUG_APP,
+                    Manifest.permission.SYSTEM_ALERT_WINDOW,
+                    Manifest.permission.GET_ACCOUNTS,
+                    Manifest.permission.WRITE_APN_SETTINGS};
+            ActivityCompat.requestPermissions(this, mPermissionList, PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
     }
 
     /**
@@ -209,6 +241,18 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
         } else {
             finish();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        PetShare.onActivityResult(this, requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PetShare.release(this);
     }
 
     @OnClick(R.id.main_reload_btn)

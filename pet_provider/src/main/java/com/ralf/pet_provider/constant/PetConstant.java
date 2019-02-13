@@ -11,7 +11,7 @@ import com.ralf.module_config_res.BuildConfig;
  **/
 public final class PetConstant {
 
-    public static final String IAMGE_PATH_PREFIX = "precious_pet";
+    public static final String IMAGE_PATH_PREFIX = "precious_pet";
     /**
      * 第三方appKey等
      */
@@ -25,10 +25,10 @@ public final class PetConstant {
     public static final String UMAPPKEY = BuildConfig.UMAPPKEY;
 
     /**
-     * 手机常量相关
+     * 手机常量相关,手机信号，手机版本
      */
-    public final static String PHONE_MODEL = "A";//手机型号
-    public final static String PHONE_VERSION = "B";//手机Android版本
+    public final static String PHONE_MODEL = "A";
+    public final static String PHONE_VERSION = "B";
     public static String ANDROID_VERSION = "";
     public static String ANDROID_MODEL = "";
 

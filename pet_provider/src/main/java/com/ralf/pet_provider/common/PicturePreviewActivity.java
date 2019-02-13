@@ -84,7 +84,7 @@ public class PicturePreviewActivity extends AppCompatActivity implements View.On
      */
     private void initData() {
         Intent intent = getIntent();
-        mPicIndex = intent.getIntExtra(RouterConfig.Provider.KEY_PIC_INDEX, -1);
+        mPicIndex = intent.getIntExtra(RouterConfig.Provider.KEY_PIC_INDEX, 0);
         String[] urls = intent.getStringArrayExtra(RouterConfig.Provider.KEY_PIC_URLS);
         mUrlsList.clear();
         if (urls != null && urls.length > 0) {
@@ -207,7 +207,7 @@ public class PicturePreviewActivity extends AppCompatActivity implements View.On
                     // 保存到本地
                     InputStream inputStream = responseBody.byteStream();
                     if (inputStream != null) {
-                        String imageName = PetConstant.IAMGE_PATH_PREFIX + "_" + System.currentTimeMillis() + ".jpg";
+                        String imageName = PetConstant.IMAGE_PATH_PREFIX + "_" + System.currentTimeMillis() + ".jpg";
                         String picturePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                                 .getAbsolutePath() + "/Pet/";
                         File file = new File(picturePath, imageName);

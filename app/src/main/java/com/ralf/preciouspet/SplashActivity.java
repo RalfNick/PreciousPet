@@ -11,8 +11,13 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.PermissionUtil;
 import com.ralf.module_chat.permissions.PermissionsManager;
+import com.ralf.pet_provider.constant.PetConstant;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.user.UserUtil;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.concurrent.TimeUnit;
 

@@ -55,12 +55,18 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         Preconditions.checkNotNull(config.getImageView(), "ImageView is required");
 
         GlideRequests requests;
+        GlideRequest<? extends Drawable> glideRequest;
 
-        requests = GlideArms.with(ctx);//如果context是activity则自动使用Activity的生命周期
+        //如果context是activity则自动使用Activity的生命周期
+        requests = GlideArms.with(ctx);
+        if (config.isGif()) {
+            glideRequest = requests.asGif().load(config.getUrl());
+        } else {
+            glideRequest = requests.load(config.getUrl());
+        }
 
-        GlideRequest<Drawable> glideRequest = requests.load(config.getUrl());
-
-        switch (config.getCacheStrategy()) {//缓存策略
+        //缓存策略
+        switch (config.getCacheStrategy()) {
             case 0:
                 glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL);
                 break;
@@ -114,9 +120,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         if (config.getFallback() != 0)//设置请求 url 为空图片
             glideRequest.fallback(config.getFallback());
 
-
-        glideRequest
-                .into(config.getImageView());
+        glideRequest.into(config.getImageView());
     }
 
     @Override

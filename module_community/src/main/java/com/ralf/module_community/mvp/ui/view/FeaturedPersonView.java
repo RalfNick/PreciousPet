@@ -232,7 +232,8 @@ public class FeaturedPersonView extends LinearLayout {
     }
 
     /**
-     *
+     * @param url    图片url
+     * @param userId 用户id
      */
     private void addImageViewToParent(String url, int userId) {
         ImageView view = new ImageView(getContext());

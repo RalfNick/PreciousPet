@@ -2,6 +2,7 @@ package com.ralf.module_community.http;
 
 import com.google.gson.JsonObject;
 import com.ralf.module_community.entity.FeaturedEntity;
+import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import io.reactivex.Observable;
@@ -26,4 +27,12 @@ public interface CommunityService {
     @POST("api/bbs/get/dynamicAll")
     Observable<BaseEntity<FeaturedEntity>> getFeaturedData(@Body JsonObject body);
 
+    /**
+     * 点赞请求
+     *
+     * @param body body
+     * @return
+     */
+    @POST("api/bbs/praiseDynamic")
+    Observable<BaseEntity<FeedbackEntity>> sendPraise(@Body JsonObject body);
 }

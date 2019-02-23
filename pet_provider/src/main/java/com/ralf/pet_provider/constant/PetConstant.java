@@ -23,6 +23,7 @@ public final class PetConstant {
     public static final String WEIBO_APP_SECRET = BuildConfig.WEIBO_APP_SECRET;
     public static final String WEIBO_REDIRECT_URL = BuildConfig.WEIBO_REDIRECT_URL;
     public static final String UMAPPKEY = BuildConfig.UMAPPKEY;
+    public static final String UMENG_MSG_SECRET_KEY = BuildConfig.UMENG_MESSAGE_SECRET_KEY;
 
     /**
      * 手机常量相关,手机信号，手机版本

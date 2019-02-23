@@ -20,6 +20,7 @@ public class BaseEntity<T> implements Serializable {
     private Integer code;
     private T data;
     private String message;
+    private boolean state = false;
 
     public Integer getCode() {
         return code;
@@ -45,14 +46,24 @@ public class BaseEntity<T> implements Serializable {
         this.message = message;
     }
 
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "BaseEntity{" +
                 "code=" + code +
                 ", data=" + data +
                 ", message='" + message + '\'' +
+                ", state=" + state +
                 '}';
     }
+
     public boolean isSuccess() {
         return code == 0;
     }

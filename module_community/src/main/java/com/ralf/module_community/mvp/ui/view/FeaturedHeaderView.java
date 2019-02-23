@@ -18,7 +18,6 @@ import com.jess.arms.utils.ArmsUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.R2;
 import com.ralf.module_community.entity.DynamicEntity;
-import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.util.AttentionStatusUtil;
 import com.ralf.pet_provider.user.constant.UserConstant;
 

@@ -18,4 +18,20 @@ public final class Constant {
     public static final int TYPE_CUTE_CAT = 4;
     public static final int TYPE_VIDEO = 7;
     public static final int TYPE_OTHER = 8;
+
+    /**
+     * 网络请求字段
+     */
+    public final static String ID = "id";
+    public final static String DYNAMIC_ID = "dynamicId";
+    public final static String DYNAMIC_TYPE = "dynamicType";
+    public final static String PAGE = "page";
+    public final static String TO_USER_ID = "toUserId";
+    public final static String TO_PET_ID = "toPetId";
+    public final static String TYPE = "type";
+
+    /**
+     * 资源常量
+     */
+    public final static String GIF_REMOVE_PRAISE = "file:///android_asset/praise_false.gif";
 }

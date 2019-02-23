@@ -50,25 +50,31 @@
      <init>(...);
 }
 #umeng 混淆
--dontshrink
--dontoptimize
--dontwarn com.google.android.maps.**
--dontwarn android.webkit.WebView
 -dontwarn com.umeng.**
--dontwarn com.tencent.weibo.sdk.**
--dontwarn com.facebook.**
--keep public class javax.**
--keep public class android.webkit.**
--dontwarn android.support.v4.**
--keep enum com.facebook.**
--keepattributes Exceptions,InnerClasses,Signature
+-dontwarn com.taobao.**
+-dontwarn anet.channel.**
+-dontwarn anetwork.channel.**
+-dontwarn org.android.**
+-dontwarn org.apache.thrift.**
+-dontwarn com.xiaomi.**
+-dontwarn com.huawei.**
+-dontwarn com.meizu.**
+
 -keepattributes *Annotation*
--keepattributes SourceFile,LineNumberTable
--keep public interface com.facebook.**
--keep public interface com.tencent.**
--keep public interface com.umeng.socialize.**
--keep public interface com.umeng.socialize.sensor.**
--keep public interface com.umeng.scrshot.**
--keep public class com.umeng.socialize.* {*;}
--keep class com.facebook.**
--keep class com.facebook.** { *; }
+
+-keep class com.taobao.** {*;}
+-keep class org.android.** {*;}
+-keep class anet.channel.** {*;}
+-keep class com.umeng.** {*;}
+-keep class com.xiaomi.** {*;}
+-keep class com.huawei.** {*;}
+-keep class com.meizu.** {*;}
+-keep class org.apache.thrift.** {*;}
+
+-keep class com.alibaba.sdk.android.**{*;}
+-keep class com.ut.**{*;}
+-keep class com.ta.**{*;}
+
+-keep public class **.R$*{
+   public static final int *;
+}

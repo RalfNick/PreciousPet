@@ -38,6 +38,7 @@ public class ImageConfigImpl extends ImageConfig {
     private int fallback; //请求 url 为空,则使用此图片作为占位符
     private int imageRadius;//图片每个圆角的大小
     private int blurValue;//高斯模糊值, 值越大模糊效果越大
+    private boolean isGif;//是否是 Gif
     /**
      * @see {@link Builder#transformation(BitmapTransformation)}
      */
@@ -66,6 +67,7 @@ public class ImageConfigImpl extends ImageConfig {
         this.isCircle = builder.isCircle;
         this.isClearMemory = builder.isClearMemory;
         this.isClearDiskCache = builder.isClearDiskCache;
+        this.isGif = builder.isGif;
     }
 
     public int getCacheStrategy() {
@@ -120,6 +122,10 @@ public class ImageConfigImpl extends ImageConfig {
         return isCircle;
     }
 
+    public boolean isGif(){
+        return isGif;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -134,6 +140,7 @@ public class ImageConfigImpl extends ImageConfig {
         private int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
         private int imageRadius;//图片每个圆角的大小
         private int blurValue;//高斯模糊值, 值越大模糊效果越大
+        private boolean isGif;//是否是 Gif
         /**
          * @see {@link Builder#transformation(BitmapTransformation)}
          */
@@ -151,6 +158,11 @@ public class ImageConfigImpl extends ImageConfig {
 
         public Builder url(String url) {
             this.url = url;
+            return this;
+        }
+
+        public Builder isGif(boolean isGif){
+            this.isGif = isGif;
             return this;
         }
 

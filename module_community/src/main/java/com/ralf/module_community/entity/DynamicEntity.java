@@ -65,6 +65,8 @@ public class DynamicEntity {
 
     private String userHeadPortrait;
 
+    private boolean isRefresh;
+
     private String state;
     private List<CommentEntity> commentList;
     private List<PraiseEntity> praiseList;
@@ -83,6 +85,14 @@ public class DynamicEntity {
 
     public void setWidth(Integer width) {
         this.width = width;
+    }
+
+    public boolean isRefresh(){
+        return isRefresh;
+    }
+
+    public void setRefresh(boolean refresh) {
+        isRefresh = refresh;
     }
 
     public Integer getCommentTotal() {

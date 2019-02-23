@@ -4,7 +4,9 @@ import com.google.gson.JsonObject;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
+import com.ralf.module_community.constant.Constant;
 import com.ralf.module_community.entity.FeaturedEntity;
+import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.http.CommunityService;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.pet_provider.http.BaseEntity;
@@ -33,10 +35,21 @@ public class FeaturedModel extends BaseModel implements FeaturedContact.Model {
     public Observable<BaseEntity<FeaturedEntity>> getFeaturedData(int page, int type) {
 
         JsonObject object = new JsonObject();
-        object.addProperty(CommunityConstant.DYNAMIC_TYPE,type);
-        object.addProperty(CommunityConstant.PAGE,page);
+        object.addProperty(CommunityConstant.DYNAMIC_TYPE, type);
+        object.addProperty(CommunityConstant.PAGE, page);
 
         return mRepositoryManager.obtainRetrofitService(CommunityService.class)
                 .getFeaturedData(object);
+    }
+
+    @Override
+    public Observable<BaseEntity<FeedbackEntity>> sendPraise(int dynamicId, int toUserId, int type) {
+        JsonObject object = new JsonObject();
+        object.addProperty(Constant.DYNAMIC_ID, dynamicId);
+        object.addProperty(Constant.TO_USER_ID, toUserId);
+        object.addProperty(Constant.TYPE, type);
+
+        return mRepositoryManager.obtainRetrofitService(CommunityService.class)
+                .sendPraise(object);
     }
 }

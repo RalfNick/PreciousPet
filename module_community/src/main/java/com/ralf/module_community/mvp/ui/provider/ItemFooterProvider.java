@@ -1,22 +1,29 @@
 package com.ralf.module_community.mvp.ui.provider;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.gifdecoder.GifDecoder;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
-import com.jess.arms.utils.ToastUtils;
+import com.orhanobut.logger.Logger;
 import com.ralf.module_community.R;
 import com.ralf.module_community.action.click.SpanTextClick;
 import com.ralf.module_community.action.click.TextClickType;
@@ -27,10 +34,12 @@ import com.ralf.module_community.entity.CommentEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.PraiseEntity;
 import com.ralf.module_community.mvp.ui.view.FeaturedPersonView;
+import com.ralf.module_community.mvp.ui.view.PraiseAnimView;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.rockerhieu.emojicon.EmojiconTextView;
 
-import java.util.HashMap;
+import java.lang.reflect.Field;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +59,10 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
     private String mMoreCommentsDes = "查看更多%s条评论";
 
     private FeaturedPersonView mPersonView;
+    /**
+     * 取消点赞 Gif 动画时长
+     */
+    private int mDuration;
 
     @Override
     public int viewType() {
@@ -64,22 +77,7 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
     @Override
     public void convert(BaseViewHolder helper, AdapterMultiItemEntity data, int position) {
         DynamicEntity entity = data.getDynamicBean();
-        Integer ownPraise = entity.getOwnPraise();
-        Integer bePraiseTimes = data.getDynamicBean().getBePraiseTimes();
-
-        mPersonView = helper.getView(R.id.item_footer_person_view);
-        // 点赞总人数
-        TextView personNumTv = helper.getView(R.id.item_footer_person_num);
-        helper.addOnClickListener(R.id.item_footer_person_num);
-        if (bePraiseTimes < 1) {
-            personNumTv.setVisibility(View.GONE);
-        } else {
-            personNumTv.setVisibility(View.VISIBLE);
-            personNumTv.setText(String.valueOf(bePraiseTimes));
-        }
-        setHeadPortraitData(entity);
-        // 点赞，送礼，评论，分享
-        RadioButton supportButton = helper.getView(R.id.item_footer_support_rb);
+        setPraiseView(helper, entity);
         RadioButton giftButton = helper.getView(R.id.item_footer_gift_rb);
         RadioButton commentButton = helper.getView(R.id.item_footer_comment_rb);
         RadioButton shareButton = helper.getView(R.id.item_footer_share_rb);
@@ -91,6 +89,94 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
         convertCommentsDetail(helper, entity);
         // 查看更多评论
         convertMoreComment(helper, entity);
+    }
+
+    /**
+     * @param helper ViewHolder
+     * @param entity 数据
+     */
+    private void setPraiseView(BaseViewHolder helper, DynamicEntity entity) {
+        Integer ownPraise = entity.getOwnPraise();
+        Integer bePraiseTimes = entity.getBePraiseTimes();
+        mPersonView = helper.getView(R.id.item_footer_person_view);
+        // 点赞总人数
+        TextView personNumTv = helper.getView(R.id.item_footer_person_num);
+        helper.addOnClickListener(R.id.item_footer_person_num);
+        if (bePraiseTimes < 1) {
+            personNumTv.setVisibility(View.GONE);
+        } else {
+            personNumTv.setVisibility(View.VISIBLE);
+            personNumTv.setText(String.valueOf(bePraiseTimes));
+        }
+        setHeadPortraitData(entity);
+        RadioButton supportButton = helper.getView(R.id.item_footer_support_rb);
+        ImageView disSupportIv = helper.getView(R.id.item_footer_not_support_iv);
+        PraiseAnimView praiseAnimView = helper.getView(R.id.item_footer_praise_anim_view);
+
+        supportButton.setChecked(ownPraise == 1);
+        if (entity.isRefresh()) {
+            if (ownPraise == 1) {
+                disSupportIv.setVisibility(View.GONE);
+                praiseAnimView.bringToFront();
+                praiseAnimView.startAnim();
+            } else {
+                disSupportIv.setVisibility(View.VISIBLE);
+                Glide.with(mContext)
+                        .asGif()
+                        .load(Constant.GIF_REMOVE_PRAISE)
+                        .listener(new RequestListener<GifDrawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                                                        Target<GifDrawable> target, boolean isFirstResource) {
+                                disSupportIv.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GifDrawable resource, Object model,
+                                                           Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+                                // 计算动画时长
+                                if (mDuration == 0) {
+                                    mDuration = getGifDuration(resource);
+                                }
+                                disSupportIv.postDelayed(() -> disSupportIv.setVisibility(View.GONE), mDuration);
+                                return false;
+                            }
+                        })
+                        .into(disSupportIv);
+            }
+        }
+    }
+
+    /**
+     * 计算 gif 的时长
+     *
+     * @param resource GifDrawable
+     * @return
+     */
+    private int getGifDuration(GifDrawable resource) {
+        try {
+            Class gifStateClass = Class.forName("com.bumptech.glide.load.resource.gif.GifDrawable$GifState");
+            Field frameLoaderField = gifStateClass.getDeclaredField("frameLoader");
+            frameLoaderField.setAccessible(true);
+            Object frameLoader = frameLoaderField.get(resource.getConstantState());
+
+            Class frameLoaderClass = Class.forName("com.bumptech.glide.load.resource.gif.GifFrameLoader");
+            Field gifDecoderField = frameLoaderClass.getDeclaredField("gifDecoder");
+            gifDecoderField.setAccessible(true);
+            GifDecoder gifDecoder = (GifDecoder) gifDecoderField.get(frameLoader);
+
+            int duration = 0;
+            for (int i = 0; i < resource.getFrameCount(); i++) {
+                duration += gifDecoder.getDelay(i);
+            }
+            return duration;
+        } catch (Exception e) {
+            Logger.e("getGifDuration - " + e.getMessage());
+            e.printStackTrace();
+        }
+        return 0;
+
     }
 
     /**
@@ -120,6 +206,7 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
         EmojiconTextView[] textViews = new EmojiconTextView[]{firstMsgTv, secondMsgTv, thirdMsgTv};
         int i = 0;
         if (commentList != null && commentList.size() > 0) {
+            commentLayout.setVisibility(View.VISIBLE);
             for (CommentEntity commentEntity : commentList) {
                 if (i == 3) {
                     break;
@@ -195,32 +282,13 @@ public class ItemFooterProvider extends BaseItemProvider<AdapterMultiItemEntity,
     }
 
     /**
-     * 判断点赞还是取消赞
-     *
-     * @param ownPraise
-     * @return
-     */
-    private boolean makeSureZanOrCancel(int ownPraise) {
-        switch (ownPraise) {
-            case 0:
-                // 取消点赞
-                return false;
-            case 1:
-                // 点赞
-                return true;
-            default:
-        }
-        return false;
-    }
-
-    /**
      * 加载头像数据
      *
      * @param entity
      */
     private void setHeadPortraitData(DynamicEntity entity) {
         List<PraiseEntity> praiseList = entity.getPraiseList();
-        Map<Integer, String> headDataMap = new HashMap<>();
+        Map<Integer, String> headDataMap = new LinkedHashMap<>();
         if (praiseList != null && praiseList.size() > 0) {
             for (PraiseEntity bean : praiseList) {
                 headDataMap.put(bean.getUserId(), bean.getHeadPortrait());

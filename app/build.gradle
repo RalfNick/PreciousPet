@@ -39,6 +39,18 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+//            java.srcDirs = ['src']
+//            resources.srcDirs = ['src']
+//            aidl.srcDirs = ['src']
+//            renderscript.srcDirs = ['src']
+//            res.srcDirs = ['res']
+//            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     afterEvaluate {
         tasks.matching {
             it.name.startsWith('dex')
@@ -47,7 +59,6 @@ android {
                 dx.additionalParameters = []
             }
             dx.additionalParameters += '--multi-dex' // enable multidex
-
             // optional
             dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
         }
@@ -75,11 +86,26 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+    // test
     //test
+    implementation rootProject.ext.dependencies["junit"]
+    androidTestApi(rootProject.ext.dependencies["espresso-core"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestApi(rootProject.ext.dependencies["runner"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
     debugImplementation rootProject.ext.dependencies["canary-debug"]
     releaseImplementation rootProject.ext.dependencies["canary-release"]
     testImplementation rootProject.ext.dependencies["canary-release"]
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+
+    // PushSDK必须依赖基础组件库，所以需要加入对应依赖
+    implementation 'com.umeng.umsdk:common:1.5.4'
+    // PushSDK必须依赖utdid库，所以需要加入对应依赖
+    implementation 'com.umeng.umsdk:utdid:1.1.5.3'
+    // PushSDK
+    implementation 'com.umeng.umsdk:push:5.0.2'
 }

@@ -16,10 +16,10 @@
         <!-- 友盟AppKey -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="597e9d91b27b0a3c04001052" />
+            android:value="5c6c1709f1f5562e66000407" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="umeng_chanal_1052" />
+            android:value="umeng_chanel_1052" />
         <meta-data
             android:name="UPDATE_APP_KEY"
             android:value="ab55ce55Ac4bcP408cPb8c1Aaeac179c5f6f" />

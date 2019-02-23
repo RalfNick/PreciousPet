@@ -24,8 +24,10 @@ import com.hyphenate.easeui.EaseConstant;
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.utils.PermissionUtils;
 import com.jess.arms.utils.SpUtil;
 import com.jess.arms.utils.ToastUtils;
+import com.jess.arms.utils.constant.PermissionConstants;
 import com.orhanobut.logger.Logger;
 import com.ralf.module_chat.ChatHelper;
 import com.ralf.module_db.data.entity.PetAssistantEntity;
@@ -102,6 +104,7 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
      * 动态请求权限
      */
     private void getPermission() {
+        PermissionUtils.permission(PermissionConstants.STORAGE).request(this);
         if (Build.VERSION.SDK_INT >= PERMISSION_CODE) {
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.ACCESS_FINE_LOCATION,

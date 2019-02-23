@@ -2,6 +2,7 @@ package com.ralf.module_community.mvp.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ import com.ralf.module_community.entity.AdapterMultiItemEntity;
 import com.ralf.module_community.entity.BannerEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
+import com.ralf.module_community.entity.ListRefreshEntity;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
@@ -50,8 +52,6 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +82,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     RecyclerView mRecyclerView;
     @BindView(R2.id.featured_refresh_layout)
     SmartRefreshLayout mRefreshLayout;
+
     /**
      * 顶部视图，轮播图，list，adapter,页号
      */
@@ -93,6 +94,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     private List<AdapterMultiItemEntity> mList = new ArrayList<>();
     private FeaturedAdapter mAdapter;
     private StickyHeadContainer mStickyHeadContainer;
+    private Handler mHandler = new Handler();
 
     /**
      * 当前吸顶的位置
@@ -110,6 +112,10 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     private LinearLayoutManager mLayoutManager;
     private int mFirstVisibleItem;
     private int mLastVisibleItem;
+    /**
+     * 是否在发送点赞请求
+     */
+    private boolean isSendingPraise;
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
@@ -127,9 +133,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mHeadView = inflater.inflate(R.layout.featured_header_layout, mRefreshLayout, false);
         mBanner = mHeadView.findViewById(R.id.featured_header_banner);
         mStickyHeadContainer = rootView.findViewById(R.id.feather_sticky_decoration);
-
-        // 设置为GL播放模式，才能支持滤镜，注意此设置是全局的
-//        GSYVideoType.setRenderType(GSYVideoType.GLSURFACE);
         return rootView;
     }
 
@@ -290,9 +293,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         mAdapter.setOnItemChildClickListener(
                 (adapter, view, position) -> {
                     int id = view.getId();
-                    AdapterMultiItemEntity itemEntity = mList.get(position);
-                    DynamicEntity dynamicBean = itemEntity.getDynamicBean();
-                    handleClick(id, dynamicBean);
+                    handleClick(position, id);
                 }
         );
     }
@@ -300,11 +301,13 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     /**
      * 处理点击事件
      *
-     * @param viewId        控件 id
-     * @param dynamicEntity 实体类
+     * @param position item 位置
+     * @param viewId   控件 id
      */
-    private void handleClick(int viewId, @NotNull DynamicEntity dynamicEntity) {
-        Integer userId = dynamicEntity.getUserId();
+    private void handleClick(int position, int viewId) {
+        AdapterMultiItemEntity itemEntity = mList.get(position);
+        DynamicEntity dynamicBean = itemEntity.getDynamicBean();
+        Integer userId = dynamicBean.getUserId();
         if (viewId == R.id.header_attention_btn) {
             ToastUtils.showShort("关注");
             // 跳转到主人详情
@@ -324,13 +327,16 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.item_footer_comment_more) {
             jumpToNewPage(userId, "", 0);
         } else if (viewId == R.id.item_footer_support_rb) {
-            ToastUtils.showShort("点赞");
+            if (!isSendingPraise) {
+                isSendingPraise = true;
+                mPresenter.sendPraise(position, dynamicBean);
+            }
         } else if (viewId == R.id.item_footer_gift_rb) {
             ToastUtils.showShort("送礼物");
         } else if (viewId == R.id.item_footer_comment_rb) {
             jumpToNewPage(userId, "", 0);
         } else if (viewId == R.id.item_footer_share_rb) {
-            shareCommunity(dynamicEntity);
+            shareCommunity(dynamicBean);
         } else if (viewId == R.id.item_footer_person_num) {
             ARouter.getInstance()
                     .build(RouterConfig.CommunityModule.COMMUNITY_PRAISE_LIST_PATH)
@@ -395,7 +401,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtils.showShort(message);
     }
 
     /**
@@ -412,7 +418,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     public void updateView(boolean isRefresh, FeaturedEntity data) {
         List<DynamicEntity> dynamicList = data.getDynamicList();
         for (DynamicEntity bean : dynamicList) {
-
+            bean.setRefresh(false);
             // 头部动态布局
             AdapterMultiItemEntity headEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_HEADER);
             headEntity.setDynamicBean(bean);
@@ -441,6 +447,20 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         if (bannerEntityList != null && bannerEntityList.size() > 0) {
             mBanner.update(bannerEntityList);
         }
+    }
+
+    @Override
+    public void updatePraiseView(int position, DynamicEntity entity) {
+        entity.setRefresh(true);
+        mList.get(position).setDynamicBean(entity);
+        // 刷新头像
+        mAdapter.notifyItemChanged(position + mAdapter.getHeaderLayoutCount(),
+                new ListRefreshEntity(ListRefreshEntity.RefreshType.REFRESH_PRAISE));
+    }
+
+    @Override
+    public void resetPraiseState() {
+        mHandler.postDelayed(() -> isSendingPraise = false, 200);
     }
 
     /**

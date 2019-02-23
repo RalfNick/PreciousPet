@@ -87,4 +87,13 @@ dependencies {
     // ijk模式的so
     implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.3'
     implementation 'com.shuyu:gsyVideoPlayer-arm64:6.0.3'
+
+    //test
+    implementation rootProject.ext.dependencies["junit"]
+    androidTestApi(rootProject.ext.dependencies["espresso-core"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestApi(rootProject.ext.dependencies["runner"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }

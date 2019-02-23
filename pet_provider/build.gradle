@@ -15,6 +15,8 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
+
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         multiDexEnabled true
 
         javaCompileOptions {
@@ -58,10 +60,17 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
     }
     //test
-    api rootProject.ext.dependencies["junit"]
+    implementation rootProject.ext.dependencies["junit"]
+    androidTestApi(rootProject.ext.dependencies["espresso-core"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestApi(rootProject.ext.dependencies["runner"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
     api 'me.imid.swipebacklayout.lib:library:1.1.0'
     // umeng
-    api files('libs/umeng-common-1.4.0.jar')
+//    api files('libs/umeng-common-1.4.0.jar')
     api files('libs/umeng_social_shareboard.jar')
     api files('libs/umeng-analytics-7.4.0.jar')
     api files('libs/umeng_social_net.jar')
@@ -84,5 +93,4 @@ dependencies {
     // 图片预览
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-
 }

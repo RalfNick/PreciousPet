@@ -324,20 +324,20 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             // 宠物类型详情
         } else if (viewId == R.id.header_pet_type_tv) {
             ToastUtils.showShort("宠物类型");
-        } else if (viewId == R.id.item_footer_comment_more) {
+        } else if (viewId == R.id.item_content_comment_more) {
             jumpToNewPage(userId, "", 0);
-        } else if (viewId == R.id.item_footer_support_rb) {
+        } else if (viewId == R.id.item_content_support_rb) {
             if (!isSendingPraise) {
                 isSendingPraise = true;
                 mPresenter.sendPraise(position, dynamicBean);
             }
-        } else if (viewId == R.id.item_footer_gift_rb) {
+        } else if (viewId == R.id.item_content_gift_rb) {
             ToastUtils.showShort("送礼物");
-        } else if (viewId == R.id.item_footer_comment_rb) {
+        } else if (viewId == R.id.item_content_comment_rb) {
             jumpToNewPage(userId, "", 0);
-        } else if (viewId == R.id.item_footer_share_rb) {
+        } else if (viewId == R.id.item_content_share_rb) {
             shareCommunity(dynamicBean);
-        } else if (viewId == R.id.item_footer_person_num) {
+        } else if (viewId == R.id.item_content_person_num) {
             ARouter.getInstance()
                     .build(RouterConfig.CommunityModule.COMMUNITY_PRAISE_LIST_PATH)
                     .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
@@ -425,9 +425,9 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             mList.add(headEntity);
 
             // 内容部分
-            AdapterMultiItemEntity contentEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_CONTENT);
-            contentEntity.setDynamicBean(bean);
-            mList.add(contentEntity);
+//            AdapterMultiItemEntity contentEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_CONTENT);
+//            contentEntity.setDynamicBean(bean);
+//            mList.add(contentEntity);
 
             // 底部部分
             AdapterMultiItemEntity footerEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_FOOTER);

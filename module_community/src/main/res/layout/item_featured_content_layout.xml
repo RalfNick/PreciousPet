@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/item_content_container_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,18 +13,8 @@
         <com.ralf.module_community.widget.player.SimpleCoverVideo
             android:id="@+id/video_item_player"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!--<ImageView-->
-        <!--android:id="@+id/video_watermark_image"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="36dp"-->
-        <!--android:layout_alignEnd="@+id/item_content_player"-->
-        <!--android:layout_alignTop="@+id/item_content_player"-->
-        <!--android:layout_marginEnd="5dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:src="@mipmap/video_image"-->
-        <!--android:visibility="visible" />-->
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/item_content_iv"
@@ -33,19 +22,210 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:src="@mipmap/ic_launcher" />
-    </RelativeLayout>
+    </FrameLayout>
 
     <com.rockerhieu.emojicon.EmojiconTextView
         android:id="@+id/item_content_comment_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/item_content_container_rl"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="6dp"
         android:background="@color/colorWhite"
+        android:maxLines="3"
         android:textColor="@color/shoushou"
         android:textSize="15sp" />
 
-</LinearLayout>
+    <com.ralf.module_community.mvp.ui.view.FeaturedPersonView
+        android:id="@+id/item_content_person_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/item_content_comment_tv"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:gravity="start"
+        app:circle="true"
+        app:horizontalSpace="6dp"
+        app:lineNum="10"
+        app:maxNum="10"
+        app:multiLine="false"
+        app:picSize="28dp">
+
+    </com.ralf.module_community.mvp.ui.view.FeaturedPersonView>
+
+    <TextView
+        android:id="@+id/item_content_person_num"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/item_content_comment_tv"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/shape_person_number"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textColor="#FFFF7624"
+        android:textSize="12sp"
+        tools:text="14" />
+
+    <LinearLayout
+        android:id="@+id/item_content_options_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/item_content_person_view"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/item_content_support_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/selector_send_like"
+            android:button="@null"
+            android:drawablePadding="12dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/item_content_gift_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@mipmap/footer_gift_send"
+            android:button="@null"
+            android:drawablePadding="6dp"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/item_content_comment_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@mipmap/footer_comment"
+            android:button="@null"
+            android:drawablePadding="6dp"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            tools:ignore="RtlSymmetry" />
+
+        <RadioButton
+            android:id="@+id/item_content_share_rb"
+            android:layout_width="57dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@mipmap/footer_share"
+            android:button="@null"
+            android:drawablePadding="6dp"
+            android:paddingStart="8dp"
+            android:paddingTop="1dp"
+            tools:ignore="RtlSymmetry" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_content_comment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_content_options_ll"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/item_content_comment_first"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textColor="@color/comment_content"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/item_content_comment_second"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textColor="@color/comment_content"
+            android:textSize="15sp"
+            android:visibility="visible" />
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/item_content_comment_third"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textColor="@color/comment_content"
+            android:textSize="15sp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/item_content_not_support_iv"
+        android:layout_width="57dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/item_content_person_view"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.6"
+        android:visibility="invisible" />
+
+    <com.ralf.module_community.mvp.ui.view.PraiseAnimView
+        android:id="@+id/item_content_praise_anim_view"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:layout_alignBottom="@+id/item_content_person_view"
+        android:layout_marginBottom="-20dp"
+        android:layout_marginStart="33dp" />
+
+    <TextView
+        android:id="@+id/item_content_comment_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/item_content_comment_ll"
+        android:layout_marginEnd="15dp"
+        android:gravity="end"
+        android:padding="3dp"
+        android:textColor="@color/comment_nickname"
+        android:textSize="12sp"
+        tools:text="更多10条消息" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@+id/item_content_comment_more"
+        android:background="@color/app_background" />
+</RelativeLayout>

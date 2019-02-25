@@ -28,9 +28,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 import static com.jess.arms.base.Platform.DEPENDENCY_AUTO_LAYOUT;
-import static com.jess.arms.base.delegate.ActivityDelegate.LAYOUT_FRAMELAYOUT;
-import static com.jess.arms.base.delegate.ActivityDelegate.LAYOUT_LINEARLAYOUT;
-import static com.jess.arms.base.delegate.ActivityDelegate.LAYOUT_RELATIVELAYOUT;
 
 /**
  * ================================================

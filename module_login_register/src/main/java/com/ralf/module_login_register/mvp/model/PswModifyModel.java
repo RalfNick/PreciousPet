@@ -9,7 +9,6 @@ import com.jess.arms.mvp.BaseModel;
 import com.ralf.module_login_register.entity.VertifyCodeEntity;
 import com.ralf.module_login_register.http.UserService;
 import com.ralf.module_login_register.mvp.contact.PswModifyContact;
-import com.ralf.pet_provider.http.BaseEntity;
 import com.ralf.pet_provider.user.constant.UserConstant;
 
 import javax.inject.Inject;

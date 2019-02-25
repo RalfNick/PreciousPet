@@ -18,22 +18,26 @@ package com.jess.arms.di.module;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.jess.arms.http.GlobalHttpHandler;
 import com.jess.arms.http.log.RequestInterceptor;
 import com.jess.arms.utils.DataHelper;
-import dagger.Binds;
-import dagger.Module;
-import dagger.Provides;
-import io.rx_cache2.internal.RxCache;
-import io.victoralbertos.jolyglot.GsonSpeaker;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
+
+import dagger.Binds;
+import dagger.Module;
+import dagger.Provides;
+import io.rx_cache2.internal.RxCache;
+import io.victoralbertos.jolyglot.GsonSpeaker;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
 import okhttp3.Dispatcher;

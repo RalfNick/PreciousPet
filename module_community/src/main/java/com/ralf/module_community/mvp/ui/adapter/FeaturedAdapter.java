@@ -31,7 +31,6 @@ public class FeaturedAdapter extends MultipleItemRvAdapter<AdapterMultiItemEntit
 
     @Override
     public void registerItemProvider() {
-
         mProviderDelegate.registerProvider(new ItemHeaderProvider());
         mProviderDelegate.registerProvider(new ItemContentProvider());
     }

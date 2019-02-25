@@ -11,6 +11,7 @@ import com.ralf.module_config_res.BuildConfig;
  **/
 public final class PetConstant {
 
+    public static final String EMPTY = "";
     public static final String IMAGE_PATH_PREFIX = "precious_pet";
     /**
      * 第三方appKey等

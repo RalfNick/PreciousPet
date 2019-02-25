@@ -6,15 +6,20 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.ralf.module_community.constant.AttentionType;
+import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.entity.PraiseEntity;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
+import com.ralf.pet_provider.constant.PetConstant;
 import com.ralf.pet_provider.http.WebObserver;
 import com.ralf.pet_provider.user.constant.UserConstant;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,38 +120,7 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                 .subscribe(new WebObserver<FeedbackEntity>(mErrorHandler) {
                     @Override
                     protected void onSuccess(FeedbackEntity data) {
-                        entity.setOwnPraise(data.getOwnPraise());
-                        int praiseTimes = entity.getBePraiseTimes();
-                        // 点赞
-                        if (data.getOwnPraise() == FeedbackEntity.STATE_PRAISE) {
-                            // 添加自己的头像到点赞列表首位置,点赞人数加1
-                            List<PraiseEntity> praiseEntityList = entity.getPraiseList();
-                            if (praiseEntityList == null) {
-                                praiseEntityList = new ArrayList<>();
-                            }
-                            PraiseEntity praiseEntity = new PraiseEntity();
-                            praiseEntity.setUserId(UserConstant.APP_USERID);
-                            praiseEntity.setHeadPortrait(UserConstant.APP_IMAGE);
-                            praiseEntityList.add(0, praiseEntity);
-                            entity.setPraiseList(praiseEntityList);
-                            entity.setBePraiseTimes(praiseTimes + 1);
-                        } else {
-                            // 去掉自己的头像,点赞人数减1
-                            List<PraiseEntity> praiseEntityList = entity.getPraiseList();
-                            if (praiseEntityList != null) {
-                                for (int i = 0; i < praiseEntityList.size(); i++) {
-                                    PraiseEntity praiseEntity = praiseEntityList.get(i);
-                                    if (praiseEntity != null
-                                            && praiseEntity.getUserId() == UserConstant.APP_USERID) {
-                                        praiseEntityList.remove(i);
-                                        if (praiseTimes > 0) {
-                                            entity.setBePraiseTimes(praiseTimes - 1);
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                        }
+                        processPraiseResult(data, entity);
                         mRootView.updatePraiseView(position, entity);
                         mRootView.resetPraiseState();
                     }
@@ -157,5 +131,104 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                         mRootView.showMessage(failMsg);
                     }
                 });
+    }
+
+    /**
+     * 处理点赞成功后结果
+     *
+     * @param data   请求结果
+     * @param entity DynamicEntity
+     */
+    private void processPraiseResult(FeedbackEntity data, @NotNull DynamicEntity entity) {
+        entity.setOwnPraise(data.getOwnPraise());
+        int praiseTimes = entity.getBePraiseTimes();
+        // 点赞
+        if (data.getOwnPraise() == FeedbackEntity.STATE_PRAISE) {
+            // 添加自己的头像到点赞列表首位置,点赞人数加1
+            List<PraiseEntity> praiseEntityList = entity.getPraiseList();
+            if (praiseEntityList == null) {
+                praiseEntityList = new ArrayList<>();
+            }
+            PraiseEntity praiseEntity = new PraiseEntity();
+            praiseEntity.setUserId(UserConstant.APP_USERID);
+            praiseEntity.setHeadPortrait(UserConstant.APP_IMAGE);
+            praiseEntityList.add(0, praiseEntity);
+            entity.setPraiseList(praiseEntityList);
+            entity.setBePraiseTimes(praiseTimes + 1);
+
+            // 获得奖励
+            if (!PetConstant.EMPTY.equals(data.getAddAward())) {
+                try {
+                    JSONObject object = new JSONObject(data.getAddAward());
+                    int type = object.getInt("type");
+                    int valueStr = object.getInt("value");
+//                    ToastUtils.showShort(valueStr);
+                    mRootView.showMessage("" + valueStr);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            // 去掉自己的头像,点赞人数减1
+            List<PraiseEntity> praiseEntityList = entity.getPraiseList();
+            if (praiseEntityList != null) {
+                for (int i = 0; i < praiseEntityList.size(); i++) {
+                    PraiseEntity praiseEntity = praiseEntityList.get(i);
+                    if (praiseEntity != null
+                            && praiseEntity.getUserId() == UserConstant.APP_USERID) {
+                        praiseEntityList.remove(i);
+                        if (praiseTimes > 0) {
+                            entity.setBePraiseTimes(praiseTimes - 1);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 请求关注状态
+     *
+     * @param position
+     * @param dynamicBean 参数
+     */
+    public void requestAttentionState(int position, DynamicEntity dynamicBean) {
+        Integer attentionStatus = dynamicBean.getAttentionStatus();
+        Integer toUserId = dynamicBean.getUserId();
+        int requestType;
+        switch (attentionStatus) {
+            case AttentionType.ADD_ATTENTION:
+                requestType = 0;
+                break;
+            case AttentionType.CANCEL_ATTENTION:
+                requestType = 1;
+                break;
+            case AttentionType.FRIEND_ATTENTION:
+                requestType = 1;
+                break;
+            case AttentionType.SPECIAL_ATTENTION:
+                requestType = 2;
+                break;
+            default:
+                requestType = 0;
+                break;
+        }
+        mModel.requestAttentionState(requestType, toUserId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new WebObserver<AttentionEntity>(mErrorHandler) {
+                    @Override
+                    protected void onSuccess(AttentionEntity data) {
+                        mRootView.updateAttentionState(position, data.getStatus());
+                    }
+
+                    @Override
+                    protected void onFailed(String failMsg) {
+                        mRootView.showMessage(failMsg);
+                    }
+                });
+
     }
 }

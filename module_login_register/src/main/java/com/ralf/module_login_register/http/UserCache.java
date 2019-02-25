@@ -1,12 +1,5 @@
 package com.ralf.module_login_register.http;
 
-import java.util.concurrent.TimeUnit;
-
-import io.rx_cache2.DynamicKey;
-import io.rx_cache2.EvictProvider;
-import io.rx_cache2.LifeCache;
-import io.rx_cache2.Reply;
-
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION

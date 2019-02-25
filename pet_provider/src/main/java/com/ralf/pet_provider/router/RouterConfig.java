@@ -1,7 +1,5 @@
 package com.ralf.pet_provider.router;
 
-import com.jess.arms.utils.StringUtils;
-
 /**
  * @author Ralf(wanglixin)
  * ARouter的参数名字常量和路径管理类

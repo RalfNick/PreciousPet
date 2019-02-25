@@ -280,7 +280,7 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
         PraiseAnimView praiseAnimView = helper.getView(R.id.item_content_praise_anim_view);
 
         supportButton.setChecked(ownPraise == 1);
-        if (entity.isRefresh()) {
+        if (entity.getRefreshType() == DynamicEntity.RefreshType.REFRESH_STATE_PRAISE) {
             if (ownPraise == 1) {
                 disSupportIv.setVisibility(View.GONE);
                 praiseAnimView.bringToFront();

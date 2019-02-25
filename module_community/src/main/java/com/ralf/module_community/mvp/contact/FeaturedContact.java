@@ -2,6 +2,7 @@ package com.ralf.module_community.mvp.contact;
 
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
+import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.BannerEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
@@ -50,6 +51,14 @@ public interface FeaturedContact {
          * 点赞结束后，使可以继续点赞或者取消点赞，请求过程中不能点赞操作，结束后恢复
          */
         void resetPraiseState();
+
+        /**
+         * 关注状态改变
+         *
+         * @param position      位置
+         * @param attentionType 关注状态类型
+         */
+        void updateAttentionState(int position, int attentionType);
     }
 
     interface Model extends IModel {
@@ -72,5 +81,14 @@ public interface FeaturedContact {
          * @return
          */
         Observable<BaseEntity<FeedbackEntity>> sendPraise(int dynamicId, int toUserId, int type);
+
+        /**
+         * 关注状态改变请求
+         *
+         * @param requestType 请求类型 0 关注   1 取消关注  2 好友关注  3 特别关注
+         * @param toUserId    用户 id
+         * @return
+         */
+        Observable<BaseEntity<AttentionEntity>> requestAttentionState(int requestType, int toUserId);
     }
 }

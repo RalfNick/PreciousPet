@@ -77,10 +77,7 @@ public class FeaturedHeaderView extends RelativeLayout {
     }
 
     private void initView() {
-
-        View view = LayoutInflater.from(getContext())
-                .inflate(R.layout.custom_header_view_layout, this);
-
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.custom_header_view_layout, this);
         ButterKnife.bind(this, view);
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(getContext()).imageLoader();
     }
@@ -90,7 +87,19 @@ public class FeaturedHeaderView extends RelativeLayout {
     }
 
     public void setData(DynamicEntity bean, BaseViewHolder helper) {
+        loadData(bean);
+        // 设置点击事件
+        if (helper != null) {
+            setClickEvent(helper);
+        }
+    }
 
+    /**
+     * 加载数据到 view 中
+     *
+     * @param bean DynamicEntity
+     */
+    private void loadData(DynamicEntity bean) {
         // 主人头像
         ImageConfig imageConfig = ImageConfigImpl.builder()
                 .imageView(mAvatarIv)
@@ -98,13 +107,10 @@ public class FeaturedHeaderView extends RelativeLayout {
                 .isCircle(true)
                 .build();
         mImageLoader.loadImage(getContext(), imageConfig);
-
         // 主人信息
         String nickName = bean.getNickName();
         String province = bean.getProvince();
         String city = bean.getCity();
-        Integer userId = bean.getUserId();
-
         Integer owner = bean.getOwner();
         boolean hasPet = false;
         int petSexResId = R.mipmap.pet_boy;
@@ -127,32 +133,35 @@ public class FeaturedHeaderView extends RelativeLayout {
         mNoPetLayout.setVisibility(hasPet ? View.GONE : View.VISIBLE);
         mPetLayout.setVisibility(hasPet ? View.VISIBLE : View.GONE);
         mPetSexIv.setImageResource(petSexResId);
-
         // 没有宠物情况下
         mNoPetNameTv.setText(nickName);
         String locationText = "%s%s";
         mNoPetLocationTv.setText(String.format(locationText, province, city));
-
         // 有宠物情况下
         mMasterNameTv.setText(nickName);
         mLocationTv.setText(String.format(locationText, province, city));
+        setAttentionState(bean);
+    }
 
-        // 关注按钮
+    /**
+     * 设置关注按钮状态
+     *
+     * @param bean DynamicEntity
+     */
+    private void setAttentionState(DynamicEntity bean) {
+        Integer userId = bean.getUserId();
         if (userId.equals(UserConstant.APP_USERID)) {
             mAttentionBtn.setVisibility(View.GONE);
         } else {
             mAttentionBtn.setBackground(AttentionStatusUtil.setAttentionStatus(getContext(), bean.getAttentionStatus()));
             mAttentionBtn.setVisibility(View.VISIBLE);
         }
-        if (helper != null) {
-            setClickEvent(helper);
-        }
     }
 
     /**
      * 设置点击事件
      *
-     * @param helper
+     * @param helper BaseViewHolder
      */
     private void setClickEvent(BaseViewHolder helper) {
 

@@ -10,7 +10,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
@@ -46,10 +45,6 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.utils.SpUtil;
-import com.ralf.module_db.data.entity.MessageRemindEntity;
-import com.ralf.module_db.db.DaoSession;
-import com.ralf.module_db.db.MessageRemindEntityDao;
-import com.ralf.module_db.util.GreenDaoUtils;
 import com.ralf.module_chat.db.ChatDBManager;
 import com.ralf.module_chat.db.InviteMessgeDao;
 import com.ralf.module_chat.db.UserDao;
@@ -59,12 +54,11 @@ import com.ralf.module_chat.parse.UserProfileManager;
 import com.ralf.module_chat.receiver.CallReceiver;
 import com.ralf.module_chat.utils.PreferenceManager;
 import com.ralf.module_chat.view.ChatActivity;
-import com.ralf.module_chat.view.ChatFragment;
 import com.ralf.module_chat.view.VideoCallActivity;
 import com.ralf.module_chat.view.VoiceCallActivity;
+import com.ralf.module_db.data.entity.MessageRemindEntity;
+import com.ralf.module_db.util.GreenDaoUtils;
 import com.ralf.pet_provider.user.constant.UserConstant;
-
-import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,7 +78,6 @@ import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 import static android.content.Context.ACTIVITY_SERVICE;
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * @author Ralf(wanglixin)

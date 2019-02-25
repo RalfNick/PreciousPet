@@ -21,8 +21,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import timber.log.Timber;
-
 /**
  * ================================================
  * 展示 {@link FragmentManager.FragmentLifecycleCallbacks} 的用法

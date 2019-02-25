@@ -16,8 +16,6 @@
 
 package com.rockerhieu.emojicon.emoji;
 
-import com.rockerhieu.emojicon.R;
-
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)
  */

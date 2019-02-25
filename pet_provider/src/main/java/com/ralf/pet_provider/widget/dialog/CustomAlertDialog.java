@@ -10,15 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.jess.arms.utils.SizeUtils;
 import com.jess.arms.utils.StringUtils;
 import com.ralf.pet_provider.R;
 import com.ralf.pet_provider.entity.DialogEntity;

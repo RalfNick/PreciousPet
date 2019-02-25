@@ -7,13 +7,11 @@ import com.jess.arms.mvp.BaseModel;
 import com.ralf.module_login_register.entity.VertifyCodeEntity;
 import com.ralf.module_login_register.http.UserService;
 import com.ralf.module_login_register.mvp.contact.RegisterContact;
-import com.ralf.pet_provider.http.BaseEntity;
 import com.ralf.pet_provider.user.constant.UserConstant;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author Ralf(wanglixin)

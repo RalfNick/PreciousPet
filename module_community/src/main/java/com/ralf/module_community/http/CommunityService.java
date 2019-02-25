@@ -1,6 +1,7 @@
 package com.ralf.module_community.http;
 
 import com.google.gson.JsonObject;
+import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.pet_provider.http.BaseEntity;
@@ -35,4 +36,13 @@ public interface CommunityService {
      */
     @POST("api/bbs/praiseDynamic")
     Observable<BaseEntity<FeedbackEntity>> sendPraise(@Body JsonObject body);
+
+    /**
+     * 关注状态改变请求
+     *
+     * @param body body
+     * @return
+     */
+    @POST("api/bbs/attention")
+    Observable<BaseEntity<AttentionEntity>> changeAttentionState(@Body JsonObject body);
 }

@@ -1,7 +1,9 @@
 package com.rockerhieu.emojicon.emoji;
+
+import com.rockerhieu.emojicon.R;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.rockerhieu.emojicon.R;
 public class EmotionHelper {
 	public final static Map<String, Integer> EmotionRule = new HashMap<String, Integer>() {
 		{

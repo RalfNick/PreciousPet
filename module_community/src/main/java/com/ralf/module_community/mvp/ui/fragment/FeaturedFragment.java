@@ -33,12 +33,12 @@ import com.ralf.module_community.entity.AdapterMultiItemEntity;
 import com.ralf.module_community.entity.BannerEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
-import com.ralf.module_community.entity.ListRefreshEntity;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
 import com.ralf.module_community.widget.player.ScrollCalculatorHelper;
+import com.ralf.pet_provider.annotation.SingleClick;
 import com.ralf.pet_provider.http.HttpUrl;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.share.PetShare;
@@ -211,23 +211,24 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             int viewId = v.getId();
             int userId = mAdapter.getData().get(mCurrentStickyPos).getDynamicBean().getUserId();
             if (viewId == R.id.header_attention_btn) {
-                ToastUtils.showShort("Decoration 关注");
-                // TODO 需要更新关注按钮状态
-                // 跳转到主人详情
+                int itemIndex = mCurrentStickyPos - mAdapter.getHeaderLayoutCount();
+                if (itemIndex > -1) {
+                    mPresenter.requestAttentionState(itemIndex, mList.get(itemIndex).getDynamicBean());
+                }
             } else if (viewId == R.id.header_master_avatar_iv
                     || viewId == R.id.header_no_pet_master_name_tv
                     || viewId == R.id.header_pet_master_name_tv) {
+                // 跳转到主人详情
                 ARouter.getInstance()
                         .build(RouterConfig.UserModule.MASTER_INFO_PATH)
                         .withInt(RouterConfig.UserModule.KEY_USER_ID, userId)
                         .navigation();
-                // 跳转宠物从详情
             } else if (viewId == R.id.header_pet_avatar_iv
                     || viewId == R.id.header_pet_name_tv) {
+                // 跳转宠物从详情
                 ToastUtils.showShort("Decoration 宠物详情");
-
-                // 宠物类型详情
             } else if (viewId == R.id.header_pet_type_tv) {
+                // 宠物类型详情
                 ToastUtils.showShort("Decoration 宠物类型");
             }
         };
@@ -290,12 +291,14 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             }
         });
         // 子控件内部点击事件
-        mAdapter.setOnItemChildClickListener(
-                (adapter, view, position) -> {
-                    int id = view.getId();
-                    handleClick(position, id);
-                }
-        );
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick(600)
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                int id = view.getId();
+                handleClick(position, id);
+            }
+        });
     }
 
     /**
@@ -309,20 +312,20 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         DynamicEntity dynamicBean = itemEntity.getDynamicBean();
         Integer userId = dynamicBean.getUserId();
         if (viewId == R.id.header_attention_btn) {
-            ToastUtils.showShort("关注");
-            // 跳转到主人详情
+            mPresenter.requestAttentionState(position, dynamicBean);
         } else if (viewId == R.id.header_master_avatar_iv
                 || viewId == R.id.header_no_pet_master_name_tv
                 || viewId == R.id.header_pet_master_name_tv) {
+            // 跳转到主人详情
             ARouter.getInstance()
                     .build(RouterConfig.UserModule.MASTER_INFO_PATH)
                     .withInt(RouterConfig.UserModule.KEY_USER_ID, userId)
                     .navigation();
-            // 跳转宠物从详情
         } else if (viewId == R.id.header_pet_avatar_iv || viewId == R.id.header_pet_name_tv) {
+            // 跳转宠物从详情
             ToastUtils.showShort("宠物详情");
-            // 宠物类型详情
         } else if (viewId == R.id.header_pet_type_tv) {
+            // 宠物类型详情
             ToastUtils.showShort("宠物类型");
         } else if (viewId == R.id.item_content_comment_more) {
             jumpToNewPage(userId, "", 0);
@@ -418,18 +421,12 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     public void updateView(boolean isRefresh, FeaturedEntity data) {
         List<DynamicEntity> dynamicList = data.getDynamicList();
         for (DynamicEntity bean : dynamicList) {
-            bean.setRefresh(false);
+            bean.setRefreshType(DynamicEntity.RefreshType.REFRESH_DEFAULT);
             // 头部动态布局
             AdapterMultiItemEntity headEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_HEADER);
             headEntity.setDynamicBean(bean);
             mList.add(headEntity);
-
             // 内容部分
-//            AdapterMultiItemEntity contentEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_CONTENT);
-//            contentEntity.setDynamicBean(bean);
-//            mList.add(contentEntity);
-
-            // 底部部分
             AdapterMultiItemEntity footerEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_FOOTER);
             footerEntity.setDynamicBean(bean);
             mList.add(footerEntity);
@@ -451,16 +448,24 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
     @Override
     public void updatePraiseView(int position, DynamicEntity entity) {
-        entity.setRefresh(true);
+        entity.setRefreshType(DynamicEntity.RefreshType.REFRESH_STATE_PRAISE);
         mList.get(position).setDynamicBean(entity);
         // 刷新头像
-        mAdapter.notifyItemChanged(position + mAdapter.getHeaderLayoutCount(),
-                new ListRefreshEntity(ListRefreshEntity.RefreshType.REFRESH_PRAISE));
+        mAdapter.notifyItemChanged(position + mAdapter.getHeaderLayoutCount());
     }
 
     @Override
     public void resetPraiseState() {
         mHandler.postDelayed(() -> isSendingPraise = false, 200);
+    }
+
+    @Override
+    public void updateAttentionState(int position, int attentionType) {
+        DynamicEntity dynamicBean = mList.get(position).getDynamicBean();
+        dynamicBean.setRefreshType(DynamicEntity.RefreshType.REFRESH_STATE_ATTENTION);
+        dynamicBean.setAttentionStatus(attentionType);
+        // 刷新关注状态
+        mAdapter.notifyItemChanged(position + mAdapter.getHeaderLayoutCount());
     }
 
     /**

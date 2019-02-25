@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ralf.module_config_res" />
+<manifest package="com.ralf.module_config_res" />

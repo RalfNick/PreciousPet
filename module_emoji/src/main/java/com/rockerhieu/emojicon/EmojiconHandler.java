@@ -17,15 +17,13 @@ package com.rockerhieu.emojicon;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
-import android.util.Log;
 import android.util.SparseIntArray;
+
+import com.rockerhieu.emojicon.emoji.EmotionHelper;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.rockerhieu.emojicon.emoji.EmotionHelper;
 
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)

@@ -5,6 +5,7 @@ import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.ralf.module_community.constant.Constant;
+import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.http.CommunityService;
@@ -51,5 +52,15 @@ public class FeaturedModel extends BaseModel implements FeaturedContact.Model {
 
         return mRepositoryManager.obtainRetrofitService(CommunityService.class)
                 .sendPraise(object);
+    }
+
+    @Override
+    public Observable<BaseEntity<AttentionEntity>> requestAttentionState(int requestType, int toUserId) {
+        JsonObject object = new JsonObject();
+        object.addProperty(Constant.TYPE, requestType);
+        object.addProperty(Constant.TO_USER_ID, toUserId);
+
+        return mRepositoryManager.obtainRetrofitService(CommunityService.class)
+                .changeAttentionState(object);
     }
 }

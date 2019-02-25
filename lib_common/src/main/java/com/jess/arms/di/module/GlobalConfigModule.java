@@ -19,6 +19,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
 import com.bumptech.glide.Glide;
 import com.jess.arms.http.BaseUrl;
 import com.jess.arms.http.GlobalHttpHandler;
@@ -32,8 +33,7 @@ import com.jess.arms.integration.cache.IntelligentCache;
 import com.jess.arms.integration.cache.LruCache;
 import com.jess.arms.utils.DataHelper;
 import com.jess.arms.utils.Preconditions;
-import dagger.Module;
-import dagger.Provides;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;

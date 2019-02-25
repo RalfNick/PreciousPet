@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.jess.arms.R;
 import com.jess.arms.integration.AppManager;
 
 import java.lang.reflect.InvocationTargetException;

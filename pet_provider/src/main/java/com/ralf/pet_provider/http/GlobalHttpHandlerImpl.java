@@ -18,7 +18,6 @@ package com.ralf.pet_provider.http;
 import android.content.Context;
 
 import com.jess.arms.http.GlobalHttpHandler;
-import com.ralf.pet_provider.user.UserUtil;
 import com.ralf.pet_provider.user.constant.UserConstant;
 
 import java.nio.charset.Charset;

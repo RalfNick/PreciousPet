@@ -1,9 +1,7 @@
 package com.ralf.pet_provider.http;
 
 import com.orhanobut.logger.Logger;
-import com.umeng.socialize.UMAuthListener;
 
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;

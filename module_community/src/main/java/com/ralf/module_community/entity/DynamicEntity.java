@@ -65,7 +65,7 @@ public class DynamicEntity {
 
     private String userHeadPortrait;
 
-    private boolean isRefresh;
+    private RefreshType mRefreshType;
 
     private String state;
     private List<CommentEntity> commentList;
@@ -87,12 +87,12 @@ public class DynamicEntity {
         this.width = width;
     }
 
-    public boolean isRefresh(){
-        return isRefresh;
+    public RefreshType getRefreshType() {
+        return mRefreshType;
     }
 
-    public void setRefresh(boolean refresh) {
-        isRefresh = refresh;
+    public void setRefreshType(RefreshType refreshType) {
+        mRefreshType = refreshType;
     }
 
     public Integer getCommentTotal() {
@@ -353,5 +353,12 @@ public class DynamicEntity {
                 ", commentList=" + commentList +
                 ", praiseList=" + praiseList +
                 '}';
+    }
+
+    public enum RefreshType {
+        /**
+         * 刷新类型,关注状态，点赞，评论，默认
+         */
+        REFRESH_STATE_ATTENTION, REFRESH_STATE_PRAISE, REFRESH_COMMENT, REFRESH_DEFAULT
     }
 }

@@ -2,7 +2,6 @@ package com.ralf.pet_provider.configuration;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
 import com.jess.arms.base.delegate.AppLifecycles;
@@ -10,7 +9,6 @@ import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.http.imageloader.glide.GlideImageLoaderStrategy;
 import com.jess.arms.http.log.RequestInterceptor;
 import com.jess.arms.integration.ConfigModule;
-import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.cache.IntelligentCache;
 import com.jess.arms.integration.cache.LruCache;
@@ -19,8 +17,8 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.ralf.pet_provider.BuildConfig;
-import com.ralf.pet_provider.http.HttpUrl;
 import com.ralf.pet_provider.http.GlobalHttpHandlerImpl;
+import com.ralf.pet_provider.http.HttpUrl;
 import com.ralf.pet_provider.http.ResponseErrorListenerImpl;
 import com.ralf.pet_provider.http.serializer.DateDeserializer;
 import com.ralf.pet_provider.http.serializer.DateSerializer;

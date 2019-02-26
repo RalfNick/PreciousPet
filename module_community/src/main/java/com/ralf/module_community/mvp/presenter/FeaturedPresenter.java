@@ -2,10 +2,16 @@ package com.ralf.module_community.mvp.presenter;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.jess.arms.di.scope.FragmentScope;
+import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.jess.arms.utils.ToastUtils;
+import com.ralf.module_community.R;
 import com.ralf.module_community.constant.AttentionType;
 import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.DynamicEntity;
@@ -162,8 +168,7 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                     JSONObject object = new JSONObject(data.getAddAward());
                     int type = object.getInt("type");
                     int valueStr = object.getInt("value");
-//                    ToastUtils.showShort(valueStr);
-                    mRootView.showMessage("" + valueStr);
+                    mRootView.showToastOfPrize(type,valueStr);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

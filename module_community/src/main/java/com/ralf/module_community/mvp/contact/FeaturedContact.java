@@ -59,6 +59,14 @@ public interface FeaturedContact {
          * @param attentionType 关注状态类型
          */
         void updateAttentionState(int position, int attentionType);
+
+        /**
+         * 展示获取奖励的 toast
+         *
+         * @param type     类型
+         * @param valueStr 点赞奖励
+         */
+        void showToastOfPrize(int type, int valueStr);
     }
 
     interface Model extends IModel {

@@ -11,7 +11,7 @@
     <!-- 用于读取数据从扩展存储卡 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <application>
         <activity
             android:name=".mvp.ui.activity.CommentActivity"

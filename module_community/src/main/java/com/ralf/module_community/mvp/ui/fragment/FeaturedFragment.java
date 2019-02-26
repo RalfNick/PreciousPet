@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -466,6 +467,13 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         dynamicBean.setAttentionStatus(attentionType);
         // 刷新关注状态
         mAdapter.notifyItemChanged(position + mAdapter.getHeaderLayoutCount());
+    }
+
+    @Override
+    public void showToastOfPrize(int type, int valueStr) {
+        TextView textView = ToastUtils.showCustomShort(R.layout.layout_toast_custom_view)
+                .findViewById(R.id.toast_message_tv);
+        textView.setText("点赞奖励 + " + valueStr);
     }
 
     /**

@@ -14,7 +14,7 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -30,6 +30,7 @@ import com.ralf.pet_provider.util.BitmapUtil;
  **/
 public class PraiseAnimView extends RelativeLayout {
 
+    private static final int TIME_ANIMATION = 4000;
     protected PointF pointFStart, pointFEnd, pointFFirst, pointFSecond;
     private Bitmap mBitmap;
     private AnimatorSet mAnimatorSet;
@@ -89,7 +90,7 @@ public class PraiseAnimView extends RelativeLayout {
             mImageView.setX(value.x - mImageView.getWidth() / 2);
             mImageView.setY(value.y + mImageView.getHeight() / 2);
         });
-        beiAnim.setInterpolator(new LinearInterpolator());
+        beiAnim.setInterpolator(new AccelerateDecelerateInterpolator());
         // 缩放动画
         PropertyValuesHolder pl = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.2f, 1f);
         PropertyValuesHolder p2 = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.2f, 1f);
@@ -108,7 +109,7 @@ public class PraiseAnimView extends RelativeLayout {
                 PraiseAnimView.this.removeView(mImageView);
             }
         });
-        mAnimatorSet.setDuration(3000).play(beiAnim).with(alphaAnim).with(scaleAnim);
+        mAnimatorSet.setDuration(TIME_ANIMATION).play(beiAnim).with(alphaAnim).with(scaleAnim);
     }
 
     @Override

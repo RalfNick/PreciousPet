@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.MultipleItemRvAdapter;
 import com.ralf.module_community.entity.AdapterMultiItemEntity;
+import com.ralf.module_community.mvp.ui.provider.ItemCommentProvider;
 import com.ralf.module_community.mvp.ui.provider.ItemContentProvider;
 import com.ralf.module_community.mvp.ui.provider.ItemHeaderProvider;
+import com.ralf.module_community.mvp.ui.provider.ItemPraiseProvider;
 
 import java.util.List;
 
@@ -33,5 +35,7 @@ public class FeaturedAdapter extends MultipleItemRvAdapter<AdapterMultiItemEntit
     public void registerItemProvider() {
         mProviderDelegate.registerProvider(new ItemHeaderProvider());
         mProviderDelegate.registerProvider(new ItemContentProvider());
+        mProviderDelegate.registerProvider(new ItemPraiseProvider());
+        mProviderDelegate.registerProvider(new ItemCommentProvider());
     }
 }

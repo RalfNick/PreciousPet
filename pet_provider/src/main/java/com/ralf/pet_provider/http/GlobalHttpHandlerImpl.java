@@ -71,6 +71,10 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
         response.body().close();
         如果使用 Okhttp 将新的请求, 请求成功后, 再将 Okhttp 返回的 Response return 出去即可
         如果不需要返回新的结果, 则直接把参数 response 返回出去即可*/
+        if (response.code() == HttpCode.CODE_SIGN_OUT){
+
+        }
+
         return response;
     }
 

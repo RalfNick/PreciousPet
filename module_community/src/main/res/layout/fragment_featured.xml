@@ -29,7 +29,7 @@
             android:background="@android:color/white"
             android:clipToPadding="false"
             android:overScrollMode="never"
-            tools:listitem="@layout/item_featured_content1_layout" />
+            tools:listitem="@layout/item_featured_content_layout" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

@@ -5,10 +5,8 @@
     android:orientation="vertical">
 
     <com.ralf.module_community.mvp.ui.view.PraiseAnimView
-        android:id="@+id/item_content_praise_anim_view"
+        android:id="@+id/praise_anim_view"
         android:layout_width="100dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="-20dp"
-        android:layout_marginStart="33dp" />
+        android:layout_height="200dp" />
 
 </LinearLayout>

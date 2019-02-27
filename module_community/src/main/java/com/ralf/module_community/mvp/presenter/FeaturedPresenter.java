@@ -128,12 +128,10 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                     protected void onSuccess(FeedbackEntity data) {
                         processPraiseResult(data, entity);
                         mRootView.updatePraiseView(position, entity);
-                        mRootView.resetPraiseState();
                     }
 
                     @Override
                     protected void onFailed(String failMsg) {
-                        mRootView.resetPraiseState();
                         mRootView.showMessage(failMsg);
                     }
                 });
@@ -168,7 +166,7 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                     JSONObject object = new JSONObject(data.getAddAward());
                     int type = object.getInt("type");
                     int valueStr = object.getInt("value");
-                    mRootView.showToastOfPrize(type,valueStr);
+                    mRootView.showToastOfPrize(type, valueStr);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

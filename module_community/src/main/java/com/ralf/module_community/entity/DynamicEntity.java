@@ -71,6 +71,16 @@ public class DynamicEntity {
     private List<CommentEntity> commentList;
     private List<PraiseEntity> praiseList;
 
+    private int[] viewLocations;
+
+    public int[] getViewLocations() {
+        return viewLocations;
+    }
+
+    public void setViewLocations(int[] viewLocations) {
+        this.viewLocations = viewLocations;
+    }
+
     public String getVideoPrintscreen() {
         return videoPrintscreen;
     }

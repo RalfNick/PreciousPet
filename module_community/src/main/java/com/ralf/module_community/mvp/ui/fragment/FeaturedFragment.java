@@ -2,12 +2,13 @@ package com.ralf.module_community.mvp.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ import butterknife.BindView;
  **/
 public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implements FeaturedContact.View {
 
+    private static final String TOAST_CONTENT_PRAISE = "点赞奖励%s";
     /**
      * BANNER 轮播延迟时间
      */
@@ -95,7 +97,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     private List<AdapterMultiItemEntity> mList = new ArrayList<>();
     private FeaturedAdapter mAdapter;
     private StickyHeadContainer mStickyHeadContainer;
-    private Handler mHandler = new Handler();
 
     /**
      * 当前吸顶的位置
@@ -113,10 +114,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     private LinearLayoutManager mLayoutManager;
     private int mFirstVisibleItem;
     private int mLastVisibleItem;
-    /**
-     * 是否在发送点赞请求
-     */
-    private boolean isSendingPraise;
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
@@ -293,7 +290,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         });
         // 子控件内部点击事件
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @SingleClick(600)
+            @SingleClick(400)
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 int id = view.getId();
@@ -330,22 +327,36 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             ToastUtils.showShort("宠物类型");
         } else if (viewId == R.id.item_content_comment_more) {
             jumpToNewPage(userId, "", 0);
-        } else if (viewId == R.id.item_content_support_rb) {
-            if (!isSendingPraise) {
-                isSendingPraise = true;
-                mPresenter.sendPraise(position, dynamicBean);
-            }
-        } else if (viewId == R.id.item_content_gift_rb) {
+        } else if (viewId == R.id.item_praise_support_rb) {
+            // 获取点击位置的坐标
+            setClickViewPosition(position + mAdapter.getHeaderLayoutCount(), dynamicBean, R.id.item_praise_support_rb);
+            mPresenter.sendPraise(position, dynamicBean);
+        } else if (viewId == R.id.item_praise_gift_rb) {
             ToastUtils.showShort("送礼物");
-        } else if (viewId == R.id.item_content_comment_rb) {
+        } else if (viewId == R.id.item_praise_comment_rb) {
             jumpToNewPage(userId, "", 0);
-        } else if (viewId == R.id.item_content_share_rb) {
+        } else if (viewId == R.id.item_praise_share_rb) {
             shareCommunity(dynamicBean);
-        } else if (viewId == R.id.item_content_person_num) {
+        } else if (viewId == R.id.item_praise_person_num) {
             ARouter.getInstance()
                     .build(RouterConfig.CommunityModule.COMMUNITY_PRAISE_LIST_PATH)
                     .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
                     .navigation();
+        }
+    }
+
+    /**
+     * 设置点击控件的位置坐标
+     *
+     * @param position    位置
+     * @param dynamicBean 数据
+     */
+    private void setClickViewPosition(int position, DynamicEntity dynamicBean, @IdRes int resId) {
+        View view = mAdapter.getViewByPosition(mRecyclerView, position, resId);
+        int[] viewLocations = new int[2];
+        if (view != null) {
+            view.getLocationOnScreen(viewLocations);
+            dynamicBean.setViewLocations(viewLocations);
         }
     }
 
@@ -428,9 +439,17 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             headEntity.setDynamicBean(bean);
             mList.add(headEntity);
             // 内容部分
-            AdapterMultiItemEntity footerEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_FOOTER);
-            footerEntity.setDynamicBean(bean);
-            mList.add(footerEntity);
+            AdapterMultiItemEntity contentEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_CONTENT);
+            contentEntity.setDynamicBean(bean);
+            mList.add(contentEntity);
+            // 点赞部分
+            AdapterMultiItemEntity praiseEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_PRAISE);
+            praiseEntity.setDynamicBean(bean);
+            mList.add(praiseEntity);
+            // 评论部分
+            AdapterMultiItemEntity commentEntity = new AdapterMultiItemEntity(MultiItemType.TYPE_COMMENT);
+            commentEntity.setDynamicBean(bean);
+            mList.add(commentEntity);
         }
         if (isRefresh) {
             mRefreshLayout.finishRefresh();
@@ -456,11 +475,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     }
 
     @Override
-    public void resetPraiseState() {
-        mHandler.postDelayed(() -> isSendingPraise = false, 200);
-    }
-
-    @Override
     public void updateAttentionState(int position, int attentionType) {
         DynamicEntity dynamicBean = mList.get(position).getDynamicBean();
         dynamicBean.setRefreshType(DynamicEntity.RefreshType.REFRESH_STATE_ATTENTION);
@@ -471,9 +485,10 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
     @Override
     public void showToastOfPrize(int type, int valueStr) {
+        ToastUtils.setGravity(Gravity.CENTER, 0, 0);
         TextView textView = ToastUtils.showCustomShort(R.layout.layout_toast_custom_view)
                 .findViewById(R.id.toast_message_tv);
-        textView.setText("点赞奖励 + " + valueStr);
+        textView.setText(String.format(TOAST_CONTENT_PRAISE, valueStr));
     }
 
     /**

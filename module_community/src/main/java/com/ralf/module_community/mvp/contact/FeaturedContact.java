@@ -48,11 +48,6 @@ public interface FeaturedContact {
         void updatePraiseView(int position, DynamicEntity entity);
 
         /**
-         * 点赞结束后，使可以继续点赞或者取消点赞，请求过程中不能点赞操作，结束后恢复
-         */
-        void resetPraiseState();
-
-        /**
          * 关注状态改变
          *
          * @param position      位置

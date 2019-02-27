@@ -15,6 +15,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -33,16 +34,16 @@ import java.lang.ref.WeakReference;
  **/
 public class ToastUtils {
 
-    private static final int     COLOR_DEFAULT = 0xFEFFFFFF;
-    private static final Handler HANDLER       = new Handler(Looper.getMainLooper());
+    private static final int COLOR_DEFAULT = 0xFEFFFFFF;
+    private static final Handler HANDLER = new Handler(Looper.getMainLooper());
 
     private static WeakReference<Toast> sWeakToast;
-    private static int sGravity     = -1;
-    private static int sXOffset     = -1;
-    private static int sYOffset     = -1;
-    private static int sBgColor     = COLOR_DEFAULT;
-    private static int sBgResource  = -1;
-    private static int sMsgColor    = COLOR_DEFAULT;
+    private static int sGravity = -1;
+    private static int sXOffset = -1;
+    private static int sYOffset = -1;
+    private static int sBgColor = COLOR_DEFAULT;
+    private static int sBgResource = -1;
+    private static int sMsgColor = COLOR_DEFAULT;
     private static int sMsgTextSize = -1;
 
     private ToastUtils() {
@@ -223,7 +224,15 @@ public class ToastUtils {
         }
     }
 
-    private static Application getApplication(){
+    /**
+     * reset default position
+     */
+    public static void resetDefaultPosition() {
+        setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL,
+                0, SizeUtils.dp2px(24));
+    }
+
+    private static Application getApplication() {
         return AppManager.getAppManager().getApplication();
     }
 
@@ -240,6 +249,7 @@ public class ToastUtils {
     }
 
     private static void show(final CharSequence text, final int duration) {
+        resetDefaultPosition();
         HANDLER.post(new Runnable() {
             @Override
             public void run() {
@@ -292,11 +302,7 @@ public class ToastUtils {
                         new PorterDuffColorFilter(sBgColor, PorterDuff.Mode.SRC_IN)
                 );
             } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    toastView.setBackground(new ColorDrawable(sBgColor));
-                } else {
-                    toastView.setBackgroundDrawable(new ColorDrawable(sBgColor));
-                }
+                toastView.setBackground(new ColorDrawable(sBgColor));
             }
         }
     }

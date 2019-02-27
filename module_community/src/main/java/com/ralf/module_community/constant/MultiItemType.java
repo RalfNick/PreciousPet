@@ -15,5 +15,6 @@ public final class MultiItemType {
 
     public static final int TYPE_HEADER = 100;
     public static final int TYPE_CONTENT = 200;
-    public static final int TYPE_FOOTER = 300;
+    public static final int TYPE_PRAISE = 300;
+    public static final int TYPE_COMMENT = 400;
 }

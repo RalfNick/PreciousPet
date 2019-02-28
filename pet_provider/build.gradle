@@ -62,10 +62,10 @@ dependencies {
     }
     //test
     implementation rootProject.ext.dependencies["junit"]
-    androidTestApi(rootProject.ext.dependencies["espresso-core"]) {
+    androidTestCompileOnly(rootProject.ext.dependencies["espresso-core"]) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestApi(rootProject.ext.dependencies["runner"]) {
+    androidTestCompileOnly(rootProject.ext.dependencies["runner"]) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 

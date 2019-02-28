@@ -17,15 +17,22 @@ package com.ralf.pet_provider.http;
 
 import android.content.Context;
 
+import com.jess.arms.event.transmit.EventPublicApi;
+import com.jess.arms.event.transmit.EventPublicApiHelper;
 import com.jess.arms.http.GlobalHttpHandler;
 import com.ralf.pet_provider.user.constant.UserConstant;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.nio.charset.Charset;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * ================================================
@@ -71,9 +78,6 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
         response.body().close();
         如果使用 Okhttp 将新的请求, 请求成功后, 再将 Okhttp 返回的 Response return 出去即可
         如果不需要返回新的结果, 则直接把参数 response 返回出去即可*/
-        if (response.code() == HttpCode.CODE_SIGN_OUT){
-
-        }
 
         return response;
     }

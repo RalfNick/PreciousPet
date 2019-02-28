@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.jess.arms.integration.AppManager;
+
 import timber.log.Timber;
 
 /**
@@ -23,6 +25,7 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
 
     @Override
     public void onActivityStarted(Activity activity) {
+        AppManager.getAppManager().addActivity(activity);
 //        Timber.i(activity + " - onActivityStarted");
 //        if (!activity.getIntent().getBooleanExtra("isInitToolbar", false)) {
 //            //由于加强框架的兼容性,故将 setContentView 放到 onActivityCreated 之后,onActivityStarted 之前执行
@@ -76,6 +79,7 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
 //        Timber.i(activity + " - onActivityDestroyed");
         //横竖屏切换或配置改变时, Activity 会被重新创建实例, 但 Bundle 中的基础数据会被保存下来,移除该数据是为了保证重新创建的实例可以正常工作
 //        activity.getIntent().removeExtra("isInitToolbar");
+        AppManager.getAppManager().removeActivity(activity);
     }
 
 }

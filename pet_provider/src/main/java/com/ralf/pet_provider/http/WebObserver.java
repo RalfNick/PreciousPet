@@ -1,5 +1,7 @@
 package com.ralf.pet_provider.http;
 
+import com.jess.arms.event.transmit.EventPublicApi;
+import com.jess.arms.event.transmit.EventPublicApiHelper;
 import com.orhanobut.logger.Logger;
 
 import io.reactivex.disposables.Disposable;
@@ -36,11 +38,19 @@ public abstract class WebObserver<E> extends ErrorHandleSubscriber<BaseEntity<E>
             onFailed("the result is null!");
         } else {
             E data = t.getData();
-            if (data != null && t.getCode() == 0) {
-                onSuccess(data);
+            if (data == null) {
+                Logger.e("the data is null!");
             } else {
-                String message = t.getMessage();
-                onFailed(message);
+                if (t.getCode() == HttpCode.CODE_SUCCESS) {
+                    onSuccess(data);
+                } else if (t.getCode() == HttpCode.CODE_SIGN_OUT) {
+                    // 账号在其他地方登录，需要登出，重新登录
+                    EventPublicApi.LogoutApi logoutApi = EventPublicApiHelper.getEventModuleApi(EventPublicApi.LogoutApi.class);
+                    logoutApi.jumpToLoginPage();
+                } else {
+                    String message = t.getMessage();
+                    onFailed(message);
+                }
             }
         }
     }

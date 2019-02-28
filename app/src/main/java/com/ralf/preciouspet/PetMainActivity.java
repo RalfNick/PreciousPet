@@ -24,6 +24,8 @@ import com.hyphenate.easeui.EaseConstant;
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.event.transmit.EventPublicApi;
+import com.jess.arms.event.transmit.EventPublicApiHelper;
 import com.jess.arms.utils.PermissionUtils;
 import com.jess.arms.utils.SpUtil;
 import com.jess.arms.utils.ToastUtils;
@@ -37,6 +39,7 @@ import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.share.PetShare;
 import com.ralf.pet_provider.user.constant.UserConstant;
 import com.ralf.pet_provider.util.NetUtil;
+import com.ralf.pet_provider.widget.dialog.DialogSure;
 
 import java.util.HashSet;
 import java.util.List;
@@ -49,7 +52,7 @@ import butterknife.OnClick;
  * @author wanglixin
  */
 @Route(path = RouterConfig.AppModule.MAIN_PATH)
-public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgInterface {
+public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgInterface, EventPublicApi.LogoutApi {
 
     private static final int PERMISSION_CODE = 120;
 
@@ -67,7 +70,7 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     /**
      * 当前选择的 Fragment 的路径
      */
-    private String mFramentPath;
+    private String mFragmentPath;
     private Set<String> mFragmentTagSet = new HashSet<>();
 
     private FragmentManager mFragmentManager;
@@ -76,6 +79,11 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
      * 记录退出时间
      */
     private long mExitTime;
+
+    /**
+     * 退出登录对话框
+     */
+    private DialogSure mDialogSure;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -91,7 +99,7 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     public void initData(@Nullable Bundle savedInstanceState) {
 
         // 首先显示社区
-        mFramentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
+        mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
         mFragmentManager = getSupportFragmentManager();
         checkNetWork();
         initRaidoCheckedEvent();
@@ -172,23 +180,23 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
                     protected void onSuccess(Integer data) {
                         switch (data) {
                             case R.id.main_community_rb:
-                                mFramentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
+                                mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
                                 break;
                             case R.id.main_information_rb:
-//                                mFramentPath = RouterConfig.NewsModule.NEWS_PATH;
-                                mFramentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
+//                                mFragmentPath = RouterConfig.NewsModule.NEWS_PATH;
+                                mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
                                 break;
                             case R.id.main_service_rb:
-//                                mFramentPath = RouterConfig.ServiceModule.SERVICE_PATH;
-                                mFramentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
+//                                mFragmentPath = RouterConfig.ServiceModule.SERVICE_PATH;
+                                mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
                                 break;
                             case R.id.main_shopping_rb:
-//                                mFramentPath = RouterConfig.MallModule.MALL_PATH;
-                                mFramentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
+//                                mFragmentPath = RouterConfig.MallModule.MALL_PATH;
+                                mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
                                 break;
 
                             default:
-                                mFramentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
+                                mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
                                 break;
                         }
                         switchFragment();
@@ -206,13 +214,13 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
      */
     private void switchFragment() {
 
-        mFragmentTagSet.add(mFramentPath);
+        mFragmentTagSet.add(mFragmentPath);
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         hideAllFragments(transaction);
-        Fragment fragment = mFragmentManager.findFragmentByTag(mFramentPath);
+        Fragment fragment = mFragmentManager.findFragmentByTag(mFragmentPath);
         if (fragment == null) {
-            fragment = (Fragment) ARouter.getInstance().build(mFramentPath).navigation();
-            transaction.add(R.id.main_fragment_container, fragment, mFramentPath);
+            fragment = (Fragment) ARouter.getInstance().build(mFragmentPath).navigation();
+            transaction.add(R.id.main_fragment_container, fragment, mFragmentPath);
         }
         transaction.show(fragment);
         transaction.commit();
@@ -237,6 +245,12 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        EventPublicApiHelper.register(EventPublicApi.LogoutApi.class, this);
+    }
+
+    @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - mExitTime > 2000) {
             mExitTime = System.currentTimeMillis();
@@ -256,6 +270,7 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     protected void onDestroy() {
         super.onDestroy();
         PetShare.release(this);
+        EventPublicApiHelper.unregister(EventPublicApi.LogoutApi.class);
     }
 
     @OnClick(R.id.main_reload_btn)
@@ -278,5 +293,23 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     @Override
     public void getMyPushMsg() {
 
+    }
+
+    @Override
+    public void jumpToLoginPage() {
+        if (mDialogSure == null) {
+            mDialogSure = new DialogSure.Builder(this)
+                    .content("您的账号已在别处登录，请重新登录")
+                    .cancelable(false)
+                    .title("下线通知")
+                    .sureListener(dialog -> {
+                        ARouter.getInstance().build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH).navigation();
+                        dialog.dismiss();
+                    })
+                    .build();
+        }
+        if (!mDialogSure.isShowing()) {
+            mDialogSure.show();
+        }
     }
 }

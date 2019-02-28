@@ -9,5 +9,10 @@ package com.ralf.pet_provider.http;
  **/
 public final class HttpCode {
 
-    public static final int CODE_SIGN_OUT = 6000;
+    public static final int CODE_SUCCESS = 0;
+
+    /**
+     * 账号在其他地方登录，需要登出
+     */
+    public static final int CODE_SIGN_OUT = 9999;
 }

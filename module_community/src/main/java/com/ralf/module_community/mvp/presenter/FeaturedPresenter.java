@@ -109,6 +109,12 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
                         mRootView.hideLoading();
                         mRootView.showMessage(failMsg);
                     }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        mRootView.hideLoading();
+                    }
                 });
     }
 

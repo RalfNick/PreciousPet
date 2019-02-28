@@ -44,6 +44,7 @@ import com.ralf.pet_provider.annotation.SingleClick;
 import com.ralf.pet_provider.http.HttpUrl;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.share.PetShare;
+import com.ralf.pet_provider.widget.dialog.DialogSure;
 import com.ralf.pet_provider.widget.stickyitemdecoration.OnStickyChangeListener;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyHeadContainer;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyItemDecoration;
@@ -322,6 +323,12 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.header_pet_avatar_iv || viewId == R.id.header_pet_name_tv) {
             // 跳转宠物从详情
             ToastUtils.showShort("宠物详情");
+            new DialogSure.Builder(mContext)
+                    .content("账号已在其他地方登陆，请重新登录！")
+                    .cancelable(false)
+                    .sureListener(v -> ARouter.getInstance().build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH).navigation())
+                    .build()
+                    .show();
         } else if (viewId == R.id.header_pet_type_tv) {
             // 宠物类型详情
             ToastUtils.showShort("宠物类型");

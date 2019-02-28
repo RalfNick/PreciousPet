@@ -8,7 +8,7 @@ import java.util.Set;
  * @author Ralf(wanglixin)
  * DESCRIPTION  使用该类进行注册和反注册，实现不同模块之间的通信
  * @name EventPublicApiHelper
- * @email wanglixin@icourt.cc
+ * @email
  * @date 2018/11/10 下午6:45
  **/
 public class EventPublicApiHelper {

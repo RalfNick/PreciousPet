@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jaeger.library.StatusBarUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.integration.AppManager;
 import com.ralf.module_login_register.R;
 import com.ralf.module_login_register.R2;
 import com.ralf.pet_provider.router.RouterConfig;
@@ -46,13 +47,21 @@ public class EntranceActivity extends BaseActivity {
         StatusBarUtil.setTranslucent(this, 1);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppManager.getAppManager().killAll(EntranceActivity.class);
+    }
+
     @OnClick({R2.id.activity_entrance_register, R2.id.activity_entrance_login})
     public void onViewClicked(View view) {
         int i = view.getId();
         if (i == R.id.activity_entrance_register) {
             ARouter.getInstance().build(RouterConfig.LoginRegisterModule.REGISTER_PATH).navigation();
         } else if (i == R.id.activity_entrance_login) {
-            ARouter.getInstance().build(RouterConfig.LoginRegisterModule.LOGIN_PATH).navigation();
+            ARouter.getInstance()
+                    .build(RouterConfig.LoginRegisterModule.LOGIN_PATH)
+                    .navigation();
         }
     }
 }

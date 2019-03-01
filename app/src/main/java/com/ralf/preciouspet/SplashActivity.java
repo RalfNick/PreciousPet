@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.ralf.module_chat.ChatHelper;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.user.UserUtil;
 

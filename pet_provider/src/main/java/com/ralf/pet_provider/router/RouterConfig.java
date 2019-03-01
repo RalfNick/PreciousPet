@@ -44,6 +44,8 @@ public final class RouterConfig {
          * 入口，跳转到登录和注册
          */
         public static final String ENTRANCE_PATH = "/login_module/entrance";
+        public static final String KEY_LOGOUT = "key_logout";
+        public static final String VALUE_LOGOUT = "value_logout";
 
         /**
          * 登录

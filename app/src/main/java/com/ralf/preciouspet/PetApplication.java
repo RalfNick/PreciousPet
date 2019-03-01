@@ -29,9 +29,9 @@ public class PetApplication extends PreciousApplication {
 //        CrashHandler crashHandler = CrashHandler.getInstance();
         CrashHandler.getInstance().init(getApplicationContext());
 //        PetCrashHandler.getInstance().init(this);
+        initPlatformConfig();
         /**环信初始化*/
         ChatHelper.getInstance().init(this);
-        initPlatformConfig();
     }
 
     /**

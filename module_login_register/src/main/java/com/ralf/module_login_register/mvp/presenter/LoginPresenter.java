@@ -24,7 +24,6 @@ import com.ralf.module_login_register.entity.LoginEntity;
 import com.ralf.module_login_register.entity.ThirdPartLoginEntity;
 import com.ralf.module_login_register.mvp.contact.LoginContact;
 import com.ralf.pet_provider.base.SimpleObserver;
-import com.ralf.pet_provider.chat.ChatCallBack;
 import com.ralf.pet_provider.chat.ChatUtil;
 import com.ralf.pet_provider.constant.PetConstant;
 import com.ralf.pet_provider.http.BaseEntity;
@@ -153,9 +152,8 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
                 .subscribe(new WebObserver<LoginEntity>(mErrorHandler) {
                     @Override
                     protected void onSuccess(LoginEntity loginEntity) {
-                        // 登录环信
-                        loginHx(loginEntity.getHxUserName());
                         saveUserAndPetInfo(loginEntity);
+                        mRootView.jumpToMainPage();
                     }
 
                     @Override
@@ -261,8 +259,7 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
                         // 保存用户信息
                         saveUserAndPetInfo(data);
                         initNotificationRemind();
-                        // 登录环信
-                        loginHx(data.getHxUserName());
+                        mRootView.jumpToMainPage();
                     }
 
                     @Override
@@ -287,6 +284,7 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
         SpUtil.getInstance().put(UserConstant.HX_USER_NAME, data.getHxUserName());
         SpUtil.getInstance().put(UserConstant.USER_SEX, data.getUserSex());
         SpUtil.getInstance().put(UserConstant.PLAY_VIDEO_STATUS, 0);
+        SpUtil.getInstance().put(UserConstant.APP_IS_FIRST, true);
 
         // 内存缓存
         UserConstant.APP_IMAGE = data.getUserHeadPortrait();
@@ -299,7 +297,7 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
         List<LoginEntity.PetListBean> petList = data.getPetList();
         List<PetEntity> petEntities = new ArrayList<>();
 
-        if (petList != null) {
+        if (petList != null && petList.size() > 0) {
             for (LoginEntity.PetListBean bean : petList) {
                 PetEntity entity = new PetEntity();
                 entity.setPetId(bean.getPetId());
@@ -309,8 +307,8 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
                 entity.setSex(bean.getSex());
                 petEntities.add(entity);
             }
+            GreenDaoUtils.getInstance(mApplication).insertTx(petEntities);
         }
-        GreenDaoUtils.getInstance(mApplication).insertTx(petEntities);
 
         // 保存助手信息
         List<LoginEntity.QCListBean> qcList = data.getQCList();
@@ -322,7 +320,7 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
             entity.setQCheadPortrait(bean.getQCheadPortrait());
             entity.setQChxId(bean.getQChxId());
             entity.setQCnickName(bean.getQCnickName());
-            GreenDaoUtils.getInstance(mApplication).insert(entity);
+            GreenDaoUtils.getInstance(mApplication).insertOrReplace(entity);
         }
     }
 
@@ -371,26 +369,5 @@ public class LoginPresenter extends BasePresenter<LoginContact.Model, LoginConta
                         mRootView.showMessage(failMsg);
                     }
                 });
-    }
-
-    /**
-     * 登录环信
-     *
-     * @param hxUserName 用户名
-     */
-    private void loginHx(String hxUserName) {
-
-        ChatUtil.login(hxUserName, hxUserName, new ChatCallBack() {
-            @Override
-            public void onSuccess() {
-                Logger.e("登录环信成功");
-                mRootView.jumpToMainPage();
-            }
-
-            @Override
-            public void onFailed(String failMsg) {
-                Logger.e("登录环信失败");
-            }
-        });
     }
 }

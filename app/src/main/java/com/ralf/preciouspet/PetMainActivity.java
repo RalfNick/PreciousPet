@@ -26,6 +26,7 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.event.transmit.EventPublicApi;
 import com.jess.arms.event.transmit.EventPublicApiHelper;
+import com.jess.arms.integration.AppManager;
 import com.jess.arms.utils.PermissionUtils;
 import com.jess.arms.utils.SpUtil;
 import com.jess.arms.utils.ToastUtils;
@@ -37,6 +38,7 @@ import com.ralf.module_db.util.GreenDaoUtils;
 import com.ralf.pet_provider.base.SimpleObserver;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.share.PetShare;
+import com.ralf.pet_provider.user.UserUtil;
 import com.ralf.pet_provider.user.constant.UserConstant;
 import com.ralf.pet_provider.util.NetUtil;
 import com.ralf.pet_provider.widget.dialog.DialogSure;
@@ -97,15 +99,29 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
         // 首先显示社区
         mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
         mFragmentManager = getSupportFragmentManager();
         checkNetWork();
-        initRaidoCheckedEvent();
+        initRadioCheckedEvent();
         loadUserInfo();
+        UserUtil.loginHx();
         ChatHelper.getInstance().setPushMsg(this);
         getPermission();
+        isFirstLogin();
+        // 注册在别处登录后，跳到登录界面
+        EventPublicApiHelper.register(EventPublicApi.LogoutApi.class, this);
+    }
+
+    /**
+     * 第一次登录，结束其他 Activity
+     */
+    private void isFirstLogin() {
+        boolean isFirst = SpUtil.getInstance().getBoolean(UserConstant.APP_IS_FIRST, false);
+        if (isFirst) {
+            AppManager.getAppManager().killAll(PetMainActivity.class);
+            SpUtil.getInstance().put(UserConstant.APP_IS_FIRST, false);
+        }
     }
 
     /**
@@ -172,7 +188,7 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     /**
      * 跳转到不同的 Fragment
      */
-    private void initRaidoCheckedEvent() {
+    private void initRadioCheckedEvent() {
 
         RxRadioGroup.checkedChanges(mViewSwitchRg)
                 .subscribe(new SimpleObserver<Integer>() {
@@ -245,17 +261,13 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        EventPublicApiHelper.register(EventPublicApi.LogoutApi.class, this);
-    }
-
-    @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - mExitTime > 2000) {
             mExitTime = System.currentTimeMillis();
+            Logger.e("onBackPressed-1");
             ToastUtils.showShort("再按一次退出程序");
         } else {
+            Logger.e("onBackPressed-2");
             finish();
         }
     }
@@ -303,7 +315,10 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
                     .cancelable(false)
                     .title("下线通知")
                     .sureListener(dialog -> {
-                        ARouter.getInstance().build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH).navigation();
+                        ARouter.getInstance()
+                                .build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH)
+                                .withString(RouterConfig.LoginRegisterModule.KEY_LOGOUT, RouterConfig.LoginRegisterModule.VALUE_LOGOUT)
+                                .navigation();
                         dialog.dismiss();
                     })
                     .build();

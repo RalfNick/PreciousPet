@@ -76,6 +76,11 @@ public class ChatUtil {
         EMClient.getInstance().logout(true);
     }
 
+    public static boolean isConnected() {
+        return EMClient.getInstance().isConnected();
+    }
+
+
     public void ConnectionListener(Context context) {
         EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
             @Override

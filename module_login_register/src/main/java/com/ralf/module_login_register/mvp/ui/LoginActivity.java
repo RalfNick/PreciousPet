@@ -22,7 +22,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.utils.ToastUtils;
 import com.ralf.module_login_register.R;
 import com.ralf.module_login_register.R2;
@@ -136,15 +135,11 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
 
     @Override
     public void jumpToMainPage() {
-        ARouter.getInstance().build(RouterConfig.AppModule.MAIN_PATH)
-                .navigation();
-        AppManager.getAppManager().killActivity(EntranceActivity.class);
-        finish();
+        ARouter.getInstance().build(RouterConfig.AppModule.MAIN_PATH).navigation();
     }
 
     @Override
     public void showMessage(@NonNull String message) {
-
         ToastUtils.showShort(message);
     }
 
@@ -169,7 +164,6 @@ public class LoginActivity extends BaseSwipeBackActivity<LoginPresenter> impleme
 
         @Override
         public void onClick(View widget) {
-
             ARouter.getInstance()
                     .build(RouterConfig.LoginRegisterModule.USER_PROTOCOL_PATH)
                     .withString(RouterConfig.LoginRegisterModule.KEY_USER_PROTOCOL_URL, HttpUrl.LOGIN_USER_PROTOCOL)

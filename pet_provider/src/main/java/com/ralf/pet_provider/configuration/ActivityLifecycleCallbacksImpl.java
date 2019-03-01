@@ -20,13 +20,13 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-//        Timber.i(activity + " - onActivityCreated");
+        Timber.i(activity + " - onActivityCreated");
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
         AppManager.getAppManager().addActivity(activity);
-//        Timber.i(activity + " - onActivityStarted");
+        Timber.i(activity + " - onActivityStarted");
 //        if (!activity.getIntent().getBooleanExtra("isInitToolbar", false)) {
 //            //由于加强框架的兼容性,故将 setContentView 放到 onActivityCreated 之后,onActivityStarted 之前执行
 //            //而 findViewById 必须在 Activity setContentView() 后才有效,所以将以下代码从之前的 onActivityCreated 中移动到 onActivityStarted 中执行
@@ -56,7 +56,7 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
 
     @Override
     public void onActivityResumed(Activity activity) {
-//        Timber.i(activity + " - onActivityResumed");
+        Timber.i(activity + " - onActivityResumed");
     }
 
     @Override
@@ -66,12 +66,12 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
 
     @Override
     public void onActivityStopped(Activity activity) {
-//        Timber.i(activity + " - onActivityStopped");
+        Timber.i(activity + " - onActivityStopped");
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-//        Timber.i(activity + " - onActivitySaveInstanceState");
+        Timber.i(activity + " - onActivitySaveInstanceState");
     }
 
     @Override

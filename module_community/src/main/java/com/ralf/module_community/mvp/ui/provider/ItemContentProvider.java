@@ -81,7 +81,7 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
         } else {
             imageView.setVisibility(View.VISIBLE);
             mVideoPlayer.setVisibility(View.GONE);
-            setImageContent(imageView, width, height, resPath);
+            setImageContent(imageView, width, height, resPath, dynamicBean);
         }
     }
 
@@ -145,12 +145,13 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
     /**
      * 设置图片
      *
-     * @param imageView ImageView
-     * @param width     宽
-     * @param height    高
-     * @param imagePath 图片路径
+     * @param imageView   ImageView
+     * @param width       宽
+     * @param height      高
+     * @param imagePath   图片路径
+     * @param dynamicBean
      */
-    private void setImageContent(ImageView imageView, int width, int height, String imagePath) {
+    private void setImageContent(ImageView imageView, int width, int height, String imagePath, DynamicEntity dynamicBean) {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.transToHeight(width, height));
         imageView.setLayoutParams(params);
@@ -163,8 +164,12 @@ public class ItemContentProvider extends BaseItemProvider<AdapterMultiItemEntity
         mImageLoader.loadImage(mContext, imageConfig);
         // 设置点击事件
         mUrlList.clear();
-        mUrlList.add(imagePath);
-        mUrlList.add(imagePath);
+        List<String> imageList = dynamicBean.getImageList();
+        if (imageList == null || imageList.size() < 1) {
+            mUrlList.add(imagePath);
+        } else {
+            mUrlList.addAll(dynamicBean.getImageList());
+        }
         String[] urlArr = new String[mUrlList.size()];
         mUrlList.toArray(urlArr);
         imageView.setOnClickListener(v ->

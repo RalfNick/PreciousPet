@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="评论详情"
-        android:textSize="14sp" />
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/layout_title" />
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/comment_detail_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlEnableNestedScrolling="true"
+        app:srlEnablePreviewInEditMode="false"
+        app:srlPrimaryColor="@color/main_color">
+
+        <com.scwang.smartrefresh.header.MaterialHeader
+            android:id="@+id/comment_detail_header_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comment_detail_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            tools:listitem="@layout/item_featured_content_layout" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <com.ralf.module_community.mvp.ui.view.CommentInputView
+        android:id="@+id/comment_input_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ralf.module_community.mvp.ui.view.CommentInputView>
 
 </LinearLayout>

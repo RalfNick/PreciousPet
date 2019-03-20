@@ -11,7 +11,6 @@ import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.http.CommunityService;
 import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.pet_provider.http.BaseEntity;
-import com.ralf.pet_provider.user.constant.CommunityConstant;
 
 import javax.inject.Inject;
 
@@ -34,13 +33,11 @@ public class FeaturedModel extends BaseModel implements FeaturedContact.Model {
 
     @Override
     public Observable<BaseEntity<FeaturedEntity>> getFeaturedData(int page, int type) {
-
         JsonObject object = new JsonObject();
-        object.addProperty(CommunityConstant.DYNAMIC_TYPE, type);
-        object.addProperty(CommunityConstant.PAGE, page);
+        object.addProperty(Constant.DYNAMIC_TYPE, type);
+        object.addProperty(Constant.PAGE, page);
 
-        return mRepositoryManager.obtainRetrofitService(CommunityService.class)
-                .getFeaturedData(object);
+        return mRepositoryManager.obtainRetrofitService(CommunityService.class).getFeaturedData(object);
     }
 
     @Override
@@ -50,8 +47,7 @@ public class FeaturedModel extends BaseModel implements FeaturedContact.Model {
         object.addProperty(Constant.TO_USER_ID, toUserId);
         object.addProperty(Constant.TYPE, type);
 
-        return mRepositoryManager.obtainRetrofitService(CommunityService.class)
-                .sendPraise(object);
+        return mRepositoryManager.obtainRetrofitService(CommunityService.class).sendPraise(object);
     }
 
     @Override
@@ -60,7 +56,6 @@ public class FeaturedModel extends BaseModel implements FeaturedContact.Model {
         object.addProperty(Constant.TYPE, requestType);
         object.addProperty(Constant.TO_USER_ID, toUserId);
 
-        return mRepositoryManager.obtainRetrofitService(CommunityService.class)
-                .changeAttentionState(object);
+        return mRepositoryManager.obtainRetrofitService(CommunityService.class).changeAttentionState(object);
     }
 }

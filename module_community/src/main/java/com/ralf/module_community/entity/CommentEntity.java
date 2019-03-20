@@ -9,6 +9,11 @@ package com.ralf.module_community.entity;
  **/
 public class CommentEntity {
 
+    /**
+     * 编号，第一个时，需要设置显示总共的评论数
+     */
+    private int id;
+    private int totalComment;
     private Integer commentId;
     private Integer userId;
     private String createTime;
@@ -33,6 +38,22 @@ public class CommentEntity {
         this.nickName = builder.nickName;
         this.toUserId = builder.toUserId;
         this.toNickName = builder.toNickName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTotalComment() {
+        return totalComment;
+    }
+
+    public void setTotalComment(int totalComment) {
+        this.totalComment = totalComment;
     }
 
     public Integer getDynamicId() {
@@ -143,6 +164,16 @@ public class CommentEntity {
 
         public Builder commentId(int commentId) {
             this.commentId = commentId;
+            return this;
+        }
+
+        public Builder dynamicId(int dynamicId) {
+            this.dynamicId = dynamicId;
+            return this;
+        }
+
+        public Builder headPortrait(String headPortrait) {
+            this.headPortrait = headPortrait;
             return this;
         }
 

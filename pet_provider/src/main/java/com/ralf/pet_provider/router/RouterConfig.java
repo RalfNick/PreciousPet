@@ -92,11 +92,19 @@ public final class RouterConfig {
     public static class CommunityModule {
 
         /**
+         * 跳转到评论详情的常量 2000 由精选跳转，3000 由频道跳转
+         */
+        public static final int TYPE_SELECTED = 2000;
+        public static final int TYPE_CHANNEL = 3000;
+        /**
          * ARouter 跳转携带的参数的 Key,用户 id，昵称，来自的 id
          */
         public static final String KEY_USER_ID = "userId";
         public static final String KEY_NICK_NAME = "nickName";
         public static final String KEY_FROM_USER_ID = "fromId";
+        public static final String KEY_DYNAMIC_ID = "dynamicId";
+        public static final String KEY_ITEM_POSITION = "itemPosition";
+        public static final String KEY_NAVIGATE_TYPE = "navigateType";
 
         public static final String FRAGMENT_NAME = "CommunityFragment";
         /**

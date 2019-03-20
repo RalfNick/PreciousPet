@@ -86,7 +86,6 @@ public class EmojiconGridFragment extends Fragment implements AdapterView.OnItem
     }
     public void setmOnEmojiconClickedListener(OnEmojiconClickedListener listener){
         mOnEmojiconClickedListener = listener;
-
     }
 
     @Override

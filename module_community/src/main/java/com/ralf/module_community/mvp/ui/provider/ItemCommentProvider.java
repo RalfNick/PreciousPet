@@ -37,6 +37,9 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
      */
     private static final int TOTAL_COMMENT_NUM = 3;
     private String mMoreCommentsDes = "查看更多%s条评论";
+    private int mDynamicId;
+    private int mUserId;
+    private String mUserName;
 
     @Override
     public int viewType() {
@@ -51,6 +54,9 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
     @Override
     public void convert(BaseViewHolder helper, AdapterMultiItemEntity data, int position) {
         DynamicEntity entity = data.getDynamicBean();
+        mDynamicId = entity.getDynamicId();
+        mUserId = entity.getUserId();
+        mUserName = entity.getNickName();
         // 评论消息显示
         convertCommentsDetail(helper, entity);
         // 查看更多评论
@@ -113,6 +119,7 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
         String content = commentEntity.getContent();
         int fromId = commentEntity.getUserId();
         int toUserId = commentEntity.getToUserId();
+        int dynamicId = commentEntity.getDynamicId();
         SpannableStringBuilder builder;
         int color = mContext.getResources().getColor(R.color.comment_nickname);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
@@ -125,17 +132,17 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
             builder = new SpannableStringBuilder(fromNickName).append(" 回复 ");
             SpannableStringBuilder toBuilder = new SpannableStringBuilder(toNickname);
             toBuilder.setSpan(colorSpan, 0, toBuilder.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-            toBuilder.setSpan(SpanTextClick.getClicker(toUserId, "", 0, TextClickType.TYPE_PERSON_NAME),
+            toBuilder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, 0, TextClickType.TYPE_PERSON_NAME),
                     0, toBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.append(toBuilder);
         }
         // click event
-        builder.setSpan(SpanTextClick.getClicker(fromId, "", 0, TextClickType.TYPE_PERSON_NAME),
+        builder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, 0, TextClickType.TYPE_PERSON_NAME),
                 0, fromNickName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         // content click
         int beforeLen = builder.length();
         builder.append(content);
-        builder.setSpan(SpanTextClick.getClicker(fromId, "", 0, TextClickType.TYPE_COMMENT_TEXT),
+        builder.setSpan(SpanTextClick.getClicker(mDynamicId, mUserId, mUserName, 0, TextClickType.TYPE_COMMENT_TEXT),
                 beforeLen, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return builder;
     }

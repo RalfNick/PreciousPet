@@ -67,9 +67,12 @@ public class DynamicEntity {
 
     private RefreshType mRefreshType;
 
+    private int pages;
+
     private String state;
     private List<CommentEntity> commentList;
     private List<PraiseEntity> praiseList;
+    private List<String> imageList;
 
     private int[] viewLocations;
 
@@ -327,6 +330,22 @@ public class DynamicEntity {
 
     public void setPraiseList(List<PraiseEntity> praiseList) {
         this.praiseList = praiseList;
+    }
+
+    public List<String> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<String> imageList) {
+        this.imageList = imageList;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 
     @Override

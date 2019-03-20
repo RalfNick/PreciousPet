@@ -1,5 +1,6 @@
 package com.ralf.pet_provider.util;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.text.ParseException;
@@ -14,6 +15,13 @@ import java.util.TimeZone;
  * @author lixiyuan
  */
 public class DateUtil {
+
+    public final static long TIME_MINUTE = 60;
+    public final static long TIME_HOUR = TIME_MINUTE * 60;
+    public final static long TIME_DAY = TIME_HOUR * 24;
+    public final static long TIME_MONTH = TIME_DAY * 30;
+    public final static long TIME_YEAR = TIME_DAY * 365;
+
     public static String DATE_PATTERN_YYYYMMDD = "yyyy-MM-dd";
 
     public static String DATE_PATTERN_YYYYMMDD_HHMM = "yyyy-MM-dd HH:mm";
@@ -28,7 +36,7 @@ public class DateUtil {
 
     public static String DATE_PATTERN_LAW_SCHOOL = "MM月dd日";
 
-    public static String DATE_PATTERN_DETAIL_DATE ="yyyy年MM月dd日";
+    public static String DATE_PATTERN_DETAIL_DATE = "yyyy年MM月dd日";
 
     public static String format(Date date, String pattern) {
         if (date == null || TextUtils.isEmpty(pattern)) {
@@ -307,6 +315,31 @@ public class DateUtil {
             return "5天前";
         }
         return getDateText(startDate, YMD_BREAK);
+    }
+
+    /***
+     * 格式化时间戳
+     * @param timeString
+     * @return
+     */
+    public static String timeAutoFormat(@NonNull String timeString) {
+        Long currentTime = System.currentTimeMillis() / 1000;
+        Long paramTime = Long.valueOf(timeString);
+        long intervalTime = currentTime - paramTime;
+        if (intervalTime > TIME_YEAR) {
+            return String.valueOf(intervalTime / TIME_YEAR) + "年前";
+        } else if (intervalTime > TIME_MONTH) {
+            return String.valueOf(intervalTime / TIME_MONTH) + "月前";
+        } else if (intervalTime > TIME_DAY) {
+            return String.valueOf(intervalTime / TIME_DAY) + "天前";
+        } else if (intervalTime < TIME_MINUTE) {
+            return "刚刚";
+        } else if (intervalTime > TIME_HOUR) {
+            return String.valueOf(intervalTime / TIME_HOUR) + "小时前";
+        } else {
+            return String.valueOf(intervalTime / TIME_MINUTE) + "分钟前";
+        }
+
     }
 
     /**

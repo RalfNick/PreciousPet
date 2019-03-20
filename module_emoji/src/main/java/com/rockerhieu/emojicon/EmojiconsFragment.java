@@ -48,7 +48,7 @@ import java.util.List;
  * @author Hieu Rocker (rockerhieu@gmail.com).
  */
 public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChangeListener, EmojiconRecents {
-    private OnEmojiconBackspaceClickedListener mOnEmojiconBackspaceClickedListener;
+    private OnBackClickListener mOnBackClickListener;
     private int mEmojiTabLastSelectedIndex = -1;
     private View[] mEmojiTabs;
     private PagerAdapter mEmojisAdapter;
@@ -103,8 +103,8 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
         view.findViewById(R.id.emojis_backspace).setOnTouchListener(new RepeatListener(1000, 50, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnEmojiconBackspaceClickedListener != null) {
-                    mOnEmojiconBackspaceClickedListener.onEmojiconBackspaceClicked(v);
+                if (mOnBackClickListener != null) {
+                    mOnBackClickListener.onBackClicked(v);
                 }
             }
         }));
@@ -129,22 +129,22 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (getActivity() instanceof OnEmojiconBackspaceClickedListener) {
-            mOnEmojiconBackspaceClickedListener = (OnEmojiconBackspaceClickedListener) getActivity();
-        } else if (getParentFragment() instanceof OnEmojiconBackspaceClickedListener) {
-            mOnEmojiconBackspaceClickedListener = (OnEmojiconBackspaceClickedListener) getParentFragment();
+        if (getActivity() instanceof OnBackClickListener) {
+            mOnBackClickListener = (OnBackClickListener) getActivity();
+        } else if (getParentFragment() instanceof OnBackClickListener) {
+            mOnBackClickListener = (OnBackClickListener) getParentFragment();
         } else {
-            throw new IllegalArgumentException(activity + " must implement interface " + OnEmojiconBackspaceClickedListener.class.getSimpleName());
+            throw new IllegalArgumentException(activity + " must implement interface " + OnBackClickListener.class.getSimpleName());
         }
     }
 
-    public void setEmojiconView(OnEmojiconBackspaceClickedListener emojiconView) {
-        mOnEmojiconBackspaceClickedListener = emojiconView;
+    public void setEmojiconView(OnBackClickListener emojiconView) {
+        mOnBackClickListener = emojiconView;
     }
 
     @Override
     public void onDetach() {
-        mOnEmojiconBackspaceClickedListener = null;
+        mOnBackClickListener = null;
         super.onDetach();
     }
 
@@ -263,16 +263,19 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
          *                        periodically
          */
         public RepeatListener(int initialInterval, int normalInterval, View.OnClickListener clickListener) {
-            if (clickListener == null)
+            if (clickListener == null) {
                 throw new IllegalArgumentException("null runnable");
-            if (initialInterval < 0 || normalInterval < 0)
+            }
+            if (initialInterval < 0 || normalInterval < 0) {
                 throw new IllegalArgumentException("negative interval");
+            }
 
             this.initialInterval = initialInterval;
             this.normalInterval = normalInterval;
             this.clickListener = clickListener;
         }
 
+        @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -292,8 +295,8 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
         }
     }
 
-    public interface OnEmojiconBackspaceClickedListener {
-        void onEmojiconBackspaceClicked(View v);
+    public interface OnBackClickListener {
+        void onBackClicked(View v);
     }
 
     @Override

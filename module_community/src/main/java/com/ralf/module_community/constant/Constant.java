@@ -24,11 +24,14 @@ public final class Constant {
      */
     public final static String ID = "id";
     public final static String DYNAMIC_ID = "dynamicId";
+    public final static String COMMENT = "comment";
     public final static String DYNAMIC_TYPE = "dynamicType";
     public final static String PAGE = "page";
     public final static String TO_USER_ID = "toUserId";
     public final static String TO_PET_ID = "toPetId";
     public final static String TYPE = "type";
+    public static String POST_ID = "postId";
+    public final static String USER_ID = "userId";
 
     /**
      * 资源常量

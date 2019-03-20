@@ -2,8 +2,11 @@ package com.ralf.module_community.http;
 
 import com.google.gson.JsonObject;
 import com.ralf.module_community.entity.AttentionEntity;
+import com.ralf.module_community.entity.ChannelDetailEntity;
+import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
+import com.ralf.module_community.entity.ReplyEntity;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import io.reactivex.Observable;
@@ -45,4 +48,32 @@ public interface CommunityService {
      */
     @POST("api/bbs/attention")
     Observable<BaseEntity<AttentionEntity>> changeAttentionState(@Body JsonObject body);
+
+    /**
+     * 频道帖子详情
+     *
+     * @param object body
+     * @return
+     */
+    @POST("/api/channel/topicDetail")
+    Observable<BaseEntity<ChannelDetailEntity>> getChannelDetailRequest(@Body JsonObject object);
+
+
+    /**
+     * 获取评论详情接口
+     *
+     * @param body 数据
+     * @return
+     */
+    @POST("api/bbs/get/dynamicsInfo")
+    Observable<BaseEntity<DynamicEntity>> getDiscussDetailRequest(@Body JsonObject body);
+
+    /**
+     * 评论回复请求
+     *
+     * @param body 数据
+     * @return
+     */
+    @POST("api/bbs/add/comment")
+    Observable<BaseEntity<ReplyEntity>> commentReplyRequest(@Body JsonObject body);
 }

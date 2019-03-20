@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/total_comment_bkg_tv"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="7dp"
+        android:background="@color/app_background"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/total_comment_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorWhite"
+        android:text="9条评论"
+        android:textColor="@color/discuss_content"
+        android:textSize="12sp"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/item_content_discuss_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total_comment_tv">
+
+        <ImageView
+            android:id="@+id/discuss_image_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/discuss_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@+id/discuss_image_iv"
+            android:text=""
+            android:textColor="@color/discuss_content"
+            android:textSize="14sp" />
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/discuss_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/discuss_name_tv"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/discuss_image_iv"
+            android:focusable="false"
+            android:text="asdfasdfasdf"
+            android:textColor="@color/comment_content"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/discuss_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="13dp"
+            android:text="4小时"
+            android:textColor="@color/comment_content"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/app_background" />
+    </RelativeLayout>
+
+</RelativeLayout>

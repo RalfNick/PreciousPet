@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +38,10 @@ import com.ralf.module_community.mvp.contact.FeaturedContact;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
+import com.ralf.module_community.util.ShareClickHelper;
 import com.ralf.module_community.widget.player.ScrollCalculatorHelper;
 import com.ralf.pet_provider.annotation.SingleClick;
-import com.ralf.pet_provider.http.HttpUrl;
 import com.ralf.pet_provider.router.RouterConfig;
-import com.ralf.pet_provider.share.PetShare;
-import com.ralf.pet_provider.user.UserUtil;
-import com.ralf.pet_provider.widget.dialog.DialogSure;
 import com.ralf.pet_provider.widget.stickyitemdecoration.OnStickyChangeListener;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyHeadContainer;
 import com.ralf.pet_provider.widget.stickyitemdecoration.StickyItemDecoration;
@@ -311,6 +307,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         AdapterMultiItemEntity itemEntity = mList.get(position);
         DynamicEntity dynamicBean = itemEntity.getDynamicBean();
         Integer userId = dynamicBean.getUserId();
+        int dynamicId = dynamicBean.getDynamicId();
         if (viewId == R.id.header_attention_btn) {
             mPresenter.requestAttentionState(position, dynamicBean);
         } else if (viewId == R.id.header_master_avatar_iv
@@ -324,17 +321,11 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.header_pet_avatar_iv || viewId == R.id.header_pet_name_tv) {
             // 跳转宠物从详情
             ToastUtils.showShort("宠物详情");
-            new DialogSure.Builder(mContext)
-                    .content("账号已在其他地方登陆，请重新登录！")
-                    .cancelable(false)
-                    .sureListener(v -> ARouter.getInstance().build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH).navigation())
-                    .build()
-                    .show();
         } else if (viewId == R.id.header_pet_type_tv) {
             // 宠物类型详情
             ToastUtils.showShort("宠物类型");
         } else if (viewId == R.id.item_content_comment_more) {
-            jumpToNewPage(userId, "", 0);
+            jumpToNewPage(dynamicId, userId, "", 0);
         } else if (viewId == R.id.item_praise_support_rb) {
             // 获取点击位置的坐标
             setClickViewPosition(position + mAdapter.getHeaderLayoutCount(), dynamicBean, R.id.item_praise_support_rb);
@@ -342,9 +333,9 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.item_praise_gift_rb) {
             ToastUtils.showShort("送礼物");
         } else if (viewId == R.id.item_praise_comment_rb) {
-            jumpToNewPage(userId, "", 0);
+            jumpToNewPage(dynamicId, userId, "", 0);
         } else if (viewId == R.id.item_praise_share_rb) {
-            shareCommunity(dynamicBean);
+            ShareClickHelper.shareCommunity(mContext,dynamicBean);
         } else if (viewId == R.id.item_praise_person_num) {
             ARouter.getInstance()
                     .build(RouterConfig.CommunityModule.COMMUNITY_PRAISE_LIST_PATH)
@@ -369,41 +360,21 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     }
 
     /**
-     * 分享社区状态
-     *
-     * @param dynamicEntity 实体类
-     */
-    private void shareCommunity(DynamicEntity dynamicEntity) {
-        String url = String.format(HttpUrl.COMMUNITY_SHARE_URL, dynamicEntity.getDynamicId());
-        String nickName = dynamicEntity.getNickName();
-        String title = TextUtils.isEmpty(nickName) ? "\r" : String.format(PetShare.shareTitleOfCommunity, nickName);
-        String desc = !TextUtils.isEmpty(dynamicEntity.getTalk()) ? dynamicEntity.getTalk() : PetShare.SHARE_SELECTED_DESC;
-        // 1 视频类型   0 图片类型
-        String imgUrl = dynamicEntity.getType() == 1 ? dynamicEntity.getVideoPrintscreen() : dynamicEntity.getDynamicsPath();
-        PetShare.ShareBuilder
-                .with(mContext)
-                .url(url)
-                .imgUrl(imgUrl)
-                .title(title)
-                .desc(desc)
-                .withText(desc)
-                .build()
-                .shareToOthers(PetShare.ShareTypeEnum.SHARE_COMMUNITY_FEATURED);
-    }
-
-    /**
      * 跳转到新界面，评论详情
      *
-     * @param userId   用户 id
-     * @param nickName 昵称
-     * @param fromId   来自的 id
+     * @param dynamicId id
+     * @param userId    用户 id
+     * @param nickName  昵称
+     * @param fromId    来自的 id
      */
-    private void jumpToNewPage(int userId, String nickName, int fromId) {
+    private void jumpToNewPage(int dynamicId, int userId, String nickName, int fromId) {
         ARouter.getInstance()
                 .build(RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
                 .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
                 .withString(RouterConfig.CommunityModule.KEY_NICK_NAME, nickName)
                 .withInt(RouterConfig.CommunityModule.KEY_FROM_USER_ID, fromId)
+                .withInt(RouterConfig.CommunityModule.KEY_DYNAMIC_ID, dynamicId)
+                .withInt(RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE, RouterConfig.CommunityModule.TYPE_SELECTED)
                 .navigation();
     }
 

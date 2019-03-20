@@ -20,17 +20,19 @@ public class SpanTextClick extends ClickableSpan {
     private TextClickType mType;
     private int mFromId;
     private String mNickName;
+    private int dynamicId;
 
 
-    private SpanTextClick(int userId, String nickName, int fromId, TextClickType type) {
+    private SpanTextClick(int dynamicId, int userId, String nickName, int fromId, TextClickType type) {
         this.mUserId = userId;
         this.mType = type;
         this.mNickName = nickName;
         this.mFromId = fromId;
+        this.dynamicId = dynamicId;
     }
 
-    public static SpanTextClick getClicker(int userId, String nickName, int fromId, TextClickType type) {
-        return new SpanTextClick(userId, nickName, fromId, type);
+    public static SpanTextClick getClicker(int dynamicId, int userId, String nickName, int fromId, TextClickType type) {
+        return new SpanTextClick(dynamicId, userId, nickName, fromId, type);
     }
 
     @Override
@@ -48,6 +50,8 @@ public class SpanTextClick extends ClickableSpan {
                         .build(RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
                         .withInt(RouterConfig.CommunityModule.KEY_USER_ID, mUserId)
                         .withString(RouterConfig.CommunityModule.KEY_NICK_NAME, mNickName)
+                        .withInt(RouterConfig.CommunityModule.KEY_DYNAMIC_ID, dynamicId)
+                        .withInt(RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE, RouterConfig.CommunityModule.TYPE_SELECTED)
                         .withInt(RouterConfig.CommunityModule.KEY_FROM_USER_ID, mFromId)
                         .navigation();
                 break;

@@ -2,7 +2,7 @@
 apply from: "config.gradle"
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
@@ -12,6 +12,8 @@ buildscript {
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         classpath "com.jakewharton:butterknife-gradle-plugin:9.0.0-rc1"
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.0'
+        // doraemonkit 调试工具
+        classpath 'com.didichuxing.doraemonkit:compiler:1.0.1'
     }
 }
 
@@ -29,7 +31,7 @@ allprojects {
         maven {
             url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository"
         }
-        maven { url 'http://developer.huawei.com/repo'}
+        maven { url 'http://developer.huawei.com/repo' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }

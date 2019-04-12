@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -27,7 +26,7 @@ import com.ralf.module_community.constant.MultiItemType;
 import com.ralf.module_community.entity.AdapterMultiItemEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.PraiseEntity;
-import com.ralf.module_community.mvp.ui.view.FeaturedPersonView;
+import com.ralf.module_community.mvp.ui.view.HeadPortraitListView;
 import com.ralf.module_community.mvp.ui.view.PraiseAnimView;
 import com.ralf.pet_provider.router.RouterConfig;
 
@@ -194,13 +193,20 @@ public class ItemPraiseProvider extends BaseItemProvider<AdapterMultiItemEntity,
                 headDataMap.put(bean.getUserId(), bean.getHeadPortrait());
             }
         }
-        FeaturedPersonView personView = helper.getView(R.id.item_praise_person_view);
-        personView.setClickListener(
-                userId -> ARouter.getInstance()
+        HeadPortraitListView personView = helper.getView(R.id.item_praise_person_view);
+        personView.setClickListener(new HeadPortraitListView.OnHeadPortraitClickListener() {
+            @Override
+            public void onClick(int id) {
+                ARouter.getInstance()
                         .build(RouterConfig.UserModule.MASTER_INFO_PATH)
-                        .withInt(RouterConfig.UserModule.KEY_USER_ID, userId)
-                        .navigation()
-        );
-        personView.setHeadPortaitData(headDataMap);
+                        .withInt(RouterConfig.UserModule.KEY_USER_ID, id)
+                        .navigation();
+            }
+
+            @Override
+            public void onMoreClick() {
+            }
+        });
+        personView.setHeadPortraitData(headDataMap);
     }
 }

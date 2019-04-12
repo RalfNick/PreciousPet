@@ -74,4 +74,11 @@ public final class UserConstant {
     public static String ASSISTANT_HXID = "TL_16567";
     public static String ASSISTANT_NAME = "牵宠小助手";
     public static String ASSISTANT_IMAGE = "";
+
+    /**
+     * 网络请求字段
+     */
+    public final static String TO_USER_ID = "toUserId";
+    public final static String PET_ID = "petId";
+    public final static String PAGE= "page";
 }

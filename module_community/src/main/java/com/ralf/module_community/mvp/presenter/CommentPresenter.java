@@ -16,7 +16,7 @@ import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.entity.PraiseEntity;
 import com.ralf.module_community.entity.ReplyEntity;
-import com.ralf.module_community.mvp.contact.CommentContact;
+import com.ralf.module_community.mvp.contact.CommentContract;
 import com.ralf.pet_provider.constant.PetConstant;
 import com.ralf.pet_provider.http.WebObserver;
 import com.ralf.pet_provider.user.constant.UserConstant;
@@ -42,7 +42,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
  * @date 2019/01/15 上午10:01
  **/
 @ActivityScope
-public class CommentPresenter extends BasePresenter<CommentContact.Model, CommentContact.View> {
+public class CommentPresenter extends BasePresenter<CommentContract.Model, CommentContract.View> {
 
     @Inject
     RxErrorHandler mErrorHandler;
@@ -60,7 +60,7 @@ public class CommentPresenter extends BasePresenter<CommentContact.Model, Commen
     private int mToUserId;
 
     @Inject
-    public CommentPresenter(CommentContact.Model model, CommentContact.View rootView) {
+    public CommentPresenter(CommentContract.Model model, CommentContract.View rootView) {
         super(model, rootView);
     }
 

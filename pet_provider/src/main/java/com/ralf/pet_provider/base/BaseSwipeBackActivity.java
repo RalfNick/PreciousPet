@@ -7,12 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.InflateException;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.delegate.IActivity;
+import com.jess.arms.event.transmit.EventPublicApi;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.lifecycle.ActivityLifecycleable;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.widget.dialog.DialogSure;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import javax.inject.Inject;
@@ -34,7 +37,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * @date 2018/11/05 上午11:23
  **/
 public abstract class BaseSwipeBackActivity<P extends IPresenter> extends AppCompatActivity
-        implements IActivity, ActivityLifecycleable, SwipeBackActivityBase {
+        implements IActivity, ActivityLifecycleable, SwipeBackActivityBase, EventPublicApi.LogoutApi {
 
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
@@ -74,7 +77,9 @@ public abstract class BaseSwipeBackActivity<P extends IPresenter> extends AppCom
                 mUnbinder = ButterKnife.bind(this);
             }
         } catch (Exception e) {
-            if (e instanceof InflateException) throw e;
+            if (e instanceof InflateException) {
+                throw e;
+            }
             e.printStackTrace();
         }
 
@@ -92,8 +97,9 @@ public abstract class BaseSwipeBackActivity<P extends IPresenter> extends AppCom
     @Override
     public View findViewById(int id) {
         View v = super.findViewById(id);
-        if (v == null && mHelper != null)
+        if (v == null && mHelper != null) {
             return mHelper.findViewById(id);
+        }
         return v;
     }
 
@@ -116,11 +122,13 @@ public abstract class BaseSwipeBackActivity<P extends IPresenter> extends AppCom
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY)
+        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
+        }
         this.mUnbinder = null;
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.onDestroy();//释放资源
+        }
         this.mPresenter = null;
     }
 
@@ -152,5 +160,22 @@ public abstract class BaseSwipeBackActivity<P extends IPresenter> extends AppCom
     @Override
     public boolean userARouter() {
         return true;
+    }
+
+    @Override
+    public void jumpToLoginPage(String path, String key, String value) {
+        new DialogSure.Builder(this)
+                .content("您的账号已在别处登录，请重新登录")
+                .cancelable(false)
+                .title("下线通知")
+                .sureListener(dialog -> {
+                    ARouter.getInstance()
+                            .build(path)
+                            .withString(key, value)
+                            .navigation();
+                    dialog.dismiss();
+                })
+                .build()
+                .show();
     }
 }

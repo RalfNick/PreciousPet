@@ -15,11 +15,11 @@ import io.reactivex.Observable;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name CommentContact
+ * @name CommentContract
  * @email -
  * @date 2019/01/15 上午10:02
  **/
-public interface CommentContact {
+public interface CommentContract {
 
     /**
      * 频道和评论公用一个接口

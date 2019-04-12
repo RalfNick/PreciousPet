@@ -3,22 +3,22 @@ package com.ralf.module_user.mvp.model;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-import com.ralf.module_user.mvp.contact.MasterInfoContact;
+import com.ralf.module_user.mvp.contact.MasterContract;
 
 import javax.inject.Inject;
 
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name MasterInfoModel
+ * @name MasterModel
  * @email -
  * @date 2019/01/16 下午1:53
  **/
 @ActivityScope
-public class MasterInfoModel extends BaseModel implements MasterInfoContact.Model{
+public class MasterModel extends BaseModel implements MasterContract.Model{
 
     @Inject
-    public MasterInfoModel(IRepositoryManager repositoryManager) {
+    public MasterModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 }

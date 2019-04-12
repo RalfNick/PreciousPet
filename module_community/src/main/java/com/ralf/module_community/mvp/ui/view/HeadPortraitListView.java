@@ -15,17 +15,19 @@ import com.jess.arms.utils.ArmsUtils;
 import com.ralf.module_community.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Ralf(wanglixin)
  * 评论点赞的人的头像自定义 View
- * @name FeaturedOptionsView
+ * @name HeadPortraitListView
  * @email -
  * @date 2019/01/01 下午10:14
  **/
-public class FeaturedPersonView extends LinearLayout {
+public class HeadPortraitListView extends LinearLayout {
+
     /**
      * 默认的间隔和分割线宽度,最大数目，默认的单行数量
      */
@@ -70,15 +72,15 @@ public class FeaturedPersonView extends LinearLayout {
 
     private ImageLoader mImageLoader;
 
-    public FeaturedPersonView(Context context) {
+    public HeadPortraitListView(Context context) {
         this(context, null);
     }
 
-    public FeaturedPersonView(Context context, AttributeSet attrs) {
+    public HeadPortraitListView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FeaturedPersonView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HeadPortraitListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs, defStyleAttr);
     }
@@ -93,14 +95,14 @@ public class FeaturedPersonView extends LinearLayout {
     private void initView(Context context, AttributeSet attrs, int defStyleAttr) {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
-                R.styleable.FeaturedPersonView, defStyleAttr, 0);
-        mHorizontalSpace = (int) typedArray.getDimension(R.styleable.FeaturedPersonView_horizontalSpace, DEFAULT_SPACING);
-        mVerticalSpace = (int) typedArray.getDimension(R.styleable.FeaturedPersonView_verticalSpace, DEFAULT_SPACING);
-        isMultiLine = typedArray.getBoolean(R.styleable.FeaturedPersonView_multiLine, false);
-        mMaxNum = typedArray.getInt(R.styleable.FeaturedPersonView_maxNum, DEFAULT_MAX_NUM);
-        mSingleLineNum = typedArray.getInt(R.styleable.FeaturedPersonView_lineNum, DEFAULT_SINGLE_MAX_NUM);
-        mPicSize = (int) typedArray.getDimension(R.styleable.FeaturedPersonView_picSize, DEFAULT_PIC_SIZE);
-        isCircle = typedArray.getBoolean(R.styleable.FeaturedPersonView_circle, true);
+                R.styleable.HeadPortraitListView, defStyleAttr, 0);
+        mHorizontalSpace = (int) typedArray.getDimension(R.styleable.HeadPortraitListView_horizontalSpace, DEFAULT_SPACING);
+        mVerticalSpace = (int) typedArray.getDimension(R.styleable.HeadPortraitListView_verticalSpace, DEFAULT_SPACING);
+        isMultiLine = typedArray.getBoolean(R.styleable.HeadPortraitListView_multiLine, false);
+        mMaxNum = typedArray.getInt(R.styleable.HeadPortraitListView_maxNum, DEFAULT_MAX_NUM);
+        mSingleLineNum = typedArray.getInt(R.styleable.HeadPortraitListView_lineNum, DEFAULT_SINGLE_MAX_NUM);
+        mPicSize = (int) typedArray.getDimension(R.styleable.HeadPortraitListView_picSize, DEFAULT_PIC_SIZE);
+        isCircle = typedArray.getBoolean(R.styleable.HeadPortraitListView_circle, true);
         mLayoutParams = new LinearLayout.LayoutParams(mPicSize, mPicSize);
         typedArray.recycle();
 
@@ -209,17 +211,18 @@ public class FeaturedPersonView extends LinearLayout {
         }
     }
 
-    public void setHeadPortaitData(Map<Integer, String> userInfoMap) {
-        if (userInfoMap == null || userInfoMap.isEmpty()) {
+    public void setHeadPortraitData(Map<Integer, String> userInfoMap) {
+        if (calculateTotalNum(userInfoMap)) {
+            mImageViews.clear();
+            removeAllViews();
             return;
         }
+        loadImageViews(userInfoMap);
+    }
+
+    private void loadImageViews(Map<Integer, String> userInfoMap) {
         mImageViews.clear();
         removeAllViews();
-        if (isMultiLine) {
-            mTotalNum = userInfoMap.size() > mMaxNum ? mMaxNum : userInfoMap.size();
-        } else {
-            mTotalNum = userInfoMap.size() > mSingleLineNum ? mSingleLineNum : userInfoMap.size();
-        }
         int count = 0;
         for (Integer userId : userInfoMap.keySet()) {
             if (count == mTotalNum) {
@@ -228,12 +231,57 @@ public class FeaturedPersonView extends LinearLayout {
             addImageViewToParent(userInfoMap.get(userId), userId);
             count++;
         }
-        requestLayout();
+    }
+
+    private boolean calculateTotalNum(Map<Integer, String> userInfoMap) {
+        if (userInfoMap == null || userInfoMap.isEmpty()) {
+            mTotalNum = 0;
+            return true;
+        }
+        if (isMultiLine) {
+            mTotalNum = userInfoMap.size() > mMaxNum ? mMaxNum : userInfoMap.size();
+        } else {
+            mTotalNum = userInfoMap.size() > mSingleLineNum ? mSingleLineNum : userInfoMap.size();
+        }
+        return false;
     }
 
     /**
-     * @param url    图片url
-     * @param userId 用户id
+     * 是否有更多数据
+     *
+     * @param userInfoMap 数据
+     * @param resId       更多图标
+     */
+    public void setHeadPortraitData(Map<Integer, String> userInfoMap, int resId) {
+        if (userInfoMap == null || userInfoMap.isEmpty()) {
+            return;
+        }
+        if (calculateTotalNum(userInfoMap)) {
+            mImageViews.clear();
+            removeAllViews();
+            return;
+        }
+        mTotalNum += 1;
+        loadImageViews(userInfoMap);
+        ImageView view = new ImageView(getContext());
+        view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        view.setLayoutParams(mLayoutParams);
+        // 加载图片
+        view.setImageResource(resId);
+        mImageViews.add(mImageViews.size(), view);
+        Collections.reverse(mImageViews);
+        this.addView(view);
+        view.setOnClickListener(v -> {
+            if (mClickListener != null) {
+                mClickListener.onMoreClick();
+            }
+        });
+
+    }
+
+    /**
+     * @param url    图片 url
+     * @param userId 用户 id
      */
     private void addImageViewToParent(String url, int userId) {
         ImageView view = new ImageView(getContext());
@@ -278,9 +326,14 @@ public class FeaturedPersonView extends LinearLayout {
         /**
          * 点赞人员头像点击事件
          *
-         * @param userId 用户id
+         * @param id id
          */
-        void onClick(int userId);
+        void onClick(int id);
+
+        /**
+         * 点击更多
+         */
+        void onMoreClick();
     }
 
 }

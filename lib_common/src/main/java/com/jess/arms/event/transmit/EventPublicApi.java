@@ -13,7 +13,11 @@ public class EventPublicApi {
 
         /**
          * 账号在其他地方登陆后，弹出提示，跳转到登录界面
+         *
+         * @param path  入口地址
+         * @param key   参数 key
+         * @param value 参数值
          */
-        void jumpToLoginPage();
+        void jumpToLoginPage(String path, String key, String value);
     }
 }

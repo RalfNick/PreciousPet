@@ -1,4 +1,4 @@
-package com.ralf.pet_provider.widget.dialog;
+package com.jess.arms.widget.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ralf.pet_provider.R;
+import com.jess.arms.R;
 
 /**
  * @author Ralf(wanglixin)

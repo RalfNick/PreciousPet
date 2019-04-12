@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.ralf.module_community.mvp.ui.view.FeaturedPersonView
+    <com.ralf.module_community.mvp.ui.view.HeadPortraitListView
         android:id="@+id/item_praise_person_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:multiLine="false"
         app:picSize="28dp">
 
-    </com.ralf.module_community.mvp.ui.view.FeaturedPersonView>
+    </com.ralf.module_community.mvp.ui.view.HeadPortraitListView>
 
     <TextView
         android:id="@+id/item_praise_person_num"

@@ -20,5 +20,6 @@
         <activity
             android:name=".mvp.ui.activity.PraiseListActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".mvp.ui.activity.PetListActivity" />
     </application>
 </manifest>

@@ -28,7 +28,8 @@ import com.ralf.module_community.entity.AdapterMultiItemEntity;
 import com.ralf.module_community.entity.ChannelDetailEntity;
 import com.ralf.module_community.entity.CommentEntity;
 import com.ralf.module_community.entity.DynamicEntity;
-import com.ralf.module_community.mvp.contact.CommentContact;
+import com.ralf.module_community.entity.eventbus.RefreshCommentEntity;
+import com.ralf.module_community.mvp.contact.CommentContract;
 import com.ralf.module_community.mvp.presenter.CommentPresenter;
 import com.ralf.module_community.mvp.ui.adapter.CommentDetailAdapter;
 import com.ralf.module_community.mvp.ui.view.CommentInputView;
@@ -37,7 +38,6 @@ import com.ralf.module_community.util.ShareClickHelper;
 import com.ralf.pet_provider.base.BaseSwipeBackActivity;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.user.constant.UserConstant;
-import com.ralf.pet_provider.widget.dialog.DialogSure;
 import com.rockerhieu.emojicon.EmojiconEditText;
 import com.rockerhieu.emojicon.EmojiconGridFragment;
 import com.rockerhieu.emojicon.EmojiconsFragment;
@@ -46,6 +46,8 @@ import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +68,8 @@ import static com.ralf.module_community.constant.MultiItemType.TYPE_PRAISE;
  **/
 @Route(path = RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
 public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
-        implements CommentContact.View, EventPublicApi.LogoutApi,
-        EmojiconsFragment.OnBackClickListener, EmojiconGridFragment.OnEmojiconClickedListener {
+        implements CommentContract.View, EmojiconsFragment.OnBackClickListener,
+        EmojiconGridFragment.OnEmojiconClickedListener {
 
     private static final String TAG = CommentActivity.class.getSimpleName();
 
@@ -84,6 +86,12 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
 
     @Autowired(name = RouterConfig.CommunityModule.KEY_DYNAMIC_ID)
     int mDynamicId;
+
+    /**
+     * 在上一个列表页面的位置
+     */
+    @Autowired(name = RouterConfig.CommunityModule.KEY_ITEM_POSITION)
+    int mPosition;
 
     /**
      * 跳转的类型（精选 or 频道）
@@ -118,7 +126,6 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
 
     private EmojiconEditText mEmojiconEditText;
 
-    private DialogSure mDialogSure;
     private List<AdapterMultiItemEntity> mItemEntityList = new ArrayList<>();
     private CommentDetailAdapter mAdapter;
     private CommentInputHelper mInputHelper;
@@ -309,27 +316,6 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
     }
 
     @Override
-    public void jumpToLoginPage() {
-        if (mDialogSure == null) {
-            mDialogSure = new DialogSure.Builder(this)
-                    .content("您的账号已在别处登录，请重新登录")
-                    .cancelable(false)
-                    .title("下线通知")
-                    .sureListener(dialog -> {
-                        ARouter.getInstance()
-                                .build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH)
-                                .withString(RouterConfig.LoginRegisterModule.KEY_LOGOUT, RouterConfig.LoginRegisterModule.VALUE_LOGOUT)
-                                .navigation();
-                        dialog.dismiss();
-                    })
-                    .build();
-        }
-        if (!mDialogSure.isShowing()) {
-            mDialogSure.show();
-        }
-    }
-
-    @Override
     public void onRefreshChannelView(ChannelDetailEntity data) {
         mItemEntityList.clear();
         DynamicEntity dynamicEntity = new DynamicEntity();
@@ -460,6 +446,8 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
         mItemEntityList.add(startCommentIndex++, entity);
         mAdapter.notifyItemInserted(mItemEntityList.size() - 1);
         mRecyclerView.smoothScrollToPosition(mItemEntityList.size() - 1);
+        // 刷新上一个页面的评论数据
+        EventBus.getDefault().post(new RefreshCommentEntity(mPosition));
     }
 
     @Override

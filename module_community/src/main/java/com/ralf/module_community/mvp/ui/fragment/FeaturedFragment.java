@@ -18,6 +18,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseLazyFragment;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.event.transmit.EventPublicApi;
 import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
@@ -34,7 +35,8 @@ import com.ralf.module_community.entity.AdapterMultiItemEntity;
 import com.ralf.module_community.entity.BannerEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
-import com.ralf.module_community.mvp.contact.FeaturedContact;
+import com.ralf.module_community.entity.eventbus.RefreshCommentEntity;
+import com.ralf.module_community.mvp.contact.FeaturedContract;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
@@ -53,6 +55,9 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +70,7 @@ import butterknife.BindView;
  * @email -
  * @date 2018/12/15 下午8:48
  **/
-public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implements FeaturedContact.View {
+public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implements FeaturedContract.View {
 
     private static final String TOAST_CONTENT_PRAISE = "点赞奖励%s";
     /**
@@ -173,9 +178,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                         mLastVisibleItem - mFirstVisibleItem);
             }
         });
-        // decoration
         initDecoration();
-        // click
         setClickEvent();
     }
 
@@ -307,6 +310,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         AdapterMultiItemEntity itemEntity = mList.get(position);
         DynamicEntity dynamicBean = itemEntity.getDynamicBean();
         Integer userId = dynamicBean.getUserId();
+        Integer petId = dynamicBean.getPetId();
         int dynamicId = dynamicBean.getDynamicId();
         if (viewId == R.id.header_attention_btn) {
             mPresenter.requestAttentionState(position, dynamicBean);
@@ -319,13 +323,16 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                     .withInt(RouterConfig.UserModule.KEY_USER_ID, userId)
                     .navigation();
         } else if (viewId == R.id.header_pet_avatar_iv || viewId == R.id.header_pet_name_tv) {
-            // 跳转宠物从详情
-            ToastUtils.showShort("宠物详情");
+            // 跳转到宠物页面
+            ARouter.getInstance()
+                    .build(RouterConfig.UserModule.PET_INFO_PATH)
+                    .withInt(RouterConfig.UserModule.KEY_PET_ID, petId)
+                    .navigation();
         } else if (viewId == R.id.header_pet_type_tv) {
             // 宠物类型详情
             ToastUtils.showShort("宠物类型");
         } else if (viewId == R.id.item_content_comment_more) {
-            jumpToNewPage(dynamicId, userId, "", 0);
+            jumpToNewPage(dynamicId, userId, "", 0, position);
         } else if (viewId == R.id.item_praise_support_rb) {
             // 获取点击位置的坐标
             setClickViewPosition(position + mAdapter.getHeaderLayoutCount(), dynamicBean, R.id.item_praise_support_rb);
@@ -333,13 +340,13 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         } else if (viewId == R.id.item_praise_gift_rb) {
             ToastUtils.showShort("送礼物");
         } else if (viewId == R.id.item_praise_comment_rb) {
-            jumpToNewPage(dynamicId, userId, "", 0);
+            jumpToNewPage(dynamicId, userId, "", 0, position);
         } else if (viewId == R.id.item_praise_share_rb) {
-            ShareClickHelper.shareCommunity(mContext,dynamicBean);
+            ShareClickHelper.shareCommunity(mContext, dynamicBean);
         } else if (viewId == R.id.item_praise_person_num) {
             ARouter.getInstance()
                     .build(RouterConfig.CommunityModule.COMMUNITY_PRAISE_LIST_PATH)
-                    .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
+                    .withInt(RouterConfig.CommunityModule.KEY_USER_ID, dynamicId)
                     .navigation();
         }
     }
@@ -367,7 +374,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
      * @param nickName  昵称
      * @param fromId    来自的 id
      */
-    private void jumpToNewPage(int dynamicId, int userId, String nickName, int fromId) {
+    private void jumpToNewPage(int dynamicId, int userId, String nickName, int fromId, int position) {
         ARouter.getInstance()
                 .build(RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
                 .withInt(RouterConfig.CommunityModule.KEY_USER_ID, userId)
@@ -375,6 +382,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                 .withInt(RouterConfig.CommunityModule.KEY_FROM_USER_ID, fromId)
                 .withInt(RouterConfig.CommunityModule.KEY_DYNAMIC_ID, dynamicId)
                 .withInt(RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE, RouterConfig.CommunityModule.TYPE_SELECTED)
+                .withInt(RouterConfig.CommunityModule.KEY_FROM_ITEM_POSITION, position)
                 .navigation();
     }
 
@@ -484,4 +492,16 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
             mImageLoader.loadImage(getContext(), imageConfig);
         }
     }
+
+    /**
+     * 刷新评论区
+     *
+     * @param entity 数据
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(RefreshCommentEntity entity) {
+        int position = entity.getPosition();
+        mAdapter.notifyItemChanged(mAdapter.getHeaderLayoutCount() + position);
+    }
+
 }

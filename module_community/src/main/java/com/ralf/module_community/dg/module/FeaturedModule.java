@@ -1,7 +1,7 @@
 package com.ralf.module_community.dg.module;
 
 import com.jess.arms.di.scope.FragmentScope;
-import com.ralf.module_community.mvp.contact.FeaturedContact;
+import com.ralf.module_community.mvp.contact.FeaturedContract;
 import com.ralf.module_community.mvp.model.FeaturedModel;
 
 import dagger.Module;
@@ -17,21 +17,21 @@ import dagger.Provides;
 @Module
 public class FeaturedModule {
 
-    private FeaturedContact.View mView;
+    private FeaturedContract.View mView;
 
-    public FeaturedModule(FeaturedContact.View view) {
+    public FeaturedModule(FeaturedContract.View view) {
         mView = view;
     }
 
     @FragmentScope
     @Provides
-    public FeaturedContact.View provideCommunityView() {
+    public FeaturedContract.View provideCommunityView() {
         return mView;
     }
 
     @FragmentScope
     @Provides
-    public FeaturedContact.Model provideCommunityModel(FeaturedModel model) {
+    public FeaturedContract.Model provideCommunityModel(FeaturedModel model) {
         return model;
     }
 }

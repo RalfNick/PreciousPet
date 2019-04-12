@@ -16,11 +16,11 @@ import io.reactivex.Observable;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name FeaturedContact
+ * @name FeaturedContract
  * @email -
  * @date 2018/12/17 上午10:07
  **/
-public interface FeaturedContact {
+public interface FeaturedContract {
 
     interface View extends IView {
 

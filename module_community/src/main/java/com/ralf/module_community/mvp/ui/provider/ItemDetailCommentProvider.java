@@ -74,7 +74,7 @@ public class ItemDetailCommentProvider extends BaseItemProvider<AdapterMultiItem
                 emojiconTextView.setText(commentEntity.getContent());
             } else {
                 // 回复的人的文本设置
-                SpannableStringBuilder builder = getSpannableStringBuilder(commentEntity);
+                SpannableStringBuilder builder = getSpannableStringBuilder(commentEntity, position);
                 emojiconTextView.setText(builder);
                 emojiconTextView.setUseSystemDefault(false);
                 emojiconTextView.setMovementMethod(LinkMovementMethod.getInstance());
@@ -89,7 +89,7 @@ public class ItemDetailCommentProvider extends BaseItemProvider<AdapterMultiItem
      * @return
      */
     @NonNull
-    private SpannableStringBuilder getSpannableStringBuilder(CommentEntity commentEntity) {
+    private SpannableStringBuilder getSpannableStringBuilder(CommentEntity commentEntity, int position) {
 
         String toNickname = commentEntity.getToNickName();
         String content = commentEntity.getContent();
@@ -103,7 +103,8 @@ public class ItemDetailCommentProvider extends BaseItemProvider<AdapterMultiItem
         builder = new SpannableStringBuilder("回复 ");
         SpannableStringBuilder toBuilder = new SpannableStringBuilder(toNickname);
         toBuilder.setSpan(colorSpan, 0, toBuilder.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        toBuilder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, fromId, TextClickType.TYPE_PERSON_NAME),
+        toBuilder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, fromId,
+                TextClickType.TYPE_PERSON_NAME, position),
                 0, toBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         builder.append(toBuilder);
         // content click

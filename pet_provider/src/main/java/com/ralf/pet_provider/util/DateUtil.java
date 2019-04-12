@@ -3,6 +3,8 @@ package com.ralf.pet_provider.util;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.jess.arms.utils.StringUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,6 +40,10 @@ public class DateUtil {
 
     public static String DATE_PATTERN_DETAIL_DATE = "yyyy年MM月dd日";
 
+    public static String DATE_PATTERN_MM = "MM";
+    public static String DATE_PATTERN_DD = "dd";
+    public static String DATE_PATTERN_YY = "yyyy";
+
     public static String format(Date date, String pattern) {
         if (date == null || TextUtils.isEmpty(pattern)) {
             return "";
@@ -58,6 +64,15 @@ public class DateUtil {
             return "今天";
         }
         return format(date, pattern);
+    }
+
+    /**
+     * 判断是否是今天
+     */
+    public static boolean isToday(String timeParam) {
+        int i = Integer.parseInt(timeParam);
+        String timeStr = format(new Date(i * 1000L), DATE_PATTERN_YYYYMMDD);
+        return getTodayStr().equals(timeStr);
     }
 
     /**
@@ -394,7 +409,6 @@ public class DateUtil {
      * @return
      */
     public static long getTimeStampOfDay(long today, int needHour) {
-//        String currentTimeZone = getCurrentTimeZone();
         TimeZone curTimeZone = TimeZone.getTimeZone("UTC+0");
         Calendar calendar = Calendar.getInstance(curTimeZone);
         calendar.setTimeInMillis(today);
@@ -453,5 +467,38 @@ public class DateUtil {
                 break;
         }
         return week;
+    }
+
+    /**
+     * 获取日期
+     *
+     * @param timeParam 毫秒时间
+     * @return
+     */
+    public static String getDayStr(String timeParam) {
+        int i = Integer.parseInt(timeParam);
+        return format(new Date(i * 1000L), DATE_PATTERN_DD);
+    }
+
+    /**
+     * 获取月份
+     *
+     * @param timeParam 毫秒时间
+     * @return
+     */
+    public static String getMonthStr(String timeParam) {
+        int i = Integer.parseInt(timeParam);
+        return format(new Date(i * 1000L), DATE_PATTERN_MM);
+    }
+
+    /**
+     * 获取月份
+     *
+     * @param timeParam 毫秒时间
+     * @return
+     */
+    public static String getYearStr(String timeParam) {
+        int i = Integer.parseInt(timeParam);
+        return format(new Date(i * 1000L), DATE_PATTERN_YY);
     }
 }

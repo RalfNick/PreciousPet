@@ -4,7 +4,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 
 import com.jess.arms.mvp.BasePresenter;
-import com.ralf.module_user.mvp.contact.MasterInfoContact;
+import com.ralf.module_user.mvp.contact.MasterContract;
 
 import javax.inject.Inject;
 
@@ -13,17 +13,17 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name MasterInfoPresenter
+ * @name MasterPresenter
  * @email -
  * @date 2019/01/16 下午1:54
  **/
-public class MasterInfoPresenter extends BasePresenter<MasterInfoContact.Model,MasterInfoContact.View> {
+public class MasterPresenter extends BasePresenter<MasterContract.Model,MasterContract.View> {
 
     @Inject
     RxErrorHandler mErrorHandler;
 
     @Inject
-    public MasterInfoPresenter(MasterInfoContact.Model model, MasterInfoContact.View rootView) {
+    public MasterPresenter(MasterContract.Model model, MasterContract.View rootView) {
         super(model, rootView);
     }
 

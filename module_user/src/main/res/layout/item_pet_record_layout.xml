@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:id="@+id/item_pet_decoration_rl"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="#f5f5f5"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/item_pet_decoration_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="动态"
+            android:textColor="#FF888888"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="8dp"
+            android:layout_toStartOf="@id/item_pet_decoration_tv"
+            android:background="@drawable/shape_decor_line_left" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/item_pet_decoration_tv"
+            android:background="@drawable/shape_decor_line_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_below="@+id/item_pet_decoration_rl">
+
+        <TextView
+            android:id="@+id/item_pet_content_date"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="23dp"
+            android:textColor="#FFD1D1D1"
+            android:textSize="12sp"
+            tools:text="12\n4月" />
+
+        <RelativeLayout
+            android:id="@+id/item_pet_content_rl"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@id/item_pet_content_date">
+
+            <ImageView
+                android:id="@+id/item_pet_content_iv"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher" />
+
+            <ImageView
+                android:id="@+id/item_pet_content_play_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_play"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <com.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/item_pet_content_emoji_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="22dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="26dp"
+            android:layout_toEndOf="@id/item_pet_content_rl"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:textColor="#FF2C2C2C"
+            tools:ignore="UnknownId" />
+
+        <TextView
+            android:id="@+id/item_pet_share_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/item_pet_content_rl"
+            android:layout_below="@id/item_pet_content_rl"
+            android:layout_marginTop="12dp"
+            android:text="分享"
+            android:textColor="#FF449DDE"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

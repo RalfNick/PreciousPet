@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="FeaturedPersonView">
+    <declare-styleable name="HeadPortraitListView">
         <attr name="multiLine" format="boolean" />
         <attr name="lineNum" format="integer" />
         <attr name="maxNum" format="integer" />

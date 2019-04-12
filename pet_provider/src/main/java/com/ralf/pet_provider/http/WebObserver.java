@@ -3,6 +3,7 @@ package com.ralf.pet_provider.http;
 import com.jess.arms.event.transmit.EventPublicApi;
 import com.jess.arms.event.transmit.EventPublicApiHelper;
 import com.orhanobut.logger.Logger;
+import com.ralf.pet_provider.router.RouterConfig;
 
 import io.reactivex.disposables.Disposable;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
@@ -46,7 +47,8 @@ public abstract class WebObserver<E> extends ErrorHandleSubscriber<BaseEntity<E>
                 } else if (t.getCode() == HttpCode.CODE_SIGN_OUT) {
                     // 账号在其他地方登录，需要登出，重新登录
                     EventPublicApi.LogoutApi logoutApi = EventPublicApiHelper.getEventModuleApi(EventPublicApi.LogoutApi.class);
-                    logoutApi.jumpToLoginPage();
+                    logoutApi.jumpToLoginPage(RouterConfig.LoginRegisterModule.ENTRANCE_PATH,
+                            RouterConfig.LoginRegisterModule.KEY_LOGOUT, RouterConfig.LoginRegisterModule.VALUE_LOGOUT);
                 } else {
                     String message = t.getMessage();
                     onFailed(message);

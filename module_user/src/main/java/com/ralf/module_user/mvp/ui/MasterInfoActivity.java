@@ -8,10 +8,10 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.di.component.AppComponent;
 import com.ralf.module_user.R;
-import com.ralf.module_user.dg.component.DaggerMasterInfoComponent;
-import com.ralf.module_user.dg.module.MasterInfoModule;
-import com.ralf.module_user.mvp.contact.MasterInfoContact;
-import com.ralf.module_user.mvp.presenter.MasterInfoPresenter;
+import com.ralf.module_user.dg.component.DaggerMasterComponent;
+import com.ralf.module_user.dg.module.MasterModule;
+import com.ralf.module_user.mvp.contact.MasterContract;
+import com.ralf.module_user.mvp.presenter.MasterPresenter;
 import com.ralf.pet_provider.base.BaseSwipeBackActivity;
 import com.ralf.pet_provider.router.RouterConfig;
 
@@ -23,16 +23,16 @@ import com.ralf.pet_provider.router.RouterConfig;
  * @date 2019/01/16 下午1:45
  **/
 @Route(path = RouterConfig.UserModule.MASTER_INFO_PATH)
-public class MasterInfoActivity extends BaseSwipeBackActivity<MasterInfoPresenter> implements MasterInfoContact.View {
+public class MasterInfoActivity extends BaseSwipeBackActivity<MasterPresenter> implements MasterContract.View {
 
     @Autowired(name = RouterConfig.UserModule.KEY_USER_ID)
-    int userId;
+    int mUserId;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
-        DaggerMasterInfoComponent.builder()
+        DaggerMasterComponent.builder()
                 .appComponent(appComponent)
-                .masterInfoModule(new MasterInfoModule(this))
+                .masterModule(new MasterModule(this))
                 .build()
                 .inject(this);
     }

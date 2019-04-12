@@ -6,8 +6,14 @@ import com.ralf.module_community.entity.ChannelDetailEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
+import com.ralf.module_community.entity.PraiseEntity;
 import com.ralf.module_community.entity.ReplyEntity;
+import com.ralf.module_community.entity.result.ListMultipleEntity;
+import com.ralf.module_community.entity.result.PetListResultEntity;
+import com.ralf.module_community.entity.result.PraiseListResultEntity;
 import com.ralf.pet_provider.http.BaseEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -76,4 +82,22 @@ public interface CommunityService {
      */
     @POST("api/bbs/add/comment")
     Observable<BaseEntity<ReplyEntity>> commentReplyRequest(@Body JsonObject body);
+
+    /**
+     * 请求获取点赞列表数据
+     *
+     * @param body 参数
+     * @return
+     */
+    @POST("api/bbs/get/praiseList")
+    Observable<BaseEntity<PraiseListResultEntity>> getPraiseList(@Body JsonObject body);
+
+    /**
+     * 查看更多宠物
+     * @param object 参数
+     * @return
+     */
+    @POST("api/user/getHisPets")
+    Observable<BaseEntity<PetListResultEntity>> getPetInfoList(@Body JsonObject object);
+
 }

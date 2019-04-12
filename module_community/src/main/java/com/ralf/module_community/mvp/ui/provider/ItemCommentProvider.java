@@ -58,7 +58,7 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
         mUserId = entity.getUserId();
         mUserName = entity.getNickName();
         // 评论消息显示
-        convertCommentsDetail(helper, entity);
+        convertCommentsDetail(helper, entity, position);
         // 查看更多评论
         convertMoreComment(helper, entity);
     }
@@ -68,7 +68,7 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
      *
      * @param helper holder
      */
-    private void convertCommentsDetail(BaseViewHolder helper, DynamicEntity entity) {
+    private void convertCommentsDetail(BaseViewHolder helper, DynamicEntity entity, int position) {
         EmojiconTextView firstMsgTv = helper.getView(R.id.item_content_comment_first);
         EmojiconTextView secondMsgTv = helper.getView(R.id.item_content_comment_second);
         EmojiconTextView thirdMsgTv = helper.getView(R.id.item_content_comment_third);
@@ -96,7 +96,7 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
                     break;
                 }
                 // 设置 Span 文本
-                SpannableStringBuilder builder = getSpannableStringBuilder(commentEntity);
+                SpannableStringBuilder builder = getSpannableStringBuilder(commentEntity, position);
                 textViews[i].setText(builder);
                 textViews[i].setUseSystemDefault(false);
                 textViews[i].setVisibility(View.VISIBLE);
@@ -109,11 +109,11 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
     /**
      * 获取 Span 文本
      *
-     * @param commentEntity
+     * @param commentEntity 评论数据
      * @return
      */
     @NonNull
-    private SpannableStringBuilder getSpannableStringBuilder(CommentEntity commentEntity) {
+    private SpannableStringBuilder getSpannableStringBuilder(CommentEntity commentEntity, int position) {
         String fromNickName = commentEntity.getNickName();
         String toNickname = commentEntity.getToNickName();
         String content = commentEntity.getContent();
@@ -132,18 +132,21 @@ public class ItemCommentProvider extends BaseItemProvider<AdapterMultiItemEntity
             builder = new SpannableStringBuilder(fromNickName).append(" 回复 ");
             SpannableStringBuilder toBuilder = new SpannableStringBuilder(toNickname);
             toBuilder.setSpan(colorSpan, 0, toBuilder.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-            toBuilder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, 0, TextClickType.TYPE_PERSON_NAME),
-                    0, toBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            toBuilder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, 0,
+                    TextClickType.TYPE_PERSON_NAME, position), 0, toBuilder.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.append(toBuilder);
         }
         // click event
-        builder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, 0, TextClickType.TYPE_PERSON_NAME),
-                0, fromNickName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(SpanTextClick.getClicker(dynamicId, toUserId, toNickname, 0,
+                TextClickType.TYPE_PERSON_NAME, position), 0, fromNickName.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         // content click
         int beforeLen = builder.length();
         builder.append(content);
-        builder.setSpan(SpanTextClick.getClicker(mDynamicId, mUserId, mUserName, 0, TextClickType.TYPE_COMMENT_TEXT),
-                beforeLen, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(SpanTextClick.getClicker(mDynamicId, mUserId, mUserName, 0,
+                TextClickType.TYPE_COMMENT_TEXT, position), beforeLen, builder.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return builder;
     }
 

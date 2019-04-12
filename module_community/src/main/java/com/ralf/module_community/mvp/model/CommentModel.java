@@ -11,7 +11,7 @@ import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.entity.ReplyEntity;
 import com.ralf.module_community.http.CommunityService;
-import com.ralf.module_community.mvp.contact.CommentContact;
+import com.ralf.module_community.mvp.contact.CommentContract;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import javax.inject.Inject;
@@ -26,7 +26,7 @@ import io.reactivex.Observable;
  * @date 2019/01/15 上午10:04
  **/
 @ActivityScope
-public class CommentModel extends BaseModel implements CommentContact.Model {
+public class CommentModel extends BaseModel implements CommentContract.Model {
 
     @Inject
     public CommentModel(IRepositoryManager repositoryManager) {

@@ -26,11 +26,13 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.delegate.IFragment;
+import com.jess.arms.event.transmit.EventPublicApi;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.lifecycle.FragmentLifecycleable;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.widget.dialog.DialogSure;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import javax.inject.Inject;
@@ -45,6 +47,7 @@ import io.reactivex.subjects.Subject;
  * 因为 Java 只能单继承, 所以如果要用到需要继承特定 @{@link Fragment} 的三方库, 那你就需要自己自定义 @{@link Fragment}
  * 继承于这个特定的 @{@link Fragment}, 然后再按照 {@link BaseFragment} 的格式, 将代码复制过去, 记住一定要实现{@link IFragment}
  *
+ * @author wanglixin
  * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki">请配合官方 Wiki 文档学习本框架</a>
  * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki/UpdateLog">更新日志, 升级必看!</a>
  * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki/Issues">常见 Issues, 踩坑必看!</a>
@@ -54,7 +57,9 @@ import io.reactivex.subjects.Subject;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment, FragmentLifecycleable {
+public abstract class BaseFragment<P extends IPresenter> extends Fragment
+        implements IFragment, FragmentLifecycleable, EventPublicApi.LogoutApi {
+
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;
@@ -148,5 +153,22 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Override
     public boolean userButterKnife() {
         return true;
+    }
+
+    @Override
+    public void jumpToLoginPage(String path, String key, String value) {
+        new DialogSure.Builder(mContext)
+                .content("您的账号已在别处登录，请重新登录")
+                .cancelable(false)
+                .title("下线通知")
+                .sureListener(dialog -> {
+                    ARouter.getInstance()
+                            .build(path)
+                            .withString(key, value)
+                            .navigation();
+                    dialog.dismiss();
+                })
+                .build()
+                .show();
     }
 }

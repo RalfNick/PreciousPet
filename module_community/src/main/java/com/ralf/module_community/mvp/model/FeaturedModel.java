@@ -9,7 +9,7 @@ import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.http.CommunityService;
-import com.ralf.module_community.mvp.contact.FeaturedContact;
+import com.ralf.module_community.mvp.contact.FeaturedContract;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ import io.reactivex.Observable;
  * @date 2018/12/17 上午10:09
  **/
 @FragmentScope
-public class FeaturedModel extends BaseModel implements FeaturedContact.Model {
+public class FeaturedModel extends BaseModel implements FeaturedContract.Model {
 
     @Inject
     public FeaturedModel(IRepositoryManager repositoryManager) {

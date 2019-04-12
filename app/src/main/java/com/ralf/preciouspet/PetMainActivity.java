@@ -31,6 +31,7 @@ import com.jess.arms.utils.PermissionUtils;
 import com.jess.arms.utils.SpUtil;
 import com.jess.arms.utils.ToastUtils;
 import com.jess.arms.utils.constant.PermissionConstants;
+import com.jess.arms.widget.dialog.DialogSure;
 import com.orhanobut.logger.Logger;
 import com.ralf.module_chat.ChatHelper;
 import com.ralf.module_db.data.entity.PetAssistantEntity;
@@ -41,7 +42,6 @@ import com.ralf.pet_provider.share.PetShare;
 import com.ralf.pet_provider.user.UserUtil;
 import com.ralf.pet_provider.user.constant.UserConstant;
 import com.ralf.pet_provider.util.NetUtil;
-import com.ralf.pet_provider.widget.dialog.DialogSure;
 
 import java.util.HashSet;
 import java.util.List;
@@ -81,10 +81,6 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
      * 记录退出时间
      */
     private long mExitTime;
-
-    /**
-     * 退出登录对话框
-     */
     private DialogSure mDialogSure;
 
     @Override
@@ -308,7 +304,7 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
     }
 
     @Override
-    public void jumpToLoginPage() {
+    public void jumpToLoginPage(String path, String key, String value) {
         if (mDialogSure == null) {
             mDialogSure = new DialogSure.Builder(this)
                     .content("您的账号已在别处登录，请重新登录")
@@ -316,8 +312,8 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
                     .title("下线通知")
                     .sureListener(dialog -> {
                         ARouter.getInstance()
-                                .build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH)
-                                .withString(RouterConfig.LoginRegisterModule.KEY_LOGOUT, RouterConfig.LoginRegisterModule.VALUE_LOGOUT)
+                                .build(path)
+                                .withString(key, value)
                                 .navigation();
                         dialog.dismiss();
                     })

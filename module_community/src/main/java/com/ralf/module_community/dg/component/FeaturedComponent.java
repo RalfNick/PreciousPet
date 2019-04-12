@@ -18,5 +18,10 @@ import dagger.Component;
 @Component(modules = FeaturedModule.class, dependencies = AppComponent.class)
 public interface FeaturedComponent {
 
+    /**
+     * Dagger2 注入
+     *
+     * @param fragment FeaturedFragment
+     */
     void inject(FeaturedFragment fragment);
 }

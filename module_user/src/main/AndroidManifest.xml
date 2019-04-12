@@ -3,5 +3,6 @@
 
     <application>
         <activity android:name=".mvp.ui.MasterInfoActivity" />
+        <activity android:name=".mvp.ui.PetInfoActivity" />
     </application>
 </manifest>

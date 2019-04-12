@@ -105,6 +105,7 @@ public final class RouterConfig {
         public static final String KEY_DYNAMIC_ID = "dynamicId";
         public static final String KEY_ITEM_POSITION = "itemPosition";
         public static final String KEY_NAVIGATE_TYPE = "navigateType";
+        public static final String KEY_FROM_ITEM_POSITION = "position";
 
         public static final String FRAGMENT_NAME = "CommunityFragment";
         /**
@@ -126,6 +127,11 @@ public final class RouterConfig {
          * 点赞列表页面
          */
         public static final String COMMUNITY_PRAISE_LIST_PATH = "/community_module/praise_list";
+
+        /**
+         * 宠物列表页面
+         */
+        public static final String COMMUNITY_PET_LIST_PATH = "/community_module/pet_list";
     }
 
     /**
@@ -182,6 +188,8 @@ public final class RouterConfig {
 
         public static final String KEY_USER_ID = "user_id";
 
+        public static final String KEY_PET_ID = "pet_id";
+
         /**
          * 测试界面
          */
@@ -196,5 +204,10 @@ public final class RouterConfig {
          * 用户状态信息
          */
         public static final String MASTER_INFO_PATH = "/user_module/master_info";
+
+        /**
+         * 宠物状态信息
+         */
+        public static final String PET_INFO_PATH = "/user_module/pet_info";
     }
 }

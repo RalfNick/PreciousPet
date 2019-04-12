@@ -2,23 +2,17 @@ package com.ralf.module_community.mvp.presenter;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.jess.arms.di.scope.FragmentScope;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
-import com.jess.arms.utils.ToastUtils;
-import com.ralf.module_community.R;
 import com.ralf.module_community.constant.AttentionType;
 import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.entity.PraiseEntity;
-import com.ralf.module_community.mvp.contact.FeaturedContact;
+import com.ralf.module_community.mvp.contact.FeaturedContract;
 import com.ralf.pet_provider.constant.PetConstant;
 import com.ralf.pet_provider.http.WebObserver;
 import com.ralf.pet_provider.user.constant.UserConstant;
@@ -44,7 +38,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
  * @date 2018/12/17 上午10:09
  **/
 @FragmentScope
-public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, FeaturedContact.View> {
+public class FeaturedPresenter extends BasePresenter<FeaturedContract.Model, FeaturedContract.View> {
 
     @Inject
     RxErrorHandler mErrorHandler;
@@ -53,7 +47,7 @@ public class FeaturedPresenter extends BasePresenter<FeaturedContact.Model, Feat
     private int mTotalPage;
 
     @Inject
-    public FeaturedPresenter(FeaturedContact.Model model, FeaturedContact.View rootView) {
+    public FeaturedPresenter(FeaturedContract.Model model, FeaturedContract.View rootView) {
         super(model, rootView);
     }
 

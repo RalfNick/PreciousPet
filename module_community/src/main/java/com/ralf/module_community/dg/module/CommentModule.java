@@ -1,7 +1,7 @@
 package com.ralf.module_community.dg.module;
 
 import com.jess.arms.di.scope.ActivityScope;
-import com.ralf.module_community.mvp.contact.CommentContact;
+import com.ralf.module_community.mvp.contact.CommentContract;
 import com.ralf.module_community.mvp.model.CommentModel;
 
 import dagger.Module;
@@ -17,21 +17,21 @@ import dagger.Provides;
 @Module
 public class CommentModule {
 
-    private CommentContact.View mView;
+    private CommentContract.View mView;
 
-    public CommentModule(CommentContact.View view) {
+    public CommentModule(CommentContract.View view) {
         mView = view;
     }
 
     @ActivityScope
     @Provides
-    public CommentContact.View provideCommentView() {
+    public CommentContract.View provideCommentView() {
         return mView;
     }
 
     @ActivityScope
     @Provides
-    public CommentContact.Model provideCommentModel(CommentModel model) {
+    public CommentContract.Model provideCommentModel(CommentModel model) {
         return model;
     }
 }

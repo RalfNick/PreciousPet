@@ -52,7 +52,7 @@ public class PraiseListAdapter extends BaseQuickAdapter<PraiseEntity, BaseViewHo
                 .isCircle(false)
                 .build();
         mImageLoader.loadImage(mContext, imageConfig);
-
+        helper.addOnClickListener(R.id.item_praise_head_portrait_iv);
         helper.setText(R.id.item_praise_head_name_tv, item.getNickName());
         int sex = item.getSex();
         helper.setImageResource(R.id.item_praise_sex_iv,

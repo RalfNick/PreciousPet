@@ -47,8 +47,7 @@ import butterknife.OnClick;
  * @date 2019/04/11 上午8:44
  **/
 @Route(path = RouterConfig.UserModule.PET_INFO_PATH)
-public class PetInfoActivity extends BaseSwipeBackActivity<PetPresenter>
-        implements PetContract.View, View.OnClickListener {
+public class PetInfoActivity extends BaseSwipeBackActivity<PetPresenter> implements PetContract.View {
 
     private static final String TITLE = "宠物详情";
     private static final String PRAISE_NUM_TXT = "%s 个赞";

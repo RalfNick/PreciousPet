@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.event.transmit.EventPublicApi;
 import com.jess.arms.event.transmit.EventPublicApiHelper;
@@ -25,6 +27,7 @@ import com.ralf.module_community.mvp.contact.PraiseListContract;
 import com.ralf.module_community.mvp.presenter.PraiseLisPresenter;
 import com.ralf.module_community.mvp.ui.adapter.PraiseListAdapter;
 import com.ralf.pet_provider.base.BaseSwipeBackActivity;
+import com.ralf.pet_provider.common.PicturePreviewActivity;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -108,6 +111,22 @@ public class PraiseListActivity extends BaseSwipeBackActivity<PraiseLisPresenter
                 refreshData(true);
             }
         });
+        // 头像预览
+        mListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            PraiseEntity praiseEntity = mPraiseEntityList.get(position);
+            if (view.getId() == R.id.item_praise_head_portrait_iv) {
+                PicturePreviewActivity.startPreViewPicActivity(PraiseListActivity.this,
+                        new String[]{praiseEntity.getHeadPortrait()}, 0);
+            }
+        });
+        // 跳转到主人详情
+        mListAdapter.setOnItemClickListener((adapter, view, position) -> {
+            PraiseEntity praiseEntity = mPraiseEntityList.get(position);
+            ARouter.getInstance()
+                    .build(RouterConfig.UserModule.MASTER_INFO_PATH)
+                    .withInt(RouterConfig.UserModule.KEY_USER_ID, praiseEntity.getUserId())
+                    .navigation();
+        });
     }
 
     @Override
@@ -153,6 +172,6 @@ public class PraiseListActivity extends BaseSwipeBackActivity<PraiseLisPresenter
             return;
         }
         int position = mPraiseEntityList.size();
-        mListAdapter.addData(position,data);
+        mListAdapter.addData(position, data);
     }
 }

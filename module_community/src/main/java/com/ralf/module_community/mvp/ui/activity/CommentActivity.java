@@ -434,7 +434,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
         AdapterMultiItemEntity entity;
         commentEntity.setId(commentIndex++);
         int total;
-        if (mItemEntityList.size() >= INDEX_START_COMMENT) {
+        if (mItemEntityList.size() > INDEX_START_COMMENT) {
             total = mItemEntityList.get(INDEX_START_COMMENT).getCommentEntity().getTotalComment();
         } else {
             total = 1;

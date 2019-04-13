@@ -140,6 +140,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     @Override
     protected void loadLargeData() {
         requestData(true, Constant.TYPE_REFRESH);
+        mIsLoaded = true;
     }
 
     @Override

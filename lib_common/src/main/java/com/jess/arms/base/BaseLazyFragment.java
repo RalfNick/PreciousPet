@@ -19,8 +19,8 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
     /**
      * 是否 UI 准备好 和 是否加载了数据
      */
-    private boolean mIsPrepared = false;
-    private boolean mIsLoaded = false;
+    protected boolean mIsPrepared = false;
+    protected boolean mIsLoaded = false;
 
     /**
      * 网络请求等延迟操作在此函数中进行,需要进行懒加载

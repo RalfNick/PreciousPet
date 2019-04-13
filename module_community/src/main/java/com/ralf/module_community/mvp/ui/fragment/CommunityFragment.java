@@ -65,8 +65,8 @@ public class CommunityFragment extends BaseFragment {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mFragmentList.add(new FeaturedFragment());
-        mFragmentList.add(new FeaturedFragment());
-        mFragmentList.add(new FeaturedFragment());
+        mFragmentList.add(new RecommendFragment());
+        mFragmentList.add(new ChannelFragment());
         CommunityAdapter adapter = new CommunityAdapter(getChildFragmentManager(), mFragmentList);
         setUpIndicatorWidth(mTabLayout, 10, 10);
         mTabLayout.setupWithViewPager(mViewPager);

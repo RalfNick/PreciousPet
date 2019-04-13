@@ -378,6 +378,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
 
     @Override
     public void onRefreshDiscussView(DynamicEntity dynamicEntity) {
+        mDynamicId = dynamicEntity.getDynamicId();
         mNickName = dynamicEntity.getNickName();
         mItemEntityList.clear();
         AdapterMultiItemEntity headerEntity = new AdapterMultiItemEntity(TYPE_HEADER);

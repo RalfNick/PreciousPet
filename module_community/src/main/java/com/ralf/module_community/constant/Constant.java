@@ -19,6 +19,9 @@ public final class Constant {
     public static final int TYPE_VIDEO = 7;
     public static final int TYPE_OTHER = 8;
 
+    public final static String LAT = "lat";
+    public final static String LNG = "lng";
+
     /**
      * 网络请求字段
      */
@@ -37,4 +40,10 @@ public final class Constant {
      * 资源常量
      */
     public final static String GIF_REMOVE_PRAISE = "file:///android_asset/praise_false.gif";
+
+    /**
+     * 推荐部分类型
+     */
+    public static final String[] HEAD_TITLE_ARR = {"最新动态", "魅力榜", "好友赞过", "附近萌宠",
+            "新宠露脸", "热赞榜", "帅哥美女", "明星红人"};
 }

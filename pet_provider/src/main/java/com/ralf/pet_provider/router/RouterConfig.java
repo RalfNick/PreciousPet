@@ -132,6 +132,11 @@ public final class RouterConfig {
          * 宠物列表页面
          */
         public static final String COMMUNITY_PET_LIST_PATH = "/community_module/pet_list";
+
+        /**
+         * 最新动态列表页面
+         */
+        public static final String COMMUNITY_LATEST_PATH = "/community_module/latest_list";
     }
 
     /**

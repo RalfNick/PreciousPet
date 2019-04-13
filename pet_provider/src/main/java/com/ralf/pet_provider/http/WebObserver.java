@@ -23,8 +23,18 @@ public abstract class WebObserver<E> extends ErrorHandleSubscriber<BaseEntity<E>
         super(rxErrorHandler);
     }
 
+    /**
+     * 网络请求成功
+     *
+     * @param data 数据
+     */
     protected abstract void onSuccess(E data);
 
+    /**
+     * 请求失败
+     *
+     * @param failMsg 失败信息
+     */
     protected abstract void onFailed(String failMsg);
 
     @Override

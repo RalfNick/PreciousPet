@@ -88,12 +88,6 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
     int mDynamicId;
 
     /**
-     * 在上一个列表页面的位置
-     */
-    @Autowired(name = RouterConfig.CommunityModule.KEY_ITEM_POSITION)
-    int mPosition;
-
-    /**
      * 跳转的类型（精选 or 频道）
      */
     @Autowired(name = RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE)
@@ -103,7 +97,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
      * 上一个页面的位置（FeaturedFragment RecyclerView）
      */
     @Autowired(name = RouterConfig.CommunityModule.KEY_ITEM_POSITION)
-    String itemPosition;
+    int mPosition;
 
     @BindView(R2.id.back_iv)
     ImageView mBackIv;
@@ -200,16 +194,23 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
         }
         // 弹出消息回复
         if (viewId == R.id.item_content_discuss_layout || viewId == R.id.item_praise_comment_rb) {
-            String nickName = commentEntity.getNickName();
-            Integer toUserId = commentEntity.getUserId();
-            if (toUserId == UserConstant.APP_USERID) {
-                ToastUtils.showShort("不能回复自己");
+            if (commentEntity != null) {
+                Integer toUserId = commentEntity.getUserId();
+                if (toUserId == UserConstant.APP_USERID) {
+                    ToastUtils.showShort("不能回复自己");
+                } else {
+                    mEmojiconEditText.setHint("回复 " + commentEntity.getNickName());
+                    mInputHelper.showKeyBoard();
+                    mPresenter.setCurrentComment(commentEntity.getDynamicId(), toUserId);
+                    CommentInputHelper.isResponse = true;
+                }
             } else {
-                mEmojiconEditText.setHint("回复 " + nickName);
-                mInputHelper.showKeyBoard();
-                mPresenter.setCurrentComment(commentEntity.getDynamicId(), toUserId);
-                CommentInputHelper.isResponse = true;
+                mEmojiconEditText.setHint("回复 " + mNickName);
+                mPresenter.setCurrentComment(mDynamicId, mUserId);
             }
+            mInputHelper.showKeyBoard();
+            CommentInputHelper.isResponse = true;
+
         } else if (viewId == R.id.discuss_image_iv) {
             ARouter.getInstance()
                     .build(RouterConfig.UserModule.MASTER_INFO_PATH)
@@ -377,6 +378,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
 
     @Override
     public void onRefreshDiscussView(DynamicEntity dynamicEntity) {
+        mNickName = dynamicEntity.getNickName();
         mItemEntityList.clear();
         AdapterMultiItemEntity headerEntity = new AdapterMultiItemEntity(TYPE_HEADER);
         headerEntity.setDynamicBean(dynamicEntity);

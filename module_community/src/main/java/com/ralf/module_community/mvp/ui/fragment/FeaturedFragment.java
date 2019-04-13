@@ -382,7 +382,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                 .withInt(RouterConfig.CommunityModule.KEY_FROM_USER_ID, fromId)
                 .withInt(RouterConfig.CommunityModule.KEY_DYNAMIC_ID, dynamicId)
                 .withInt(RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE, RouterConfig.CommunityModule.TYPE_SELECTED)
-                .withInt(RouterConfig.CommunityModule.KEY_FROM_ITEM_POSITION, position)
+                .withInt(RouterConfig.CommunityModule.KEY_ITEM_POSITION, position)
                 .navigation();
     }
 

@@ -29,6 +29,8 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
 
     /**
      * 少量数据，初始化时就加载，如 View 的初始化，点击事件设置等，接口中 iniView 仅仅用来返回布局
+     *
+     * @param savedInstanceState 数据
      */
     protected abstract void initEvent(@Nullable Bundle savedInstanceState);
 

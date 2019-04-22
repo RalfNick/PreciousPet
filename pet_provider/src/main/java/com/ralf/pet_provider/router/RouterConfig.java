@@ -96,6 +96,7 @@ public final class RouterConfig {
          */
         public static final int TYPE_SELECTED = 2000;
         public static final int TYPE_CHANNEL = 3000;
+
         /**
          * ARouter 跳转携带的参数的 Key,用户 id，昵称，来自的 id
          */
@@ -137,6 +138,37 @@ public final class RouterConfig {
          * 最新动态列表页面
          */
         public static final String COMMUNITY_LATEST_PATH = "/community_module/latest_list";
+
+        /**
+         * 好友点赞列表页面,新萌露脸公用一个界面
+         */
+        public static final String COMMUNITY_FRIEND_PRAISE_PATH = "/community_module/friend_praise_list";
+        public static final String KEY_COMMUNITY_FRIEND_PRISE_TYPE = "typeFriendPraise";
+
+        /**
+         * 跳转类型，4000 好友点赞  5000 新萌露脸
+         */
+        public static final int TYPE_FRIEND_PRISE = 4000;
+        public static final int TYPE_NEW_CUTE_PET = 5000;
+
+        /**
+         * 热赞榜页面
+         */
+        public static final String COMMUNITY_HEAT_PRAISE_PATH = "/community_module/heat_praise_list";
+
+        /**
+         * 附近萌宠页面
+         */
+        public static final String COMMUNITY_NEAR_PET_PATH = "/community_module/near_pet_list";
+
+        /**
+         * 历史热赞榜-更多查看页面
+         */
+        public static final String COMMUNITY_HISTORY_PRAISE_MORE_PATH = "/community_module/history_more_list";
+        /**
+         * 历史热赞榜-更多查看页面 key - dateTime
+         */
+        public static final String KEY_HISTORY_PRAISE_MORE_TIME = "dateTime";
     }
 
     /**

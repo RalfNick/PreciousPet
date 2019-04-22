@@ -19,7 +19,7 @@ import com.ralf.module_community.R2;
 import com.ralf.module_community.dg.component.DaggerPetListComponent;
 import com.ralf.module_community.dg.module.PetListModule;
 import com.ralf.module_community.entity.PetInfoEntity;
-import com.ralf.module_community.mvp.contact.PetListContract;
+import com.ralf.module_community.mvp.contract.PetListContract;
 import com.ralf.module_community.mvp.presenter.PetListPresenter;
 import com.ralf.module_community.mvp.ui.adapter.PetListAdapter;
 import com.ralf.pet_provider.base.BaseSwipeBackActivity;

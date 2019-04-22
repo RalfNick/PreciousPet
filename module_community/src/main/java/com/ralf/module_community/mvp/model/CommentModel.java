@@ -11,7 +11,7 @@ import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.entity.ReplyEntity;
 import com.ralf.module_community.http.CommunityService;
-import com.ralf.module_community.mvp.contact.CommentContract;
+import com.ralf.module_community.mvp.contract.CommentContract;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import javax.inject.Inject;

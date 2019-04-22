@@ -1,12 +1,13 @@
 package com.ralf.module_community.mvp.model;
 
 import com.google.gson.JsonObject;
+import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.ralf.module_community.constant.Constant;
 import com.ralf.module_community.entity.RecommendEntity;
 import com.ralf.module_community.http.CommunityService;
-import com.ralf.module_community.mvp.contact.RecommendContract;
+import com.ralf.module_community.mvp.contract.RecommendContract;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import javax.inject.Inject;
@@ -20,6 +21,7 @@ import io.reactivex.Observable;
  * @email -
  * @date 2019/04/13 上午10:33
  **/
+@FragmentScope
 public class RecommendModel extends BaseModel implements RecommendContract.Model {
 
     @Inject

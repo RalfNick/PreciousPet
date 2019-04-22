@@ -1,7 +1,7 @@
 package com.ralf.module_community.dg.module;
 
 import com.jess.arms.di.scope.FragmentScope;
-import com.ralf.module_community.mvp.contact.ChannelContract;
+import com.ralf.module_community.mvp.contract.ChannelContract;
 import com.ralf.module_community.mvp.model.ChannelModel;
 
 import dagger.Module;

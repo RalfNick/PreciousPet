@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/item_friend_praise_image_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/item_friend_praise_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/item_friend_praise_image_iv"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            tools:text="一只小猫" />
+
+        <ImageView
+
+            android:id="@+id/item_friend_pet_head_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_below="@+id/item_friend_praise_name_tv"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/item_friend_praise_image_iv"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/item_friend_pet_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_below="@+id/item_friend_praise_name_tv"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/item_friend_pet_head_iv"
+            android:gravity="center"
+            android:text="小鼠"
+            android:textColor="#FF707070"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/item_friend_pet_sex_iv"
+            android:layout_width="13dp"
+            android:layout_height="11dp"
+            android:layout_below="@+id/item_friend_praise_name_tv"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@+id/item_friend_pet_name_tv"
+            android:src="@mipmap/ic_launcher" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <ImageView
+            android:id="@+id/item_friend_pet_image_iv"
+            android:layout_width="match_parent"
+            android:layout_height="186dp"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/item_friend_video_play_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_video_play"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/item_praise_from_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:text="宠物小助手"
+            android:textColor="@color/discuss_text_color"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/item_praise_action_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_praise_from_name_tv"
+            android:layout_marginStart="5dp"
+            android:text="赞过"
+            android:textColor="@color/discuss_text_color"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/item_send_praise_rb"
+            android:layout_width="57dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_item_friend_praise_bkg"
+            android:button="@null"
+            android:drawableStart="@drawable/item_friend_praise_rb_bkg"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="赞"
+            android:textColor="@color/comment_content"
+            android:textSize="11sp" />
+    </RelativeLayout>
+
+</LinearLayout>

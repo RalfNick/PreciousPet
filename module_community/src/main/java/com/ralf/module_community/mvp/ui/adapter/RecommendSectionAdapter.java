@@ -39,6 +39,6 @@ public class RecommendSectionAdapter extends BaseSectionQuickAdapter<RecommendSe
     @Override
     protected void convert(BaseViewHolder helper, RecommendSectionEntity item) {
         ImageView imageView = helper.getView(R.id.recommend_content_iv);
-        ImageLoaderHelper.loadImage(mContext, imageView, item.t.getImgUrl(), 6);
+        ImageLoaderHelper.loadImage(mContext, imageView, item.t.getImgUrl(), 10);
     }
 }

@@ -7,7 +7,7 @@ import com.jess.arms.mvp.BaseModel;
 import com.ralf.module_community.constant.Constant;
 import com.ralf.module_community.entity.result.PetListResultEntity;
 import com.ralf.module_community.http.CommunityService;
-import com.ralf.module_community.mvp.contact.PetListContract;
+import com.ralf.module_community.mvp.contract.PetListContract;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import javax.inject.Inject;

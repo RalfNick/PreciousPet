@@ -18,7 +18,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseLazyFragment;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.event.transmit.EventPublicApi;
 import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
@@ -36,7 +35,7 @@ import com.ralf.module_community.entity.BannerEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.eventbus.RefreshCommentEntity;
-import com.ralf.module_community.mvp.contact.FeaturedContract;
+import com.ralf.module_community.mvp.contract.FeaturedContract;
 import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
@@ -209,7 +208,9 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
         final FeaturedHeaderView featuredHeaderView = mStickyHeadContainer.findViewById(R.id.item_header_view);
         View.OnClickListener listener = v -> {
             int viewId = v.getId();
-            int userId = mAdapter.getData().get(mCurrentStickyPos).getDynamicBean().getUserId();
+            DynamicEntity dynamicBean = mAdapter.getData().get(mCurrentStickyPos).getDynamicBean();
+            int userId = dynamicBean.getUserId();
+            int petId = dynamicBean.getPetId();
             if (viewId == R.id.header_attention_btn) {
                 int itemIndex = mCurrentStickyPos - mAdapter.getHeaderLayoutCount();
                 if (itemIndex > -1) {
@@ -225,8 +226,11 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
                         .navigation();
             } else if (viewId == R.id.header_pet_avatar_iv
                     || viewId == R.id.header_pet_name_tv) {
-                // 跳转宠物从详情
-                ToastUtils.showShort("Decoration 宠物详情");
+                // 跳转到宠物页面
+                ARouter.getInstance()
+                        .build(RouterConfig.UserModule.PET_INFO_PATH)
+                        .withInt(RouterConfig.UserModule.KEY_PET_ID, petId)
+                        .navigation();
             } else if (viewId == R.id.header_pet_type_tv) {
                 // 宠物类型详情
                 ToastUtils.showShort("Decoration 宠物类型");

@@ -1,9 +1,8 @@
-package com.ralf.module_community.mvp.contact;
+package com.ralf.module_community.mvp.contract;
 
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 import com.ralf.module_community.entity.PraiseEntity;
-import com.ralf.module_community.entity.result.ListMultipleEntity;
 import com.ralf.module_community.entity.result.PraiseListResultEntity;
 import com.ralf.pet_provider.http.BaseEntity;
 

@@ -13,7 +13,7 @@ import com.jess.arms.utils.ToastUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.dg.component.DaggerChannelComponent;
 import com.ralf.module_community.dg.module.ChannelModule;
-import com.ralf.module_community.mvp.contact.ChannelContract;
+import com.ralf.module_community.mvp.contract.ChannelContract;
 import com.ralf.module_community.mvp.presenter.ChannelPresenter;
 
 /**

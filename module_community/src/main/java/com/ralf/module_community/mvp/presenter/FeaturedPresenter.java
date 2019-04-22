@@ -12,7 +12,7 @@ import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.entity.PraiseEntity;
-import com.ralf.module_community.mvp.contact.FeaturedContract;
+import com.ralf.module_community.mvp.contract.FeaturedContract;
 import com.ralf.pet_provider.constant.PetConstant;
 import com.ralf.pet_provider.http.WebObserver;
 import com.ralf.pet_provider.user.constant.UserConstant;

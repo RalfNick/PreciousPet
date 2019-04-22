@@ -29,7 +29,7 @@ import com.ralf.module_community.entity.ChannelDetailEntity;
 import com.ralf.module_community.entity.CommentEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.eventbus.RefreshCommentEntity;
-import com.ralf.module_community.mvp.contact.CommentContract;
+import com.ralf.module_community.mvp.contract.CommentContract;
 import com.ralf.module_community.mvp.presenter.CommentPresenter;
 import com.ralf.module_community.mvp.ui.adapter.CommentDetailAdapter;
 import com.ralf.module_community.mvp.ui.view.CommentInputView;

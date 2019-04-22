@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/heat_praise_round_ri"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/day_bg_one"
+        android:padding="5dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="20dp"
+        app:riv_mutate_background="false"
+        tools:src="@drawable/ic_launcher" />
+
+    <com.ralf.pet_provider.widget.StrokeTextView
+        android:id="@+id/praise_num_stroke_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/heat_praise_round_ri"
+        android:layout_alignEnd="@+id/heat_praise_round_ri"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="18dp"
+        android:drawablePadding="5dp"
+        android:drawableStart="@mipmap/icon_praise_true"
+        android:gravity="end"
+        android:textColor="@color/white"
+        app:strokeTextColor="@color/black"
+        app:strokeTextWidth="4"
+        tools:text="6" />
+
+    <ImageView
+        android:id="@+id/heat_praise_play_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/icon_video_play"
+        android:visibility="invisible" />
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.ralf.module_community.widget.HeatPraiseView
+        android:id="@+id/item_history_heat_praise_hv"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        android:layout_margin="12dp">
+
+    </com.ralf.module_community.widget.HeatPraiseView>
+</LinearLayout>

@@ -1,7 +1,7 @@
 package com.ralf.module_community.dg.module;
 
 import com.jess.arms.di.scope.ActivityScope;
-import com.ralf.module_community.mvp.contact.CommentContract;
+import com.ralf.module_community.mvp.contract.CommentContract;
 import com.ralf.module_community.mvp.model.CommentModel;
 
 import dagger.Module;

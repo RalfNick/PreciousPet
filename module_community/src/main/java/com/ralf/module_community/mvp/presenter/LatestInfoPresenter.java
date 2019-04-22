@@ -4,7 +4,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.ralf.module_community.entity.result.LatestInfoResultEntity;
-import com.ralf.module_community.mvp.contact.LatestInfoContract;
+import com.ralf.module_community.mvp.contract.LatestInfoContract;
 import com.ralf.pet_provider.http.WebObserver;
 
 import javax.inject.Inject;

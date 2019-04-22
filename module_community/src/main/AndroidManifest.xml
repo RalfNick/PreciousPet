@@ -22,5 +22,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".mvp.ui.activity.PetListActivity" />
         <activity android:name=".mvp.ui.activity.LatestInfoActivity" />
+        <activity android:name=".mvp.ui.activity.FriendPraiseActivity" />
+        <activity android:name=".mvp.ui.activity.HeatPraiseActivity" />
+        <activity android:name=".mvp.ui.activity.HistoryPraiseMoreActivity" />
     </application>
 </manifest>

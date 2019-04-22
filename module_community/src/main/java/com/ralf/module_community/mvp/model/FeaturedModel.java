@@ -9,7 +9,7 @@ import com.ralf.module_community.entity.AttentionEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.http.CommunityService;
-import com.ralf.module_community.mvp.contact.FeaturedContract;
+import com.ralf.module_community.mvp.contract.FeaturedContract;
 import com.ralf.pet_provider.http.BaseEntity;
 
 import javax.inject.Inject;

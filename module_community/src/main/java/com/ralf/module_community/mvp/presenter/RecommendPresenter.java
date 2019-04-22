@@ -5,7 +5,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.ralf.module_community.entity.RecommendEntity;
 import com.ralf.module_community.entity.RecommendSectionEntity;
-import com.ralf.module_community.mvp.contact.RecommendContract;
+import com.ralf.module_community.mvp.contract.RecommendContract;
 import com.ralf.pet_provider.http.WebObserver;
 
 import java.util.ArrayList;

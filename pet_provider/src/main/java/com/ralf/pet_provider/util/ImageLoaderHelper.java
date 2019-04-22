@@ -3,6 +3,7 @@ package com.ralf.pet_provider.util;
 import android.content.Context;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.jess.arms.glide.GlideRoundTransform;
 import com.jess.arms.http.imageloader.ImageConfig;
 import com.jess.arms.http.imageloader.ImageLoader;

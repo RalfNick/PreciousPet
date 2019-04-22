@@ -87,6 +87,8 @@ dependencies {
     // ijk模式的so
     implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.3'
     implementation 'com.shuyu:gsyVideoPlayer-arm64:6.0.3'
+    // 圆角图片
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     //test
     implementation rootProject.ext.dependencies["junit"]

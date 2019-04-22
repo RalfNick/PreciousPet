@@ -2,7 +2,7 @@ package com.ralf.module_community.mvp.presenter;
 
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.ralf.module_community.mvp.contact.ChannelContract;
+import com.ralf.module_community.mvp.contract.ChannelContract;
 
 import javax.inject.Inject;
 

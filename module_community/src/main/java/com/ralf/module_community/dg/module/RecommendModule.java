@@ -1,7 +1,7 @@
 package com.ralf.module_community.dg.module;
 
 import com.jess.arms.di.scope.FragmentScope;
-import com.ralf.module_community.mvp.contact.RecommendContract;
+import com.ralf.module_community.mvp.contract.RecommendContract;
 import com.ralf.module_community.mvp.model.RecommendModel;
 
 import dagger.Module;

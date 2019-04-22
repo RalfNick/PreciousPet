@@ -35,6 +35,7 @@ public final class Constant {
     public final static String TYPE = "type";
     public static String POST_ID = "postId";
     public final static String USER_ID = "userId";
+    public final static String DATE_TIME = "dateTime";
 
     /**
      * 资源常量

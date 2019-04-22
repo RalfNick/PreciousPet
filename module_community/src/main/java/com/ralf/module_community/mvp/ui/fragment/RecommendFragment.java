@@ -18,19 +18,19 @@ import com.ralf.module_community.R2;
 import com.ralf.module_community.dg.component.DaggerRecommendComponent;
 import com.ralf.module_community.dg.module.RecommendModule;
 import com.ralf.module_community.entity.RecommendSectionEntity;
-import com.ralf.module_community.mvp.contact.RecommendContract;
+import com.ralf.module_community.mvp.contract.RecommendContract;
 import com.ralf.module_community.mvp.presenter.RecommendPresenter;
 import com.ralf.module_community.mvp.ui.adapter.RecommendSectionAdapter;
 import com.ralf.module_community.mvp.ui.decoration.GridSectionAverageGapItemDecoration;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-import static com.ralf.module_community.constant.Constant.HEAD_TITLE_ARR;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+
+import static com.ralf.module_community.constant.Constant.HEAD_TITLE_ARR;
 
 /**
  * @author Ralf(wanglixin)
@@ -80,6 +80,7 @@ public class RecommendFragment extends BaseLazyFragment<RecommendPresenter> impl
     @Override
     protected void loadLargeData() {
         mPresenter.getRecommendData(mLat, mLng);
+        mIsLoaded = true;
     }
 
     @Override
@@ -88,27 +89,29 @@ public class RecommendFragment extends BaseLazyFragment<RecommendPresenter> impl
                 R.layout.head_recommend_tile_layout, mSectionEntityList);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         mRecyclerView.setAdapter(mSectionAdapter);
-        mRecyclerView.addItemDecoration(new GridSectionAverageGapItemDecoration(10, 2, 10, 2));
+        mRecyclerView.addItemDecoration(new GridSectionAverageGapItemDecoration(10, 5, 10, 10));
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setOnRefreshListener(refreshLayout -> mPresenter.getRecommendData(mLat, mLng));
         mSectionAdapter.setOnItemClickListener((adapter, view, position) -> {
             RecommendSectionEntity sectionEntity = mSectionEntityList.get(position);
-            int id = sectionEntity.t.getId();
-            int type = sectionEntity.t.getType();
-            if (type == 0) {
-                // 跳转到主人详情
-                ARouter.getInstance()
-                        .build(RouterConfig.UserModule.MASTER_INFO_PATH)
-                        .withInt(RouterConfig.UserModule.KEY_USER_ID, id)
-                        .navigation();
-            } else {
-                // 跳转到讨论区
-                ARouter.getInstance()
-                        .build(RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
-                        .withInt(RouterConfig.CommunityModule.KEY_DYNAMIC_ID, id)
-                        .withString(RouterConfig.CommunityModule.KEY_NICK_NAME, "")
-                        .withInt(RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE, RouterConfig.CommunityModule.TYPE_SELECTED)
-                        .navigation();
+            if (!sectionEntity.isHeader) {
+                int id = sectionEntity.t.getId();
+                int type = sectionEntity.t.getType();
+                if (type == 0) {
+                    // 跳转到主人详情
+                    ARouter.getInstance()
+                            .build(RouterConfig.UserModule.MASTER_INFO_PATH)
+                            .withInt(RouterConfig.UserModule.KEY_USER_ID, id)
+                            .navigation();
+                } else {
+                    // 跳转到讨论区
+                    ARouter.getInstance()
+                            .build(RouterConfig.CommunityModule.COMMUNITY_COMMENT_PATH)
+                            .withInt(RouterConfig.CommunityModule.KEY_DYNAMIC_ID, id)
+                            .withString(RouterConfig.CommunityModule.KEY_NICK_NAME, "")
+                            .withInt(RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE, RouterConfig.CommunityModule.TYPE_SELECTED)
+                            .navigation();
+                }
             }
         });
         // 更多查看
@@ -123,13 +126,29 @@ public class RecommendFragment extends BaseLazyFragment<RecommendPresenter> impl
                 } else if (HEAD_TITLE_ARR[1].equals(sectionEntity.header)) {
                     ToastUtils.showShort("魅力榜");
                 } else if (HEAD_TITLE_ARR[2].equals(sectionEntity.header)) {
-                    ToastUtils.showShort("好友赞过");
+                    // 跳转到好友点赞
+                    ARouter.getInstance()
+                            .build(RouterConfig.CommunityModule.COMMUNITY_FRIEND_PRAISE_PATH)
+                            .withInt(RouterConfig.CommunityModule.KEY_COMMUNITY_FRIEND_PRISE_TYPE,
+                                    RouterConfig.CommunityModule.TYPE_FRIEND_PRISE)
+                            .navigation();
                 } else if (HEAD_TITLE_ARR[3].equals(sectionEntity.header)) {
-                    ToastUtils.showShort("附近萌宠");
+                    // 跳转到附近萌宠
+                    ARouter.getInstance()
+                            .build(RouterConfig.CommunityModule.COMMUNITY_NEAR_PET_PATH)
+                            .navigation();
                 } else if (HEAD_TITLE_ARR[4].equals(sectionEntity.header)) {
-                    ToastUtils.showShort("新宠露脸");
+                    // 跳转到新萌露脸
+                    ARouter.getInstance()
+                            .build(RouterConfig.CommunityModule.COMMUNITY_FRIEND_PRAISE_PATH)
+                            .withInt(RouterConfig.CommunityModule.KEY_COMMUNITY_FRIEND_PRISE_TYPE,
+                                    RouterConfig.CommunityModule.TYPE_NEW_CUTE_PET)
+                            .navigation();
                 } else if (HEAD_TITLE_ARR[5].equals(sectionEntity.header)) {
-                    ToastUtils.showShort("热赞榜");
+                    // 跳转到热赞榜
+                    ARouter.getInstance()
+                            .build(RouterConfig.CommunityModule.COMMUNITY_HEAT_PRAISE_PATH)
+                            .navigation();
                 }
             }
         });

@@ -6,16 +6,16 @@ import com.ralf.module_community.entity.ChannelDetailEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
-import com.ralf.module_community.entity.PraiseEntity;
+import com.ralf.module_community.entity.HeatPraiseEntity;
+import com.ralf.module_community.entity.HistoryHeatPraiseEntity;
 import com.ralf.module_community.entity.RecommendEntity;
 import com.ralf.module_community.entity.ReplyEntity;
+import com.ralf.module_community.entity.result.FriendPraiseListResultEntity;
 import com.ralf.module_community.entity.result.LatestInfoResultEntity;
-import com.ralf.module_community.entity.result.ListMultipleEntity;
 import com.ralf.module_community.entity.result.PetListResultEntity;
 import com.ralf.module_community.entity.result.PraiseListResultEntity;
+import com.ralf.module_community.entity.result.ResultListEntity;
 import com.ralf.pet_provider.http.BaseEntity;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -120,4 +120,49 @@ public interface CommunityService {
      */
     @POST("api/bbs/get/latestList")
     Observable<BaseEntity<LatestInfoResultEntity>> getLatestInfoData(@Body JsonObject object);
+
+    /**
+     * 新宠露脸
+     *
+     * @param object 页码
+     * @return
+     */
+    @POST("api/bbs/get/newPetList")
+    Observable<BaseEntity<FriendPraiseListResultEntity>> getNewCutePetData(@Body JsonObject object);
+
+    /**
+     * 好友赞过
+     *
+     * @param object 页码
+     * @return
+     */
+    @POST("api/bbs/get/friendPraiseList")
+    Observable<BaseEntity<FriendPraiseListResultEntity>> getFriendPraiseData(@Body JsonObject object);
+
+    /**
+     * 请求日赞榜
+     *
+     * @param object 参数数据
+     * @return
+     */
+    @POST("api/bbs/get/hotPraiseList")
+    Observable<BaseEntity<ResultListEntity<HeatPraiseEntity>>> getHeatDayListRequest(@Body JsonObject object);
+
+    /**
+     * 请求历史热赞榜
+     *
+     * @param object 参数
+     * @return
+     */
+    @POST("api/bbs/get/hotPraiseHistoryList")
+    Observable<BaseEntity<ResultListEntity<HistoryHeatPraiseEntity>>> getHistoryHeatPraiseData(@Body JsonObject object);
+
+    /**
+     * 查看历史更多数据-点赞
+     *
+     * @param object 参数
+     * @return
+     */
+    @POST("api/bbs/get/hotPraiseHistoryMore")
+    Observable<BaseEntity<ResultListEntity<HeatPraiseEntity>>> getMoreHeatPraiseData(@Body JsonObject object);
 }

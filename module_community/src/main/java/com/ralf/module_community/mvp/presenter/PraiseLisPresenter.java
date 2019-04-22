@@ -7,7 +7,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.ralf.module_community.entity.result.PraiseListResultEntity;
-import com.ralf.module_community.mvp.contact.PraiseListContract;
+import com.ralf.module_community.mvp.contract.PraiseListContract;
 import com.ralf.pet_provider.http.WebObserver;
 
 import javax.inject.Inject;

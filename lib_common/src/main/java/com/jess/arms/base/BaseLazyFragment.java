@@ -43,7 +43,7 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        loadLargeData();
+        lazyLoad();
     }
 
     @Override

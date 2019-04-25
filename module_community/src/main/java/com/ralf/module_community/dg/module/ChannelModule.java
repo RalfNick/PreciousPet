@@ -3,6 +3,7 @@ package com.ralf.module_community.dg.module;
 import com.jess.arms.di.scope.FragmentScope;
 import com.ralf.module_community.mvp.contract.ChannelContract;
 import com.ralf.module_community.mvp.model.ChannelModel;
+import com.ralf.module_community.mvp.ui.block.ChannelHeaderView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -34,4 +35,10 @@ public class ChannelModule {
     public ChannelContract.Model provideChannelModel(ChannelModel model) {
         return model;
     }
+
+//    @FragmentScope
+//    @Provides
+//    public ChannelHeaderView provideChannelHeaderView() {
+//        return new ChannelHeaderView();
+//    }
 }

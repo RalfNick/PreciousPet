@@ -731,7 +731,7 @@ public class ChannelDetailEntity {
 
         @Override
         public String toString() {
-            return "TopicDetailListBean{" +
+            return "TopicBean{" +
                     "topicDetailId=" + topicDetailId +
                     ", topicDetailName='" + topicDetailName + '\'' +
                     '}';

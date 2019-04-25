@@ -150,4 +150,7 @@
     <color name="color_main_radio_text_true">#f2473d</color>
     <color name="color_main_radio_text_false">#FF888888</color>
 
+    <!--相机部分的颜色==========================================================-->
+    <color name="camera_bg">#2c2c2c</color>
+
 </resources>

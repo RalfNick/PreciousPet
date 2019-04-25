@@ -169,6 +169,27 @@ public final class RouterConfig {
          * 历史热赞榜-更多查看页面 key - dateTime
          */
         public static final String KEY_HISTORY_PRAISE_MORE_TIME = "dateTime";
+
+        /**
+         * 频道详情页面
+         */
+        public static final String COMMUNITY_CHANNEL_DETAIL_PATH = "/community_module/channel_detail";
+
+        /**
+         * 帖子详情页面
+         */
+        public static final String COMMUNITY_POST_DETAIL_PATH = "/community_module/post_detail";
+        public static final String COMMUNITY_KEY_POST_DETAIL_ID = "postId";
+
+        /**
+         * 频道详情页面携带参数 key - 频道 id
+         */
+        public static final String KEY_CHANNEL_DETAIL_ID = "channelId";
+
+        /**
+         * 全部频道页面
+         */
+        public static final String COMMUNITY_ALL_CHANNEL_PATH = "/community_module/all_channel";
     }
 
     /**

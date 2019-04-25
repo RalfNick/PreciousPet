@@ -33,7 +33,6 @@ public class PetListModel extends BaseModel implements PetListContract.Model {
     public Observable<BaseEntity<PetListResultEntity>> getPetDataList(int userId) {
         JsonObject object = new JsonObject();
         object.addProperty(Constant.TO_USER_ID, userId);
-
         return mRepositoryManager.obtainRetrofitService(CommunityService.class)
                 .getPetInfoList(object);
     }

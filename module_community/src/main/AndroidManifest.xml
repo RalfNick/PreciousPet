@@ -25,5 +25,8 @@
         <activity android:name=".mvp.ui.activity.FriendPraiseActivity" />
         <activity android:name=".mvp.ui.activity.HeatPraiseActivity" />
         <activity android:name=".mvp.ui.activity.HistoryPraiseMoreActivity" />
+        <activity android:name=".mvp.ui.activity.ChannelActivity" />
+        <activity android:name=".mvp.ui.activity.PostDetailActivity" />
+        <activity android:name=".mvp.ui.activity.AllChannelActivity" />
     </application>
 </manifest>

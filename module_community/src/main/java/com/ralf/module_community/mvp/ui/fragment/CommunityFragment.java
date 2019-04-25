@@ -71,6 +71,7 @@ public class CommunityFragment extends BaseFragment {
         setUpIndicatorWidth(mTabLayout, 10, 10);
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(2);
 
         // 在位置2时不显示发布状态的相机按钮
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

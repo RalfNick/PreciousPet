@@ -57,7 +57,6 @@ public class HistoryPraiseMoreActivity extends BaseSwipeBackActivity<HistoryPrai
     private HeatPraiseView mFirstPraiseView;
     private HeatPraiseView mSecondPraiseView;
     private HeatPraiseView mThirdPraiseView;
-    private ImageView mBackImageView;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -79,11 +78,12 @@ public class HistoryPraiseMoreActivity extends BaseSwipeBackActivity<HistoryPrai
         mFirstPraiseView = mHeadView.findViewById(R.id.day_heat_praise_first_hv);
         mSecondPraiseView = mHeadView.findViewById(R.id.day_heat_praise_second_hv);
         mThirdPraiseView = mHeadView.findViewById(R.id.day_heat_praise_third_hv);
-        mBackImageView = mHeadView.findViewById(R.id.heat_praise_back_iv);
-        mBackImageView.setVisibility(View.VISIBLE);
+        ImageView backImageView = mHeadView.findViewById(R.id.heat_praise_back_iv);
+        backImageView.setVisibility(View.VISIBLE);
         mSecondPraiseView.setOnClickListener(this);
         mFirstPraiseView.setOnClickListener(this);
         mThirdPraiseView.setOnClickListener(this);
+        backImageView.setOnClickListener(this);
         mAdapter = new DayHeatPraiseAdapter(R.layout.item_heat_praise_layout, mPraiseEntityList);
         mAdapter.addHeaderView(mHeadView);
         mRecyclerView.setAdapter(mAdapter);

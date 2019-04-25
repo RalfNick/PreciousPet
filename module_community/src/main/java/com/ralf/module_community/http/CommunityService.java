@@ -10,6 +10,7 @@ import com.ralf.module_community.entity.HeatPraiseEntity;
 import com.ralf.module_community.entity.HistoryHeatPraiseEntity;
 import com.ralf.module_community.entity.RecommendEntity;
 import com.ralf.module_community.entity.ReplyEntity;
+import com.ralf.module_community.entity.result.ChannelResultEntity;
 import com.ralf.module_community.entity.result.FriendPraiseListResultEntity;
 import com.ralf.module_community.entity.result.LatestInfoResultEntity;
 import com.ralf.module_community.entity.result.PetListResultEntity;
@@ -165,4 +166,13 @@ public interface CommunityService {
      */
     @POST("api/bbs/get/hotPraiseHistoryMore")
     Observable<BaseEntity<ResultListEntity<HeatPraiseEntity>>> getMoreHeatPraiseData(@Body JsonObject object);
+
+    /**
+     * 请求频道数据
+     *
+     * @param object 参数
+     * @return
+     */
+    @POST("api/channel/channelHomePage")
+    Observable<BaseEntity<ChannelResultEntity>> getChannelData(@Body JsonObject object);
 }

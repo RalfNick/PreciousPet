@@ -47,4 +47,9 @@ public final class Constant {
      */
     public static final String[] HEAD_TITLE_ARR = {"最新动态", "魅力榜", "好友赞过", "附近萌宠",
             "新宠露脸", "热赞榜", "帅哥美女", "明星红人"};
+
+    /**
+     * 频道部分文案常量，频道动态条数
+     */
+    public static final String CHANNEL_NUMBER_STATE = "新增%s条内容";
 }

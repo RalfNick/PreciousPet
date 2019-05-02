@@ -3,7 +3,7 @@ package com.ralf.module_community.mvp.contract;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 import com.ralf.module_community.entity.AttentionEntity;
-import com.ralf.module_community.entity.ChannelDetailEntity;
+import com.ralf.module_community.entity.ChannelPostDetailEntity;
 import com.ralf.module_community.entity.CommentEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
@@ -31,7 +31,7 @@ public interface CommentContract {
          *
          * @param data 数据
          */
-        void onRefreshChannelView(ChannelDetailEntity data);
+        void onRefreshChannelView(ChannelPostDetailEntity data);
 
         /**
          * 请求评论详情后更新数据
@@ -45,7 +45,7 @@ public interface CommentContract {
          *
          * @param data 数据
          */
-        void onFinishChannelLoadMore(ChannelDetailEntity data);
+        void onFinishChannelLoadMore(ChannelPostDetailEntity data);
 
         /**
          * 请求评论加载更多数据
@@ -102,7 +102,7 @@ public interface CommentContract {
          * @param userId 用户 id
          * @return
          */
-        Observable<BaseEntity<ChannelDetailEntity>> getChannelDetailRequest(int page, int postId, int userId);
+        Observable<BaseEntity<ChannelPostDetailEntity>> getChannelDetailRequest(int page, int postId, int userId);
 
         /**
          * 请求评论详情

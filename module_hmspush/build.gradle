@@ -37,7 +37,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    // 华为 HMS push sdk
-    implementation 'com.huawei.android.hms:push:2.6.0.301'
+    implementation 'com.huawei.android.hms:push:2.6.1.301'
+    implementation 'com.huawei.android.hms:base:2.6.3.301'
 }

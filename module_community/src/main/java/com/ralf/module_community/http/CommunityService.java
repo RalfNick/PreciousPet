@@ -2,7 +2,9 @@ package com.ralf.module_community.http;
 
 import com.google.gson.JsonObject;
 import com.ralf.module_community.entity.AttentionEntity;
+import com.ralf.module_community.entity.ChannelAttentionEntity;
 import com.ralf.module_community.entity.ChannelDetailEntity;
+import com.ralf.module_community.entity.ChannelPostDetailEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeaturedEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
@@ -10,6 +12,7 @@ import com.ralf.module_community.entity.HeatPraiseEntity;
 import com.ralf.module_community.entity.HistoryHeatPraiseEntity;
 import com.ralf.module_community.entity.RecommendEntity;
 import com.ralf.module_community.entity.ReplyEntity;
+import com.ralf.module_community.entity.result.AllChannelResultEntity;
 import com.ralf.module_community.entity.result.ChannelResultEntity;
 import com.ralf.module_community.entity.result.FriendPraiseListResultEntity;
 import com.ralf.module_community.entity.result.LatestInfoResultEntity;
@@ -65,7 +68,7 @@ public interface CommunityService {
      * @return
      */
     @POST("/api/channel/topicDetail")
-    Observable<BaseEntity<ChannelDetailEntity>> getChannelDetailRequest(@Body JsonObject object);
+    Observable<BaseEntity<ChannelPostDetailEntity>> getChannelDetailRequest(@Body JsonObject object);
 
 
     /**
@@ -175,4 +178,31 @@ public interface CommunityService {
      */
     @POST("api/channel/channelHomePage")
     Observable<BaseEntity<ChannelResultEntity>> getChannelData(@Body JsonObject object);
+
+    /**
+     * 全部频道
+     *
+     * @param object 参数-用户 id
+     * @return
+     */
+    @POST("/api/channel/aLLchannels")
+    Observable<BaseEntity<AllChannelResultEntity>> getAllChannelData(@Body JsonObject object);
+
+    /**
+     * 获取频道详情
+     *
+     * @param object 参数
+     * @return
+     */
+    @POST("/api/channel/channelDetails")
+    Observable<BaseEntity<ChannelDetailEntity>> getChannelDetail(@Body JsonObject object);
+
+    /**
+     * 关注频道
+     *
+     * @param object 参数
+     * @return
+     */
+    @POST("/api/channel/attOrLike")
+    Observable<BaseEntity<ChannelAttentionEntity>> addAttentionOfChannel(@Body JsonObject object);
 }

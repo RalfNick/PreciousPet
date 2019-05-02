@@ -10,8 +10,9 @@ package com.ralf.module_community.action.click;
 public enum TextClickType {
 
     /**
-     * 人名点击，评论点击
+     * 人名点击，评论点击,话题点击
      */
     TYPE_PERSON_NAME,
-    TYPE_COMMENT_TEXT
+    TYPE_COMMENT_TEXT,
+    TYPE_TOPIC_TEXT
 }

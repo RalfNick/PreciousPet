@@ -249,33 +249,6 @@ public final class HMSAgent implements INoProguard {
     }
 
     /**
-     * 检查本应用的升级 | Check for upgrades to this application
-     * @param activity 上下文 | context
-     */
-    public static void checkUpdate (final Activity activity) {
-        HMSAgentLog.i("start checkUpdate");
-        ApiClientMgr.INST.connect(new IClientConnectCallback() {
-            @Override
-            public void onConnect(int rst, HuaweiApiClient client) {
-                Activity activityCur = ActivityMgr.INST.getLastActivity();
-
-                if (activityCur != null && client != null) {
-                    client.checkUpdate(activityCur);
-                } else if (activity != null && client != null){
-                    client.checkUpdate(activity);
-                } else {
-                    // 跟SE确认：activity 为 null ， 不处理 | Activity is null and does not need to be processed
-                    HMSAgentLog.e("no activity to checkUpdate");
-                }
-            }
-        }, true);
-    }
-
-
-
-
-
-    /**
      * push接口封装 | Push interface Encapsulation
      */
     public static final class Push {

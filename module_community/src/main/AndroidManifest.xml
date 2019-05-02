@@ -28,5 +28,7 @@
         <activity android:name=".mvp.ui.activity.ChannelActivity" />
         <activity android:name=".mvp.ui.activity.PostDetailActivity" />
         <activity android:name=".mvp.ui.activity.AllChannelActivity" />
+        <activity android:name=".mvp.ui.activity.ChannelTopicActivity" />
+        <activity android:name=".mvp.ui.activity.ChannelInfoActivity" />
     </application>
 </manifest>

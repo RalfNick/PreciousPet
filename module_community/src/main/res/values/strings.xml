@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">module_community</string>
-    <string name="num_comment_text">条评论</string>
+    <string name="app_name" translatable="false">module_community</string>
+    <string name="num_comment_text" translatable="false">条评论</string>
+    <string name="channel_send_post" translatable="false">发帖子</string>
 </resources>

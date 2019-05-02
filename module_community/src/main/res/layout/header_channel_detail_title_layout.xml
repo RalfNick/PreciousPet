@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/channel_detail_header_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <ImageView
+        android:id="@+id/channel_detail_header_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="centerCrop"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/channel_detail_header_member_num_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/channel_detail_header_iv"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toEndOf="@id/channel_detail_header_iv"
+        android:textColor="#888888"
+        android:textSize="12sp"
+        tools:text="成员 10" />
+
+    <TextView
+        android:id="@+id/channel_detail_header_post_num_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/channel_detail_header_iv"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toEndOf="@id/channel_detail_header_member_num_tv"
+        android:textColor="#888888"
+        android:textSize="12sp"
+        tools:text="帖子 6" />
+
+    <TextView
+        android:id="@+id/channel_detail_header_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/channel_detail_header_iv"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/channel_detail_header_iv"
+        android:textColor="#2c2c2c"
+        android:textSize="15sp"
+        tools:text="喵星人俱乐部" />
+
+    <ImageView
+        android:id="@+id/channel_detail_header_attention_btn"
+        android:layout_width="74dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="13dp"
+        android:src="@mipmap/attention_add" />
+
+    <ImageView
+        android:id="@+id/channel_detail_header_see_detail_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12dp"
+        android:src="@mipmap/icon_arrow_right"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

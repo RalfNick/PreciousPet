@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <include
+        android:id="@+id/channel_detail_title_layout"
+        layout="@layout/layout_title" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/channel_detail_smart_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/channel_detail_title_layout">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/textGray"
+            app:srlDrawableArrow="@mipmap/arrow_refresh"
+            app:srlEnableLastTime="false"
+            app:srlTextSizeTime="12sp"
+            app:srlTextSizeTitle="14sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/channel_detail_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/channel_detail_send_post_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#E6FFFFFF"
+            android:drawableStart="@mipmap/icon_send_post"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="@string/channel_send_post"
+            android:textColor="@color/main_color"
+            android:textSize="15sp" />
+    </LinearLayout>
+</RelativeLayout>

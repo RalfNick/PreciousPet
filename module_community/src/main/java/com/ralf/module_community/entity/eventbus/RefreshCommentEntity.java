@@ -1,5 +1,7 @@
 package com.ralf.module_community.entity.eventbus;
 
+import com.ralf.module_community.entity.CommentEntity;
+
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
@@ -12,9 +14,10 @@ public class RefreshCommentEntity {
     /**
      * 刷新评论，在列表中的位置
      */
-    int position;
+    private int position;
+    private CommentEntity mEntity;
 
-    public RefreshCommentEntity(int position) {
+    public RefreshCommentEntity(int position, CommentEntity entity) {
         this.position = position;
     }
 
@@ -24,5 +27,13 @@ public class RefreshCommentEntity {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public CommentEntity getEntity() {
+        return mEntity;
+    }
+
+    public void setEntity(CommentEntity entity) {
+        mEntity = entity;
     }
 }

@@ -10,7 +10,7 @@ import com.jess.arms.utils.StringUtils;
 import com.jess.arms.utils.ToastUtils;
 import com.ralf.module_community.constant.AttentionType;
 import com.ralf.module_community.entity.AttentionEntity;
-import com.ralf.module_community.entity.ChannelDetailEntity;
+import com.ralf.module_community.entity.ChannelPostDetailEntity;
 import com.ralf.module_community.entity.CommentEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
@@ -128,9 +128,9 @@ public class CommentPresenter extends BasePresenter<CommentContract.Model, Comme
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new WebObserver<ChannelDetailEntity>(mErrorHandler) {
+                .subscribe(new WebObserver<ChannelPostDetailEntity>(mErrorHandler) {
                     @Override
-                    protected void onSuccess(ChannelDetailEntity data) {
+                    protected void onSuccess(ChannelPostDetailEntity data) {
                         mTotalPages = data.getTotal();
                         if (isRefresh) {
                             mRootView.onRefreshChannelView(data);

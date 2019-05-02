@@ -14,12 +14,14 @@ public class ChannelTypeEntity {
      * channelTitle : 美宠秀秀
      * channelUrl : http://192.168.1.81:8090/upload/image/userPic/dff115b6d39d40c8b62b145752eae812.jpg
      * newNumber : 0
+     * int type  : 1
      */
 
     private int channelId;
     private String channelTitle;
     private String channelUrl;
     private int newNumber;
+    private int type;
 
     public int getChannelId() {
         return channelId;
@@ -53,13 +55,22 @@ public class ChannelTypeEntity {
         this.newNumber = newNumber;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
-        return "ChannelDesBean{" +
+        return "ChannelTypeEntity{" +
                 "channelId=" + channelId +
                 ", channelTitle='" + channelTitle + '\'' +
                 ", channelUrl='" + channelUrl + '\'' +
                 ", newNumber=" + newNumber +
+                ", type=" + type +
                 '}';
     }
 

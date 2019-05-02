@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_all_channel_img_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/item_all_channel_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/item_all_channel_img_iv"
+        android:textColor="@color/camera_bg"
+        android:textSize="15sp"
+        tools:text="食品用品DIY" />
+
+    <TextView
+        android:id="@+id/item_header_all_channel_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item_all_channel_img_iv"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/item_all_channel_img_iv"
+        android:textColor="#FF888888"
+        android:textSize="12sp"
+        tools:text="新增7条内容" />
+
+</RelativeLayout>

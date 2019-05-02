@@ -190,6 +190,20 @@ public final class RouterConfig {
          * 全部频道页面
          */
         public static final String COMMUNITY_ALL_CHANNEL_PATH = "/community_module/all_channel";
+
+        /**
+         * 频道话题页面
+         */
+        public static final String COMMUNITY_CHANNEL_TOPIC_PATH = "/community_module/channel_topic";
+        /**
+         * 频道话题页面携带参数 key - 频道话题 id
+         */
+        public static final String KEY_CHANNEL_TOPIC_ID = "topicId";
+
+        /**
+         * 频道简介页面
+         */
+        public static final String COMMUNITY_CHANNEL_INFO_PATH = "/community_module/channel_info";
     }
 
     /**

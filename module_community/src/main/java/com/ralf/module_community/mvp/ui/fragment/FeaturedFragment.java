@@ -506,6 +506,11 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(RefreshCommentEntity entity) {
         int position = entity.getPosition();
+        AdapterMultiItemEntity multiItemEntity = mList.get(position);
+        DynamicEntity dynamicBean = multiItemEntity.getDynamicBean();
+        if (dynamicBean != null && dynamicBean.getCommentList() != null){
+            dynamicBean.getCommentList().add(0,entity.getEntity());
+        }
         mAdapter.notifyItemChanged(mAdapter.getHeaderLayoutCount() + position);
     }
 

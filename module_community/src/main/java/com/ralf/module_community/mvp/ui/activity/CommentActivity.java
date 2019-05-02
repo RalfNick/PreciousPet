@@ -25,7 +25,7 @@ import com.ralf.module_community.R2;
 import com.ralf.module_community.dg.component.DaggerCommentComponent;
 import com.ralf.module_community.dg.module.CommentModule;
 import com.ralf.module_community.entity.AdapterMultiItemEntity;
-import com.ralf.module_community.entity.ChannelDetailEntity;
+import com.ralf.module_community.entity.ChannelPostDetailEntity;
 import com.ralf.module_community.entity.CommentEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.eventbus.RefreshCommentEntity;
@@ -317,7 +317,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
     }
 
     @Override
-    public void onRefreshChannelView(ChannelDetailEntity data) {
+    public void onRefreshChannelView(ChannelPostDetailEntity data) {
         mItemEntityList.clear();
         DynamicEntity dynamicEntity = new DynamicEntity();
         dynamicEntity.setDynamicId(mUserId);
@@ -332,7 +332,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
         dynamicEntity.setPetSex(data.getPetSex());
         dynamicEntity.setPetName(data.getPetName());
         dynamicEntity.setTalk(data.getContent());
-        List<ChannelDetailEntity.TopicDetailListBean> topicDetailList = data.getTopicDetailList();
+        List<ChannelPostDetailEntity.TopicDetailListBean> topicDetailList = data.getTopicDetailList();
         dynamicEntity.setVideoPrintscreen(data.getVideoUrl());
         dynamicEntity.setType(StringUtils.isEmpty(data.getVideoUrl()) ? 0 : 1);
         dynamicEntity.setDynamicsPath(data.getImgUrlList().get(0));
@@ -355,7 +355,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
     }
 
     @Override
-    public void onFinishChannelLoadMore(ChannelDetailEntity data) {
+    public void onFinishChannelLoadMore(ChannelPostDetailEntity data) {
         mRefreshLayout.finishLoadMore();
     }
 
@@ -450,7 +450,7 @@ public class CommentActivity extends BaseSwipeBackActivity<CommentPresenter>
         mAdapter.notifyItemInserted(mItemEntityList.size() - 1);
         mRecyclerView.smoothScrollToPosition(mItemEntityList.size() - 1);
         // 刷新上一个页面的评论数据
-        EventBus.getDefault().post(new RefreshCommentEntity(mPosition));
+        EventBus.getDefault().post(new RefreshCommentEntity(mPosition, commentEntity));
     }
 
     @Override

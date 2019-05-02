@@ -36,6 +36,10 @@ public final class Constant {
     public static String POST_ID = "postId";
     public final static String USER_ID = "userId";
     public final static String DATE_TIME = "dateTime";
+    public final static String CHANNEL_ID = "channelId";
+    public final static String REL_TYPE = "relType";
+    public final static String RIGHT_OR_CANCEL = "rightOrcancel";
+    public final static String RELEVANTID = "relevantId";
 
     /**
      * 资源常量
@@ -52,4 +56,26 @@ public final class Constant {
      * 频道部分文案常量，频道动态条数
      */
     public static final String CHANNEL_NUMBER_STATE = "新增%s条内容";
+
+    /**
+     * 全部频道 header 部分文案
+     */
+    public static final String CHANNEL_OF_MY = "我的频道";
+    public static final String CHANNEL_OF_OTHERS = "其他频道";
+
+    /**
+     * 频道类型，根据类型跳转不同的页面
+     * CHANNEL_DETAIL - 频道详情
+     * CHANNEL_ADOPTION - 领养频道
+     * CHANNEL_PAIR - 配对频道
+     */
+    public static final int CHANNEL_DETAIL = 1;
+    public static final int CHANNEL_ADOPTION = 2;
+    public static final int CHANNEL_PAIR = 3;
+
+    /**
+     * 频道详情页面文案
+     */
+    public static final String CHANNEL_DETAIL_MEMBER_NUM = "成员 %s";
+    public static final String CHANNEL_DETAIL_POST_NUM = "帖子 %s";
 }

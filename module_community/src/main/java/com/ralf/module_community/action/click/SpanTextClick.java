@@ -22,6 +22,12 @@ public class SpanTextClick extends ClickableSpan {
     private String mNickName;
     private int dynamicId;
     private int position;
+    private int topicId;
+
+    private SpanTextClick(TextClickType type, int topicId) {
+        this.mType = type;
+        this.topicId = topicId;
+    }
 
     private SpanTextClick(int dynamicId, int userId, String nickName,
                           int fromId, TextClickType type, int position) {
@@ -36,6 +42,10 @@ public class SpanTextClick extends ClickableSpan {
     public static SpanTextClick getClicker(int dynamicId, int userId, String nickName,
                                            int fromId, TextClickType type, int position) {
         return new SpanTextClick(dynamicId, userId, nickName, fromId, type, position);
+    }
+
+    public static SpanTextClick getTopicClicker(int topicId) {
+        return new SpanTextClick(TextClickType.TYPE_TOPIC_TEXT, topicId);
     }
 
     @Override
@@ -57,6 +67,12 @@ public class SpanTextClick extends ClickableSpan {
                         .withInt(RouterConfig.CommunityModule.KEY_NAVIGATE_TYPE, RouterConfig.CommunityModule.TYPE_SELECTED)
                         .withInt(RouterConfig.CommunityModule.KEY_FROM_USER_ID, mFromId)
                         .withInt(RouterConfig.CommunityModule.KEY_FROM_ITEM_POSITION, position)
+                        .navigation();
+                break;
+            case TYPE_TOPIC_TEXT:
+                ARouter.getInstance()
+                        .build(RouterConfig.CommunityModule.COMMUNITY_CHANNEL_TOPIC_PATH)
+                        .withInt(RouterConfig.CommunityModule.KEY_CHANNEL_TOPIC_ID, topicId)
                         .navigation();
                 break;
             default:

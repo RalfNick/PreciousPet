@@ -10,6 +10,7 @@ import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.SizeUtils;
+import com.ralf.pet_provider.R;
 
 /**
  * @author Ralf(wanglixin)
@@ -51,7 +52,6 @@ public final class ImageLoaderHelper {
         ImageConfig imageConfig = ImageConfigImpl.builder()
                 .imageView(imageView)
                 .url(url)
-                .isCircle(false)
                 .transformation(new GlideRoundTransform(radius))
                 .build();
         mImageLoader.loadImage(context, imageConfig);

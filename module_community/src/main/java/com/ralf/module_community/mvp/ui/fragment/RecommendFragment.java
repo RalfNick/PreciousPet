@@ -86,7 +86,7 @@ public class RecommendFragment extends BaseLazyFragment<RecommendPresenter> impl
     @Override
     protected void initEvent(@Nullable Bundle savedInstanceState) {
         mSectionAdapter = new RecommendSectionAdapter(R.layout.item_recommend_content_layout,
-                R.layout.head_recommend_tile_layout, mSectionEntityList);
+                R.layout.head_recommend_title_layout, mSectionEntityList);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         mRecyclerView.setAdapter(mSectionAdapter);
         mRecyclerView.addItemDecoration(new GridSectionAverageGapItemDecoration(10, 5, 10, 10));

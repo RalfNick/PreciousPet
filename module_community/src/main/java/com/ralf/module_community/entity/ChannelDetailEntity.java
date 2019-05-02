@@ -9,134 +9,39 @@ import java.util.List;
  * DESCRIPTION
  * @name ChannelDetailEntity
  * @email -
- * @date 2019/03/06 上午11:24
+ * @date 2019/04/30 11:00
  **/
 public class ChannelDetailEntity {
 
     /**
-     * boutique : 0
      * channelId : 1
-     * channelMember : 5607
-     * channelName : 美宠秀秀
-     * channelPic : http://192.168.1.139:8090/upload/image/userPic/dff115b6d39d40c8b62b145752eae812.jpg
-     * channelTopicNum : 7
-     * city : 涪陵区
-     * commentList : [{"responseList":{"commentId":83013,"content":"测试内容f2b8","creatTime":"测试内容8y11","nickName":"测试内容7em7","postId":21323,"responseId":53082,"toNickName":"测试内容83vd","toUserId":13076,"userId":75313},"canDelete":0,"city":"涪陵区","commentId":1,"commentPic":"","content":"1","creatTime":"1502413768","floor":1,"headPortrait":"http://192.168.1.139:8090/upload/image/userPic/6.jpg","nickName":"时光小偷","postId":1,"province":"辽宁省","userId":6},{"responseList":{"commentId":83013,"content":"测试内容f2b8","creatTime":"测试内容8y11","nickName":"测试内容7em7","postId":21323,"responseId":53082,"toNickName":"测试内容83vd","toUserId":13076,"userId":75313},"canDelete":0,"city":"涪陵区","commentId":2,"commentPic":"http://192.168.1.139:8090/upload/image/channelCommentPic/c16449aa8a5f40f3b42e9131bd3d67cf.jpg","content":"1","creatTime":"1502414023","floor":2,"headPortrait":"http://192.168.1.139:8090/upload/image/userPic/6.jpg","nickName":"时光小偷","postId":1,"province":"辽宁省","userId":6}]
-     * content : 今天是2017年8月8日
-     * creatTime : 1502163055
-     * headPortrait : http://192.168.1.139:8090/upload/image/userPic/4.jpg
-     * imgUrlList : ["http://192.168.1.139:8090/upload/image/ChannelPic/adf1477ba27f42908052b2872a24a886.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/87cbe45d87264c10ac03dcc941dae98e.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/40f7f4a9e80b4d9395d3509d2476a249.jpg"]
-     * isAttention: 0
-     * isTop : 0
-     * nickName : 发如雪
-     * pages : 1
-     * petBreed :
-     * petHeadPortrait:
-     * petName :
-     * petSex : 0
-     * postId : 1
-     * province : 辽宁省
-     * publisherId : 4
-     * replyTimes : 0
-     * topicDetailList : [{"topicDetailId":1,"topicDetailName":"#8月封面萌宠#"},{"topicDetailId":2,"topicDetailName":"#我要上精选#"}]
-     * total : 2
-     * type : 1
-     * userPetId : 0
-     * videoUrl :
-     * viewTimes : 4
+     * channelPostList : [{"imgUrl":["http://192.168.1.139:8090/upload/image/ChannelPic/adf1477ba27f42908052b2872a24a886.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/87cbe45d87264c10ac03dcc941dae98e.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/40f7f4a9e80b4d9395d3509d2476a249.jpg"],"themeList":[{"themeId":1,"themeName":"#8月封面萌宠#"}],"content":"今天是2017年8月8日","creatTime":"1天前","headPortrait":"http://192.168.1.139:8090/upload/image/userPic/4.jpg","nickName":"发如雪","publisherId":4,"replyTimes":0,"topicId":1,"type":1,"videoUrl":""},{"imgUrl":["http://192.168.1.139:8090/upload/image/ChannelPic/adf1477ba27f42908052b2872a24a886.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/87cbe45d87264c10ac03dcc941dae98e.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/40f7f4a9e80b4d9395d3509d2476a249.jpg"],"themeList":[{"themeId":2,"themeName":"#我要上精选#"}],"content":"今天是2017年8月8日","creatTime":"1天前","headPortrait":"http://192.168.1.139:8090/upload/image/userPic/4.jpg","nickName":"发如雪","publisherId":4,"replyTimes":0,"topicId":2,"type":1,"videoUrl":""},{"imgUrl":["http://192.168.1.139:8090/upload/image/ChannelPic/adf1477ba27f42908052b2872a24a886.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/87cbe45d87264c10ac03dcc941dae98e.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/40f7f4a9e80b4d9395d3509d2476a249.jpg"],"themeList":[{"themeId":1,"themeName":"#8月封面萌宠#"}],"content":"今天是2017年8月8日","creatTime":"3小时前","headPortrait":"http://192.168.1.139:8090/upload/image/userPic/4.jpg","nickName":"发如雪","publisherId":4,"replyTimes":0,"topicId":4,"type":2,"videoUrl":"http://192.168.1.139:8090/upload/video/channelVideo/videoFile/eeed32fe57eb45d28bacd544d9262ad4.mp4"},{"imgUrl":["http://192.168.1.139:8090/upload/image/ChannelPic/adf1477ba27f42908052b2872a24a886.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/87cbe45d87264c10ac03dcc941dae98e.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/40f7f4a9e80b4d9395d3509d2476a249.jpg"],"themeList":[{"themeId":2,"themeName":"#我要上精选#"}],"content":"今天是2017年8月9日，我是纯文本","creatTime":"3小时前","headPortrait":"http://192.168.1.139:8090/upload/image/userPic/4.jpg","nickName":"发如雪","publisherId":4,"replyTimes":0,"topicId":5,"type":0,"videoUrl":""},{"imgUrl":["http://192.168.1.139:8090/upload/image/ChannelPic/adf1477ba27f42908052b2872a24a886.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/87cbe45d87264c10ac03dcc941dae98e.jpg","http://192.168.1.139:8090/upload/image/ChannelPic/40f7f4a9e80b4d9395d3509d2476a249.jpg"],"themeList":[{"themeId":1,"themeName":"#8月封面萌宠#"}],"content":"今天是2017年8月9日,我也是纯文本","creatTime":"3小时前","headPortrait":"http://192.168.1.139:8090/upload/image/userPic/4.jpg","nickName":"发如雪","publisherId":4,"replyTimes":0,"topicId":6,"type":0,"videoUrl":""}]
+     * channelStickList : [{"title":"的话你刚刚","topicId":3}]
+     * channelTitle : {"attention":1,"channelName":"美宠秀秀","channelUrl":"http://192.168.1.139:8090","members":0,"topicNum":0}
+     * pageCount : 10
+     * userId : 1
      */
 
-    @SerializedName("boutique")
-    private int boutique;
     @SerializedName("channelId")
     private int channelId;
-    @SerializedName("channelMember")
-    private int channelMember;
-    @SerializedName("channelName")
-    private String channelName;
-    @SerializedName("channelPic")
-    private String channelPic;
-    @SerializedName("channelTopicNum")
-    private int channelTopicNum;
-    @SerializedName("city")
-    private String city;
-    @SerializedName("content")
-    private String content;
-    @SerializedName("creatTime")
-    private String creatTime;
-    @SerializedName("headPortrait")
-    private String headPortrait;
-    @SerializedName("isTop")
-    private int isTop;
-    @SerializedName("isWish")
-    private int isWish;
-    @SerializedName("isAttention")
-    private int isAttention;
-    @SerializedName("nickName")
-    private String nickName;
-    @SerializedName("pages")
-    private int pages;
-    @SerializedName("petBreed")
-    private String petBreed;
-    @SerializedName("petName")
-    private String petName;
-    @SerializedName("petHeadPortrait")
-    private String petHeadPortrait;
-    @SerializedName("petSex")
-    private int petSex;
-    @SerializedName("postId")
-    private int postId;
-    @SerializedName("province")
-    private String province;
-    @SerializedName("publisherId")
-    private int publisherId;
-    @SerializedName("replyTimes")
-    private int replyTimes;
-    @SerializedName("total")
-    private int total;
-    @SerializedName("type")
-    private int type;
-    @SerializedName("userPetId")
-    private int userPetId;
-    @SerializedName("videoUrl")
-    private String videoUrl;
-    @SerializedName("viewTimes")
-    private int viewTimes;
-    @SerializedName("commentList")
-    private List<CommentListBean> commentList;
-    @SerializedName("imgUrlList")
-    private List<String> imgUrlList;
-    @SerializedName("topicDetailList")
-    private List<TopicDetailListBean> topicDetailList;
-    @SerializedName("videoHeight")
-    private int videoHeight;
-    @SerializedName("videoWidth")
-    private int videoWidth;
+    @SerializedName("channelTitle")
+    private ChannelTitleBean channelTitle;
+    @SerializedName("pageCount")
+    private int pageCount;
+    @SerializedName("userId")
+    private int userId;
+    @SerializedName("channelPostList")
+    private List<ChannelPostEntity> channelPostList;
+    @SerializedName("channelStickList")
+    private List<ChannelStickListBean> channelStickList;
 
-    public int getVideoHeight() {
-        return videoHeight;
+    public int getPageCount() {
+        return pageCount;
     }
 
-    public void setVideoHeight(int videoHeight) {
-        this.videoHeight = videoHeight;
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
-
-    public int getVideoWidth() {
-        return videoWidth;
-    }
-
-    public void setVideoWidth(int videoWidth) {
-        this.videoWidth = videoWidth;
-    }
-
-    public int getBoutique() {
-        return boutique;
-    }
-
-    public void setBoutique(int boutique) {
-        this.boutique = boutique;
-    }
-
     public int getChannelId() {
         return channelId;
     }
@@ -145,595 +50,167 @@ public class ChannelDetailEntity {
         this.channelId = channelId;
     }
 
-    public int getChannelMember() {
-        return channelMember;
+    public ChannelTitleBean getChannelTitle() {
+        return channelTitle;
     }
 
-    public void setChannelMember(int channelMember) {
-        this.channelMember = channelMember;
+    public void setChannelTitle(ChannelTitleBean channelTitle) {
+        this.channelTitle = channelTitle;
     }
 
-    public String getChannelName() {
-        return channelName;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setChannelName(String channelName) {
-        this.channelName = channelName;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getChannelPic() {
-        return channelPic;
+    public List<ChannelPostEntity> getChannelPostList() {
+        return channelPostList;
     }
 
-    public void setChannelPic(String channelPic) {
-        this.channelPic = channelPic;
+    public void setChannelPostList(List<ChannelPostEntity> channelPostList) {
+        this.channelPostList = channelPostList;
     }
 
-    public int getChannelTopicNum() {
-        return channelTopicNum;
+    public List<ChannelStickListBean> getChannelStickList() {
+        return channelStickList;
     }
 
-    public void setChannelTopicNum(int channelTopicNum) {
-        this.channelTopicNum = channelTopicNum;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getCreatTime() {
-        return creatTime;
-    }
-
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
-    }
-
-    public String getHeadPortrait() {
-        return headPortrait;
-    }
-
-    public void setHeadPortrait(String headPortrait) {
-        this.headPortrait = headPortrait;
-    }
-
-    public int getIsTop() {
-        return isTop;
-    }
-
-    public void setIsTop(int isTop) {
-        this.isTop = isTop;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public int getPages() {
-        return pages;
-    }
-
-    public void setPages(int pages) {
-        this.pages = pages;
-    }
-
-    public String getPetBreed() {
-        return petBreed;
-    }
-
-    public void setPetBreed(String petBreed) {
-        this.petBreed = petBreed;
-    }
-
-    public String getPetName() {
-        return petName;
-    }
-
-    public void setPetName(String petName) {
-        this.petName = petName;
-    }
-
-    public String getPetHeadPortrait() {
-        return petHeadPortrait;
-    }
-
-    public void setPetHeadPortrait(String petHeadPortrait) {
-        this.petHeadPortrait = petHeadPortrait;
-    }
-
-    public int getPetSex() {
-        return petSex;
-    }
-
-    public void setPetSex(int petSex) {
-        this.petSex = petSex;
-    }
-
-    public int getPostId() {
-        return postId;
-    }
-
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public int getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
-    }
-
-    public int getReplyTimes() {
-        return replyTimes;
-    }
-
-    public void setReplyTimes(int replyTimes) {
-        this.replyTimes = replyTimes;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getUserPetId() {
-        return userPetId;
-    }
-
-    public void setUserPetId(int userPetId) {
-        this.userPetId = userPetId;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
-
-    public int getViewTimes() {
-        return viewTimes;
-    }
-
-    public void setViewTimes(int viewTimes) {
-        this.viewTimes = viewTimes;
-    }
-
-    public List<CommentListBean> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<CommentListBean> commentList) {
-        this.commentList = commentList;
-    }
-
-    public List<String> getImgUrlList() {
-        return imgUrlList;
-    }
-
-    public void setImgUrlList(List<String> imgUrlList) {
-        this.imgUrlList = imgUrlList;
-    }
-
-    public List<TopicDetailListBean> getTopicDetailList() {
-        return topicDetailList;
-    }
-
-    public void setTopicDetailList(List<TopicDetailListBean> topicDetailList) {
-        this.topicDetailList = topicDetailList;
-    }
-
-    public int getIsAttention() {
-        return isAttention;
-    }
-
-    public void setIsAttention(int isAttention) {
-        this.isAttention = isAttention;
-    }
-
-    public int getIsWish() {
-        return isWish;
-    }
-
-    public void setIsWish(int isWish) {
-        this.isWish = isWish;
+    public void setChannelStickList(List<ChannelStickListBean> channelStickList) {
+        this.channelStickList = channelStickList;
     }
 
     @Override
     public String toString() {
-        return "ChannelPostsDetailsEntity{" +
-                "boutique=" + boutique +
-                ", channelId=" + channelId +
-                ", channelMember=" + channelMember +
-                ", channelName='" + channelName + '\'' +
-                ", channelPic='" + channelPic + '\'' +
-                ", channelTopicNum=" + channelTopicNum +
-                ", city='" + city + '\'' +
-                ", content='" + content + '\'' +
-                ", creatTime='" + creatTime + '\'' +
-                ", headPortrait='" + headPortrait + '\'' +
-                ", isTop=" + isTop +
-                ", isWish=" + isWish +
-                ", isAttention=" + isAttention +
-                ", nickName='" + nickName + '\'' +
-                ", pages=" + pages +
-                ", petBreed='" + petBreed + '\'' +
-                ", petName='" + petName + '\'' +
-                ", petHeadPortrait='" + petHeadPortrait + '\'' +
-                ", petSex=" + petSex +
-                ", postId=" + postId +
-                ", province='" + province + '\'' +
-                ", publisherId=" + publisherId +
-                ", replyTimes=" + replyTimes +
-                ", total=" + total +
-                ", type=" + type +
-                ", userPetId=" + userPetId +
-                ", videoUrl='" + videoUrl + '\'' +
-                ", viewTimes=" + viewTimes +
-                ", commentList=" + commentList +
-                ", imgUrlList=" + imgUrlList +
-                ", topicDetailList=" + topicDetailList +
+        return "ChannelDetailsEntity{" +
+                "channelId=" + channelId +
+                ", channelTitle=" + channelTitle +
+                ", pageCount=" + pageCount +
+                ", userId=" + userId +
+                ", channelPostList=" + channelPostList +
+                ", channelStickList=" + channelStickList +
                 '}';
     }
 
-    public static class CommentListBean {
+    public static class ChannelTitleBean {
+
+
         /**
-         * responseList : {"commentId":83013,"content":"测试内容f2b8","creatTime":"测试内容8y11","nickName":"测试内容7em7","postId":21323,"responseId":53082,"toNickName":"测试内容83vd","toUserId":13076,"userId":75313}
-         * canDelete : 0
-         * city : 涪陵区
-         * commentId : 1
-         * commentPic :
-         * content : 1
-         * creatTime : 1502413768
-         * floor : 1
-         * headPortrait : http://192.168.1.139:8090/upload/image/userPic/6.jpg
-         * nickName : 时光小偷
-         * postId : 1
-         * province : 辽宁省
-         * userId : 6
+         * about : xx
+         * attention : 1
+         * channelName : 美宠秀秀
+         * channelUrl : http://192.168.1.139:8090
+         * members : 0
+         * topicNum : 0
          */
+        @SerializedName("about")
+        private String about;
+        @SerializedName("attention")
+        private int attention;
+        @SerializedName("channelName")
+        private String channelName;
+        @SerializedName("channelUrl")
+        private String channelUrl;
+        @SerializedName("members")
+        private int members;
+        @SerializedName("topicNum")
+        private int topicNum;
 
-        @SerializedName("responseList")
-        private List<ResponseListBean> responseList;
-        @SerializedName("canDelete")
-        private int canDelete;
-        @SerializedName("city")
-        private String city;
-        @SerializedName("commentId")
-        private int commentId;
-        @SerializedName("commentPic")
-        private String commentPic;
-        @SerializedName("content")
-        private String content;
-        @SerializedName("creatTime")
-        private String creatTime;
-        @SerializedName("floor")
-        private int floor;
-        @SerializedName("headPortrait")
-        private String headPortrait;
-        @SerializedName("nickName")
-        private String nickName;
-        @SerializedName("postId")
-        private int postId;
-        @SerializedName("province")
-        private String province;
-        @SerializedName("userId")
-        private int userId;
-
-        public List<ResponseListBean> getResponseList() {
-            return responseList;
+        public int getAttention() {
+            return attention;
         }
 
-        public void setResponseList(List<ResponseListBean> responseList) {
-            this.responseList = responseList;
+        public void setAttention(int attention) {
+            this.attention = attention;
         }
 
-        public int getCanDelete() {
-            return canDelete;
+        public String getChannelName() {
+            return channelName;
         }
 
-        public void setCanDelete(int canDelete) {
-            this.canDelete = canDelete;
+        public void setChannelName(String channelName) {
+            this.channelName = channelName;
         }
 
-        public String getCity() {
-            return city;
+        public String getChannelUrl() {
+            return channelUrl;
         }
 
-        public void setCity(String city) {
-            this.city = city;
+        public void setChannelUrl(String channelUrl) {
+            this.channelUrl = channelUrl;
         }
 
-        public int getCommentId() {
-            return commentId;
+        public int getMembers() {
+            return members;
         }
 
-        public void setCommentId(int commentId) {
-            this.commentId = commentId;
+        public void setMembers(int members) {
+            this.members = members;
         }
 
-        public String getCommentPic() {
-            return commentPic;
+        public int getTopicNum() {
+            return topicNum;
         }
 
-        public void setCommentPic(String commentPic) {
-            this.commentPic = commentPic;
+        public void setTopicNum(int topicNum) {
+            this.topicNum = topicNum;
         }
 
-        public String getContent() {
-            return content;
+        public String getAbout() {
+            return about;
         }
 
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public String getCreatTime() {
-            return creatTime;
-        }
-
-        public void setCreatTime(String creatTime) {
-            this.creatTime = creatTime;
-        }
-
-        public int getFloor() {
-            return floor;
-        }
-
-        public void setFloor(int floor) {
-            this.floor = floor;
-        }
-
-        public String getHeadPortrait() {
-            return headPortrait;
-        }
-
-        public void setHeadPortrait(String headPortrait) {
-            this.headPortrait = headPortrait;
-        }
-
-        public String getNickName() {
-            return nickName;
-        }
-
-        public void setNickName(String nickName) {
-            this.nickName = nickName;
-        }
-
-        public int getPostId() {
-            return postId;
-        }
-
-        public void setPostId(int postId) {
-            this.postId = postId;
-        }
-
-        public String getProvince() {
-            return province;
-        }
-
-        public void setProvince(String province) {
-            this.province = province;
-        }
-
-        public int getUserId() {
-            return userId;
-        }
-
-        public void setUserId(int userId) {
-            this.userId = userId;
+        public void setAbout(String about) {
+            this.about = about;
         }
 
         @Override
         public String toString() {
-            return "CommentListBean{" +
-                    "responseList=" + responseList +
-                    ", canDelete=" + canDelete +
-                    ", city='" + city + '\'' +
-                    ", commentId=" + commentId +
-                    ", commentPic='" + commentPic + '\'' +
-                    ", content='" + content + '\'' +
-                    ", creatTime='" + creatTime + '\'' +
-                    ", floor=" + floor +
-                    ", headPortrait='" + headPortrait + '\'' +
-                    ", nickName='" + nickName + '\'' +
-                    ", postId=" + postId +
-                    ", province='" + province + '\'' +
-                    ", userId=" + userId +
+            return "ChannelTitleBean{" +
+                    "about='" + about + '\'' +
+                    ", attention=" + attention +
+                    ", channelName='" + channelName + '\'' +
+                    ", channelUrl='" + channelUrl + '\'' +
+                    ", members=" + members +
+                    ", topicNum=" + topicNum +
                     '}';
-        }
-
-        public static class ResponseListBean {
-            /**
-             * commentId : 83013
-             * content : 测试内容f2b8
-             * creatTime : 测试内容8y11
-             * nickName : 测试内容7em7
-             * postId : 21323
-             * responseId : 53082
-             * toNickName : 测试内容83vd
-             * toUserId : 13076
-             * userId : 75313
-             */
-
-            @SerializedName("commentId")
-            private int commentId;
-            @SerializedName("content")
-            private String content;
-            @SerializedName("creatTime")
-            private String creatTime;
-            @SerializedName("nickName")
-            private String nickName;
-            @SerializedName("postId")
-            private int postId;
-            @SerializedName("responseId")
-            private int responseId;
-            @SerializedName("toNickName")
-            private String toNickName;
-            @SerializedName("toUserId")
-            private int toUserId;
-            @SerializedName("userId")
-            private int userId;
-
-            public int getCommentId() {
-                return commentId;
-            }
-
-            public void setCommentId(int commentId) {
-                this.commentId = commentId;
-            }
-
-            public String getContent() {
-                return content;
-            }
-
-            public void setContent(String content) {
-                this.content = content;
-            }
-
-            public String getCreatTime() {
-                return creatTime;
-            }
-
-            public void setCreatTime(String creatTime) {
-                this.creatTime = creatTime;
-            }
-
-            public String getNickName() {
-                return nickName;
-            }
-
-            public void setNickName(String nickName) {
-                this.nickName = nickName;
-            }
-
-            public int getPostId() {
-                return postId;
-            }
-
-            public void setPostId(int postId) {
-                this.postId = postId;
-            }
-
-            public int getResponseId() {
-                return responseId;
-            }
-
-            public void setResponseId(int responseId) {
-                this.responseId = responseId;
-            }
-
-            public String getToNickName() {
-                return toNickName;
-            }
-
-            public void setToNickName(String toNickName) {
-                this.toNickName = toNickName;
-            }
-
-            public int getToUserId() {
-                return toUserId;
-            }
-
-            public void setToUserId(int toUserId) {
-                this.toUserId = toUserId;
-            }
-
-            public int getUserId() {
-                return userId;
-            }
-
-            public void setUserId(int userId) {
-                this.userId = userId;
-            }
-
-            @Override
-            public String toString() {
-                return "ResponseListBean{" +
-                        "commentId=" + commentId +
-                        ", content='" + content + '\'' +
-                        ", creatTime='" + creatTime + '\'' +
-                        ", nickName='" + nickName + '\'' +
-                        ", postId=" + postId +
-                        ", responseId=" + responseId +
-                        ", toNickName='" + toNickName + '\'' +
-                        ", toUserId=" + toUserId +
-                        ", userId=" + userId +
-                        '}';
-            }
         }
     }
 
-    public static class TopicDetailListBean {
+    public static class ChannelStickListBean {
         /**
-         * topicDetailId : 1
-         * topicDetailName : #8月封面萌宠#
+         * title : 的话你刚刚
+         * topicId : 3
          */
 
-        @SerializedName("topicDetailId")
-        private int topicDetailId;
-        @SerializedName("topicDetailName")
-        private String topicDetailName;
+        @SerializedName("title")
+        private String title;
+        @SerializedName("topicId")
+        private int topicId;
 
-        public int getTopicDetailId() {
-            return topicDetailId;
+        public String getTitle() {
+            return title;
         }
 
-        public void setTopicDetailId(int topicDetailId) {
-            this.topicDetailId = topicDetailId;
+        public void setTitle(String title) {
+            this.title = title;
         }
 
-        public String getTopicDetailName() {
-            return topicDetailName;
+        public int getTopicId() {
+            return topicId;
         }
 
-        public void setTopicDetailName(String topicDetailName) {
-            this.topicDetailName = topicDetailName;
+        public void setTopicId(int topicId) {
+            this.topicId = topicId;
         }
 
         @Override
         public String toString() {
-            return "TopicBean{" +
-                    "topicDetailId=" + topicDetailId +
-                    ", topicDetailName='" + topicDetailName + '\'' +
+            return "ChannelStickListBean{" +
+                    "title='" + title + '\'' +
+                    ", topicId=" + topicId +
                     '}';
         }
     }

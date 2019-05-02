@@ -6,7 +6,7 @@ import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.ralf.module_community.constant.Constant;
 import com.ralf.module_community.entity.AttentionEntity;
-import com.ralf.module_community.entity.ChannelDetailEntity;
+import com.ralf.module_community.entity.ChannelPostDetailEntity;
 import com.ralf.module_community.entity.DynamicEntity;
 import com.ralf.module_community.entity.FeedbackEntity;
 import com.ralf.module_community.entity.ReplyEntity;
@@ -34,7 +34,7 @@ public class CommentModel extends BaseModel implements CommentContract.Model {
     }
 
     @Override
-    public Observable<BaseEntity<ChannelDetailEntity>> getChannelDetailRequest(int page, int postId, int userId) {
+    public Observable<BaseEntity<ChannelPostDetailEntity>> getChannelDetailRequest(int page, int postId, int userId) {
 
         JsonObject object = new JsonObject();
         object.addProperty(Constant.USER_ID, userId);

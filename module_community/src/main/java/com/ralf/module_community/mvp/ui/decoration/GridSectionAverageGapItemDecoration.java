@@ -64,7 +64,6 @@ public class GridSectionAverageGapItemDecoration extends RecyclerView.ItemDecora
                 //不处理header
                 isPreItemHeader = true;
                 outRect.set(0,0,0,0);
-//                Log.w("GridAverageGapItem", "pos=" + position + "," + outRect.toShortString());
                 return;
             }
 

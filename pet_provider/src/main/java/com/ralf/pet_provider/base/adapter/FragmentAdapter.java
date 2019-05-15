@@ -1,4 +1,4 @@
-package com.ralf.module_community.mvp.ui.adapter;
+package com.ralf.pet_provider.base.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,18 +10,24 @@ import java.util.List;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name CommunityAdapter
+ * @name FragmentAdapter
  * @email -
- * @date 2018/12/19 下午2:14
+ * @date 2019/05/05 12:31
  **/
-public class CommunityAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentPagerAdapter {
 
-    private static final String[] TITLES = {"精选", "推荐", "频道"};
     private List<Fragment> mFragmentList;
+    private List<String> mTitleList;
 
-    public CommunityAdapter(FragmentManager fm,List<Fragment> fragments) {
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         mFragmentList = fragments;
+    }
+
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> titleList) {
+        super(fm);
+        mFragmentList = fragmentList;
+        mTitleList = titleList;
     }
 
     @Override
@@ -37,6 +43,9 @@ public class CommunityAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return TITLES[position];
+        if (mTitleList == null || mTitleList.size() < 1) {
+            return null;
+        }
+        return mTitleList.get(position);
     }
 }

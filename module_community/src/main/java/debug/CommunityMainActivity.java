@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.ralf.module_community.R;
 
+/**
+ * @author wanglixin
+ */
 public class CommunityMainActivity extends AppCompatActivity {
 
     @Override

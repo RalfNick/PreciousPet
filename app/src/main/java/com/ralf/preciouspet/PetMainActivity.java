@@ -195,8 +195,7 @@ public class PetMainActivity extends BaseActivity implements ChatHelper.PushMsgI
                                 mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
                                 break;
                             case R.id.main_information_rb:
-//                                mFragmentPath = RouterConfig.NewsModule.NEWS_PATH;
-                                mFragmentPath = RouterConfig.CommunityModule.COMMUNITY_PATH;
+                                mFragmentPath = RouterConfig.NewsModule.NEWS_PATH;
                                 break;
                             case R.id.main_service_rb:
 //                                mFragmentPath = RouterConfig.ServiceModule.SERVICE_PATH;

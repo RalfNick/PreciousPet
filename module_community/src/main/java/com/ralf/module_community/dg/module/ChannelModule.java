@@ -35,10 +35,4 @@ public class ChannelModule {
     public ChannelContract.Model provideChannelModel(ChannelModel model) {
         return model;
     }
-
-//    @FragmentScope
-//    @Provides
-//    public ChannelHeaderView provideChannelHeaderView() {
-//        return new ChannelHeaderView();
-//    }
 }

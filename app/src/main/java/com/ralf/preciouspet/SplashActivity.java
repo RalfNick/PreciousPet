@@ -1,5 +1,6 @@
 package com.ralf.preciouspet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,6 +53,11 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        // 后台返回时可能启动这个页面 http://blog.csdn.net/jianiuqi/article/details/54091181
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish();
+            return;
+        }
         startCount();
     }
 
@@ -77,6 +83,7 @@ public class SplashActivity extends BaseActivity {
                     } else {
                         ARouter.getInstance().build(RouterConfig.LoginRegisterModule.ENTRANCE_PATH).navigation();
                     }
+                    overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                     finish();
                 })
                 .subscribe();

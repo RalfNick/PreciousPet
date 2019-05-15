@@ -19,11 +19,12 @@ import com.jess.arms.utils.SizeUtils;
 import com.jess.arms.utils.ToastUtils;
 import com.ralf.module_community.R;
 import com.ralf.module_community.R2;
-import com.ralf.module_community.mvp.ui.adapter.CommunityAdapter;
+import com.ralf.pet_provider.base.adapter.FragmentAdapter;
 import com.ralf.pet_provider.router.RouterConfig;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +41,7 @@ import butterknife.OnClick;
 public class CommunityFragment extends BaseFragment {
 
     private static final int PIC_IMAGE_HIDE_POSITION = 2;
+    private static final String[] TITLES = {"精选", "推荐", "频道"};
 
     @BindView(R2.id.take_picture_iv)
     ImageView mPictureIv;
@@ -67,7 +69,7 @@ public class CommunityFragment extends BaseFragment {
         mFragmentList.add(new FeaturedFragment());
         mFragmentList.add(new RecommendFragment());
         mFragmentList.add(new ChannelFragment());
-        CommunityAdapter adapter = new CommunityAdapter(getChildFragmentManager(), mFragmentList);
+        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), mFragmentList, Arrays.asList(TITLES));
         setUpIndicatorWidth(mTabLayout, 10, 10);
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setAdapter(adapter);

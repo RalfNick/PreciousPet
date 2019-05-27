@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.jess.arms.utils.SizeUtils;
 import com.ralf.module_news.R;
-import com.ralf.module_news.constant.NewConstant;
+import com.ralf.module_news.constant.NewsConstant;
 import com.ralf.module_news.mvp.ui.fragment.NewsEmptyFragment;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 
@@ -37,16 +37,16 @@ public class NewsFragmentViewPagerAdapter extends IndicatorViewPager.IndicatorFr
             convertView = LayoutInflater.from(mContext).inflate(R.layout.news_tab_layout, container, false);
         }
         TextView textView = (TextView) convertView;
-        textView.setText(NewConstant.VERSION_ARR[position]);
+        textView.setText(NewsConstant.VERSION_ARR[position]);
         textView.setPadding(SizeUtils.dp2px(10), 0, SizeUtils.dp2px(10), 0);
         return convertView;
     }
 
     @Override
     public Fragment getFragmentForPage(int position) {
-        String fragmentClassName = NewConstant.FRAGMENT_NAME_ARR[position];
+        String fragmentClassName = NewsConstant.FRAGMENT_NAME_ARR[position];
         try {
-            Class<?> clazz = Class.forName(NewConstant.FRAGMENT_PACKAGE_NAME + "." + fragmentClassName);
+            Class<?> clazz = Class.forName(NewsConstant.FRAGMENT_PACKAGE_NAME + "." + fragmentClassName);
             Object o = clazz.newInstance();
             if (o instanceof Fragment) {
                 return (Fragment) o;
@@ -70,6 +70,6 @@ public class NewsFragmentViewPagerAdapter extends IndicatorViewPager.IndicatorFr
 
     @Override
     public int getCount() {
-        return NewConstant.VERSION_ARR.length;
+        return NewsConstant.VERSION_ARR.length;
     }
 }

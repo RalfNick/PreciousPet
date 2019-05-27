@@ -486,7 +486,7 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
     /**
      * banner 的图片加载器
      */
-    public class GlideImageLoader extends ImageLoader {
+    private class GlideImageLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object object, ImageView imageView) {
             BannerEntity entity = (BannerEntity) object;

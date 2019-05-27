@@ -21,7 +21,7 @@ import com.ralf.module_news.mvp.presenter.RecommendPresenter;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name RecommendNewFragment
+ * @name NewsRecommendFragment
  * @email -
  * @date 2019/05/15 17:58
  **/

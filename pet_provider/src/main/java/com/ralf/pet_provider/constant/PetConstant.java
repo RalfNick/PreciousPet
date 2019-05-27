@@ -35,4 +35,18 @@ public final class PetConstant {
     public static String ANDROID_MODEL = "";
 
 
+    /**
+     * 网络请求字段
+     */
+    public final static String PAGE = "page";
+    public final static String CATEGORY = "category";
+    public final static String USER_NAME = "userName";
+    public final static String USER_IMAGE = "userImage";
+    public final static String USERPET_ID = "userPetId";
+    public final static String ID = "id";
+    public final static String DYNAMIC_ID = "dynamicId";
+    public final static String DYNAMIC_TYPE = "dynamicType";
+    public final static String POSITION = "position";
+    public final static String USER_ID = "userId";
+    public final static String TOKEN = "token";
 }

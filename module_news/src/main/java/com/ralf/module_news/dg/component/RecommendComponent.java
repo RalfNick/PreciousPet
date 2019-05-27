@@ -3,7 +3,7 @@ package com.ralf.module_news.dg.component;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.di.scope.FragmentScope;
 import com.ralf.module_news.dg.module.RecommendModule;
-import com.ralf.module_news.mvp.ui.fragment.RecommendNewFragment;
+import com.ralf.module_news.mvp.ui.fragment.NewsRecommendFragment;
 
 import dagger.Component;
 
@@ -21,7 +21,7 @@ public interface RecommendComponent {
     /**
      * dagger2 注入
      *
-     * @param fragment RecommendNewFragment
+     * @param fragment NewsRecommendFragment
      */
-    void inject(RecommendNewFragment fragment);
+    void inject(NewsRecommendFragment fragment);
 }

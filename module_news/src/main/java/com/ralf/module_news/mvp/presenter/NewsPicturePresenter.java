@@ -2,6 +2,7 @@ package com.ralf.module_news.mvp.presenter;
 
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
+import com.ralf.module_news.mvp.contract.NewsContract;
 import com.ralf.module_news.mvp.contract.NewsPictureContract;
 
 import javax.inject.Inject;
@@ -14,10 +15,10 @@ import javax.inject.Inject;
  * @date 2019/05/15 19:35
  **/
 @FragmentScope
-public class NewsPicturePresenter extends BasePresenter<NewsPictureContract.Model,NewsPictureContract.View> {
+public class NewsPicturePresenter extends BasePresenter<NewsContract.Model,NewsPictureContract.View> {
 
     @Inject
-    public NewsPicturePresenter(NewsPictureContract.Model model, NewsPictureContract.View rootView) {
+    public NewsPicturePresenter(NewsContract.Model model, NewsPictureContract.View rootView) {
         super(model, rootView);
     }
 

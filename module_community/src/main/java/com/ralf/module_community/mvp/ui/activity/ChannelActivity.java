@@ -141,7 +141,8 @@ public class ChannelActivity extends BaseSwipeBackActivity<ChannelDetailPresente
             ChannelPostEntity channelPostEntity = mPostEntityList.get(position);
             ARouter.getInstance()
                     .build(RouterConfig.CommunityModule.COMMUNITY_CHANNEL_TOPIC_PATH)
-                    .withInt(RouterConfig.CommunityModule.KEY_CHANNEL_TOPIC_ID, channelPostEntity.getTopicId())
+                    .withInt(RouterConfig.CommunityModule.
+                            KEY_CHANNEL_TOPIC_ID, channelPostEntity.getTopicId())
                     .navigation();
         });
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {

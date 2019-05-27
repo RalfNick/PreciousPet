@@ -1,8 +1,9 @@
 package com.ralf.module_news.dg.module;
 
 import com.jess.arms.di.scope.FragmentScope;
+import com.ralf.module_news.mvp.contract.NewsContract;
 import com.ralf.module_news.mvp.contract.NewsVideoContract;
-import com.ralf.module_news.mvp.model.NewsVideoModel;
+import com.ralf.module_news.mvp.model.NewsModel;
 
 import dagger.Module;
 import dagger.Provides;
@@ -31,7 +32,7 @@ public class NewsVideoModule {
 
     @FragmentScope
     @Provides
-    public NewsVideoContract.Model provideNewsVideoModel(NewsVideoModel model) {
+    public NewsContract.Model provideNewsModel(NewsModel model) {
         return model;
     }
 }

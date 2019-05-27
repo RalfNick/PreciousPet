@@ -218,7 +218,19 @@ public final class RouterConfig {
          */
         public static final String MAIN_PATH = "/news_module/main";
 
+        /**
+         * 资讯容器页面
+         */
         public static final String NEWS_PATH = "/news_module/news";
+
+        /**
+         * 资讯详情页面
+         */
+        public static final String NEWS_PATH_DETAIL = NEWS_PATH + "/detail";
+        /**
+         * 资讯详情页面 key - 资讯 id
+         */
+        public static final String KEY_NEWS_ID = "newsId";
     }
 
     /**

@@ -49,16 +49,4 @@ public interface RecommendContract {
          */
         void showBanner(List<BannerEntity> bannerList);
     }
-
-    interface Model extends IModel {
-
-        /**
-         * 请求推荐数据
-         *
-         * @param category    类别
-         * @param currentPage 当前页码
-         * @return
-         */
-        Observable<BaseEntity<NewsResultEntity>> getRecommendData(int category, int currentPage);
-    }
 }

@@ -6,6 +6,7 @@ import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.ralf.module_news.entity.NewsResultEntity;
 import com.ralf.module_news.http.NewsService;
+import com.ralf.module_news.mvp.contract.NewsContract;
 import com.ralf.module_news.mvp.contract.RecommendContract;
 import com.ralf.pet_provider.constant.PetConstant;
 import com.ralf.pet_provider.http.BaseEntity;
@@ -17,15 +18,15 @@ import io.reactivex.Observable;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name RecommendModel
+ * @name NewsModel
  * @email -
  * @date 2019/05/15 19:34
  **/
 @FragmentScope
-public class RecommendModel extends BaseModel implements RecommendContract.Model {
+public class NewsModel extends BaseModel implements NewsContract.Model {
 
     @Inject
-    public RecommendModel(IRepositoryManager repositoryManager) {
+    public NewsModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 
@@ -35,7 +36,7 @@ public class RecommendModel extends BaseModel implements RecommendContract.Model
     }
 
     @Override
-    public Observable<BaseEntity<NewsResultEntity>> getRecommendData(int category, int currentPage) {
+    public Observable<BaseEntity<NewsResultEntity>> getNewsData(int category, int currentPage) {
         JsonObject object = new JsonObject();
         object.addProperty(PetConstant.PAGE, currentPage);
         object.addProperty(PetConstant.CATEGORY, category);

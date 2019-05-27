@@ -1,24 +1,24 @@
 package com.ralf.module_news.mvp.model;
 
-import com.jess.arms.di.scope.FragmentScope;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-import com.ralf.module_news.mvp.contract.NewsVideoContract;
+import com.ralf.module_news.mvp.contract.NewsDetailContract;
 
 import javax.inject.Inject;
 
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name NewsModel
+ * @name NewsDetailModel
  * @email -
- * @date 2019/05/15 19:34
+ * @date 2019/05/27 19:32
  **/
-@FragmentScope
-public class NewsVideoModel extends BaseModel implements NewsVideoContract.Model {
+@ActivityScope
+public class NewsDetailModel extends BaseModel implements NewsDetailContract.Model{
 
     @Inject
-    public NewsVideoModel(IRepositoryManager repositoryManager) {
+    public NewsDetailModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 

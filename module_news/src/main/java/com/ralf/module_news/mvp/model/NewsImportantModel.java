@@ -10,7 +10,7 @@ import javax.inject.Inject;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name RecommendModel
+ * @name NewsModel
  * @email -
  * @date 2019/05/15 19:34
  **/

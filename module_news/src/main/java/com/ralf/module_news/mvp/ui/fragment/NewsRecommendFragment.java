@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseLazyFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ToastUtils;
@@ -25,7 +25,8 @@ import com.ralf.module_news.entity.BannerEntity;
 import com.ralf.module_news.entity.NewsEntity;
 import com.ralf.module_news.mvp.contract.RecommendContract;
 import com.ralf.module_news.mvp.presenter.RecommendPresenter;
-import com.ralf.module_news.mvp.ui.adapter.NewsAdapter;
+import com.ralf.module_news.mvp.ui.adapter.NewsRecommendAdapter;
+import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.util.ImageLoaderHelper;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -68,7 +69,7 @@ public class NewsRecommendFragment extends BaseLazyFragment<RecommendPresenter> 
     private List<BannerEntity> mBannerEntityList = new ArrayList<>();
     private List<String> mBannerTitleList = new ArrayList<>();
 
-    private NewsAdapter mAdapter;
+    private NewsRecommendAdapter mAdapter;
     private List<NewsEntity> mEntityList = new ArrayList<>();
 
     /**
@@ -86,12 +87,13 @@ public class NewsRecommendFragment extends BaseLazyFragment<RecommendPresenter> 
     @Override
     protected void initEvent(@Nullable Bundle savedInstanceState) {
         setHeaderView();
-        mAdapter = new NewsAdapter(R.layout.item_news_recommend_layout, mEntityList);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showShort("item" + position);
-            }
+        mAdapter = new NewsRecommendAdapter(R.layout.item_news_recommend_layout, mEntityList);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            NewsEntity entity = mEntityList.get(position);
+            ARouter.getInstance()
+                    .build(RouterConfig.NewsModule.NEWS_PATH_DETAIL)
+                    .withString(RouterConfig.NewsModule.KEY_NEWS_ID, String.valueOf(entity.getArticleId()))
+                    .navigation();
         });
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(mHeaderView);
@@ -136,7 +138,11 @@ public class NewsRecommendFragment extends BaseLazyFragment<RecommendPresenter> 
                 .setImageLoader(new GlideImageLoader());
         mBanner.setOnBannerListener(position -> {
             BannerEntity entity = mBannerEntityList.get(position);
-            ToastUtils.showShort("资讯详情");
+            ARouter.getInstance()
+                    .build(RouterConfig.NewsModule.NEWS_PATH_DETAIL)
+                    .withString(RouterConfig.NewsModule.KEY_NEWS_ID, String.valueOf(entity.getId()))
+                    .navigation();
+
         });
         mSearchView.setOnClickListener(view -> ToastUtils.showShort("搜索"));
     }
@@ -206,7 +212,7 @@ public class NewsRecommendFragment extends BaseLazyFragment<RecommendPresenter> 
             for (BannerEntity entity : bannerList) {
                 titleList.add(entity.getTitle());
             }
-            mBanner.update(bannerList,titleList);
+            mBanner.update(bannerList, titleList);
         }
     }
 

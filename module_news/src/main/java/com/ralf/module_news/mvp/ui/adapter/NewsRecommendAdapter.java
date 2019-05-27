@@ -16,13 +16,13 @@ import java.util.List;
 /**
  * @author Ralf(wanglixin)
  * DESCRIPTION
- * @name NewsAdapter
+ * @name NewsRecommendAdapter
  * @email -
  * @date 2019/05/16 17:34
  **/
-public class NewsAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolder> {
+public class NewsRecommendAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolder> {
 
-    public NewsAdapter(int layoutResId, @Nullable List<NewsEntity> data) {
+    public NewsRecommendAdapter(int layoutResId, @Nullable List<NewsEntity> data) {
         super(layoutResId, data);
     }
 

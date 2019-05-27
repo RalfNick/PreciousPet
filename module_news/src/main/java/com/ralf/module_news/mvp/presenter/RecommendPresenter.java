@@ -4,6 +4,7 @@ import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.ralf.module_news.entity.NewsResultEntity;
+import com.ralf.module_news.mvp.contract.NewsContract;
 import com.ralf.module_news.mvp.contract.RecommendContract;
 import com.ralf.pet_provider.http.WebObserver;
 
@@ -21,7 +22,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
  * @date 2019/05/15 19:35
  **/
 @FragmentScope
-public class RecommendPresenter extends BasePresenter<RecommendContract.Model, RecommendContract.View> {
+public class RecommendPresenter extends BasePresenter<NewsContract.Model, RecommendContract.View> {
 
     @Inject
     RxErrorHandler mErrorHandler;
@@ -30,7 +31,7 @@ public class RecommendPresenter extends BasePresenter<RecommendContract.Model, R
     private int mCurrentPage = 1;
 
     @Inject
-    public RecommendPresenter(RecommendContract.Model model, RecommendContract.View rootView) {
+    public RecommendPresenter(NewsContract.Model model, RecommendContract.View rootView) {
         super(model, rootView);
     }
 
@@ -60,7 +61,7 @@ public class RecommendPresenter extends BasePresenter<RecommendContract.Model, R
                 return;
             }
         }
-        mModel.getRecommendData(category, mCurrentPage)
+        mModel.getNewsData(category, mCurrentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))

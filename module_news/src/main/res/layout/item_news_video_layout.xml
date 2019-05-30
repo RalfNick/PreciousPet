@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="254dp"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/item_news_detail_tv"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:maxLines="1"
+        android:text="小仓鼠选购指南"
+        android:textColor="#FF2C2C2C"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <com.ralf.pet_provider.widget.player.SimpleCoverVideo
+        android:id="@+id/item_news_detail_video"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_below="@id/item_news_detail_tv"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/item_news_video_watermark_iv"
+        android:layout_width="80dp"
+        android:layout_height="36dp"
+        android:layout_alignTop="@+id/item_news_detail_video"
+        android:layout_alignEnd="@+id/item_news_detail_video"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:src="@mipmap/video_image"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/item_news_author_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="作者"
+        android:textColor="#b2b2b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/item_news_preview_num_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:drawableStart="@mipmap/icon_have_read"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:text="1871"
+        android:textColor="#b2b2b2"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFF5F5F5" />
+</RelativeLayout>

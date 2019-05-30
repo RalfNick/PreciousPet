@@ -23,7 +23,7 @@
         android:layout_marginTop="10dp"
         android:visibility="visible">
 
-        <com.ralf.module_community.widget.player.SimpleCoverVideo
+        <com.ralf.pet_provider.widget.player.SimpleCoverVideo
             android:id="@+id/item_channel_detail_player"
             android:layout_width="108dp"
             android:layout_height="108dp"

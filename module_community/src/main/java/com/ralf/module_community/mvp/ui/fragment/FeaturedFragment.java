@@ -40,7 +40,7 @@ import com.ralf.module_community.mvp.presenter.FeaturedPresenter;
 import com.ralf.module_community.mvp.ui.adapter.FeaturedAdapter;
 import com.ralf.module_community.mvp.ui.view.FeaturedHeaderView;
 import com.ralf.module_community.util.ShareClickHelper;
-import com.ralf.module_community.widget.player.ScrollCalculatorHelper;
+import com.ralf.pet_provider.widget.player.ScrollCalculatorHelper;
 import com.ralf.pet_provider.annotation.SingleClick;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.widget.stickyitemdecoration.OnStickyChangeListener;
@@ -144,7 +144,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
 
     @Override
     protected void initEvent(@Nullable Bundle savedInstanceState) {
-
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(getContext()).imageLoader();
         mBanner.setImages(mBannerList)
                 .setIndicatorGravity(BannerConfig.CENTER)

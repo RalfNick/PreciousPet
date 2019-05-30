@@ -15,7 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.ralf.module_community.R;
 import com.ralf.module_community.action.click.SpanTextClick;
 import com.ralf.module_community.entity.ChannelPostEntity;
-import com.ralf.module_community.widget.player.SimpleCoverVideo;
+import com.ralf.pet_provider.widget.player.SimpleCoverVideo;
 import com.ralf.pet_provider.util.ImageLoaderHelper;
 import com.rockerhieu.emojicon.EmojiconTextView;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;

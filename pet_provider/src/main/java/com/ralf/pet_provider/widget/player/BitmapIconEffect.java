@@ -1,4 +1,4 @@
-package com.ralf.module_community.widget.player;
+package com.ralf.pet_provider.widget.player;
 
 import android.graphics.Bitmap;
 import android.opengl.GLSurfaceView;

@@ -96,6 +96,9 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.3.1'
 
+    // player
+    api 'com.shuyu:gsyVideoPlayer-java:6.0.3'
+
     // AOP
     implementation("org.aspectj:aspectjrt:1.8.9")
 

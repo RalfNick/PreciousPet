@@ -29,7 +29,7 @@ import com.ralf.module_community.entity.eventbus.RefreshAttentionChannelEntity;
 import com.ralf.module_community.mvp.contract.ChannelDetailContract;
 import com.ralf.module_community.mvp.presenter.ChannelDetailPresenter;
 import com.ralf.module_community.mvp.ui.adapter.ChannelDetailAdapter;
-import com.ralf.module_community.widget.player.ScrollCalculatorHelper;
+import com.ralf.pet_provider.widget.player.ScrollCalculatorHelper;
 import com.ralf.pet_provider.base.BaseSwipeBackActivity;
 import com.ralf.pet_provider.router.RouterConfig;
 import com.ralf.pet_provider.user.constant.UserConstant;

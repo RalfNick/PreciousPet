@@ -1,4 +1,4 @@
-package com.ralf.module_community.widget.player;
+package com.ralf.pet_provider.widget.player;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -10,7 +10,7 @@ import android.widget.SeekBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.ralf.module_community.R;
+import com.ralf.pet_provider.R;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYBaseVideoPlayer;
@@ -46,7 +46,6 @@ public class SimpleCoverVideo extends StandardGSYVideoPlayer {
     protected void init(Context context) {
         super.init(context);
         mCoverImage = findViewById(R.id.thumbImage);
-
         if (mThumbImageViewLayout != null &&
                 (mCurrentState == -1 || mCurrentState == CURRENT_STATE_NORMAL || mCurrentState == CURRENT_STATE_ERROR)) {
             mThumbImageViewLayout.setVisibility(VISIBLE);

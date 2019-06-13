@@ -106,6 +106,8 @@ public class NewsDetailActivity extends BaseSwipeBackActivity<NewsDetailPresente
                 mPresenter.getNewsDetailData(mNewsId, true);
             }
         });
+        mRefreshLayout.setEnableLoadMore(false);
+        mRefreshLayout.setEnableRefresh(false);
         mPresenter.getNewsDetailData(mNewsId, true);
     }
 

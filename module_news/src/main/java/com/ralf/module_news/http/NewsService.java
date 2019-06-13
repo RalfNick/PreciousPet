@@ -1,6 +1,7 @@
 package com.ralf.module_news.http;
 
 import com.google.gson.JsonObject;
+import com.ralf.module_news.entity.CollectionEntity;
 import com.ralf.module_news.entity.NewsDetailEntity;
 import com.ralf.module_news.entity.NewsResultEntity;
 import com.ralf.pet_provider.http.BaseEntity;
@@ -35,4 +36,13 @@ public interface NewsService {
      */
     @POST("api/news/articleContent")
     Observable<BaseEntity<NewsDetailEntity>> getNewsDetailData(@Body JsonObject object);
+
+    /**
+     * 资讯收藏
+     *
+     * @param object 参数
+     * @return
+     */
+    @POST("api/news/articleWish")
+    Observable<BaseEntity<CollectionEntity>> requestCollection(@Body JsonObject object);
 }

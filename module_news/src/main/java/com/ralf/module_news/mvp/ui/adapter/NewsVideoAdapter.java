@@ -52,6 +52,8 @@ public class NewsVideoAdapter extends BaseQuickAdapter<NewsEntity, BaseViewHolde
                 .setThumbImageView(imageView)
                 .setCacheWithPlay(false)
                 .setLockLand(true)
+                .setNeedShowWifiTip(true)
+                .setLooping(false)
                 .setPlayTag(TAG)
                 .build(video);
         // 隐藏 title

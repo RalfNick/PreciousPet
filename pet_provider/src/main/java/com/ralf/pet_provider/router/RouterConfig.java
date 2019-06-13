@@ -231,6 +231,19 @@ public final class RouterConfig {
          * 资讯详情页面 key - 资讯 id
          */
         public static final String KEY_NEWS_ID = "newsId";
+
+        /**
+         * 图片预览页面
+         */
+        public static final String NEWS_PATH_PICTURE_PREVIEW = NEWS_PATH + "/picture_preview";
+        /**
+         * 图片预览页面 key - urls id
+         */
+        public static final String KEY_IMAGE_URLS = "imageUrls";
+        /**
+         * 图片预览页面 key -  id
+         */
+        public static final String KEY_IMAGE_ID = "imageId";
     }
 
     /**

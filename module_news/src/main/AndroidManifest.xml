@@ -2,6 +2,11 @@
     package="com.ralf.module_news">
 
     <application>
-        <activity android:name=".mvp.ui.activity.NewsDetailActivity" />
+        <activity
+            android:name=".mvp.ui.activity.NewsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.PicturePreviewActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

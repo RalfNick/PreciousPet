@@ -49,4 +49,7 @@ public final class PetConstant {
     public final static String POSITION = "position";
     public final static String USER_ID = "userId";
     public final static String TOKEN = "token";
+    public final static String TYPE = "type";
+    public final static String RELEVANTID = "relevantId";
+    public final static String RELEVANCEID = "relevanceId";
 }

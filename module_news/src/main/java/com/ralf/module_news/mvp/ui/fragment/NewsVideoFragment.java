@@ -103,6 +103,14 @@ public class NewsVideoFragment extends BaseLazyFragment<NewsVideoPresenter> impl
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser){
+            GSYVideoManager.onPause();
+        }
+    }
+
+    @Override
     public void hideLoading() {
         mRefreshLayout.finishRefresh();
         mRefreshLayout.finishLoadMore();

@@ -46,9 +46,12 @@ public abstract class BaseSwipeBackActivity<P extends IPresenter> extends AppCom
 
     private SwipeBackActivityHelper mHelper;
 
+    /**
+     * 如果当前页面逻辑简单, Presenter 可以为 null
+     */
     @Inject
     @Nullable
-    protected P mPresenter;//如果当前页面逻辑简单, Presenter 可以为 null
+    protected P mPresenter;
 
     @NonNull
     @Override

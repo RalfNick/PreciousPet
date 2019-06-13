@@ -55,7 +55,7 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="20dp"
         android:layout_toStartOf="@+id/right_iv"
-        android:src="@mipmap/right_setting"
         android:scaleType="centerCrop"
+        android:src="@mipmap/right_setting"
         android:visibility="invisible" />
 </RelativeLayout>

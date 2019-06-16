@@ -154,7 +154,9 @@ public class PicturePreviewActivity extends BaseSwipeBackActivity<PicturePreview
     @Override
     public void updateCollectionView(CollectionEntity data) {
         mWish = data.getStatus();
-        mCollectionTv.setChecked(data.getStatus() == 1);
+        boolean checked = data.getStatus() == 1;
+        mCollectionTv.setChecked(checked);
+        ToastUtils.showShort(checked ? "收藏成功" : "取消收藏");
     }
 
     @OnClick({R2.id.back_iv, R2.id.right_iv, R2.id.photo_preview_download_iv, R2.id.photo_preview_collection_tv})

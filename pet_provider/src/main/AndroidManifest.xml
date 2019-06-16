@@ -88,6 +88,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".webview.WebActivity" />
         <!-- 第三方section end -->
     </application>
 

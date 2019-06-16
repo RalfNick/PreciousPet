@@ -107,4 +107,7 @@ dependencies {
 
     // 调试工具
     debugImplementation rootProject.ext.dependencies["doraemonkit-debug"]
+
+    // webview
+    implementation 'com.tencent.sonic:sdk:3.1.0'
 }

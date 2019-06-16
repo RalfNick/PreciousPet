@@ -72,23 +72,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':pet_provider')
-    implementation project(':module_emoji')
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
 
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.youth.banner:banner:1.4.10'
-    // tab
-    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-
-    // player
-    implementation 'com.shuyu:gsyVideoPlayer-java:6.0.3'
-    // ijk模式的so
-    implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.3'
-    implementation 'com.shuyu:gsyVideoPlayer-arm64:6.0.3'
-    // 圆角图片
-    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     //test
     implementation rootProject.ext.dependencies["junit"]
@@ -98,5 +87,18 @@ dependencies {
     androidTestImplementation(rootProject.ext.dependencies["runner"]) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+
+    // tangram
+    implementation('com.alibaba.android:vlayout:1.0.3@aar') {
+        changing = true
+    }
+    implementation('me.everything:overscroll-decor-android:1.0.1@aar') {
+        transitive true
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    implementation('com.alibaba.android:ultraviewpager:1.0.4@aar') {
+        transitive = true
+    }
+    implementation 'com.alibaba.android:tangram:1.0.0@aar'
 }
 

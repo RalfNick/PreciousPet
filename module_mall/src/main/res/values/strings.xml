@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">module_mall</string>
+    <string name="app_name" translatable="false">module_mall</string>
+    <string name="search_content_default" translatable="false">狗粮</string>
+    <string name="mall_sub_title" translatable="false">主粮零食</string>
+    <string name="mall_more" translatable="false">查看更多</string>
+
 </resources>

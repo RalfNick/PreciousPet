@@ -13,6 +13,7 @@ public final class PetConstant {
 
     public static final String EMPTY = "";
     public static final String IMAGE_PATH_PREFIX = "precious_pet";
+    public static String APP_SYSTEM = "android";
     /**
      * 第三方appKey等
      */

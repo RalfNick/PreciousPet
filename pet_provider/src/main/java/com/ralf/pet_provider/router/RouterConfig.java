@@ -1,5 +1,7 @@
 package com.ralf.pet_provider.router;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 /**
  * @author Ralf(wanglixin)
  * ARouter的参数名字常量和路径管理类
@@ -23,6 +25,19 @@ public final class RouterConfig {
          * 传递图片的地址的第一张的索引-Key
          */
         public static final String KEY_PIC_INDEX = "pic_current_index";
+
+        /**
+         * webview activity 路径
+         */
+        public static final String WEB_VIEW_PATH = "/provider_module/web_view";
+
+        /**
+         * WEB VIEW URL KEY
+         */
+        public final static String KEY_WEB_URL = "param_url";
+        public static final String KEY_WEB_TYPE = "type";
+        public static final String KEY_WEB_TITLE = "title";
+        public static final String KEY_WEB_MENU = "menu";
     }
 
     public static class AppModule {

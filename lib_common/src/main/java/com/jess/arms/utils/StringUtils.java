@@ -15,6 +15,8 @@ import java.io.IOException;
 public final class StringUtils {
 
     public static final int INDEX_NOT_FOUND = -1;
+    public static final String EMPTY = "";
+
     private StringUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }

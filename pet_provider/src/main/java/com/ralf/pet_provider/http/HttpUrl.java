@@ -12,6 +12,16 @@ import com.ralf.module_config_res.BuildConfig;
 public interface HttpUrl {
 
     /**
+     * 动态设置 base-url
+     */
+    String DOMAIN_NAME = "Domain-Name: ";
+
+    /**
+     * 购物标识 shop
+     */
+    String TAG_SHOP = "shop";
+
+    /**
      *  app base url
      */
     String APP_URL_DOMAIN = BuildConfig.API_URL;

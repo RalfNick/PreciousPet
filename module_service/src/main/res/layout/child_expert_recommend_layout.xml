@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/expert_head_image_iv"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:scaleType="centerInside"
+            tools:src="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="bottom|end"
+            android:src="@mipmap/icon_expert_flag" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/expert_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        tools:text="某某某" />
+
+    <TextView
+        android:id="@+id/expert_area_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/pet_doctor"
+        android:textColor="#FF888888"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/ask_question_btn"
+        android:layout_width="63dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_rect_blue_r20"
+        android:text="@string/ask_who"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFFFF"
+        android:textSize="13sp" />
+</LinearLayout>

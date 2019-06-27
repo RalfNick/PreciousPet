@@ -203,7 +203,6 @@ public class FeaturedFragment extends BaseLazyFragment<FeaturedPresenter> implem
      * 初始化吸顶悬浮布局
      */
     private void initDecoration() {
-
         final FeaturedHeaderView featuredHeaderView = mStickyHeadContainer.findViewById(R.id.item_header_view);
         View.OnClickListener listener = v -> {
             int viewId = v.getId();

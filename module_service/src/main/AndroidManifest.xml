@@ -2,4 +2,10 @@
     package="com.ralf.module_service" >
 
 
+    <application>
+        <activity android:name=".mvp.ui.activity.PetPairActivity" />
+        <activity android:name=".mvp.ui.activity.ExpertOnlineActivity" />
+        <activity android:name=".mvp.ui.activity.PetAdoptionActivity" />
+        <activity android:name=".mvp.ui.activity.SameCityActivity" />
+    </application>
 </manifest>

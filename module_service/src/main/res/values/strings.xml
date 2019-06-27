@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">module_service</string>
+    <string name="app_name" translatable="false">module_service</string>
+    <string name="search_content_default" translatable="false">搜索宠物 or 问题</string>
+    <string name="expert_medical" translatable="false">医疗</string>
+    <string name="all" translatable="false">全部</string>
+    <string name="disease_encyclopedia" translatable="false">疾病百科</string>
+    <string name="disease_check" translatable="false">疾病自查</string>
+    <string name="cancel">取消</string>
+    <string name="expert_recommend" translatable="false">专家推荐</string>
+    <string name="ask_who" translatable="false">问Ta</string>
+    <string name="pet_doctor" translatable="false">宠物医生</string>
 </resources>

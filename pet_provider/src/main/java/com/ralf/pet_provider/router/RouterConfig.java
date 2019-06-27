@@ -274,6 +274,17 @@ public final class RouterConfig {
         public static final String MAIN_PATH = "/service_module/main";
 
         public static final String SERVICE_PATH = "/service_module/service";
+
+        /**
+         * 路径 - 专家在线，同城服务，宠物领养，萌宠配对
+         */
+        public static final String PATH_EXPERT_ONLINE = "/service_module/expert_online";
+
+        public static final String PATH_SAME_CITY = "/service_module/same_city";
+
+        public static final String PATH_PET_ADOPTION = "/service_module/pet_adoption";
+
+        public static final String PATH_PET_PAIR = "/service_module/pet_pair";
     }
 
     /**

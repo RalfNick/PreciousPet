@@ -53,4 +53,6 @@ public final class PetConstant {
     public final static String TYPE = "type";
     public final static String RELEVANTID = "relevantId";
     public final static String RELEVANCEID = "relevanceId";
+    public final static String FENLEI_ID = "excelId";
+    public final static String PET_ID = "petId";
 }

@@ -98,5 +98,7 @@ dependencies {
     androidTestImplementation(rootProject.ext.dependencies["runner"]) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+
+    implementation 'com.github.dongjunkun:DropDownMenu:1.0.4'
 }
 

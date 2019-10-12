@@ -55,4 +55,15 @@ public final class PetConstant {
     public final static String RELEVANCEID = "relevanceId";
     public final static String FENLEI_ID = "excelId";
     public final static String PET_ID = "petId";
+    public final static String CITY  = "city";
+    public final static String CITY_ID = "cityId";
+    public final static String LAT = "lat";
+    public final static String LNG = "lng";
+    public final static String CITY_CODE = "cityCode";
+    public final static String TASK_ID = "taskId";
+    public final static String AD_CODE = "adCode";
+    public final static String PROVINCE_ID = "provinceId";
+    public final static String SORT = "sort";
+    public final static String SEX = "sex";
+    public final static String PET_TYPEID  = "petTypeId";
 }

@@ -27,7 +27,7 @@ import android.widget.TextView;
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com).
  */
-public class EmojiconTextView extends TextView {
+public class EmojiconTextView extends android.support.v7.widget.AppCompatTextView {
     private int mEmojiconSize;
     private int mEmojiconAlignment;
     private int mEmojiconTextSize;

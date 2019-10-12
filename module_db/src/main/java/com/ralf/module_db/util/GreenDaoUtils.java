@@ -231,7 +231,7 @@ public class GreenDaoUtils {
 
     public <T> List<T> queryAll(Class<T> claz, QueryBuilder<T> queryBuilder) {
         setCurrentDao(claz);
-        return mDaoSession.queryBuilder(claz).list();
+        return queryBuilder.list();
     }
 
     public <T> List<T> queryAll(Class<T> claz, Query<T> query) {

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_lingyang_layout"
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:layout_marginTop="2dp"
+    android:background="@color/colorWhite">
+
+    <ImageView
+        android:id="@+id/adoption_pet_image_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:scaleType="fitXY"
+        tools:src="@mipmap/ic_launcher" />
+
+    <com.rockerhieu.emojicon.EmojiconTextView
+        android:id="@+id/adoption_pet_title_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_toEndOf="@+id/adoption_pet_image_iv"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/discuss_content"
+        android:textSize="15sp"
+        tools:text="主要是看狗狗" />
+
+
+    <TextView
+        android:id="@+id/adoption_pet_type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adoption_pet_title_et"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/adoption_pet_image_iv"
+        android:textColor="@color/comment_content"
+        android:textSize="12sp"
+        tools:text="中华田园鼠" />
+
+    <ImageView
+        android:id="@+id/adoption_pet_sex_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adoption_pet_title_et"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/adoption_pet_type_tv"
+        android:src="@mipmap/pet_boy" />
+
+
+    <TextView
+        android:id="@+id/adoption_pet_age_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adoption_pet_title_et"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/adoption_pet_sex_iv"
+        android:textColor="@color/comment_content"
+        android:textSize="12sp"
+        tools:text="5个月" />
+
+    <TextView
+        android:id="@+id/adoption_pet_state_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adoption_pet_title_et"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/comment_content"
+        android:textSize="12sp"
+        tools:text="2天前" />
+
+</RelativeLayout>
